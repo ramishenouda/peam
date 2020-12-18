@@ -7,7 +7,7 @@ interface Props {
 
 function Home(props: Props): JSX.Element {
     return (
-        <Button> {props.name} </Button>
+        <Button data-testid="peam button"> {props.name} </Button>
     )
 }
 
