@@ -3,14 +3,16 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from './components/home/home-container';
 import Register from './components/register/register-container';
 import Login from './components/login/login-container';
+import PasswordReset from './components/password-reset/password-reset-container';
 
 export const App = () => {
     return (
         <React.Fragment>
             <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/join" component={Register} />
-            <Route exact path="/login" component={Login} />
+                <Route exact path="/" component={Home} />
+                <Route exact path="/join" component={Register} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/password_reset" component={PasswordReset} />
                 <Route render={() => <Redirect to={{ pathname: '/' }} />} />
             </Switch>
         </React.Fragment>
