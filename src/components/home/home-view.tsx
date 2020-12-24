@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button } from 'react-bootstrap'
+import Navbar from '../navbar/navbar-container';
+import './home-style.css'
 
 interface Props {
     name: string;
@@ -7,7 +8,12 @@ interface Props {
 
 function Home(props: Props): JSX.Element {
     return (
-        <Button data-testid="peam button"> {props.name} </Button>
+        <>
+        <Navbar />
+        <div id="home">
+            PEAM
+        </div>
+        </>
     )
 }
 

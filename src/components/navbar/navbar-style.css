@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+.navbar-view {
+    background: #9c27b0;
+    width: 100%;
+}
+
+.navbar-view .primary {
+    background: #9c27b0 !important;
+}
+.navbar-view .dark {
+    background: #424242 !important;
+}
+.navbar-view .info {
+    background: #00acc1 !important;
+}
+.navbar-view .success {
+    background: #4caf50 !important;
+}
+.navbar-view .warning {
+    background: #ff9800;
+}
+.navbar-view .danger {
+    background: #f6695f;
+}
+.navbar-view .rose {
+    background: #e91e63;
+}
+.navbar .navbar-item, .navbar .navbar-search, .navbar .navbar-brand {
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    color: #faf8fa !important;
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
+    transition: all 0.3s ease-in-out !important;
+    border-radius: 4px;
+}
+.navbar .navbar-item {
+    font-size: medium;
+}
+.navbar .navbar-item:hover, .navbar .navbar-brand:hover {
+    background: #c0a0c938;
+}
+.navbar .navbar-search:focus {
+    padding-left: 3vw !important;
+}
+.navbar .navbar-search {
+    color: #424242 !important;
+}
