@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
-
 .login {
     font-family: 'Inconsolata', monospace !important;
 }
@@ -21,5 +19,5 @@
 .login .register-to-peam {
     padding: 2vh 0 2vh 0;
     border: 2px solid #d8dee2;
-    max-width: 360px;
+    max-width: 350px;
 }

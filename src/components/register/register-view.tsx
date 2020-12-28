@@ -17,8 +17,10 @@ type Props = {
 }
 
 const SignupSchema = yup.object().shape({
-  username: yup.string().required('Username is a required field').min(2, 'Username can\'t be less than 2 characters'),
   email: yup.string().email().required('Email is a required field'),
+  username: yup.string().required('Username is a required field').min(2, 'Username can\'t be less than 2 characters').test('Doesn\'t contain special characters test', 'Username can\'t contain special characters', (value) => {
+    return !value?.match(/[_\W0-9]/);
+  }),
   password: yup.string().required('Password is a required field').min(6, 'Password can\'t be less than 6 characters'),
   confirmPassword: yup.string().required('Confirm password is a required field').min(6, 'Confirm password can\'t be less than 6 characters').oneOf([yup.ref('password'), null], 'Passwords must match'),
   emailPreferences: yup.boolean()
@@ -66,7 +68,7 @@ function RegisterView(props: Props) {
             {props.registering? (
               <CircleLoader size={35} color={"#9c27b0"} loading={props.registering} />
             ) : (
-              <Button disabled={ !isValid } variant="primary" type="submit">
+              <Button variant="primary" type="submit" disabled={ !isValid }>
                 Create my account
               </Button>
             )}

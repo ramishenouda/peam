@@ -36,7 +36,7 @@ function LoginView(props: Props) {
         Sign in to Peam
       </h2>
       <Container>
-        <Form className="login-form md-lg-8 mb-5" onSubmit={handleSubmit(props.register)}>
+        <Form className="login-form mb-5" onSubmit={handleSubmit(props.register)}>
           <Form.Group controlId="username">
             <Form.Label>Username or email address <span className="required-text">*</span></Form.Label>
             <Form.Control onChange={props.handleChange} name="username" ref={register} type="text" />
@@ -57,7 +57,7 @@ function LoginView(props: Props) {
           )}
         </Form>
       </Container>
-      <Container className="register-to-peam text-center">
+      <Container className={`register-to-peam text-center`}>
         New to Peam? <Link to="join" className="link">Create an account</Link>
       </Container>
     </div>
