@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import AnonymousRoute from './AnonymousRoute';
+import ProtectedRoute from './ProtectedRoute';
 
 import Home from './components/home/home-container';
 import Register from './components/register/register-container';
@@ -12,10 +13,10 @@ export const App = () => {
     return (
         <React.Fragment>
             <Switch>
-                <Route exact path="/" render={ () => <AnonymousRoute component={Home} /> } />
-                <Route exact path="/join" component={Register} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/password_reset" component={PasswordReset} />
+                <Route exact path="/" render={() => <AnonymousRoute component={Home} />} />
+                <Route exact path="/join" render={() => <AnonymousRoute component={Register} />} />
+                <Route exact path="/login" render={() => <AnonymousRoute component={Login} />} />
+                <Route exact path="/password_reset" render={ () => <AnonymousRoute component={PasswordReset} /> } />
                 <Route render={() => <Redirect to={{ pathname: '/' }} />} />
             </Switch>
         </React.Fragment>
