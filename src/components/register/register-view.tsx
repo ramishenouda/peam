@@ -19,7 +19,7 @@ type Props = {
 const SignupSchema = yup.object().shape({
   email: yup.string().email().required('Email is a required field'),
   username: yup.string().required('Username is a required field').min(2, 'Username can\'t be less than 2 characters').test('Doesn\'t contain special characters test', 'Username can\'t contain special characters', (value) => {
-    return !value?.match(/[_\W0-9]/);
+    return !value?.match(/[_\W]/);
   }),
   password: yup.string().required('Password is a required field').min(6, 'Password can\'t be less than 6 characters'),
   confirmPassword: yup.string().required('Confirm password is a required field').min(6, 'Confirm password can\'t be less than 6 characters').oneOf([yup.ref('password'), null], 'Passwords must match'),
