@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 import './navbar-style.css';
 
@@ -24,7 +25,7 @@ const NavbarView = (props: Props) => {
       <Navbar className={`navbar ${props.color}`} variant='dark' expand='md'>
         {
           (props.logo || props.logo === undefined) &&
-          <Navbar.Brand className='navbar-brand' href="home">PEAM</Navbar.Brand>
+          <Navbar.Brand> <Link className="disable-link-style" to="/"> PEAM </Link> </Navbar.Brand>
         }
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -37,11 +38,15 @@ const NavbarView = (props: Props) => {
             </Form>
             {
               (props.signIn || props.signIn === undefined) &&
-              <Nav.Link className={`navbar-item ml-2 ${mdScreen && 'mt-1'}`} href="login">Sign in</Nav.Link>
+              <Nav.Link className={`navbar-item ml-2 ${mdScreen && 'mt-1'}`}>
+                <Link to="login" className="disable-link-style">Sign in</Link>
+              </Nav.Link>
             }
             {
               (props.signUp || props.signUp === undefined) &&
-              <Nav.Link className={`navbar-item ml-2 ${!mdScreen && 'mr-5'}`} href="join">Sign up</Nav.Link>
+              <Nav.Link className={`navbar-item ml-2 ${!mdScreen && 'mr-5'}`} href="join">
+                <Link to="join" className="disable-link-style">Sign up</Link>
+              </Nav.Link>
             }
           </Nav>
         </Navbar.Collapse>
