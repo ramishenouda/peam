@@ -8,6 +8,7 @@ import Home from './components/home/home-container';
 import Register from './components/register/register-container';
 import Login from './components/login/login-container';
 import PasswordReset from './components/password-reset/password-reset-container';
+import Course from './components/course-page/course-container';
 
 export const App = () => {
     return (
@@ -17,6 +18,7 @@ export const App = () => {
                 <Route exact path="/join" render={() => <AnonymousRoute component={Register} />} />
                 <Route exact path="/login" render={() => <AnonymousRoute component={Login} />} />
                 <Route exact path="/password_reset" render={ () => <AnonymousRoute component={PasswordReset} /> } />
+                <Route exact path="/course/:id" render={ () => <ProtectedRoute component={Course} /> } />
                 <Route render={() => <Redirect to={{ pathname: '/' }} />} />
             </Switch>
         </React.Fragment>
