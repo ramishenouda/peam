@@ -14,12 +14,12 @@ export const App = () => {
     return (
         <React.Fragment>
             <Switch>
-                <Route exact path="/" render={() => <AnonymousRoute component={Home} />} />
-                <Route exact path="/join" render={() => <AnonymousRoute component={Register} />} />
-                <Route exact path="/login" render={() => <AnonymousRoute component={Login} />} />
-                <Route exact path="/password_reset" render={ () => <AnonymousRoute component={PasswordReset} /> } />
-                <Route exact path="/course/:id" render={ () => <ProtectedRoute component={Course} /> } />
-                <Route render={() => <Redirect to={{ pathname: '/' }} />} />
+                <Route exact path="/" render={() => <AnonymousRoute component={Home}/>} />
+                <Route exact path="/join" render={() => <AnonymousRoute component={Register}/>} />
+                <Route exact path="/login" render={() => <AnonymousRoute component={Login}/>} />
+                <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordReset}/> } />
+                <Route exact path="/course/:id" render={() => <ProtectedRoute component={Course}/>} />
+                <Route render={() => <Redirect to={{ pathname: '/' }}/>} />
             </Switch>
         </React.Fragment>
     );

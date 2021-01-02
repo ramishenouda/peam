@@ -1,4 +1,3 @@
-import React from 'react';
 import Navbar from '../navbar/navbar-container';
 import './course-style.css'
 
@@ -6,15 +5,15 @@ interface Props {
     name: string;
 }
 
-function Course(props: Props): JSX.Element {
+function CourseView(props: Props): JSX.Element {
     return (
         <>
         <Navbar />
         <div id="course">
-            Course Page
+            Course
         </div>
         </>
     )
 }
 
-export default Course;
+export default CourseView;
