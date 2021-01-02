@@ -1,9 +1,9 @@
 import React from 'react';
 import {useForm} from 'react-hook-form'
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Container, Form, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { CircleLoader } from 'react-spinners';
 
 import { UserForRegistration as User } from '../../models/user';
@@ -13,10 +13,12 @@ type Props = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   register: (user: User) => void,
   registering: boolean,
-  emailPreferences: boolean
+  emailPreferences: boolean,
+  role: string
 }
 
 const SignupSchema = yup.object().shape({
+  role: yup.string(),
   email: yup.string().email().required('Email is a required field'),
   username: yup.string().required('Username is a required field').min(2, 'Username can\'t be less than 2 characters').test('Doesn\'t contain special characters test', 'Username can\'t contain special characters', (value) => {
     return !value?.match(/[_\W]/);
@@ -41,6 +43,31 @@ function RegisterView(props: Props) {
       </h1>
       <Container>
         <Form className="register-form md-lg-8 mb-5" onSubmit={handleSubmit(props.register)}>
+          <Form.Group controlId="role">
+            <Form.Label>Iam a: <span className="required-text">*</span></Form.Label>
+            <br />
+            <ButtonGroup toggle>
+              <ToggleButton 
+                value="Teacher" 
+                className="role" 
+                ref={register}
+                checked={props.role === "Teacher"} 
+                variant="info" type="radio" name="role" onChange={props.handleChange}
+              >
+                Teacher
+              </ToggleButton>
+              <ToggleButton 
+                value="Student"
+                className="role"
+                ref={register}
+                checked={props.role === "Student"}
+                variant="info" type="radio" name="role" onChange={props.handleChange}
+              >
+                Student
+              </ToggleButton>
+            </ButtonGroup>
+            <p className="required-text"> { errors.role && errors.role.message } </p>
+          </Form.Group>
           <Form.Group controlId="username">
             <Form.Label>Username <span className="required-text">*</span></Form.Label>
             <Form.Control onChange={props.handleChange} name="username" ref={register} type="text" />
@@ -63,7 +90,7 @@ function RegisterView(props: Props) {
           </Form.Group>
           <Form.Group controlId="notifications">
             <Form.Label>Email preferences <span className="required-text">*</span></Form.Label>
-            <Form.Check  onChange={props.handleChange} name="emailPreferences" checked={props.emailPreferences} ref={register} type="checkbox" label="Send me notifications about my courses." />
+            <Form.Check onChange={props.handleChange} name="emailPreferences" checked={props.emailPreferences} ref={register} type="checkbox" label="Send me notifications about my courses." />
           </Form.Group>
             {props.registering? (
               <CircleLoader size={35} color={"#9c27b0"} loading={props.registering} />
