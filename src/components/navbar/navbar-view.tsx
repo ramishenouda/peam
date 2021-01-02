@@ -33,20 +33,24 @@ const NavbarView = (props: Props) => {
             <Form>
               {
                 (props.search || props.search === undefined) &&
-                <FormControl type="text" placeholder="Search Peam" className={`navbar-search ${mdScreen && 'mt-2'}`} />
+                <FormControl type="text" placeholder="Search Peam" className={`navbar-search navbar-item ${mdScreen && 'mt-2'}`} />
               }
             </Form>
             {
               (props.signIn || props.signIn === undefined) &&
-              <Nav.Link className={`navbar-item ml-2 ${mdScreen && 'mt-1'}`}>
-                <Link to="/login" className="disable-link-style">Sign in</Link>
-              </Nav.Link>
+              <Link to="/login" className="disable-link-style">
+                <Nav.Item className={`navbar-item ml-2 ${mdScreen && 'mt-1'}`}>    
+                  Sign in
+                </Nav.Item>
+              </Link>
             }
             {
               (props.signUp || props.signUp === undefined) &&
-              <Nav.Link className={`navbar-item ml-2 ${!mdScreen && 'mr-5'}`}>
-                <Link to="/join" className="disable-link-style">Sign up</Link>
-              </Nav.Link>
+              <Link to="/join" className="disable-link-style">
+                <Nav.Item className={`navbar-item ml-2 ${!mdScreen && 'mr-5'}`}>
+                  Sign up
+                </Nav.Item>
+              </Link>
             }
           </Nav>
         </Navbar.Collapse>

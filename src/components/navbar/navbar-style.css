@@ -30,20 +30,33 @@
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
     color: #faf8fa !important;
-    padding-left: 2vw !important;
-    padding-right: 2vw !important;
     transition: all 0.3s ease-in-out !important;
     border-radius: 4px;
+
+    font-size: larger;
+    display: block;
+    padding: .5rem 1rem !important;
+    cursor: pointer;
 }
 .navbar .navbar-item {
-    font-size: medium;
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
 }
 .navbar .navbar-item:hover, .navbar .navbar-brand:hover {
     background: #c0a0c938;
 }
-.navbar .navbar-search:focus {
-    padding-left: 3vw !important;
+
+.navbar .navbar-brand {
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
 }
+
 .navbar .navbar-search {
     color: #424242 !important;
+    background-color: white !important;
+
+}
+
+.navbar .navbar-search:focus {
+    padding-right: 10vw !important;
 }

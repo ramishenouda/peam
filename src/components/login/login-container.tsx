@@ -12,7 +12,6 @@ class Login extends Component {
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
-        console.log(name, value)
         if(name === 'emailPreferences')
             this.setState({[name]: !this.state.emailPreferences})
         else 

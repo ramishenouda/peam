@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import { Course as CourseData } from '../../models/course';
 import CourseService from '../../services/course-service';
 import CourseView from './course-view';
 
