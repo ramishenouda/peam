@@ -58,7 +58,7 @@ function LoginView(props: Props) {
         </Form>
       </Container>
       <Container className={`register-to-peam text-center`}>
-        New to Peam? <Link to="join" className="link">Create an account</Link>
+        New to Peam? <Link to="/join" className="link">Create an account</Link>
       </Container>
     </div>
   );

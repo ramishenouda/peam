@@ -39,13 +39,13 @@ const NavbarView = (props: Props) => {
             {
               (props.signIn || props.signIn === undefined) &&
               <Nav.Link className={`navbar-item ml-2 ${mdScreen && 'mt-1'}`}>
-                <Link to="login" className="disable-link-style">Sign in</Link>
+                <Link to="/login" className="disable-link-style">Sign in</Link>
               </Nav.Link>
             }
             {
               (props.signUp || props.signUp === undefined) &&
-              <Nav.Link className={`navbar-item ml-2 ${!mdScreen && 'mr-5'}`} href="join">
-                <Link to="join" className="disable-link-style">Sign up</Link>
+              <Nav.Link className={`navbar-item ml-2 ${!mdScreen && 'mr-5'}`}>
+                <Link to="/join" className="disable-link-style">Sign up</Link>
               </Nav.Link>
             }
           </Nav>

@@ -1,0 +1,17 @@
+{
+    "course":
+    [
+        {
+            "id": "cool-kind-warm-good",
+            "title": "Adavanced Compiler",
+            "code": "COMP 403",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+        },
+        {
+            "id": "cool-kind-warm-bruh",
+            "title": "Adavanced Compiler",
+            "code": "COMP 408",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+        }
+    ]
+}
