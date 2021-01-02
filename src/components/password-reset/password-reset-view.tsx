@@ -1,7 +1,8 @@
 import React from 'react';
 import {useForm} from 'react-hook-form'
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { Link } from 'react-router-dom';
 
 import { Button, Container, Form } from 'react-bootstrap';
 
@@ -40,6 +41,11 @@ function PasswordResetView(props: Props) {
             Send password reset link
           </Button>
         </Form>
+      </Container>
+      <Container className={`register-to-peam text-center`}>
+      <Link to="/join" className="link">Create an account</Link>
+        |
+      <Link to="/login" className="link">Login</Link>
       </Container>
     </div>
   );

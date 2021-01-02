@@ -13,7 +13,7 @@ class PasswordReset extends Component {
         return (
             <>
                 <Navbar 
-                    signIn={false}
+                    hide={true}
                 />
                 <PasswordResetView
                     register={this.reset}

@@ -8,6 +8,7 @@ class Register extends Component {
     state = {
         emailPreferences: true,
         registering: false,
+        role: "Student"
     }
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +21,7 @@ class Register extends Component {
 
     register = (user: User) => {
         this.setState({'registering': true})
+        user.role = this.state.role;
         console.log(user);
     }
 
@@ -32,6 +34,7 @@ class Register extends Component {
                 register={this.register}
                 registering={this.state.registering}
                 emailPreferences={this.state.emailPreferences}
+                role={this.state.role}
             />
             </>
         );

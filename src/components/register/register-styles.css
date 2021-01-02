@@ -16,3 +16,14 @@
     margin-right: auto;
     max-width: 720px;
 }
+
+.register .role {
+    font-size: larger !important;
+    outline: none !important;
+    box-shadow:  none;
+}
+
+.register .role:focus, .register .role:active, .register .role:active:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
