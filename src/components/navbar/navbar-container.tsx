@@ -18,7 +18,7 @@ class Navbar extends Component<Props> {
                 logo={this.props.logo} 
                 hide={this.props.hide} 
                 search={this.props.search}
-                color="dark"
+                color="shiny"
             />
         );
     }
