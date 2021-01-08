@@ -3,10 +3,12 @@ import React from 'react';
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
+import peamLogo from '../../assets/peam-logo.png';
+
 import './navbar-style.css';
 
 type Props = {
-  color?: 'primary'| 'info' | 'success' | 'warning' | 'danger' | 'dark' | 'rose';
+  color?: 'shiny';
   signIn?: boolean;
   signUp?: boolean;
   search?: boolean;
@@ -22,10 +24,10 @@ const NavbarView = (props: Props) => {
 
   return (
     <div className='navbar-view'>
-      <Navbar className={`navbar ${props.color}`} variant='dark' expand='md'>
+      <Navbar className={`${props.color} one-edge-shadow`} expand='md'>
         {
           (props.logo || props.logo === undefined) &&
-          <Navbar.Brand> <Link className="disable-link-style" to="/"> PEAM </Link> </Navbar.Brand>
+          <Link className="disable-link-style" to="/"><Navbar.Brand> PEAM </Navbar.Brand></Link>
         }
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
