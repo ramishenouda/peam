@@ -43,31 +43,30 @@ function RegisterView(props: Props) {
       </h1>
       <Container>
         <Form className="register-form md-lg-8 mb-5" onSubmit={handleSubmit(props.register)}>
+          <div className="role">
           <Form.Group controlId="role">
-            <Form.Label>Iam a: <span className="required-text">*</span></Form.Label>
-            <br />
             <ButtonGroup toggle>
-              <ToggleButton 
-                value="Teacher" 
-                className="role" 
-                ref={register}
-                checked={props.role === "Teacher"} 
-                variant="info" type="radio" name="role" onChange={props.handleChange}
-              >
-                Teacher
-              </ToggleButton>
               <ToggleButton 
                 value="Student"
                 className="role"
                 ref={register}
-                checked={props.role === "Student"}
-                variant="info" type="radio" name="role" onChange={props.handleChange}
+                checked={props.role === "Student"} 
+                type="radio" name="role" onChange={props.handleChange}
               >
                 Student
               </ToggleButton>
+              <ToggleButton 
+                value="Teacher" 
+                className="role" 
+                ref={register}
+                checked={props.role === "Teacher"}
+                type="radio" name="role" onChange={props.handleChange}
+              >
+                Teacher
+              </ToggleButton>
             </ButtonGroup>
-            <p className="required-text"> { errors.role && errors.role.message } </p>
           </Form.Group>
+          </div>
           <Form.Group controlId="username">
             <Form.Label>Username <span className="required-text">*</span></Form.Label>
             <Form.Control onChange={props.handleChange} name="username" ref={register} type="text" />
@@ -93,9 +92,9 @@ function RegisterView(props: Props) {
             <Form.Check onChange={props.handleChange} name="emailPreferences" checked={props.emailPreferences} ref={register} type="checkbox" label="Send me notifications about my courses." />
           </Form.Group>
             {props.registering? (
-              <CircleLoader size={35} color={"#9c27b0"} loading={props.registering} />
+              <CircleLoader size={35} color={"#1a1a1a"} loading={props.registering} />
             ) : (
-              <Button variant="primary" type="submit" disabled={ !isValid }>
+              <Button variant="dark" type="submit" disabled={ !isValid }>
                 Create my account
               </Button>
             )}
