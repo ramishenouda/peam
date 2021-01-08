@@ -2,6 +2,18 @@
     font-family: 'Inconsolata', monospace !important;
 }
 
+.register .role .btn {
+    background-color: #f7f7f7 !important;
+    border-color: #fcfcfc !important;
+    color: #424242 !important;
+}
+
+.register .role .focus, .register .role .active {
+    background-color: #1a1a1a !important;
+    border-color: #202020 !important;
+    color: white !important;
+}
+
 .register .register-header, .register .register-form {
     padding: 5vh 5vw 0 5vw;
 
