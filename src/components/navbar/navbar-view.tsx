@@ -3,8 +3,6 @@ import React from 'react';
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
-import peamLogo from '../../assets/peam-logo.png';
-
 import './navbar-style.css';
 
 type Props = {
