@@ -1,11 +1,12 @@
 .register {
     font-family: 'Inconsolata', monospace !important;
 }
-
 .register .role .btn {
     background-color: #f7f7f7 !important;
     border-color: #fcfcfc !important;
     color: #424242 !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .register .role .focus, .register .role .active {
@@ -16,7 +17,6 @@
 
 .register .register-header, .register .register-form {
     padding: 5vh 5vw 0 5vw;
-
 }
 
 .register .register-header {

@@ -29,7 +29,6 @@ function LoginView(props: Props) {
   });
 
   const { isValid } = formState;
-
   return (
     <div className="login">
       <h2 className="login-header">
@@ -39,19 +38,19 @@ function LoginView(props: Props) {
         <Form className="login-form mb-5" onSubmit={handleSubmit(props.register)}>
           <Form.Group controlId="username">
             <Form.Label>Username or email address <span className="required-text">*</span></Form.Label>
-            <Form.Control onChange={props.handleChange} name="username" ref={register} type="text" />
+            <Form.Control className="form-peam" onChange={props.handleChange} name="username" ref={register} type="text" />
             <p className="required-text"> { errors.username && errors.username.message } </p>
           </Form.Group>
           <Form.Group controlId="password" style={{clear: "both"}}>
             <Form.Label>Password <span className="required-text">*</span></Form.Label>
             <Link className="float-right link" to="/password_reset">Forget password?</Link>
-            <Form.Control onChange={props.handleChange} name="password" ref={register} type="password" />
+            <Form.Control className="form-peam" onChange={props.handleChange} name="password" ref={register} type="password" />
             <p className="required-text"> {errors.password?.message} </p>
           </Form.Group>
           {props.registering? (
-            <CircleLoader size={35} color={"#9c27b0"} loading={props.registering} />
+            <CircleLoader size={35} color={"#1a1a1a"} loading={props.registering} />
             ) : (
-            <Button disabled={ !isValid } variant="primary" type="submit">
+            <Button disabled={ !isValid } variant="dark" type="submit">
               Sign in
             </Button>
           )}

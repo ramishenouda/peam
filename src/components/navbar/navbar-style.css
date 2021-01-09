@@ -45,11 +45,9 @@
     color: #424242 !important;
     background-color: white !important;
     cursor: text;
-    outline:none !important;
 }
 
-.navbar .navbar-search:focus, .navbar .navbar-search:active, .navbar .navbar-search:active:focus {
+.navbar .navbar-search:focus, .navbar .navbar-search:active {
     padding-right: 10vw !important;
-    outline:none !important;
     box-shadow: 0px 16px 12px -20px black !important;
 }
