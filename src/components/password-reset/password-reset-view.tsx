@@ -37,7 +37,7 @@ function PasswordResetView(props: Props) {
             <Form.Control name="email" placeholder="Email address" ref={register} type="text" />
             <p className="required-text"> { errors.email && errors.email.message } </p>
           </Form.Group>
-          <Button disabled={ !isValid } variant="primary" type="submit">
+          <Button disabled={ !isValid } variant="dark" type="submit">
             Send password reset link
           </Button>
         </Form>
