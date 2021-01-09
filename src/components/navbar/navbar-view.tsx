@@ -33,7 +33,7 @@ const NavbarView = (props: Props) => {
             <Form>
               {
                 (props.search || props.search === undefined) &&
-                <FormControl type="text" placeholder="Search Peam" className={`navbar-search navbar-item ${mdScreen && 'mt-2'}`} />
+                <FormControl type="text" placeholder="Search Peam" className={`navbar-search form-peam navbar-item ${mdScreen && 'mt-2'}`} />
               }
             </Form>
             {
