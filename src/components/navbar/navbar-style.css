@@ -48,6 +48,6 @@
 }
 
 .navbar .navbar-search:focus, .navbar .navbar-search:active {
-    padding-right: 10vw !important;
+    margin-right: 6rem !important;
     box-shadow: 0px 16px 12px -20px black !important;
 }
