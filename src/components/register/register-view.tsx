@@ -69,22 +69,22 @@ function RegisterView(props: Props) {
           </div>
           <Form.Group controlId="username">
             <Form.Label>Username <span className="required-text">*</span></Form.Label>
-            <Form.Control onChange={props.handleChange} name="username" ref={register} type="text" />
+            <Form.Control className="form-peam" onChange={props.handleChange} name="username" ref={register} type="text" />
             <p className="required-text"> { errors.username && errors.username.message } </p>
           </Form.Group>
           <Form.Group controlId="email">
             <Form.Label>Email address <span className="required-text">*</span></Form.Label>
-            <Form.Control onChange={props.handleChange} name="email" ref={register} type="email" />
+            <Form.Control className="form-peam" onChange={props.handleChange} name="email" ref={register} type="email" />
             <p className="required-text"> {errors.email && errors.email.message} </p>
           </Form.Group>
           <Form.Group controlId="password">
             <Form.Label>Password <span className="required-text">*</span></Form.Label>
-            <Form.Control onChange={props.handleChange} name="password" ref={register} type="password" />
+            <Form.Control className="form-peam" onChange={props.handleChange} name="password" ref={register} type="password" />
             <p className="required-text"> {errors.password?.message} </p>
           </Form.Group>
           <Form.Group controlId="confirmPassword">
             <Form.Label>Confirm password <span className="required-text">*</span></Form.Label>
-            <Form.Control onChange={props.handleChange} name="confirmPassword" ref={register} type="password" />
+            <Form.Control className="form-peam" onChange={props.handleChange} name="confirmPassword" ref={register} type="password" />
             <p className="required-text"> {errors.confirmPassword?.message} </p>
           </Form.Group>
           <Form.Group controlId="notifications">
