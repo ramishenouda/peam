@@ -1,19 +1,24 @@
-import Navbar from '../navbar/navbar-container';
 import './course-style.css'
 
-interface Props {
-    name: string;
+import Course from '../../models/course';
+import CourseNavbar from './course-navbar';
+
+type Props = {
+    name?: string;
+    course?: Course;
+    activeTab: number;
+    tabHandler: (tab: number) => void;
 }
 
-function CourseView(props: Props): JSX.Element {
+export default function CourseView(props: Props): JSX.Element {
     return (
         <>
-        <Navbar />
-        <div id="course">
-            Course
+        <div className="head bg-g-gray">
+            <div className="flex-auto mb-4">
+                <h1 className="title f2">{ props.course?.title } | { props.course?.code }</h1>
+            </div>
+            <CourseNavbar active={props.activeTab} tabHandler={props.tabHandler} />
         </div>
         </>
     )
 }
-
-export default CourseView;
