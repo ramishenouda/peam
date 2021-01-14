@@ -7,7 +7,6 @@ import course from '../../models/course';
 import CourseService from '../../services/course-service';
 
 import CourseView from './course-view';
-import CourseSkeleton from './course-skeleton';
 
 interface RouteInfo {
     id: string
@@ -46,18 +45,14 @@ class Course extends Component<ComponentProps, IState> {
     render() {
         return (
             <>
-            <Navbar />
-            <main id="course">
-                { this.state.loading ? (
-                    <CourseSkeleton />
-                ) : (
+                <Navbar />
+                <main id="course">
                     <CourseView 
                         course={this.state.course} 
                         activeTab={this.state.activeTab}
                         tabHandler={this.tabHandler}
                     />
-                )}
-            </main>
+                </main>
             </>
         );
     }

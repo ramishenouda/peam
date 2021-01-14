@@ -1,10 +1,13 @@
-import './course-style.css'
+import { Container } from 'react-bootstrap';
 
 import Course from '../../models/course';
+
+import CourseOverView from './course-components/course-overview/course-overview-container';
+
+import './course-style.css'
 import CourseNavbar from './course-navbar';
 
 type Props = {
-    name?: string;
     course?: Course;
     activeTab: number;
     tabHandler: (tab: number) => void;
@@ -19,6 +22,11 @@ export default function CourseView(props: Props): JSX.Element {
             </div>
             <CourseNavbar active={props.activeTab} tabHandler={props.tabHandler} />
         </div>
+        <Container>
+            {props.activeTab === 0 && (
+                <CourseOverView />
+            )}
+        </Container>
         </>
     )
 }

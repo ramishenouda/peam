@@ -1,20 +1,28 @@
 #course .head {
     font-family: 'Roboto', sans-serif;
-    padding: 10px 5px 0px 20px !important;
 }
 
 #course .title {
     font-weight: bold;
+    padding: 10px 20px 0px 20px !important;
 }
 
 #course-nav .course-nav-item {
     font-family: Inconsolata;
-    text-decoration: none;
+    text-decoration: none #fff;
     color: #1a1a1a !important;
     font-size: x-large;
     text-underline-offset: 13px;
     cursor: pointer;
     transition: all 0.3s ease-in-out !important;
+    display: inline-flex !important;
+}
+
+#course-nav {
+    overflow-x: scroll;
+    padding-right: 100px !important;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 #course-nav .course-nav-item:hover {
@@ -25,17 +33,10 @@
     text-decoration: underline #aa3b3b !important;
 }
 
-#course-nav {
-    overflow-x: scroll;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
 #course-nav::-webkit-scrollbar {
     display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-#course-nav {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+.material-ui-icon {
+    margin: 7px 10px 0px 0px;
 }
