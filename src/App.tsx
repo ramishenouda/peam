@@ -18,7 +18,7 @@ export const App = () => {
                 <Route exact path="/join" render={() => <AnonymousRoute component={Register}/>} />
                 <Route exact path="/login" render={() => <AnonymousRoute component={Login}/>} />
                 <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordReset}/> } />
-                <Route exact path="/course/:id" render={() => <ProtectedRoute redirectTo="/login" component={Course}/>} />
+                <Route exact path="/courses/:ownerName/:courseName" render={() => <ProtectedRoute redirectTo="/login" component={Course}/>} />
                 <Route render={() => <Redirect to={{ pathname: '/' }}/>} />
             </Switch>
         </React.Fragment>

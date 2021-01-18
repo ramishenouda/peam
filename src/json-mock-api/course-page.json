@@ -1,16 +1,41 @@
 {
-    "course":
-    [
+    "DrAshraf": [
         {
-            "id": "cool-kind-warm-good",
+            "id": "adavancedcompiler",
             "title": "Adavanced Compiler",
             "code": "COMP 403",
             "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
         },
         {
-            "id": "cool-kind-warm-bruh",
+            "id": "syntax",
             "title": "Adavanced Compiler",
-            "code": "COMP 408",
+            "code": "COMP 409",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+        },
+        {
+            "id": "mediumcompiler",
+            "title": "MediumCompiler",
+            "code": "COMP 407",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+        }
+    ],
+    "DrWael": [
+        {
+            "id": "database",
+            "title": "database",
+            "code": "COMP 410",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+        },
+        {
+            "id": "machinelearning",
+            "title": "Machine Learning",
+            "code": "COMP 415",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+        },
+        {
+            "id": "syntax",
+            "title": "syntax",
+            "code": "COMP 430",
             "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
         }
     ]
