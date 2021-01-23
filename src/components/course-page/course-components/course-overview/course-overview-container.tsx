@@ -1,21 +1,17 @@
 import { Component } from 'react';
 
-import course from '../../../../models/course';
+import Course from '../../../../models/course';
 
 import View from './course-overview-view'
 
 interface IState {
-    loading: boolean;
-    course?: course;
+    course: Course;
 }
 
-class CourseOverView extends Component {
-    componentDidMount() {
-
-    }
+class CourseOverView extends Component<IState> {
     render() {
         return (
-            <View />
+            <View course={this.props.course} />
         );
     }
 }

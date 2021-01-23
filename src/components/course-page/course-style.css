@@ -37,6 +37,11 @@
     display: none;
 }
 
+#course-nav .course-description {
+    font-weight: bolder;
+    font-size: large;
+}
+
 .material-ui-icon {
     margin: 7px 10px 0px 0px;
 }

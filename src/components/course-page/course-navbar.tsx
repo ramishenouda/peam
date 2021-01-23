@@ -9,11 +9,15 @@ import SettingsIcon from '@material-ui/icons/Settings';
 type Props = {
     active: number,
     tabHandler: (tab: number) => void,
+    courseDescription: string
 }
 
 export default function CourseNavbar(props: Props): JSX.Element {
     return (
         <Container id="course-nav">
+            <p className="course-description">
+                { props.courseDescription }
+            </p>
             <Navbar>
                 <span onClick={() => props.tabHandler(0)} className={`course-nav-item ${props.active === 0 && 'active-tab'}`}>
                     <ImportContactsIcon className="material-ui-icon"/> Overview
