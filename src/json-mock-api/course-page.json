@@ -1,17 +1,68 @@
 {
-    "course":
-    [
+    "DrAshraf": [
         {
-            "id": "cool-kind-warm-good",
+            "id": "advancedcompiler",
+            "uid": "advancedcompiler",
             "title": "Adavanced Compiler",
             "code": "COMP 403",
-            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...",
+            "projectRequirements": { 
+                "uid": "some-pray-will-make",
+                "title": "I want the project right now",
+                "description": "this is for the spring, students.",
+                "from_dt": "2021-01-18 06:00",
+                "to_dt": "2022-09-25 06:00"
+            },
+            "attachments": { 
+                "uid": "some-pray-will-make",
+                "title": "lecture 1",
+                "description": "this is some information about lecture 1",
+                "link": "https://aramy.me/assets/RamiShenouda%20Resume.pdf"
+            }
         },
         {
-            "id": "cool-kind-warm-bruh",
+            "id": "syntax",
+            "uid": "syntax",
             "title": "Adavanced Compiler",
-            "code": "COMP 408",
-            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+            "code": "COMP 409",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...",
+            "projectRequirements": { },
+            "attachments": { }
+        },
+        {
+            "id": "mediumcompiler",
+            "uid": "mediumcompiler",
+            "title": "MediumCompiler",
+            "code": "COMP 407",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...",
+            "projectRequirements": { },
+            "attachments": { }
+        }
+    ],
+    "DrWael": [
+        {
+            "uid": "database",
+            "title": "database",
+            "code": "COMP 410",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...",
+            "projectRequirements": { },
+            "attachments": {  }
+        },
+        {
+            "uid": "machinelearning",
+            "title": "Machine Learning",
+            "code": "COMP 415",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...",
+            "projectRequirements": { },
+            "attachments": { }
+        },
+        {
+            "uid": "syntax",
+            "title": "syntax",
+            "code": "COMP 430",
+            "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...",
+            "projectRequirements": { },
+            "attachments": { }
         }
     ]
 }

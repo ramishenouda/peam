@@ -7,33 +7,28 @@ import course from '../../models/course';
 import CourseService from '../../services/course-service';
 
 import CourseView from './course-view';
-import CourseSkeleton from './course-skeleton';
 
 interface RouteInfo {
-    id: string
+    owner: string;
+    courseName: string;
 }
 
 interface IState {
-    loading: boolean;
-    course?: course;
+    loading?: boolean;
+    course: course;
     activeTab: number; 
 }
 
 interface ComponentProps extends RouteComponentProps<RouteInfo> {}
 
 class Course extends Component<ComponentProps, IState> {
-    state = {
-        loading: true,
-        course: undefined,
-        activeTab: 0
-    }
-
     componentDidMount() {
-        const id = this.props.match.params.id;
-
-        CourseService.GetCourse(id)
+        const owner = this.props.match.params.owner;
+        const courseName = this.props.match.params.courseName;
+        CourseService.GetCourse(owner, courseName)
             .then((result) => {
-                this.setState({ course: result.data, loading: false});
+                this.setState({ course: result.data, loading: false, activeTab: 0});
+                console.log(result)
             }).catch((err) => {
                 console.log(err);
             });
@@ -44,20 +39,23 @@ class Course extends Component<ComponentProps, IState> {
     }
 
     render() {
+        let info;
+        // todo replace this with the skeleton loader   
+        if(this.state === null) {
+            info = <span> Loading </span>
+        } else {
+            info = <CourseView 
+                course={this.state.course} 
+                activeTab={this.state.activeTab}
+                tabHandler={this.tabHandler}
+            />
+        }
         return (
             <>
-            <Navbar />
-            <main id="course">
-                { this.state.loading ? (
-                    <CourseSkeleton />
-                ) : (
-                    <CourseView 
-                        course={this.state.course} 
-                        activeTab={this.state.activeTab}
-                        tabHandler={this.tabHandler}
-                    />
-                )}
-            </main>
+                <Navbar />
+                <main id="course">
+                    { info }
+                </main>
             </>
         );
     }

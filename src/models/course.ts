@@ -1,6 +1,11 @@
+import Attachment from "./attachment";
+import ProjectRequirement from "./project-requirement";
+
 export default interface Course {
-    id: string;
+    uid: string;
     title: string;
     code: string;
     description: string;
+    attachments: Array<Attachment>;
+    projectRequirements: Array<ProjectRequirement>;
 }

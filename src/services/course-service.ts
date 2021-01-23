@@ -10,8 +10,13 @@ export default class CourseService {
         }
     };
 
-    static async GetCourse(id: string)  {
-        const url = this.baseURL + 'course/' + id;
+    static async GetCourse(owner: string, courseName: string)  {
+        let url;
+        if(process.env.NODE_ENV === 'development')
+            url = this.baseURL + `${owner}/${courseName}`;
+        else
+            url = this.baseURL + `courses/${owner}/${courseName}`;
+
         return (await axios.get(url, this.options));
     }
 }
