@@ -6,6 +6,7 @@ export default interface Course {
     title: string;
     code: string;
     description: string;
+    owner: string;
     attachments: Array<Attachment>;
     projectRequirements: Array<ProjectRequirement>;
 }

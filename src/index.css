@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
-
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #3498db; /* Blue */
@@ -48,6 +47,14 @@
   background: -webkit-linear-gradient(287deg, rgba(232,232,232,1) 24%, rgba(250,251,252,1) 100%);
   background: linear-gradient(287deg, rgba(232,232,232,1) 24%, rgba(250,251,252,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e8e8e8",endColorstr="#fafbfc",GradientType=1);
+}
+
+.bg-g-dark {
+  background: rgb(34,34,34);
+  background: -moz-linear-gradient(90deg, rgba(34,34,34,1) 0%, rgba(37,37,37,1) 100%);
+  background: -webkit-linear-gradient(90deg, rgba(34,34,34,1) 0%, rgba(37,37,37,1) 100%);
+  background: linear-gradient(90deg, rgba(34,34,34,1) 0%, rgba(37,37,37,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#222222",endColorstr="#252525",GradientType=1);
 }
 
 .form-peam:focus, .register .form-peam:active, .form-peam:active:focus {

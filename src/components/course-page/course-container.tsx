@@ -16,7 +16,6 @@ interface RouteInfo {
 interface IState {
     loading?: boolean;
     course: course;
-    activeTab: number; 
 }
 
 interface ComponentProps extends RouteComponentProps<RouteInfo> {}
@@ -27,35 +26,28 @@ class Course extends Component<ComponentProps, IState> {
         const courseName = this.props.match.params.courseName;
         CourseService.GetCourse(owner, courseName)
             .then((result) => {
-                this.setState({ course: result.data, loading: false, activeTab: 0});
+                this.setState({ course: result.data, loading: false });
                 console.log(result)
             }).catch((err) => {
                 console.log(err);
             });
     }
 
-    tabHandler = (tab: number): void => {
-        this.setState({ activeTab: tab });
-    }
-
     render() {
-        let info;
-        // todo replace this with the skeleton loader   
-        if(this.state === null) {
-            info = <span> Loading </span>
-        } else {
-            info = <CourseView 
-                course={this.state.course} 
-                activeTab={this.state.activeTab}
-                tabHandler={this.tabHandler}
-            />
-        }
         return (
             <>
                 <Navbar />
-                <main id="course">
-                    { info }
-                </main>
+                <div id="course">
+                    {
+                        this.state === null ? (
+                            <span> Loading </span>
+                        ) : (
+                            <CourseView 
+                                course={this.state.course} 
+                            />
+                        )
+                    }
+                </div>
             </>
         );
     }

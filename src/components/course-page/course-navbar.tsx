@@ -9,7 +9,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 type Props = {
     active: number,
     tabHandler: (tab: number) => void,
-    courseDescription: string
+    courseDescription: string,
+    courseOwner: string // will be used for course settings
 }
 
 export default function CourseNavbar(props: Props): JSX.Element {
