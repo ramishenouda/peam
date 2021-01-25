@@ -2,12 +2,17 @@
     font-family: 'Roboto', sans-serif;
 }
 
-#course .title {
-    font-weight: bold;
+#course .title, #course .description {
     padding: 10px 20px 0px 20px !important;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
 }
 
-#course-nav .course-nav-item {
+.course-navbar {
+    padding: 0 5vw 2vh 5vw;
+}
+
+.course-navbar .course-nav-item {
     font-family: Inconsolata;
     text-decoration: none #fff;
     color: #1a1a1a !important;
@@ -18,26 +23,26 @@
     display: inline-flex !important;
 }
 
-#course-nav {
+.course-navbar {
     overflow-x: scroll;
     padding-right: 100px !important;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
 
-#course-nav .course-nav-item:hover {
+.course-navbar .course-nav-item:hover {
     text-decoration: underline #1a1a1a;
 }
 
-#course-nav .active-tab {
+.course-navbar .active-tab {
     text-decoration: underline #aa3b3b !important;
 }
 
-#course-nav::-webkit-scrollbar {
+.course-navbar::-webkit-scrollbar {
     display: none;
 }
 
-#course-nav .course-description {
+.course-navbar .course-description {
     font-weight: bolder;
     font-size: large;
 }

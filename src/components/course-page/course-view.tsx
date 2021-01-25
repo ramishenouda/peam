@@ -17,7 +17,8 @@ export default function CourseView(props: Props): JSX.Element {
         <>
         <header className="head bg-g-gray">
             <div className="flex-auto mb-4">
-                <h1 className="title f2">{ props.course?.title } | { props.course?.code }</h1>
+                <h1 className="title f2">{ props.course.title } | { props.course.code }</h1>
+                <h1 className="description f3">{ props.course.description }</h1>
             </div>
             <CourseNavbar 
                 courseDescription={props.course.description} 
