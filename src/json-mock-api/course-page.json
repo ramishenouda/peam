@@ -6,19 +6,30 @@
             "title": "Adavanced Compiler",
             "code": "COMP 403",
             "description": "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...",
-            "projectRequirements": { 
-                "uid": "some-pray-will-make",
-                "title": "I want the project right now",
-                "description": "this is for the spring, students.",
-                "from_dt": "2021-01-18 06:00",
-                "to_dt": "2022-09-25 06:00"
-            },
-            "attachments": { 
-                "uid": "some-pray-will-make",
-                "title": "lecture 1",
-                "description": "this is some information about lecture 1",
-                "link": "https://aramy.me/assets/RamiShenouda%20Resume.pdf"
-            }
+            "projectRequirements": [
+                {
+                    "uid": "some-prey-will-make",
+                    "title": "Spring Project",
+                    "description": "This is for the spring project. The proejct will be about creating a website about corona virus.",
+                    "from_dt": "2021-01-18 06:00",
+                    "to_dt": "2022-09-25 06:00"
+                },
+                {
+                    "uid": "food-good-dark-done",
+                    "title": "Midterm project",
+                    "description": "This is for the midterm. The project will be about creating a codegenerator for the ven language using the two passes approach, the program should work 100% correctly.",
+                    "from_dt": "2021-01-18 06:00",
+                    "to_dt": "2022-09-25 06:00"
+                }
+            ],
+            "attachments": [
+                {
+                    "uid": "some-pray-will-make",
+                    "title": "lecture 1",
+                    "description": "this is some information about lecture 1",
+                    "link": "https://aramy.me/assets/RamiShenouda%20Resume.pdf"
+                }
+            ]
         },
         {
             "id": "syntax",
