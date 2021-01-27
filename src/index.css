@@ -97,3 +97,10 @@
   color: #f52617;
   font-weight: bold;
 }
+
+.title-hr {
+  width: 240px;
+  margin: auto;
+  text-align: center;
+  border-radius: 100px;
+}

@@ -1,0 +1,16 @@
+#course-over-view {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 70% 3px 25%;
+    grid-column-gap: 3%;
+}
+
+#course-over-view .separator {
+    background: #5a5a5a;
+    box-shadow: 0px 0px 1px #1a1a1a;
+}
+
+#course-over-view .title {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
