@@ -1,20 +1,21 @@
+import { Link } from 'react-router-dom';
+
 import './project-requirement-style.css'
 
-import projectReq from '../../models/project-requirement';
-import { ProjectRequirementItem } from './project-requirement-item';
-
 interface Props {
-    projectReq: Array<projectReq>;
+    projectReqs: Array<JSX.Element>;
 }
 
 function ProjectRequirement(props: Props): JSX.Element {
-    const projectReqs = props.projectReq.map(pr => 
-        <ProjectRequirementItem key={pr.uid} projectReq={pr} />
-    );
-
     return (
         <div id="project-req">
-            { projectReqs }
+
+            <h1 className="f2 title">Project requirements</h1>
+            <div className="mb-2">
+                <hr className="title-hr" />
+            </div>
+            <Link to="/drashraf/advancedcompiler" className="mb-2 btn btn-dark">Add project requirement</Link>
+            { props.projectReqs }
         </div>
     )
 }
