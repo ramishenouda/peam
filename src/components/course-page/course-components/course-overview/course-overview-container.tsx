@@ -10,8 +10,9 @@ interface IState {
 
 class CourseOverView extends Component<IState> {
     render() {
+        const isSmallScreen = window.innerWidth < 769;
         return (
-            <View course={this.props.course} />
+            <View isSamllScreen={isSmallScreen} course={this.props.course} />
         );
     }
 }

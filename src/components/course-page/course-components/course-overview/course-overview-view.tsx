@@ -3,7 +3,8 @@ import ProjectRequirement from '../../../project-requirement/project-requirement
 import './course-overview-style.css';
 
 type Props = {
-    course: Course
+    course: Course,
+    isSamllScreen: boolean
 }
 
 function CourseOverView(props: Props) {
@@ -14,20 +15,30 @@ function CourseOverView(props: Props) {
             </div>
             <div className="separator"></div>
             <div>
-                <h1 className="f2 title">Attachments</h1>
-                <div className="mb-2">
-                    <hr className="title-hr" />
-                </div>
-                <div>                       
-                    <h5>
-                        Lecture from last night
-                    </h5>
-                    <h5>
-                        Lecture from last night
-                    </h5>
-                    <h5>
-                        Lecture from last night
-                    </h5>
+                {
+                    !props.isSamllScreen &&
+                    <div>
+                        <h1 className={`f2 overview-title ${props.isSamllScreen && 'mt-2'}`}>
+                            About
+                        </h1>
+                        <p>
+                            {props.course.description}    
+                        </p>
+                    </div>
+                }
+                <div>
+                    <h1 className={`f2 overview-title ${props.isSamllScreen && 'mt-4'}`}>Attachments</h1>
+                    <div>                   
+                        <p>
+                            Lecture from last night
+                        </p>
+                        <p>
+                            Lecture from last night
+                        </p>
+                        <p>
+                            Lecture from last night
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
