@@ -12,15 +12,15 @@
                     "uid": "some-prey-will-make",
                     "title": "Spring Project",
                     "description": "This is for the spring project. The proejct will be about creating a website about corona virus.",
-                    "from_dt": "2021-01-18 06:00",
-                    "to_dt": "2022-09-25 06:00"
+                    "from_dt": "2021-01-29T15:39:02Z",
+                    "to_dt": "2021-01-29T23:00:00Z"
                 },
                 {
                     "uid": "food-good-dark-done",
                     "title": "Midterm project",
                     "description": "This is for the midterm. The project will be about creating a codegenerator for the ven language using the two passes approach, the program should work 100% correctly.",
-                    "from_dt": "2021-01-18 06:00",
-                    "to_dt": "2022-09-25 06:00"
+                    "from_dt": "2021-01-29T15:39:02Z",
+                    "to_dt": "2021-01-29T23:00:00Z"
                 }
             ],
             "attachments": [

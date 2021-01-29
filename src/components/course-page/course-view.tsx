@@ -13,12 +13,15 @@ type Props = {
 
 export default function CourseView(props: Props): JSX.Element {
     const [tap, setTap] = useState(0);
+    const isSmallScreen = window.innerWidth < 769;
     return (
         <>
         <header className="head bg-g-gray">
             <div className="flex-auto mb-4">
-                <h1 className="title f2">{ props.course.title } | { props.course.code }</h1>
-                <h1 className="description f3">{ props.course.description }</h1>
+                <h1 className="course-title f2">{ props.course.title } | { props.course.code }</h1>
+                { isSmallScreen && 
+                    <h2 className="course-description f3">{ props.course.description }</h2>
+                }
             </div>
             <CourseNavbar 
                 courseDescription={props.course.description} 

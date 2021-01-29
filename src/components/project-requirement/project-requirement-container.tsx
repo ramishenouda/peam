@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 
 import projectReq from '../../models/project-requirement';
 import { ProjectRequirementItem } from './project-requirement-item';
@@ -9,14 +10,34 @@ type Props = {
     projectReq: Array<projectReq>
 };
 
-class ProjectRequirement extends Component<Props> {
-    projectReqs = this.props.projectReq.map(pr => 
-        <ProjectRequirementItem key={pr.uid} teacher={true} projectReq={pr} />
-    );
+interface IState {
+    token: string;
+    redirect: string;
+}
+
+class ProjectRequirement extends Component<Props, IState> {
+    state = {
+        token: "",
+        redirect: ""
+    }
+
+    componentDidMount() {
+        const token = localStorage.getItem('token');
+        if (token === undefined)
+            this.setState({redirect: '/login'})
+    }
 
     render() {
+        if(this.state.redirect)
+            <Redirect to={{ pathname: this.state.redirect }} />
+        
+        const projectReqs = this.props.projectReq.map((pr, index) =>
+            <div className={index !== this.props.projectReq.length -1 ? 'mb-3' : 'mb-1'}>
+                <ProjectRequirementItem key={pr.uid} teacher={true} projectReq={pr} />
+            </div> 
+        );
         return (
-            <View projectReqs={this.projectReqs} />
+            <View projectReqs={projectReqs} />
         );
     }
 }
