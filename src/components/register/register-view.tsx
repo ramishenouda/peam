@@ -46,7 +46,7 @@ function RegisterView(props: Props) {
           <div className="role">
           <Form.Group controlId="role">
             <ButtonGroup toggle>
-              <ToggleButton 
+              <ToggleButton
                 value="Student"
                 className="role"
                 ref={register}

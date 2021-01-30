@@ -1,13 +1,29 @@
+import { useState, useEffect } from 'react';
+
 import Course from '../../../../models/course';
+
 import ProjectRequirement from '../../../project-requirement/project-requirement-container';
+
 import './course-overview-style.css';
 
 type Props = {
     course: Course,
-    isSamllScreen: boolean
 }
 
 function CourseOverView(props: Props) {
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
+    useEffect(() => {
+        console.log('subscribe to event');
+        window.addEventListener('resize', () => setWindowSize(window.innerWidth));
+
+        return function cleanup () {
+            console.log('unsubscribe to events');
+            window.removeEventListener('resize', () => setWindowSize(window.innerWidth));
+        }
+    }, []);
+
+    const isSmallScreen = windowSize < 769;
+
     return (
         <div id="course-over-view">
             <div>
@@ -16,9 +32,9 @@ function CourseOverView(props: Props) {
             <div className="separator"></div>
             <div>
                 {
-                    !props.isSamllScreen &&
+                    !isSmallScreen &&
                     <div>
-                        <h1 className={`f2 overview-title ${props.isSamllScreen && 'mt-2'}`}>
+                        <h1 className={`f2 overview-title ${isSmallScreen && 'mt-2'}`}>
                             About
                         </h1>
                         <p>
@@ -26,8 +42,16 @@ function CourseOverView(props: Props) {
                         </p>
                     </div>
                 }
+                <div className="separator">
+                    <hr/>
+                </div>
                 <div>
-                    <h1 className={`f2 overview-title ${props.isSamllScreen && 'mt-4'}`}>Attachments</h1>
+                    <h1 className={`f2 overview-title ${isSmallScreen && 'mt-4 text-center'}`}>Attachments</h1>
+                    {isSmallScreen && 
+                        <div className="mb-2"> 
+                            <hr style={{width: '140px', textAlign: 'center', margin: 'auto'}} />
+                        </div>
+                    }
                     <div>                   
                         <p>
                             Lecture from last night

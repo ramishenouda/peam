@@ -32,8 +32,8 @@ class ProjectRequirement extends Component<Props, IState> {
             <Redirect to={{ pathname: this.state.redirect }} />
         
         const projectReqs = this.props.projectReq.map((pr, index) =>
-            <div className={index !== this.props.projectReq.length -1 ? 'mb-3' : 'mb-1'}>
-                <ProjectRequirementItem key={pr.uid} teacher={true} projectReq={pr} />
+            <div key={pr.uid} className={index !== this.props.projectReq.length -1 ? 'mb-3' : 'mb-1'}>
+                <ProjectRequirementItem teacher={true} projectReq={pr} />
             </div> 
         );
         return (

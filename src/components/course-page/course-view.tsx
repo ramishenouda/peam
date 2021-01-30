@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import Course from '../../models/course';
 
@@ -13,7 +13,20 @@ type Props = {
 
 export default function CourseView(props: Props): JSX.Element {
     const [tap, setTap] = useState(0);
-    const isSmallScreen = window.innerWidth < 769;
+
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
+    useEffect(() => {
+        console.log('subscribe to event');
+        window.addEventListener('resize', () => setWindowSize(window.innerWidth));
+
+        return function cleanup () {
+            console.log('unsubscribe to events');
+            window.removeEventListener('resize', () => setWindowSize(window.innerWidth));
+        }
+    }, []);
+
+    const isSmallScreen = windowSize < 769;
+
     return (
         <>
         <header className="head bg-g-gray">

@@ -11,21 +11,21 @@
                 {
                     "uid": "some-prey-will-make",
                     "title": "Spring Project",
-                    "description": "This is for the spring project. The proejct will be about creating a website about corona virus.",
-                    "from_dt": "2021-01-29T15:39:02Z",
-                    "to_dt": "2021-01-29T23:00:00Z"
+                    "description": "This is for the spring project. The project will be about creating a website about coronavirus.",
+                    "from_dt": "2021-01-31T15:39:02Z",
+                    "to_dt": "2021-02-29T23:00:00Z"
                 },
                 {
                     "uid": "food-good-dark-done",
                     "title": "Midterm project",
-                    "description": "This is for the midterm. The project will be about creating a codegenerator for the ven language using the two passes approach, the program should work 100% correctly.",
+                    "description": "This is for the midterm. The project will be about creating a code generator for the ven language using the two passes approach, the program should work 100% correctly.",
                     "from_dt": "2021-01-29T15:39:02Z",
                     "to_dt": "2021-01-29T23:00:00Z"
                 }
             ],
             "attachments": [
                 {
-                    "uid": "some-pray-will-make",
+                    "uid": "some-pray-will-makee",
                     "title": "lecture 1",
                     "description": "this is some information about lecture 1",
                     "link": "https://aramy.me/assets/RamiShenouda%20Resume.pdf"
