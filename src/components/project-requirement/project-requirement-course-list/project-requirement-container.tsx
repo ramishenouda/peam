@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 
-import projectReq from '../../models/project-requirement';
+import projectReq from '../../../models/project-requirement';
 import { ProjectRequirementItem } from './project-requirement-item';
 
 import View from './project-requirement-view';
 
 type Props = {
-    projectReq: Array<projectReq>
+    projectReq: Array<projectReq>;
+    courseOwner: string;
+    courseTitle: string;
 };
 
 interface IState {
@@ -37,7 +39,11 @@ class ProjectRequirement extends Component<Props, IState> {
             </div> 
         );
         return (
-            <View projectReqs={projectReqs} />
+            <View 
+                courseOwner={this.props.courseOwner}
+                courseTitle={this.props.courseTitle}
+                projectReqs={projectReqs} 
+            />
         );
     }
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import Course from '../../../../models/course';
 
-import ProjectRequirement from '../../../project-requirement/project-requirement-container';
+import ProjectRequirement from '../../../project-requirement/project-requirement-course-list/project-requirement-container';
 
 import './course-overview-style.css';
 
@@ -27,7 +27,11 @@ function CourseOverView(props: Props) {
     return (
         <div id="course-over-view">
             <div>
-                <ProjectRequirement projectReq={props.course.projectRequirements} />
+                <ProjectRequirement 
+                    courseOwner={props.course.owner} 
+                    courseTitle={props.course.title} 
+                    projectReq={props.course.projectRequirements} 
+                />
             </div>
             <div className="separator"></div>
             <div>

@@ -1,4 +1,4 @@
-import { Container,  Navbar } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import PeopleIcon from '@material-ui/icons/People';

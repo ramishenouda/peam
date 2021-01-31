@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
@@ -14,9 +14,20 @@ type Props = {
   logo?: boolean;
 };
 
-const mdScreen = window.innerWidth < 768
-
 const NavbarView = (props: Props) => {
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  useEffect(() => {
+      console.log('subscribe to event');
+      window.addEventListener('resize', () => setWindowSize(window.innerWidth));
+
+      return function cleanup () {
+          console.log('unsubscribe to events');
+          window.removeEventListener('resize', () => setWindowSize(window.innerWidth));
+      }
+  }, []);
+
+  const mdScreen = windowSize < 769;
+
   if(props.hide)
     return <></>
 

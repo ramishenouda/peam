@@ -102,3 +102,15 @@
   border-radius: 100px;
   border: 1px solid #d6d6d6;
 }
+
+.center-big-wide-small {
+  width: 70%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .center-big-wide-small {
+    width: 100%;
+    margin: auto;
+  }
+}

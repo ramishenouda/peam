@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 
 import { Button, Form } from 'react-bootstrap';
 
-import ProjectRequirement from '../../models/project-requirement';
+import ProjectRequirement from '../../../models/project-requirement';
 
 type Props = {
     projectReq: ProjectRequirement
@@ -100,7 +100,6 @@ export const ProjectRequirementItem = (props: Props) => {
 
     const EditItem = () => 
     {
-        console.log(startDate, endDate)
         return (
             <Form className="project-req-item text-light">
                 <Form.Group>
