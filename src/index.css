@@ -108,6 +108,10 @@
   margin: auto;
 }
 
+.form-control {
+  box-shadow: none !important;
+}
+
 @media only screen and (max-width: 768px) {
   .center-big-wide-small {
     width: 100%;

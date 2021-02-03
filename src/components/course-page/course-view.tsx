@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Course from '../../models/course';
 
 import CourseOverView from './course-components/course-overview/course-overview-container';
+import CourseStudents from './course-components/course-students/course-students-container'
 
 import './course-style.css'
 import CourseNavbar from './course-navbar';
@@ -45,9 +46,10 @@ export default function CourseView(props: Props): JSX.Element {
         </header>
         <main>
             {tap === 0 &&
-                <CourseOverView
-                    course={props.course}
-                />
+                <CourseOverView course={props.course} />
+            }
+            {tap === 1 &&
+                <CourseStudents />
             }
         </main>
         </>

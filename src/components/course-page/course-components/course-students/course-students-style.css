@@ -1,0 +1,51 @@
+#course-students .controls {
+    text-align: right;
+    display: block;
+}
+
+#course-students .controls .form-control {
+    display: inline-block !important;
+    margin-right: 0.5rem !important;
+    padding-top: 0px;
+}
+
+#student-list {
+    display: grid;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-column-gap: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+    #student-list {
+        grid-template-columns: 100%;
+    }
+}
+
+#student {
+    background-color: #f3f3f3;
+    padding: 10px;
+    position: relative;
+}
+
+#student .profile-pic {
+    height: 75px;
+    width: 75px;
+    border-radius: 100px;
+    background-size: auto;
+    object-fit: cover;
+}
+
+#student .title {
+    font-family: Inter, sans-serif;
+    padding-left: 4px;
+    font-size: medium;
+    font-weight: 500;
+}
+
+#student .remove-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
