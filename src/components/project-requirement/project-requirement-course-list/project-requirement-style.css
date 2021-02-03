@@ -1,0 +1,54 @@
+@import '~react-datepicker/dist/react-datepicker.css';
+
+.project-req-item {
+    border-radius: 5px;
+    padding: 10px;
+    background:  rgba(0, 0, 0, 0.075);
+    color: #1a1a1a !important;
+    position: relative;
+    box-shadow: 1px 1px 3px #1a1a1a;
+    transition: 0.5s;
+}
+
+.project-req-item .project-req-title, .project-req-item .project-req-description {
+    padding: 5px 10px;
+    border-radius: inherit;
+}
+
+.project-req-item .project-req-title {
+    background-color: rgb(48, 48, 48);
+    color: #fff;
+    font-family: 'Roboto';
+    border-radius: 5px;
+    height: fit-content;
+    box-shadow: none;
+}
+
+.project-req-item .project-req-deadline {
+    font-weight: 600;
+    font-family: Inter, sans-serif;
+}
+
+.project-req-item .project-req-deadline .date-over {
+    color: red;
+    text-decoration: line-through;
+}
+
+.project-req-item .project-req-description {
+    box-shadow: none;
+    border-radius: 5px;
+    overflow-y: hidden;
+    outline: none;
+    background: rgba(0, 0, 0, 0.075)
+}
+
+.project-req-item .project-requirement-item-options {
+    text-align: right;
+    font-weight: 600;
+}
+
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+    padding-left: 0;
+    padding-right: 0;
+}

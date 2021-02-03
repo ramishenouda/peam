@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Navbar from '../navbar/navbar-container';
 
 import course from '../../models/course';
-import CourseService from '../../services/course-service';
+import { GetCourse } from '../../services/course-service';
 
 import CourseView from './course-view';
 
@@ -14,7 +14,7 @@ interface RouteInfo {
 }
 
 interface IState {
-    loading?: boolean;
+    loading: boolean;
     course: course;
 }
 
@@ -24,7 +24,7 @@ class Course extends Component<ComponentProps, IState> {
     componentDidMount() {
         const owner = this.props.match.params.owner;
         const courseName = this.props.match.params.courseName;
-        CourseService.GetCourse(owner, courseName)
+        GetCourse(owner, courseName)
             .then((result) => {
                 this.setState({ course: result.data, loading: false });
                 console.log(result)

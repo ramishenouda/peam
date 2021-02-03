@@ -1,5 +1,6 @@
 import React from 'react';
-import {useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -46,7 +47,7 @@ function RegisterView(props: Props) {
           <div className="role">
           <Form.Group controlId="role">
             <ButtonGroup toggle>
-              <ToggleButton 
+              <ToggleButton
                 value="Student"
                 className="role"
                 ref={register}

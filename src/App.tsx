@@ -9,6 +9,7 @@ import Register from './components/register/register-container';
 import Login from './components/login/login-container';
 import PasswordReset from './components/password-reset/password-reset-container';
 import Course from './components/course-page/course-container';
+import AddProjectRequirement from './components/project-requirement/add-project-requirement-page/add-project-requirement-container';
 
 export const App = () => {
     return (
@@ -19,6 +20,7 @@ export const App = () => {
                 <Route exact path="/login" render={() => <AnonymousRoute component={Login}/>} />
                 <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordReset}/> } />
                 <Route exact path="/:owner/:courseName" render={() => <ProtectedRoute redirectTo="/login" component={Course}/>} />
+                <Route exact path="/:owner/:courseName/add_project_requirement" render={() => <ProtectedRoute redirectTo="/login" component={AddProjectRequirement}/>} />
                 <Route render={() => <Redirect to={{ pathname: '/' }}/>} />
             </Switch>
         </React.Fragment>

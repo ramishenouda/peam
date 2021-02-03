@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 
-import projectReq from '../../models/project-requirement';
+import projectReq from '../../../models/project-requirement';
 import { ProjectRequirementItem } from './project-requirement-item';
 
 import View from './project-requirement-view';
 
 type Props = {
-    projectReq: Array<projectReq>
+    projectReq: Array<projectReq>;
+    courseOwner: string;
+    courseTitle: string;
 };
 
 interface IState {
@@ -32,12 +34,16 @@ class ProjectRequirement extends Component<Props, IState> {
             <Redirect to={{ pathname: this.state.redirect }} />
         
         const projectReqs = this.props.projectReq.map((pr, index) =>
-            <div className={index !== this.props.projectReq.length -1 ? 'mb-3' : 'mb-1'}>
-                <ProjectRequirementItem key={pr.uid} teacher={true} projectReq={pr} />
+            <div key={pr.uid} className={index !== this.props.projectReq.length -1 ? 'mb-3' : 'mb-1'}>
+                <ProjectRequirementItem teacher={true} projectReq={pr} />
             </div> 
         );
         return (
-            <View projectReqs={projectReqs} />
+            <View 
+                courseOwner={this.props.courseOwner}
+                courseTitle={this.props.courseTitle}
+                projectReqs={projectReqs} 
+            />
         );
     }
 }

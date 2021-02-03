@@ -1,18 +1,17 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 import Course from '../../../../models/course';
 
 import View from './course-overview-view'
 
-interface IState {
+type Props = {
     course: Course;
 }
 
-class CourseOverView extends Component<IState> {
+class CourseOverView extends Component<Props> {
     render() {
-        const isSmallScreen = window.innerWidth < 769;
         return (
-            <View isSamllScreen={isSmallScreen} course={this.props.course} />
+            <View course={this.props.course} />
         );
     }
 }
