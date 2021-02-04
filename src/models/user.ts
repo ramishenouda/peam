@@ -6,3 +6,9 @@ export interface UserForRegistration {
     role: string;
     emailPreferences: boolean;
 }
+
+export interface UserForLogin {
+    username?: string;
+    email?: string;
+    password: string;
+}
