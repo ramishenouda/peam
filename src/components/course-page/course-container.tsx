@@ -27,7 +27,6 @@ class Course extends Component<ComponentProps, IState> {
         GetCourse(owner, courseName)
             .then((result) => {
                 this.setState({ course: result.data, loading: false });
-                console.log(result)
             }).catch((err) => {
                 console.log(err);
             });

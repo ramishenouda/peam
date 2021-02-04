@@ -17,16 +17,18 @@ type Props = {
 const NavbarView = (props: Props) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   useEffect(() => {
-      console.log('subscribe to event');
-      window.addEventListener('resize', () => setWindowSize(window.innerWidth));
+      window.addEventListener('resize', setSize);
 
       return function cleanup () {
-          console.log('unsubscribe to events');
-          window.removeEventListener('resize', () => setWindowSize(window.innerWidth));
+          window.removeEventListener('resize', setSize);
       }
   }, []);
 
   const mdScreen = windowSize < 769;
+
+  const setSize = () => {
+    setWindowSize(window.innerWidth)
+  }
 
   if(props.hide)
     return <></>

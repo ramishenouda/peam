@@ -14,22 +14,41 @@ interface RouteInfo {
 interface IState {
     loading: boolean;
     students: Array<Student>;
-    filterdStudents: Array<Student>
-    searchValue: string
+    filterdStudents: Array<Student>;
+    searchValue: string;
+    courseOwner: string;
 }
 
 interface ComponentProps extends RouteComponentProps<RouteInfo> {}
 
 class CourseStudents extends Component<ComponentProps, IState> {
     componentDidMount() {
+        this.setState({ loading: true });
+        let canUnload = false;
+
+        // simulating loading...
+        setTimeout(() => {
+            canUnload = true;
+        }, 500);
+
         const owner = this.props.match.params.owner;
         const courseName = this.props.match.params.courseName;
 
         GetCourseStudents(owner, courseName)
         .then((result) => {
-            this.setState({ students: result.data.students, loading: false, searchValue: '' });
+            this.setState({ students: result.data.students });
         }).catch((err) => {
             console.log(err);
+        }).finally(() => {
+            this.setState({ searchValue: '', courseOwner: owner }, () => {
+                if(canUnload === true)
+                    this.setState({ loading: false });
+                else {
+                    setTimeout(() => {
+                        this.setState({ loading: false });
+                    }, 500);
+                }
+            });
         });
     }
 
@@ -58,7 +77,7 @@ class CourseStudents extends Component<ComponentProps, IState> {
         return (
             <>
                 {
-                    this.state === null ? (
+                    (this.state === null || this.state.loading === true) ? (
                         <div> Loading </div>
                     ) : (
                         <View 
@@ -66,6 +85,7 @@ class CourseStudents extends Component<ComponentProps, IState> {
                             students={this.state.students} 
                             filteredStudents={this.state.filterdStudents}
                             searchValue={this.state.searchValue}
+                            courseOwner={this.state.courseOwner}
                         />
                     )
                 }

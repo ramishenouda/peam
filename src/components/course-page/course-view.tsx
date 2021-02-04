@@ -17,14 +17,16 @@ export default function CourseView(props: Props): JSX.Element {
 
     const [windowSize, setWindowSize] = useState(window.innerWidth);
     useEffect(() => {
-        console.log('subscribe to event');
-        window.addEventListener('resize', () => setWindowSize(window.innerWidth));
+        window.addEventListener('resize', setSize);
 
         return function cleanup () {
-            console.log('unsubscribe to events');
-            window.removeEventListener('resize', () => setWindowSize(window.innerWidth));
+            window.removeEventListener('resize', setSize);
         }
     }, []);
+
+    const setSize = () => {
+        setWindowSize(window.innerWidth)
+    }
 
     const isSmallScreen = windowSize < 769;
 

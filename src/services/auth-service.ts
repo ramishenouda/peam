@@ -29,7 +29,7 @@ export const CurrentUser = (): SystemState => {
 export const GetCurrentUser = (): SystemState => {
     const token = localStorage.getItem('token');
 
-    let currentUser: SystemState = {loggedIn: false, session: '', userName: ''};
+    let currentUser: SystemState = {loggedIn: false, session: '', userName: '', role: ''};
     if (token) {
         var decoded: SystemState;
          try {

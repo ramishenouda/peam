@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import AnonymousRoute from './AnonymousRoute';
 import ProtectedRoute from './ProtectedRoute';
 
-import { GetCurrentUser, Login } from './services/auth-service';
+import { GetCurrentUser } from './services/auth-service';
 import { updateSession } from './store/system/actions'
 
 import HomePage from './components/home/home-container';

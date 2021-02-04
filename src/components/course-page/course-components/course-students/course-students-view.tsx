@@ -1,8 +1,11 @@
 import React from 'react';
-import { Container, Form, FormControl } from 'react-bootstrap'
+
+import { Container, FormControl } from 'react-bootstrap';
+
+import { CurrentUser } from '../../../../services/auth-service';
 
 import StudentType from '../../../../models/student-for-list';
-import { Student } from './student'
+import { Student } from './student';
 
 import './course-students-style.css'
 
@@ -11,11 +14,15 @@ type Props = {
     filteredStudents: Array<StudentType>;
     searchStudents: (event: React.ChangeEvent<HTMLInputElement>) => void;
     searchValue: string;
+    courseOwner: string;
 }
+
 
 function CourseStudents(props: Props) {
     let students;
-    if (props.searchValue.length > 0) {
+    const currentUser = CurrentUser().userName;
+
+    if (props.searchValue && props.searchValue.length > 0) {
         students = props.filteredStudents.map(student => {
             return <Student
                 userName={student.username}
@@ -37,12 +44,15 @@ function CourseStudents(props: Props) {
 
     return (
         <Container id="course-students" className="mt-2">
-            <p>
-                { }
-            </p>
-            <Form inline className="controls">
-                <FormControl type="text" placeholder="Search" onChange={props.searchStudents} className="mr-sm-2" />
-            </Form>
+            <div>
+                {
+                    (currentUser.toLowerCase() === props.courseOwner.toLowerCase()) &&
+                    <p>
+                        Go to settings to add students or teachers
+                    </p>
+                }
+                <FormControl type="text" placeholder="Search students" onChange={props.searchStudents} />
+            </div>
             <div id="student-list">
                 { students }
             </div>
