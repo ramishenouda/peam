@@ -1,77 +1,75 @@
-import React, { Component } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
 
-import Student from '../../../../models/student-for-list';
-import { GetCourseStudents } from '../../../../services/course-service'
+import { useSelector } from 'react-redux'
+import { CourseState } from '../../../../store/course/types';
+
+import { StudentForCourseList as student } from '../../../../models/student';
+import { GetCourseStudents } from '../../../../services/course-service';
 
 import View from './course-students-view'
 
-interface RouteInfo {
-    owner: string;
-    courseName: string;
-}
 
-interface IState {
-    loading: boolean;
-    students: Array<Student>;
-    filterdStudents: Array<Student>
-    searchValue: string
-}
+function CourseStudents () {
+    const [fetching, setFetching] = useState(true);
+    const [error, setError] = useState(false);
+    const [students, setStudents] = useState(Array<student>());
+    const [filterdStudents, setFilterdStudents] = useState(Array<student>());
+    const [searchValue, setSearchValue] = useState('');
 
-interface ComponentProps extends RouteComponentProps<RouteInfo> {}
+    const courseState: CourseState = useSelector((state: any) => state.course);
 
-class CourseStudents extends Component<ComponentProps, IState> {
-    componentDidMount() {
-        const owner = this.props.match.params.owner;
-        const courseName = this.props.match.params.courseName;
+    useEffect(() => {
+        let canUnload = false;
+        setTimeout(() => { canUnload = true; }, 500);
 
-        GetCourseStudents(owner, courseName)
+        GetCourseStudents(courseState.courseOwner, courseState.courseTitle)
         .then((result) => {
-            this.setState({ students: result.data.students, loading: false, searchValue: '' });
+            setStudents(result.data.students);
         }).catch((err) => {
+            setError(true);
             console.log(err);
+        }).finally(() => {
+            if(canUnload === true)
+                setFetching(false);
+            else {
+                setTimeout(() => { setFetching(false); }, 500);
+            }
         });
-    }
+    })
 
-    searchStudents = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchStudents = (event: React.ChangeEvent<HTMLInputElement>) => {
         const searchValue = event.target.value;
+        setSearchValue(searchValue);
+
         if (searchValue === '') {
-            this.setState({filterdStudents: [], searchValue: searchValue})
+            setFilterdStudents([]);
             return;
         }
 
-        this.setState(prevState => {
-            const filterStudents = prevState.students.filter(student => {
-                return searchValue.trimStart().toLowerCase() === (
-                    student.fullName.slice(0, searchValue.length).toLowerCase() || student.username.slice(0, searchValue.length).toLowerCase()
-                )
-            })
-
-            return {
-                filterdStudents: filterStudents,
-                searchValue: searchValue
-            }
+        const filterdStudents = students.filter(student => {
+            return searchValue.trimStart().toLowerCase() === (
+                student.fullName.slice(0, searchValue.length).toLowerCase() || student.username.slice(0, searchValue.length).toLowerCase()
+            )
         })
+
+        setFilterdStudents(filterdStudents);
     }
 
-    render() {
+    if (fetching) {
+        return <div> Loading </div>
+    } else if (error) {
+        return <div> Error </div>
+    } else {
         return (
-            <>
-                {
-                    this.state === null ? (
-                        <div> Loading </div>
-                    ) : (
-                        <View 
-                            searchStudents={this.searchStudents} 
-                            students={this.state.students} 
-                            filteredStudents={this.state.filterdStudents}
-                            searchValue={this.state.searchValue}
-                        />
-                    )
-                }
-            </>
-        );
+            <View
+                searchStudents={searchStudents}
+                students={students}
+                filteredStudents={filterdStudents}
+                searchValue={searchValue}
+                role={courseState.role}
+            />
+        )
     }
 }
 
-export default withRouter(CourseStudents);
+export default CourseStudents;

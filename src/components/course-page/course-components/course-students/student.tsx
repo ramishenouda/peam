@@ -10,7 +10,7 @@ export const Student = (props: Props) => {
     return (
         <div className="mt-2" id="student">
             <div>
-                <img 
+                <img
                     className="profile-pic" 
                     src={`${props.pictureUrl}`} 
                     alt={props.fullName? props.fullName : props.userName} 

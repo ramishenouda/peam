@@ -5,6 +5,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { CurrentUser } from '../../services/auth-service';
 
 type Props = {
     active: number,
@@ -14,6 +15,8 @@ type Props = {
 }
 
 export default function CourseNavbar(props: Props): JSX.Element {
+    const currentUser = CurrentUser();
+
     return (
         <Navbar className="course-navbar">
             <span onClick={() => props.tabHandler(0)} className={`course-nav-item ${props.active === 0 && 'active-tab'}`}>
@@ -25,12 +28,18 @@ export default function CourseNavbar(props: Props): JSX.Element {
             <span onClick={() => props.tabHandler(2)} className={`course-nav-item ${props.active === 2 && 'active-tab'} ml-5`}>
                 <GroupWorkIcon className="material-ui-icon"/> Teams
             </span>
-            <span onClick={() => props.tabHandler(3)} className={`course-nav-item ${props.active === 3 && 'active-tab'} ml-5`}>
-                <AssessmentIcon className="material-ui-icon"/> Reports 
-            </span>
-            <span onClick={() => props.tabHandler(4)} className={`course-nav-item ${props.active === 4 && 'active-tab'} ml-5 mr-4`}>
-                <SettingsIcon className="material-ui-icon"/> Settings
-            </span>
+            {
+                currentUser.userName === props.courseOwner &&
+                <span onClick={() => props.tabHandler(3)} className={`course-nav-item ${props.active === 3 && 'active-tab'} ml-5`}>
+                    <AssessmentIcon className="material-ui-icon"/> Reports 
+                </span>
+            }
+            {
+                currentUser.userName === props.courseOwner &&
+                <span onClick={() => props.tabHandler(4)} className={`course-nav-item ${props.active === 4 && 'active-tab'} ml-5 mr-4`}>
+                    <SettingsIcon className="material-ui-icon"/> Settings
+                </span>
+            }
             <span className="">&nbsp;</span>
         </Navbar>
     )

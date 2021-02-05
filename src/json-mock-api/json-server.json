@@ -2,9 +2,10 @@
     "users": [],
     "DrAshraf": [
         {
+            "role": "student",
             "id": "advanced compiler",
-            "uid": "advanced Compiler",
-            "title": "advanced Compiler",
+            "uid": "advanced ompiler",
+            "title": "advanced compiler",
             "code": "COMP 403",
             "owner": "DrAshraf",
             "description": "Students learn several implementation techniques for modern functional and object-oriented programming languages. They put some of them into practice by developing key parts of a compiler and run time system for a simple functional programming language.",
@@ -50,6 +51,83 @@
                     "username": "Sorya",
                     "fullName": "Mohamed Khaled Fares",
                     "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                }
+            ],
+            "teams": [
+                {
+                    "id": "some-cool-team",
+                    "title": "PEAM",
+                    "description": "best team ever, hehe.",
+                    "students": [
+                        {
+                            "uid": "some-people-are-just-good",
+                            "username": "Sorya",
+                            "fullName": "Mohamed Khaled Fares",
+                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        },
+                        {
+                            "uid": "some-people-are-just-good",
+                            "username": "abdelrahaman",
+                            "fullName": "",
+                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        },
+                        {
+                            "uid": "some-people-are-just-good",
+                            "username": "ramishenouda",
+                            "fullName": "Rami Shenouda",
+                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        }
+                    ]
+                },
+                {
+                    "id": "some-cool-team2",
+                    "title": "LONGTITLE",
+                    "description": "best team ever, not-hehe.",
+                    "students": [
+                        {
+                            "uid": "some-people-are-just-good",
+                            "username": "Sorya",
+                            "fullName": "Mohamed Khaled Fares",
+                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        },
+                        {
+                            "uid": "some-people-are-just-good",
+                            "username": "abdelrahaman",
+                            "fullName": "",
+                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        },
+                        {
+                            "uid": "some-people-are-just-good",
+                            "username": "ramishenouda",
+                            "fullName": "Rami Shenouda",
+                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        }
+                    ]
+                },
+                {
+                    "id": "some-cool-team3",
+                    "title": "nice-name-trust-me",
+                    "description": "best team ever, semi-hehe.",
+                    "students": [
+                        {
+                            "uid": "some-people-are-just-good",
+                            "username": "Sorya",
+                            "fullName": "Mohamed Khaled Fares",
+                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        },
+                        {
+                            "uid": "some-people-are-just-good1",
+                            "username": "abdelrahaman",
+                            "fullName": "",
+                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        },
+                        {
+                            "uid": "some-people-are-just-good2",
+                            "username": "ramishenouda",
+                            "fullName": "Rami Shenouda",
+                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        }
+                    ]
                 }
             ]
         },

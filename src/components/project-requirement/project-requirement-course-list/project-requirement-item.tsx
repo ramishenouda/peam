@@ -8,7 +8,7 @@ import { Button, Form } from 'react-bootstrap';
 import ProjectRequirement from '../../../models/project-requirement';
 
 type Props = {
-    projectReq: ProjectRequirement
+    projectReq: ProjectRequirement,
     teacher: boolean
 };
 
@@ -88,7 +88,7 @@ export const ProjectRequirementItem = (props: Props) => {
                 </p>
                 <div className="project-requirement-item-options">
                 <Button variant="dark">More info</Button>
-                    { props.teacher && (
+                    {props.teacher && (
                         <Button className="ml-2" variant="danger" onClick={() => setEdit(true)}>
                             Edit info
                         </Button>

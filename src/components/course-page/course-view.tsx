@@ -2,8 +2,14 @@ import { useState, useEffect } from 'react'
 
 import Course from '../../models/course';
 
+import { useDispatch } from 'react-redux';
+
+import { updateCourse } from '../../store/course/actions';
+import { CourseState } from '../../store/course/types';
+
 import CourseOverView from './course-components/course-overview/course-overview-container';
-import CourseStudents from './course-components/course-students/course-students-container'
+import CourseStudents from './course-components/course-students/course-students-container';
+import CourseTeams from './course-components/course-teams/course-teams-container';
 
 import './course-style.css'
 import CourseNavbar from './course-navbar';
@@ -12,19 +18,38 @@ type Props = {
     course: Course;
 }
 
-export default function CourseView(props: Props): JSX.Element {
+const CourseView = (props: Props): JSX.Element => {
     const [tap, setTap] = useState(0);
+
+    const dispatch = useDispatch()
 
     const [windowSize, setWindowSize] = useState(window.innerWidth);
     useEffect(() => {
-        console.log('subscribe to event');
-        window.addEventListener('resize', () => setWindowSize(window.innerWidth));
+        window.addEventListener('resize', setSize);
+
+        const courseState: CourseState = {
+            courseOwner: props.course.owner,
+            courseTitle: props.course.title,
+            role: props.course.role 
+        }
+        dispatch(updateCourse(courseState));
 
         return function cleanup () {
-            console.log('unsubscribe to events');
-            window.removeEventListener('resize', () => setWindowSize(window.innerWidth));
+            window.removeEventListener('resize', setSize);
+
+            const initialState: CourseState = {
+                courseOwner: '',
+                courseTitle: '',
+                role: '' 
+            }
+
+            dispatch(updateCourse(initialState));
         }
-    }, []);
+    }, [dispatch, props.course]);
+
+    const setSize = () => {
+        setWindowSize(window.innerWidth)
+    }
 
     const isSmallScreen = windowSize < 769;
 
@@ -51,7 +76,13 @@ export default function CourseView(props: Props): JSX.Element {
             {tap === 1 &&
                 <CourseStudents />
             }
+            {
+                tap === 2 &&
+                <CourseTeams />
+            }
         </main>
         </>
     )
 }
+
+export default CourseView;

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import AnonymousRoute from './AnonymousRoute';
 import ProtectedRoute from './ProtectedRoute';
 
-import { GetCurrentUser, Login } from './services/auth-service';
+import { GetCurrentUser } from './services/auth-service';
 import { updateSession } from './store/system/actions'
 
 import HomePage from './components/home/home-container';
@@ -16,7 +16,7 @@ import PasswordResetPage from './components/password-reset/password-reset-contai
 import CoursePage from './components/course-page/course-container';
 import AddProjectRequirementPage from './components/project-requirement/add-project-requirement-page/add-project-requirement-container';
 
-export const App = () => {
+const App = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
