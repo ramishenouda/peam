@@ -2,27 +2,23 @@ import React from 'react';
 
 import { Container, FormControl } from 'react-bootstrap';
 
-import { CurrentUser } from '../../../../services/auth-service';
-
-import { StudentForList as StudentType } from '../../../../models/student';
+import { StudentForCourseList as StudentType } from '../../../../models/student';
 import { Student } from './student';
 
-import './course-students-style.css'
+import './course-students-style.css';
 
 type Props = {
     students: Array<StudentType>;
     filteredStudents: Array<StudentType>;
     searchStudents: (event: React.ChangeEvent<HTMLInputElement>) => void;
     searchValue: string;
-    courseOwner: string;
+    role:string;
 }
-
 
 function CourseStudents(props: Props) {
     let students;
-    const currentUser = CurrentUser().userName;
 
-    if (props.searchValue && props.searchValue.length > 0) {
+    if (props.searchValue.length) {
         students = props.filteredStudents.map(student => {
             return <Student
                 userName={student.username}
@@ -46,7 +42,7 @@ function CourseStudents(props: Props) {
         <Container id="course-students" className="mt-2">
             <div>
                 {
-                    (currentUser.toLowerCase() === props.courseOwner.toLowerCase()) &&
+                    (props.role.toLowerCase() === 'teacher') &&
                     <p>
                         Go to settings to add students or teachers
                     </p>

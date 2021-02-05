@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 
-import { CurrentUser } from '../../../services/auth-service';
+import { useSelector } from 'react-redux';
+
+import { CourseState } from '../../../store/course/types';
 
 import projectReq from '../../../models/project-requirement';
 import { ProjectRequirementItem } from './project-requirement-item';
 
 
-import './project-requirement-style.css'
+import './project-requirement-style.css';
 
 
 type Props = {
@@ -16,12 +18,12 @@ type Props = {
 }
 
 function ProjectRequirement(props: Props): JSX.Element {
-    const currentUser = CurrentUser();
+    const courseState: CourseState = useSelector((state: any) => state.course);
 
-    const projectReqs = props.projectReqs.map((pr, index) =>
+    const projectReqs = props.projectReqs.map((pr) =>
         <div key={pr.uid} className='mb-2'>
             <ProjectRequirementItem
-                teacher={currentUser.role === 'teacher'}
+                teacher={courseState.role === 'teacher'}
                 projectReq={pr}
             />
         </div>
@@ -32,7 +34,7 @@ function ProjectRequirement(props: Props): JSX.Element {
             <h1 className="f2 overview-title">Project requirements</h1>
             <div>
                 {
-                    (currentUser.userName === props.courseOwner) &&
+                    courseState.role === 'teacher' &&
                     <Link to={`/${props.courseOwner}/${props.courseTitle}/add_project_requirement`} 
                     className="mb-2 mt-1 btn btn-dark"
                     >

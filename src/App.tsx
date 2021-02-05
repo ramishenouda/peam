@@ -16,7 +16,7 @@ import PasswordResetPage from './components/password-reset/password-reset-contai
 import CoursePage from './components/course-page/course-container';
 import AddProjectRequirementPage from './components/project-requirement/add-project-requirement-page/add-project-requirement-container';
 
-export const App = () => {
+const App = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {

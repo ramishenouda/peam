@@ -1,8 +1,8 @@
-import { StudentForList } from './student';
+import { StudentForCourseList } from './student';
 
-export default interface TeamForList {
+export interface TeamForCourseList {
     uid: string;
     title: string;
     description: string;
-    students: Array<StudentForList>;
+    students: Array<StudentForCourseList>;
 }

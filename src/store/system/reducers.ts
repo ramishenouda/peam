@@ -4,7 +4,6 @@ const initialState: SystemState = {
   loggedIn: false,
   session: '',
   userName: '',
-  role: ''
 }
 
 export function systemReducer(state = initialState, action: SystemActionTypes): SystemState {

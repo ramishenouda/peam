@@ -9,4 +9,5 @@ export default interface Course {
     owner: string;
     attachments: Array<Attachment>;
     projectRequirements: Array<ProjectRequirement>;
+    role: string; // descripting current user's status to the course
 }
