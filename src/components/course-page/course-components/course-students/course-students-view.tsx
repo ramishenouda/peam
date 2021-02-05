@@ -4,7 +4,7 @@ import { Container, FormControl } from 'react-bootstrap';
 
 import { CurrentUser } from '../../../../services/auth-service';
 
-import StudentType from '../../../../models/student-for-list';
+import { StudentForList as StudentType } from '../../../../models/student';
 import { Student } from './student';
 
 import './course-students-style.css'

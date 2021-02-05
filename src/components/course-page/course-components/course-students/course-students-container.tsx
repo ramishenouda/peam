@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import Student from '../../../../models/student-for-list';
+import { StudentForList } from '../../../../models/student';
 import { GetCourseStudents } from '../../../../services/course-service'
 
 import View from './course-students-view'
@@ -13,8 +13,8 @@ interface RouteInfo {
 
 interface IState {
     loading: boolean;
-    students: Array<Student>;
-    filterdStudents: Array<Student>;
+    students: Array<StudentForList>;
+    filterdStudents: Array<StudentForList>;
     searchValue: string;
     courseOwner: string;
 }

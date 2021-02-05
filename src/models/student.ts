@@ -1,4 +1,4 @@
-export default interface Student {
+export interface StudentForList {
     uid: string;
     username: string;
     fullName: string;

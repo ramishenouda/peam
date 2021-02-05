@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import Course from '../../models/course';
 
 import CourseOverView from './course-components/course-overview/course-overview-container';
-import CourseStudents from './course-components/course-students/course-students-container'
+import CourseStudents from './course-components/course-students/course-students-container';
+import CourseTeams from './course-components/course-teams/course-teams-view';
 
 import './course-style.css'
 import CourseNavbar from './course-navbar';
@@ -52,6 +53,10 @@ export default function CourseView(props: Props): JSX.Element {
             }
             {tap === 1 &&
                 <CourseStudents />
+            }
+            {
+                tap === 2 &&
+                <CourseTeams />
             }
         </main>
         </>
