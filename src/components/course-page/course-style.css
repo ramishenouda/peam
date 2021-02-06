@@ -4,12 +4,12 @@
 
 #course .course-title, #course .course-description {
     padding: 10px 20px 0px 20px !important;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 600;
+    font-family: 'Inter', 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
 .course-navbar {
-    padding: 0 5vw 2vh 5vw;
+    padding: 0 5vw 1.1vh 5vw;
 }
 
 .course-navbar .course-nav-item {

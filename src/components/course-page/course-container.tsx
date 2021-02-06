@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+
+import { useParams } from "react-router";
 
 import Navbar from '../navbar/navbar-container';
 
@@ -8,48 +9,60 @@ import { GetCourse } from '../../services/course-service';
 
 import CourseView from './course-view';
 
-interface RouteInfo {
-    owner: string;
-    courseName: string;
-}
+function Course () {
+    const initialCourse: course = {
+        attachments: [],
+        code: '',
+        description: '',
+        owner: '',
+        projectRequirements: [],
+        role: '',
+        title: '',
+        uid: '',
+    }
 
-interface IState {
-    loading: boolean;
-    course: course;
-}
+    const [fetching, setFetching] = useState(true);
+    const [error, setError] = useState(false);
+    const [course, setCourse] = useState(initialCourse);
 
-interface ComponentProps extends RouteComponentProps<RouteInfo> {}
+    const params: any = useParams();
 
-class Course extends Component<ComponentProps, IState> {
-    componentDidMount() {
-        const owner = this.props.match.params.owner;
-        const courseName = this.props.match.params.courseName;
+    console.log(params);
+
+    useEffect(() => {
+        const owner = params.owner;
+        const courseName = params.courseName;
         GetCourse(owner, courseName)
             .then((result) => {
-                this.setState({ course: result.data, loading: false });
+                setCourse(result.data);
             }).catch((err) => {
+                setError(true);
                 console.log(err);
+            }).finally(() => {
+                setFetching(false);
             });
+    }, [params.courseName, params.owner])
+
+    let data;
+    if (fetching) {
+        data = <div> Loading.... </div>
+    } else if (error) {
+        data = <div> Error.... </div>
+    } else {
+        data = 
+            <CourseView
+                course={course} 
+            />
     }
 
-    render() {
-        return (
-            <>
-                <Navbar />
-                <div id="course">
-                    {
-                        this.state === null ? (
-                            <span> Loading </span>
-                        ) : (
-                            <CourseView 
-                                course={this.state.course} 
-                            />
-                        )
-                    }
-                </div>
-            </>
-        );
-    }
+    return (
+        <>
+            <Navbar />
+            <div id="course">
+                { data }
+            </div>
+        </>
+    );
 }
 
-export default withRouter(Course);
+export default Course;

@@ -1,6 +1,6 @@
 import { TeamForCourseList as team } from '../../../../models/team';
 
-import './course-teams-style.css'
+import './course-teams-style.css';
 
 type Props = {
     teams: Array<team>;

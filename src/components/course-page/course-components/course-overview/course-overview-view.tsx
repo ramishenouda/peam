@@ -36,15 +36,14 @@ function CourseOverView(props: Props) {
                     projectReqs={props.course.projectRequirements} 
                 />
             </div>
-            <div className="separator"></div>
             <div>
                 {
                     !isSmallScreen &&
                     <div>
-                        <h1 className={`f2 overview-title ${isSmallScreen && 'mt-2'}`}>
+                        <h1 className={`f3 overview-title ${isSmallScreen && 'mt-2'}`}>
                             About
                         </h1>
-                        <p>
+                        <p className="mt-4">
                             {props.course.description}    
                         </p>
                     </div>
@@ -53,13 +52,13 @@ function CourseOverView(props: Props) {
                     <hr/>
                 </div>
                 <div>
-                    <h1 className={`f2 overview-title ${isSmallScreen && 'mt-4 text-center'}`}>Attachments</h1>
+                    <h1 className={`f3 overview-title ${isSmallScreen && 'mt-4 text-center'}`}>Attachments</h1>
                     {isSmallScreen && 
                         <div className="mb-2"> 
                             <hr style={{width: '140px', textAlign: 'center', margin: 'auto'}} />
                         </div>
                     }
-                    <div>                   
+                    <div className="mt-4">                   
                         <p>
                             Lecture from last night
                         </p>

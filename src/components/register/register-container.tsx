@@ -21,7 +21,7 @@ class Register extends Component {
 
     register = (user: User) => {
         this.setState({'registering': true})
-        user.role = this.state.role;
+        // user = this.state.role;
         console.log(user);
     }
 
