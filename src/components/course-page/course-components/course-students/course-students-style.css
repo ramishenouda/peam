@@ -5,9 +5,8 @@
 
 #student-list {
     display: grid;
-    display: grid;
     grid-template-columns: 50% 50%;
-    grid-column-gap: 5px;
+    grid-column-gap: 8px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -20,6 +19,8 @@
     background-color: #f3f3f3;
     padding: 10px;
     position: relative;
+    box-shadow: 1px 1px 3px black;
+    border-radius: 5px;
 }
 
 #student .profile-pic {

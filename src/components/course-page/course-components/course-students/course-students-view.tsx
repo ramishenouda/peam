@@ -3,7 +3,7 @@ import React from 'react';
 import { Container, FormControl } from 'react-bootstrap';
 
 import { StudentForCourseList as StudentType } from '../../../../models/student';
-import { Student } from './student';
+import { Student } from './student-item';
 
 import './course-students-style.css';
 

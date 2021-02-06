@@ -55,77 +55,164 @@
             ],
             "teams": [
                 {
-                    "id": "some-cool-team",
-                    "title": "PEAM",
-                    "description": "best team ever, hehe.",
-                    "students": [
+                    "projectRequirement": "Spring Project",
+                    "id": "some-prey-will-make",
+                    "teams": [
                         {
-                            "uid": "some-people-are-just-good",
-                            "username": "Sorya",
-                            "fullName": "Mohamed Khaled Fares",
-                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                            "id": "some-cool-team",
+                            "title": "PEAM",
+                            "description": "best team ever, not-hehe.",
+                            "students": [
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "Sorya",
+                                    "fullName": "Mohamed Khaled Fares",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "abdelrahaman",
+                                    "fullName": "",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "ramishenouda",
+                                    "fullName": "Rami Shenouda",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                }
+                            ]
                         },
                         {
-                            "uid": "some-people-are-just-good",
-                            "username": "abdelrahaman",
-                            "fullName": "",
-                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                            "id": "some-cool-team2",
+                            "title": "LONGTITLE",
+                            "description": "bestbest team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe. team ever, hehe.",
+                            "students": [
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "Sorya",
+                                    "fullName": "Mohamed Khaled Fares",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "abdelrahaman",
+                                    "fullName": "",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "ramishenouda",
+                                    "fullName": "Rami Shenouda",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                }
+                            ]
                         },
                         {
-                            "uid": "some-people-are-just-good",
-                            "username": "ramishenouda",
-                            "fullName": "Rami Shenouda",
-                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                            "id": "some-cool-team3",
+                            "title": "nice-name-trust-me",
+                            "description": "best team ever, semi-hehe.",
+                            "students": [
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "Sorya",
+                                    "fullName": "Mohamed Khaled Fares",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good1",
+                                    "username": "abdelrahaman",
+                                    "fullName": "",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good2",
+                                    "username": "ramishenouda",
+                                    "fullName": "Rami Shenouda",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                }
+                            ]
                         }
                     ]
                 },
                 {
-                    "id": "some-cool-team2",
-                    "title": "LONGTITLE",
-                    "description": "best team ever, not-hehe.",
-                    "students": [
+                    "projectRequirement": "Midterm Project",
+                    "id": "some-prey-will-make2",
+                    "teams": [
                         {
-                            "uid": "some-people-are-just-good",
-                            "username": "Sorya",
-                            "fullName": "Mohamed Khaled Fares",
-                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                            "id": "some-cool-team",
+                            "title": "PEAM",
+                            "description": "best team ever, not-hehe.",
+                            "students": [
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "Sorya",
+                                    "fullName": "Mohamed Khaled Fares",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "abdelrahaman",
+                                    "fullName": "",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "ramishenouda",
+                                    "fullName": "Rami Shenouda",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                }
+                            ]
                         },
                         {
-                            "uid": "some-people-are-just-good",
-                            "username": "abdelrahaman",
-                            "fullName": "",
-                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                            "id": "some-cool-team2",
+                            "title": "LONGTITLE",
+                            "description": "bestbest team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe.best team ever, hehe. team ever, hehe.",
+                            "students": [
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "Sorya",
+                                    "fullName": "Mohamed Khaled Fares",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "abdelrahaman",
+                                    "fullName": "",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "ramishenouda",
+                                    "fullName": "Rami Shenouda",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                }
+                            ]
                         },
                         {
-                            "uid": "some-people-are-just-good",
-                            "username": "ramishenouda",
-                            "fullName": "Rami Shenouda",
-                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                        }
-                    ]
-                },
-                {
-                    "id": "some-cool-team3",
-                    "title": "nice-name-trust-me",
-                    "description": "best team ever, semi-hehe.",
-                    "students": [
-                        {
-                            "uid": "some-people-are-just-good",
-                            "username": "Sorya",
-                            "fullName": "Mohamed Khaled Fares",
-                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                        },
-                        {
-                            "uid": "some-people-are-just-good1",
-                            "username": "abdelrahaman",
-                            "fullName": "",
-                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                        },
-                        {
-                            "uid": "some-people-are-just-good2",
-                            "username": "ramishenouda",
-                            "fullName": "Rami Shenouda",
-                            "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                            "id": "some-cool-team3",
+                            "title": "nice-name-trust-me",
+                            "description": "best team ever, semi-hehe.",
+                            "students": [
+                                {
+                                    "uid": "some-people-are-just-good",
+                                    "username": "Sorya",
+                                    "fullName": "Mohamed Khaled Fares",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good1",
+                                    "username": "abdelrahaman",
+                                    "fullName": "",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                },
+                                {
+                                    "uid": "some-people-are-just-good2",
+                                    "username": "ramishenouda",
+                                    "fullName": "Rami Shenouda",
+                                    "pictureUrl": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                }
+                            ]
                         }
                     ]
                 }

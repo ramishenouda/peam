@@ -100,7 +100,9 @@
 
 .title-hr {
   border-radius: 100px;
-  border: 1px solid #d6d6d6;
+  color: #000000;
+  background-color: #000;
+  margin: 20px auto 0 auto;
 }
 
 .center-big-wide-small {
