@@ -2,10 +2,10 @@
     "users": [],
     "DrAshraf": [
         {
-            "role": "student",
-            "id": "advanced compiler",
-            "uid": "advanced ompiler",
-            "title": "advanced compiler",
+            "role": "teacher",
+            "id": "Advanced compiler",
+            "uid": "Advanced compiler",
+            "title": "Advanced compiler",
             "code": "COMP 403",
             "owner": "DrAshraf",
             "description": "Students learn several implementation techniques for modern functional and object-oriented programming languages. They put some of them into practice by developing key parts of a compiler and run time system for a simple functional programming language.",

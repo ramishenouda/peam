@@ -27,8 +27,6 @@ function Course () {
 
     const params: any = useParams();
 
-    console.log(params);
-
     useEffect(() => {
         const owner = params.owner;
         const courseName = params.courseName;

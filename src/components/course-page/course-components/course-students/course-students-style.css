@@ -1,5 +1,6 @@
 #course-students .form-control {
     width: 250px !important;
+    margin-left: auto;
 }
 
 #student-list {

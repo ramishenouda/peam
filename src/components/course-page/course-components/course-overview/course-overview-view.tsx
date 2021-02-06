@@ -16,7 +16,6 @@ function CourseOverView(props: Props) {
         window.addEventListener('resize', setSize);
 
         return function cleanup () {
-            console.log('overview');
             window.removeEventListener('resize', setSize);
         }
     }, []);

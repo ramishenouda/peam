@@ -27,7 +27,8 @@ function CourseTeams() {
         }).finally(() => {
             setFetching(false);
         });
-    })
+    }, [courseState.courseOwner, courseState.courseTitle])
+
 
     if (fetching) {
         return <div> Loading </div>

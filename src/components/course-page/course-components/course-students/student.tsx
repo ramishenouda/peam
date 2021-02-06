@@ -4,9 +4,11 @@ type Props = {
     userName: string,
     fullName: string,
     pictureUrl: string
+    role: string;
 };
 
 export const Student = (props: Props) => {
+
     return (
         <div className="mt-2" id="student">
             <div>
@@ -20,7 +22,9 @@ export const Student = (props: Props) => {
                 </span>
             </div>
             <div className="remove-btn">
-                <Button variant="danger">Remove</Button>
+                {
+                    props.role === 'teacher' && <Button variant="danger">Remove</Button>
+                }
             </div>
         </div>
     );
