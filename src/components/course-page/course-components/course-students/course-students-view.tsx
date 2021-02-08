@@ -3,7 +3,7 @@ import React from 'react';
 import { Container, FormControl } from 'react-bootstrap';
 
 import { StudentForCourseList as StudentType } from '../../../../models/student';
-import { Student } from './student';
+import { Student } from './student-item';
 
 import './course-students-style.css';
 
@@ -25,6 +25,7 @@ function CourseStudents(props: Props) {
                 fullName={student.fullName}
                 pictureUrl={student.pictureUrl}
                 key={student.username}
+                role={props.role}
             />
         })
     } else {
@@ -34,26 +35,29 @@ function CourseStudents(props: Props) {
                 fullName={student.fullName}
                 pictureUrl={student.pictureUrl}
                 key={student.username}
+                role={props.role}
             />
         })
     }
 
-    return (
-        <Container id="course-students" className="mt-2">
-            <div>
-                {
-                    (props.role.toLowerCase() === 'teacher') &&
-                    <p>
-                        Go to settings to add students or teachers
-                    </p>
-                }
-                <FormControl type="text" placeholder="Search students" onChange={props.searchStudents} />
-            </div>
-            <div id="student-list">
-                { students }
-            </div>
-        </Container>
-    );
+    if (students.length) {
+        return (
+            <Container id="course-students" className="mt-2">
+                <div>
+                    <FormControl type="text" placeholder="Search students" onChange={props.searchStudents} />
+                </div>
+                <div id="student-list">
+                    { students }
+                </div>
+            </Container>
+        );
+    } else {
+        return (
+            <Container id="course-students" className="mt-2">
+                No students yet. Go to settings to add students.
+            </Container>
+        );
+    }
 }
 
 export default CourseStudents;

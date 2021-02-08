@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { CourseState } from '../../../../store/course/types';
 
-import { TeamForCourseList as team } from '../../../../models/team';
+import { ProjectRequirementForTeams as ProjectRequirement, ProjectRequirementForTeams } from '../../../../models/project-requirement';
+
 import { GetCourseTeams } from '../../../../services/course-service';
 
 import View from './course-teams-view';
@@ -11,7 +12,7 @@ import View from './course-teams-view';
 function CourseTeams() {
     const [fetching, setFetching] = useState(true);
     const [error, setError] = useState(false);
-    const [teams, setTeams] = useState(Array<team>());
+    const [projectRequirements, setProjectRequirements] = useState(Array<ProjectRequirement>());
     // const [filterdStudents, setFilterdTeams] = useState(Array<team>());
     // const [searchValue, setSearchValue] = useState('');
 
@@ -20,25 +21,34 @@ function CourseTeams() {
     useEffect(() => {
         GetCourseTeams(courseState.courseOwner, courseState.courseTitle)
         .then((result) => {
-            setTeams(result.data.teams);
+            setProjectRequirements(result.data.teams);
         }).catch((err) => {
             setError(true);
             console.log(err);
         }).finally(() => {
             setFetching(false);
         });
-    })
+    }, [courseState.courseOwner, courseState.courseTitle])
+
 
     if (fetching) {
         return <div> Loading </div>
     } else if (error) {
         return <div> error </div>
     } else {
-        return (
+        const Teams = projectRequirements.map((pr: ProjectRequirementForTeams, index: number) => 
             <View
-                teams={teams}
-                role={courseState.role} 
+                title={pr.projectRequirement}
+                teams={pr.teams}
+                role={courseState.role}
+                key={pr.id} 
+                index={index}
             />
+        );
+        return (
+            <>
+                { Teams }
+            </>
         )
     }
 }

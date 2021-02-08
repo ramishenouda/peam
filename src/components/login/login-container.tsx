@@ -1,40 +1,33 @@
-import React, { Component } from 'react';
-import { UserForRegistration as User } from '../../models/user';
-import Navbar from '../navbar/navbar-container';
+import React, { useState } from 'react';
 
+import { SignIn } from '../../services/auth-service';
+import { UserForLogin as User } from '../../models/user';
+
+import Navbar from '../navbar/navbar-container';
 import LoginView from './login-view'
 
-class Login extends Component {
-    state = {
-        emailPreferences: true,
-        registering: false,
+function Login() {
+    const [logging, setLogging] = useState(false);
+
+    const login = (user: User) => {
+        setLogging(true);
+        SignIn(user)
+            .then((result) => {
+                console.log(result);
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
-    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = event.target;
-        if(name === 'emailPreferences')
-            this.setState({[name]: !this.state.emailPreferences})
-        else 
-            this.setState({[name]: value});
-    };
-
-    register = (user: User) => {
-        this.setState({'registering': true})
-    }
-
-    render() {
-        return (
-            <>
-            <Navbar hide={true} />
-            <LoginView
-                handleChange={this.handleChange}
-                register={this.register}
-                registering={this.state.registering}
-                emailPreferences={this.state.emailPreferences}
-            />
-            </>
-        );
-    }
+    return (
+        <>
+        <Navbar hide={true} />
+        <LoginView
+            login={login}
+            logging={logging}
+        />
+        </>
+    );
 }
 
 export default Login

@@ -21,7 +21,7 @@ function ProjectRequirement(props: Props): JSX.Element {
     const courseState: CourseState = useSelector((state: any) => state.course);
 
     const projectReqs = props.projectReqs.map((pr) =>
-        <div key={pr.uid} className='mb-2'>
+        <div key={pr.uid} className='mb-4'>
             <ProjectRequirementItem
                 teacher={courseState.role === 'teacher'}
                 projectReq={pr}
@@ -31,7 +31,7 @@ function ProjectRequirement(props: Props): JSX.Element {
 
     return (
         <div id="project-req">
-            <h1 className="f2 overview-title">Project requirements</h1>
+            <h1 className="f3 overview-title">Project requirements</h1>
             <div>
                 {
                     courseState.role === 'teacher' &&

@@ -64,7 +64,7 @@ const CourseView = (props: Props): JSX.Element => {
             </div>
             <CourseNavbar 
                 courseDescription={props.course.description} 
-                courseOwner={props.course.owner}
+                courseRole={props.course.role}
                 active={tap} 
                 tabHandler={setTap}
             />

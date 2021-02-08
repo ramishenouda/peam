@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Course from '../../../../models/course';
 
@@ -8,12 +8,10 @@ type Props = {
     course: Course;
 }
 
-class CourseOverView extends Component<Props> {
-    render() {
-        return (
-            <View course={this.props.course} />
-        );
-    }
+function CourseOverView(props: Props) {
+    return (
+        <View course={props.course} />
+    );
 }
 
 export default CourseOverView;

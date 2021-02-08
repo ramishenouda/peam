@@ -6,14 +6,14 @@
 }
 
 .navbar .navbar-item, .navbar .navbar-search {
-    font-weight: bold !important;
-    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-family: Inter, 'Roboto', Inconsolata, sans-serif;
     border-radius: 4px;
     font-size: larger;
     display: block;
-    padding: .5rem 1rem !important;
+    padding: .5rem 1rem;
     cursor: pointer;
-    transition: all 0.3s ease-in-out !important;
+    transition: all 0.3s;
 }
 
 .navbar .navbar-brand {
@@ -39,6 +39,8 @@
 }
 
 .navbar .navbar-search {
+    box-shadow: none !important;
+    outline: none !important;
     color: #424242 !important;
     background-color: white !important;
     cursor: text;
@@ -46,5 +48,6 @@
 
 .navbar .navbar-search:focus, .navbar .navbar-search:active {
     margin-right: 6rem !important;
+    outline: none !important;
     box-shadow: 0px 16px 12px -20px black !important;
 }

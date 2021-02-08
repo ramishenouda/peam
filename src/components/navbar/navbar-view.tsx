@@ -17,11 +17,11 @@ type Props = {
 const NavbarView = (props: Props) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   useEffect(() => {
-      window.addEventListener('resize', setSize);
+    window.addEventListener('resize', setSize);
 
-      return function cleanup () {
-          window.removeEventListener('resize', setSize);
-      }
+    return function cleanup () {
+      window.removeEventListener('resize', setSize);
+    }
   }, []);
 
   const mdScreen = windowSize < 769;
@@ -38,7 +38,7 @@ const NavbarView = (props: Props) => {
       <Navbar className={`${props.color} one-edge-shadow`} expand='md'>
         {
           (props.logo || props.logo === undefined) &&
-          <Link className="disable-link-style" to="/"><Navbar.Brand> PEAM </Navbar.Brand></Link>
+          <Link className="disable-link-style" to="/"><Navbar.Brand>PEAM</Navbar.Brand></Link>
         }
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
