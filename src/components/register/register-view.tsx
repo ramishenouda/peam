@@ -1,21 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { Button, Container, Form, ButtonGroup, ToggleButton } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 import { CircleLoader } from 'react-spinners';
 
 import { UserForRegistration as User } from '../../models/user';
 import './register-styles.css';
 
 type Props = {
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   register: (user: User) => void,
   registering: boolean,
-  emailPreferences: boolean,
-  role: string
 }
 
 const SignupSchema = yup.object().shape({
@@ -30,6 +27,20 @@ const SignupSchema = yup.object().shape({
 });
 
 function RegisterView(props: Props) {
+  const initialUser: User = {
+    confirmPassword: '',
+    email: '',
+    password: '',
+    username: '',
+  }
+
+  const [user, setUser] = useState(initialUser);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target;
+    setUser({...user, [name]: value});
+  };
+
   const { register, handleSubmit, errors, formState } = useForm<User>({
     mode: "all",
     resolver: yupResolver(SignupSchema)
@@ -44,53 +55,25 @@ function RegisterView(props: Props) {
       </h1>
       <Container>
         <Form className="register-form md-lg-8 mb-5" onSubmit={handleSubmit(props.register)}>
-          <div className="role">
-          <Form.Group controlId="role">
-            <ButtonGroup toggle>
-              <ToggleButton
-                value="Student"
-                className="role"
-                ref={register}
-                checked={props.role === "Student"} 
-                type="radio" name="role" onChange={props.handleChange}
-              >
-                Student
-              </ToggleButton>
-              <ToggleButton 
-                value="Teacher" 
-                className="role" 
-                ref={register}
-                checked={props.role === "Teacher"}
-                type="radio" name="role" onChange={props.handleChange}
-              >
-                Teacher
-              </ToggleButton>
-            </ButtonGroup>
-          </Form.Group>
-          </div>
           <Form.Group controlId="username">
             <Form.Label>Username <span className="required-text">*</span></Form.Label>
-            <Form.Control className="form-peam" onChange={props.handleChange} name="username" ref={register} type="text" />
+            <Form.Control disabled={props.registering} className="form-peam" onChange={handleChange} name="username" ref={register} type="text" />
             <p className="required-text"> { errors.username && errors.username.message } </p>
           </Form.Group>
           <Form.Group controlId="email">
             <Form.Label>Email address <span className="required-text">*</span></Form.Label>
-            <Form.Control className="form-peam" onChange={props.handleChange} name="email" ref={register} type="email" />
+            <Form.Control disabled={props.registering} className="form-peam" onChange={handleChange} name="email" ref={register} type="email" />
             <p className="required-text"> {errors.email && errors.email.message} </p>
           </Form.Group>
           <Form.Group controlId="password">
             <Form.Label>Password <span className="required-text">*</span></Form.Label>
-            <Form.Control className="form-peam" onChange={props.handleChange} name="password" ref={register} type="password" />
+            <Form.Control disabled={props.registering} className="form-peam" onChange={handleChange} name="password" ref={register} type="password" />
             <p className="required-text"> {errors.password?.message} </p>
           </Form.Group>
           <Form.Group controlId="confirmPassword">
             <Form.Label>Confirm password <span className="required-text">*</span></Form.Label>
-            <Form.Control className="form-peam" onChange={props.handleChange} name="confirmPassword" ref={register} type="password" />
+            <Form.Control disabled={props.registering} className="form-peam" onChange={handleChange} name="confirmPassword" ref={register} type="password" />
             <p className="required-text"> {errors.confirmPassword?.message} </p>
-          </Form.Group>
-          <Form.Group controlId="notifications">
-            <Form.Label>Email preferences <span className="required-text">*</span></Form.Label>
-            <Form.Check onChange={props.handleChange} name="emailPreferences" checked={props.emailPreferences} ref={register} type="checkbox" label="Send me notifications about my courses." />
           </Form.Group>
             {props.registering? (
               <CircleLoader size={35} color={"#1a1a1a"} loading={props.registering} />
