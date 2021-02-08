@@ -23,20 +23,12 @@ export const SignUp = async (registerInfo: UserForRegistration) => {
     return (await axios.post(url, options));
 }
 
-export const Login = async (loginInfo: UserForLogin) => {
+export const SignIn = async (loginInfo: UserForLogin) => {
     const url = baseURL + 'auth/login/';
-    let key: string, value: string;
-
-    if (loginInfo.email?.indexOf('@')) {
-        value = loginInfo.email;
-        key = 'email';
-    } else {
-        value = loginInfo.username || '';
-        key = 'username';
-    }
+    const key = loginInfo.username.includes("@") ? 'email' : 'username';
 
     options.data = {
-        [key]: value,
+        [key]: loginInfo.username,
         "password": loginInfo.password
     }
 

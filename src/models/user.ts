@@ -6,7 +6,6 @@ export interface UserForRegistration {
 }
 
 export interface UserForLogin {
-    username?: string;
-    email?: string;
+    username: string;
     password: string;
 }

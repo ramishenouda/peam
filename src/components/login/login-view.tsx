@@ -1,20 +1,19 @@
-import React from 'react';
-import {useForm} from 'react-hook-form'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { Button, Container, Form } from 'react-bootstrap';
 import { CircleLoader } from 'react-spinners';
 
-import { UserForRegistration as User } from '../../models/user';
+import { UserForLogin as User } from '../../models/user';
+
 import './login-styles.css';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  register: (user: User) => void,
-  registering: boolean,
-  emailPreferences: boolean
+  login: (user: User) => void,
+  logging: boolean,
 }
 
 const SignupSchema = yup.object().shape({
@@ -27,28 +26,39 @@ function LoginView(props: Props) {
     mode: "all",
     resolver: yupResolver(SignupSchema)
   });
-
+  
   const { isValid } = formState;
+  const initialUser: User = {
+    password: '',
+    username: ''
+  }
+
+  const [user, setUser] = useState(initialUser);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target;
+    setUser({ ...user, [name]: value });
+  };
+
   return (
     <div className="login">
       <h2 className="login-header">
         Sign in to Peam
       </h2>
       <Container>
-        <Form className="login-form mb-5" onSubmit={handleSubmit(props.register)}>
+        <Form className="login-form mb-5" onSubmit={handleSubmit(props.login)}>
           <Form.Group controlId="username">
             <Form.Label>Username or email address <span className="required-text">*</span></Form.Label>
-            <Form.Control className="form-peam" onChange={props.handleChange} name="username" ref={register} type="text" />
+            <Form.Control className="form-peam" onChange={handleChange} name="username" ref={register} type="text" />
             <p className="required-text"> { errors.username && errors.username.message } </p>
           </Form.Group>
           <Form.Group controlId="password" style={{clear: "both"}}>
             <Form.Label>Password <span className="required-text">*</span></Form.Label>
             <Link className="float-right link" to="/password_reset">Forget password?</Link>
-            <Form.Control className="form-peam" onChange={props.handleChange} name="password" ref={register} type="password" />
+            <Form.Control className="form-peam" onChange={handleChange} name="password" ref={register} type="password" />
             <p className="required-text"> {errors.password?.message} </p>
           </Form.Group>
-          {props.registering? (
-            <CircleLoader size={35} color={"#1a1a1a"} loading={props.registering} />
+          {props.logging? (
+            <CircleLoader size={35} color={"#1a1a1a"} loading={props.logging} />
             ) : (
             <Button disabled={ !isValid } variant="dark" type="submit">
               Sign in
