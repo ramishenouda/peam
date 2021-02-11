@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { useParams } from "react-router";
 
-import Navbar from '../navbar/navbar-container';
-
 import course from '../../models/course';
 import { GetCourse } from '../../services/course-service';
 
@@ -55,7 +53,6 @@ function Course () {
 
     return (
         <>
-            <Navbar />
             <div id="course">
                 { data }
             </div>

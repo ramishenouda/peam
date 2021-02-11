@@ -11,7 +11,6 @@ import { SignIn } from '../../services/auth-service';
 import { getCurrentUser } from '../../services/user-service';
 import { UserForLogin as User } from '../../models/user';
 
-import Navbar from '../navbar/navbar-container';
 import LoginView from './login-view'
 
 function Login() {
@@ -47,7 +46,6 @@ function Login() {
 
     return (
         <>
-        <Navbar hide={true} />
         <LoginView
             login={login}
             logging={logging}

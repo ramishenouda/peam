@@ -6,7 +6,6 @@ import { UserForRegistration as User } from '../../models/user';
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
 import { success, message } from '../../services/notifications-service';
 
-import Navbar from '../navbar/navbar-container';
 import RegisterView from './register-view'
 import { Redirect } from 'react-router-dom';
 import { AxiosError } from 'axios';
@@ -37,7 +36,6 @@ function Register() {
 
     return (
         <>
-        <Navbar signUp={false} />
         <RegisterView
             register={register}
             registering={registering}

@@ -5,8 +5,6 @@ import { Redirect } from 'react-router-dom'
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import ProjectRequirement from '../../../models/project-requirement';
 
-import Navbar from '../../navbar/navbar-container';
-
 import View from './add-project-requirement-view';
 
 interface RouteInfo {
@@ -48,7 +46,6 @@ class AddProjectRequirement extends Component<ComponentProps, IState> {
 
         return (
             <>
-                <Navbar />
                 <View add={this.add} />
             </>
         );

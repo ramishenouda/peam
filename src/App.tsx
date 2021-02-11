@@ -11,6 +11,7 @@ import { getCurrentUser } from './services/user-service';
 
 import { updateSession } from './store/system/actions';
 
+import Navbar from './components/navbar/navbar-container';
 import HomePage from './components/home/home-container';
 import RegisterPage from './components/register/register-container';
 import LoginPage from './components/login/login-container';
@@ -54,8 +55,9 @@ const App = () => {
         return <>Loading......</>
     return (
         <React.Fragment>
+            <Navbar />
             <Switch>
-                <Route exact path="/" render={() => <AnonymousRoute component={HomePage}/>} />
+                <Route exact path="/" render={() => <HomePage />} />
                 <Route exact path="/join" render={() => <AnonymousRoute component={RegisterPage}/>} />
                 <Route exact path="/login" render={() => <AnonymousRoute component={LoginPage}/>} />
                 <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordResetPage}/> } />

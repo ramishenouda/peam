@@ -1,5 +1,10 @@
 import React from 'react';
+
+import { useSelector } from 'react-redux';
+import { SystemState } from '../../store/system/types';
+
 import NavbarView from './navbar-view';
+
 
 type Props = {
     signIn?: boolean;
@@ -10,6 +15,10 @@ type Props = {
 }
 
 function Navbar(props: Props) {
+    const systemState: SystemState = useSelector((state: any) => state.system);
+
+    console.log(systemState);
+
     if (props.hide)
         return <> </>
 
