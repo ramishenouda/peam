@@ -25,5 +25,6 @@ export const error = (title: string, message?: string, callback?: () => any) => 
     }).then(() => {
         if (callback)
             callback();
+        console.log('here');
     })
 }

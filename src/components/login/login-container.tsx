@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { AxiosError, AxiosResponse } from 'axios';
+import { useDispatch } from 'react-redux';
 
-import { AxiosError } from 'axios';
+import { showAxiosResponseErrors } from '../../services/error-handler-service';
+
+import { updateSession } from '../../store/system/actions';
 
 import { SignIn } from '../../services/auth-service';
+import { getCurrentUser } from '../../services/user-service';
 import { UserForLogin as User } from '../../models/user';
 
 import Navbar from '../navbar/navbar-container';
@@ -10,15 +16,33 @@ import LoginView from './login-view'
 
 function Login() {
     const [logging, setLogging] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const dispatch = useDispatch();
 
     const login = (user: User) => {
         setLogging(true);
         SignIn(user)
-            .then((result) => {
-                console.log(result);
+            .then((result: AxiosResponse) => {
+                const accessToken = result.data['access_token'];
+                const refreshToken = result.data['refresh_token'];
+                
+                const user = getCurrentUser(accessToken, refreshToken);
+                if (typeof user === 'object') {
+                    dispatch(updateSession(user));
+                    setLoggedIn(true);
+                }
             }).catch((err: AxiosError) => {
-                console.log(err);
+                showAxiosResponseErrors(err);
+                setLogging(false);
             });
+    }
+
+    if (loggedIn) {
+        const redirectTo = localStorage.getItem('redirectTo');
+        if (redirectTo)
+            localStorage.removeItem('redirectTo');
+
+        return <Redirect to={redirectTo ? redirectTo : '/'} />
     }
 
     return (

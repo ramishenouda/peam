@@ -1,6 +1,8 @@
 import jwt_decode from "jwt-decode";
 import { useSelector } from 'react-redux';
 
+import { error, success } from './notifications-service';
+
 import { SystemState } from '../store/system/types';
 
 export const CurrentUser = (): SystemState => {
@@ -9,20 +11,47 @@ export const CurrentUser = (): SystemState => {
     return systemState;
 }
 
-export const GetCurrentUser = (): SystemState => {
-    const token = localStorage.getItem('token');
-    let currentUser: SystemState = {loggedIn: false, session: '', username: '', full_name: ''};
-
-    if (token) {
-        var decoded: SystemState;
-         try {
-            decoded = jwt_decode(token);
-            decoded.loggedIn = true;
-            currentUser = decoded;
-        } catch (error) {
-            localStorage.clear(); window.location.reload();
+export const getCurrentUser = (token: string, refreshToken: string): SystemState | boolean => {
+    try {
+        const decodedToken: SystemState = jwt_decode(token);
+        const user: SystemState = decodedToken;
+        
+        if (refreshToken !== '') {
+            jwt_decode(refreshToken);
+            success("Login successful")
+            localStorage.setItem('refresh_token', refreshToken);
         }
-    }
+        
+        return user;
+    } catch (err) {
+        localStorage.clear();
+        error('An error occurred please try to login again.', '', 
+            () => {
+                window.location.reload();
+                localStorage.clear();
+            });
 
-    return currentUser;
+        localStorage.clear();
+
+        return false;
+    }
 }
+
+// depreacted
+// export const GetCurrentUser = (): SystemState => {
+//     const token = localStorage.getItem('token');
+//     let currentUser: SystemState = {loggedIn: false, session: '', username: '', full_name: ''};
+
+//     if (token) {
+//         var decoded: SystemState;
+//          try {
+//             decoded = jwt_decode(token);
+//             decoded.loggedIn = true;
+//             currentUser = decoded;
+//         } catch (error) {
+//             localStorage.clear(); window.location.reload();
+//         }
+//     }
+
+//     return currentUser;
+// }

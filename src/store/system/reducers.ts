@@ -5,6 +5,8 @@ const initialState: SystemState = {
   session: '',
   username: '',
   full_name: '',
+  jwt_id: '',
+  user_id: '',
 }
 
 export function systemReducer(state = initialState, action: SystemActionTypes): SystemState {

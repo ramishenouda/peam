@@ -35,6 +35,17 @@ export const SignIn = async (loginInfo: UserForLogin) => {
     return (await axios(options));
 }
 
+export const refreshToken = async(refreshToken: string) => {
+    options.url = baseURL + 'auth/token/refresh/';
+    options.method = 'post';
+
+    options.data = {
+        "refresh": refreshToken
+    }
+
+    return (await axios(options));
+}
+
 export const Logout = async () => {
     options.url = baseURL + 'auth/logout/';
     options.method = 'post';

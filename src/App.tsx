@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
-
+import { AxiosResponse } from 'axios';
 import { useDispatch } from 'react-redux';
 
 import AnonymousRoute from './AnonymousRoute';
 import ProtectedRoute from './ProtectedRoute';
 
-import { GetCurrentUser } from './services/user-service';
-import { updateSession } from './store/system/actions'
+import { refreshToken } from './services/auth-service';
+import { getCurrentUser } from './services/user-service';
+
+import { updateSession } from './store/system/actions';
 
 import HomePage from './components/home/home-container';
 import RegisterPage from './components/register/register-container';
@@ -17,14 +19,32 @@ import CoursePage from './components/course-page/course-container';
 import AddProjectRequirementPage from './components/project-requirement/add-project-requirement-page/add-project-requirement-container';
 
 const App = () => {
+    const [fetchingToken, setFetchingToken] = useState(true);
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const user = GetCurrentUser();
-        dispatch(updateSession(user));
+        const _refreshToken = localStorage.getItem('refresh_token') 
 
+        if (_refreshToken) {
+            refreshToken(_refreshToken)
+                .then((result: AxiosResponse) => {
+                    const token = result.data['access'];
+                    const user = getCurrentUser(token, '');
+                    if(typeof user === "object") {
+                        dispatch(updateSession(user));
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                }).finally(() => {
+                    setFetchingToken(false);
+                });
+        } else {
+            setFetchingToken(false);
+        }
     }, [dispatch])
 
+    if (fetchingToken)
+        return <>Loading......</>
     return (
         <React.Fragment>
             <Switch>

@@ -4,6 +4,8 @@ export interface SystemState {
     session: string;
     username: string;
     full_name: string;
+    user_id: string;
+    jwt_id: string;
 }
 
 // Describing the different ACTION NAMES available
