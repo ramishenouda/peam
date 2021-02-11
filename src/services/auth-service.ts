@@ -1,42 +1,43 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 
 import { UserForLogin, UserForRegistration } from "../models/user";
 
 const baseURL = process.env.REACT_APP_API_URI;
 
-const options = {
+const options: AxiosRequestConfig = {
+    url: '',
     headers: {
-        Accept: 'application/json',
+        "Accept": 'application/json',
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
     },
-    data: {
-    }
+    data: { }
 };
 
 export const SignUp = async (registerInfo: UserForRegistration) => {
-    const url = baseURL + 'signup/';
+    options.url = baseURL + 'signup/';
+    options.method = 'post';
     options.data = registerInfo;
 
-    console.log(options);
-
-    return (await axios.post(url, options));
+    return (await axios(options));
 }
 
 export const SignIn = async (loginInfo: UserForLogin) => {
-    const url = baseURL + 'auth/login/';
+    options.url = baseURL + 'auth/login/';
+    options.method = 'post';
+
     const key = loginInfo.username.includes("@") ? 'email' : 'username';
 
     options.data = {
-        [key]: loginInfo.username,
-        "password": loginInfo.password
+        password: loginInfo.password,
+        [key]: loginInfo.username
     }
 
-    console.log(options);
-
-    return (await axios.post(url, options));
+    return (await axios(options));
 }
 
-export const Logout = () => {
-    localStorage.clear();
+export const Logout = async () => {
+    options.url = baseURL + 'auth/logout/';
+    options.method = 'post';
+
+    return (await axios(options));
 }

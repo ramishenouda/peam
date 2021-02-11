@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { AxiosError } from 'axios';
 
 import { SignIn } from '../../services/auth-service';
 import { UserForLogin as User } from '../../models/user';
@@ -14,7 +16,7 @@ function Login() {
         SignIn(user)
             .then((result) => {
                 console.log(result);
-            }).catch((err) => {
+            }).catch((err: AxiosError) => {
                 console.log(err);
             });
     }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NavbarView from './navbar-view';
 
 type Props = {
@@ -9,19 +9,20 @@ type Props = {
     logo?: boolean;
 }
 
-class Navbar extends Component<Props> {
-    render() {
-        return (
-            <NavbarView 
-                signIn={this.props.signIn} 
-                signUp={this.props.signUp} 
-                logo={this.props.logo} 
-                hide={this.props.hide} 
-                search={this.props.search}
-                color="shiny"
-            />
-        );
-    }
+function Navbar(props: Props) {
+    if (props.hide)
+        return <> </>
+
+    return (
+        <NavbarView
+            signIn={props.signIn}
+            signUp={props.signUp}
+            logo={props.logo}
+            hide={props.hide}
+            search={props.search}
+            color="shiny"
+        />
+    );
 }
 
 export default Navbar;

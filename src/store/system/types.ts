@@ -2,7 +2,8 @@
 export interface SystemState {
     loggedIn: boolean;
     session: string;
-    userName: string;
+    username: string;
+    full_name: string;
 }
 
 // Describing the different ACTION NAMES available
