@@ -3,7 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { SystemState } from '../../store/system/types';
 
-import NavbarView from './navbar-view';
+import { AnonymousNavbar } from './anonymous-navbar-view';
+import { AuthorizedNavbar } from './authorized-navbar-view';
 
 
 type Props = {
@@ -22,8 +23,11 @@ function Navbar(props: Props) {
     if (props.hide)
         return <> </>
 
+    if (systemState.loggedIn)
+        return <AuthorizedNavbar />
+
     return (
-        <NavbarView
+        <AnonymousNavbar
             signIn={props.signIn}
             signUp={props.signUp}
             logo={props.logo}

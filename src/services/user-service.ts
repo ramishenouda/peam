@@ -15,6 +15,7 @@ export const getCurrentUser = (token: string, refreshToken: string): SystemState
     try {
         const decodedToken: SystemState = jwt_decode(token);
         const user: SystemState = decodedToken;
+        user.loggedIn = true;
         user.token = token;
 
         if (refreshToken !== '') {
