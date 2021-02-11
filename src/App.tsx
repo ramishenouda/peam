@@ -23,24 +23,31 @@ const App = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const _refreshToken = localStorage.getItem('refresh_token') 
-
-        if (_refreshToken) {
-            refreshToken(_refreshToken)
-                .then((result: AxiosResponse) => {
-                    const token = result.data['access'];
-                    const user = getCurrentUser(token, '');
-                    if(typeof user === "object") {
-                        dispatch(updateSession(user));
-                    }
-                }).catch((err) => {
-                    console.log(err);
-                }).finally(() => {
-                    setFetchingToken(false);
-                });
-        } else {
-            setFetchingToken(false);
+        const getNewToken = () => {
+            const _refreshToken = localStorage.getItem('refresh_token')
+            if (_refreshToken) {
+                refreshToken(_refreshToken)
+                    .then((result: AxiosResponse) => {
+                        const token = result.data['access'];
+                        const user = getCurrentUser(token, '');
+                        if(typeof user === "object") {
+                            dispatch(updateSession(user));
+                        }
+                    }).catch((err) => {
+                        console.log(err);
+                    }).finally(() => {
+                        setFetchingToken(false);
+                    });
+            } else {
+                setFetchingToken(false);
+            }
         }
+
+        getNewToken();
+
+        setInterval(() => {
+            getNewToken();
+        }, 600000);
     }, [dispatch])
 
     if (fetchingToken)
