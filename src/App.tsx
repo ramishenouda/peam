@@ -16,6 +16,7 @@ import HomePage from './components/home/home-container';
 import RegisterPage from './components/register/register-container';
 import LoginPage from './components/login/login-container';
 import PasswordResetPage from './components/password-reset/password-reset-container';
+import { NewCourse } from './components/course-new/new-course-container';
 import CoursePage from './components/course-page/course-container';
 import AddProjectRequirementPage from './components/project-requirement/add-project-requirement-page/add-project-requirement-container';
 
@@ -35,7 +36,8 @@ const App = () => {
                             dispatch(updateSession(user));
                         }
                     }).catch((err) => {
-                        console.log(err);
+                        localStorage.removeItem('refresh_token');
+                        window.location.reload();
                     }).finally(() => {
                         setFetchingToken(false);
                     });
@@ -53,6 +55,7 @@ const App = () => {
 
     if (fetchingToken)
         return <>Loading......</>
+
     return (
         <React.Fragment>
             <Navbar />
@@ -61,6 +64,7 @@ const App = () => {
                 <Route exact path="/join" render={() => <AnonymousRoute component={RegisterPage}/>} />
                 <Route exact path="/login" render={() => <AnonymousRoute component={LoginPage}/>} />
                 <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordResetPage}/> } />
+                <Route exact path="/new" render={() => <ProtectedRoute redirectTo="/login" component={NewCourse}/>} />
                 <Route exact path="/:owner/:courseName" render={() => <ProtectedRoute redirectTo="/login" component={CoursePage}/>} />
                 <Route exact path="/:owner/:courseName/add_project_requirement" render={() => <ProtectedRoute redirectTo="/login" component={AddProjectRequirementPage}/>} />
                 <Route render={() => <Redirect to={{ pathname: '/' }}/>} />

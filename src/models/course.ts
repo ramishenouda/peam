@@ -11,3 +11,9 @@ export default interface Course {
     projectRequirements: Array<ProjectRequirement>;
     role: string; // descripting current user's status to the course
 }
+
+export interface NewCourse {
+    title: string;
+    code: string;
+    description: string;
+}
