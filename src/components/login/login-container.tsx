@@ -37,9 +37,9 @@ function Login() {
     }
 
     if (loggedIn) {
-        const redirectTo = localStorage.getItem('redirectTo');
+        const redirectTo = localStorage.getItem('redirect_to');
         if (redirectTo)
-            localStorage.removeItem('redirectTo');
+            localStorage.removeItem('redirect_to');
 
         return <Redirect to={redirectTo ? redirectTo : '/'} />
     }

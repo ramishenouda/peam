@@ -1,16 +1,35 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
+
+import { SystemState } from '../store/system/types';
+
+import { NewCourse } from '../models/course';
 
 const baseURL = process.env.REACT_APP_API_URI;
 const utils = '';
 
-const options = {
+const options: AxiosRequestConfig = {
+    url: '',
     headers: {
-        Accept: 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        "Accept": 'application/json',
+        "Content-Type": "application/json",
     },
-    data: {
-    }
+    data: { }
 };
+
+export const CreateCourse = async (course: NewCourse, system: SystemState) => {
+    options.url = baseURL + 'courses/';
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'post';
+
+    options.data = {
+        owner_id: system.user_id,
+        ...course
+    }
+
+    console.log(options);
+
+    return (await axios(options));
+}
 
 export const GetCourse = async (owner: string, courseName: string) => {
     let url;

@@ -10,6 +10,7 @@ import { Container, Form, FormControl, FormLabel, TextareaAutosize, Button } fro
 
 type Props = {
     createCourse: (course: NewCourse) => void;
+    creating: boolean;
 };
 
 export const NewCourseView = (props: Props) => {
@@ -57,7 +58,6 @@ export const NewCourseView = (props: Props) => {
                                 type="text"
                                 autoComplete="off"
                                 onChange={(e: any) => setTitle(e.target.value)}
-                                value={title}
                                 name="title"
                                 ref={register}
                             />
@@ -70,7 +70,6 @@ export const NewCourseView = (props: Props) => {
                                 type="text"
                                 autoComplete="off"
                                 onChange={(e: any) => setCode(e.target.value)}
-                                value={code}
                                 name="code"
                                 ref={register}
                             />
@@ -82,14 +81,13 @@ export const NewCourseView = (props: Props) => {
                                 minRows={3}
                                 className="form-control f3" 
                                 onChange={(e: any) => setDescription(e.target.value)}
-                                value={description}
                                 name="description"
                                 ref={register}
                             />
                             <p className="required-text"> {errors.description?.message} </p>
                         </Form.Group>
                         <Form.Group>
-                            <Button type="submit" className="px-5 py-2" variant="dark" disabled={ !isValid }>Create</Button>
+                            <Button type="submit" className="px-5 py-2" variant="dark" disabled={ !isValid || props.creating }>Create</Button>
                         </Form.Group>
                     </Form>
                 </div>
