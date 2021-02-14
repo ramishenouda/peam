@@ -7,14 +7,14 @@ const baseURL = process.env.REACT_APP_API_URI;
 const options: AxiosRequestConfig = {
     url: '',
     headers: {
-        "Accept": 'application/json',
-        "Content-Type": "application/json",
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
     },
     data: { }
 };
 
 export const SignUp = async (registerInfo: UserForRegistration) => {
-    options.url = baseURL + 'signup/';
+    options.url = baseURL + 'auth/signup/';
     options.method = 'post';
     options.data = registerInfo;
 
@@ -50,5 +50,6 @@ export const Logout = async () => {
     options.url = baseURL + 'auth/logout/';
     options.method = 'post';
 
+    localStorage.clear();
     return (await axios(options));
 }

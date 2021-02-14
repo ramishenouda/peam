@@ -46,27 +46,20 @@ export const AuthorizedNavbar = (props: Props) => {
                             <span>
                                 Signed in as <br /> <strong>{systemState.username}</strong>
                             </span>
+                            <hr/>
                         </Dropdown.Item>
-                        <Dropdown.Item>
-                            <Link to={"/" + systemState.username} className="link">
-                                Your Profile
-                            </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                            <Link to={"/" + systemState.username + "/courses"} className="link">
-                                Your Courses
-                            </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                            <Link to={"/" + systemState.username + "/settings"} className="link">
-                                Settings
-                            </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                            <Link to="/sign_out">
-                                Sign out
-                            </Link>
-                        </Dropdown.Item>
+                        <Link to={"/" + systemState.username} className="link dropdown-item">
+                            Your Profile
+                        </Link>
+                        <Link to={"/" + systemState.username + "/courses"} className="link dropdown-item">
+                            Your Courses
+                        </Link>
+                        <Link to={"/" + systemState.username + "/settings"} className="link dropdown-item">
+                            Settings
+                        </Link>
+                        <Link to="/logout" className="link dropdown-item">
+                            Sign out
+                        </Link>
                     </Dropdown>
                 </Nav>
             </Navbar.Collapse>

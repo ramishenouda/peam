@@ -15,6 +15,7 @@ import Navbar from './components/navbar/navbar-container';
 import HomePage from './components/home/home-container';
 import RegisterPage from './components/register/register-container';
 import LoginPage from './components/login/login-container';
+import { Logout } from './components/logout/logout';
 import PasswordResetPage from './components/password-reset/password-reset-container';
 import { NewCourse } from './components/course-new/new-course-container';
 import CoursePage from './components/course-page/course-container';
@@ -31,6 +32,7 @@ const App = () => {
                 refreshToken(_refreshToken)
                     .then((result: AxiosResponse) => {
                         const token = result.data['access'];
+                        console.log(token);
                         const user = getCurrentUser(token, '');
                         if(typeof user === "object") {
                             dispatch(updateSession(user));
@@ -49,6 +51,7 @@ const App = () => {
         getNewToken();
 
         setInterval(() => {
+            console.log('getting token');
             getNewToken();
         }, 600000);
     }, [dispatch])
@@ -63,6 +66,7 @@ const App = () => {
                 <Route exact path="/" render={() => <HomePage />} />
                 <Route exact path="/join" render={() => <AnonymousRoute component={RegisterPage}/>} />
                 <Route exact path="/login" render={() => <AnonymousRoute component={LoginPage}/>} />
+                <Route exact path="/logout" render={() => <ProtectedRoute redirectTo="/login" component={Logout}/>} />
                 <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordResetPage}/> } />
                 <Route exact path="/new" render={() => <ProtectedRoute redirectTo="/login" component={NewCourse}/>} />
                 <Route exact path="/:owner/:courseName" render={() => <ProtectedRoute redirectTo="/login" component={CoursePage}/>} />
