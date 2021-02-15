@@ -30,6 +30,7 @@ function Course () {
         projectRequirements: [],
         attachments: [],
         students: [],
+        teachers: [],
         code: '',
         description: '',
         owner: '',

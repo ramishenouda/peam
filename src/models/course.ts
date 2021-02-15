@@ -1,5 +1,7 @@
 import Attachment from "./attachment";
 import ProjectRequirement from "./project-requirement";
+
+import { Teacher } from "./teacher";
 import { StudentForCourseList } from "./student";
 
 export default interface Course {
@@ -10,8 +12,9 @@ export default interface Course {
     owner: string;
     attachments: Array<Attachment>;
     projectRequirements: Array<ProjectRequirement>;
+    teachers: Array<Teacher>;
     students: Array<StudentForCourseList>;
-    role: string; // descripting current user's status to the course
+    role: string;
 }
 
 export interface NewCourse {

@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import Course from '../../../../models/course';
 
 import ProjectRequirement from '../../../project-requirement/project-requirement-course-list/project-requirement-container';
+import { CourseAttachments } from '../course-attachments/course-attachments';
+import { CourseTeachers } from '../course-teachers/course-teachers';
 
 import './course-overview-style.css';
 
@@ -42,11 +44,23 @@ function CourseOverView(props: Props) {
                         <h1 className={`f3 overview-title ${isSmallScreen && 'mt-2'}`}>
                             About
                         </h1>
-                        <p className="mt-4">
+                        <p className="mt-2">
                             { props.course.description }
                         </p>
                     </div>
                 }
+                <div className="separator">
+                    <hr/>
+                </div>
+                <div>
+                    <h1 className={`f3 overview-title ${isSmallScreen && 'mt-4 text-center'}`}>Teachers</h1>
+                    {isSmallScreen && 
+                        <div className="mb-2"> 
+                            <hr style={{width: '140px', textAlign: 'center', margin: 'auto'}} />
+                        </div>
+                    }
+                    <CourseTeachers teachers={props.course.teachers}/>
+                </div>
                 <div className="separator">
                     <hr/>
                 </div>
@@ -57,17 +71,7 @@ function CourseOverView(props: Props) {
                             <hr style={{width: '140px', textAlign: 'center', margin: 'auto'}} />
                         </div>
                     }
-                    <div className="mt-4">                   
-                        <p>
-                            Lecture from last night
-                        </p>
-                        <p>
-                            Lecture from last night
-                        </p>
-                        <p>
-                            Lecture from last night
-                        </p>
-                    </div>
+                    <CourseAttachments attachments={props.course.attachments}/>
                 </div>
             </div>
         </div>
