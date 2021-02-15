@@ -19,15 +19,18 @@ type Props = {
 
 function ProjectRequirement(props: Props): JSX.Element {
     const courseState: CourseState = useSelector((state: any) => state.course);
+    let projectReqs;
 
-    const projectReqs = props.projectReqs.map((pr) =>
-        <div key={pr.uid} className='mb-4'>
-            <ProjectRequirementItem
-                teacher={courseState.role === 'teacher'}
-                projectReq={pr}
-            />
-        </div>
-    );
+    if (props.projectReqs) {
+        projectReqs = props.projectReqs.map((pr) =>
+            <div key={pr.uid} className='mb-4'>
+                <ProjectRequirementItem
+                    teacher={courseState.role === 'teacher'}
+                    projectReq={pr}
+                />
+            </div>
+        );
+    }
 
     return (
         <div id="project-req">
@@ -42,8 +45,13 @@ function ProjectRequirement(props: Props): JSX.Element {
                     </Link>
                 }
             </div>
-
-            { projectReqs }
+            { projectReqs && projectReqs }
+            { !projectReqs && (
+                    <div className="mt-5 f1 text-center">
+                        No project requirements yet.
+                    </div>
+                )
+            }
         </div>
     )
 }

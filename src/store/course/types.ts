@@ -2,7 +2,9 @@
 export interface CourseState {
     role: string;
     courseOwner: string;
+    courseCode: string;
     courseTitle: string;
+    courseDescription: string;
 }
 
 // Describing the different ACTION NAMES available

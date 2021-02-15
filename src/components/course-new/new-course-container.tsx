@@ -26,7 +26,7 @@ export const NewCourse = (props: Props) => {
             .then(() => {
                 setRedirect(course.code);
             }).catch((err: AxiosError) => {
-                showAxiosResponseErrors(err);
+                showAxiosResponseErrors(err, 'Error');
                 setCreating(false);
             });
     }

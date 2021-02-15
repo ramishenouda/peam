@@ -21,7 +21,6 @@ function CourseTeams(props: Props) {
     const [teams, setTeams] = useState(Array<JSX.Element>());
 
     useEffect(() => {
-        console.log('here');
         const getData = () => {
             return props.teams.map((team) =>
                 <TeamItem

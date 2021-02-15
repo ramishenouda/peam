@@ -30,9 +30,9 @@ function CourseOverView(props: Props) {
         <div id="course-over-view">
             <div>
                 <ProjectRequirement 
-                    courseOwner={props.course.owner} 
-                    courseTitle={props.course.title} 
-                    projectReqs={props.course.projectRequirements} 
+                    courseOwner={props.course.owner}
+                    courseTitle={props.course.title}
+                    projectReqs={props.course.projectRequirements}
                 />
             </div>
             <div>
@@ -43,7 +43,7 @@ function CourseOverView(props: Props) {
                             About
                         </h1>
                         <p className="mt-4">
-                            {props.course.description}    
+                            { props.course.description }
                         </p>
                     </div>
                 }

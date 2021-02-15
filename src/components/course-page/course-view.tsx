@@ -2,11 +2,6 @@ import { useState, useEffect } from 'react'
 
 import Course from '../../models/course';
 
-import { useDispatch } from 'react-redux';
-
-import { updateCourse } from '../../store/course/actions';
-import { CourseState } from '../../store/course/types';
-
 import CourseOverView from './course-components/course-overview/course-overview-container';
 import CourseStudents from './course-components/course-students/course-students-container';
 import CourseTeams from './course-components/course-teams/course-teams-container';
@@ -20,32 +15,15 @@ type Props = {
 
 const CourseView = (props: Props): JSX.Element => {
     const [tap, setTap] = useState(0);
-
-    const dispatch = useDispatch()
-
     const [windowSize, setWindowSize] = useState(window.innerWidth);
+
     useEffect(() => {
         window.addEventListener('resize', setSize);
 
-        const courseState: CourseState = {
-            courseOwner: props.course.owner,
-            courseTitle: props.course.title,
-            role: props.course.role 
-        }
-        dispatch(updateCourse(courseState));
-
         return function cleanup () {
             window.removeEventListener('resize', setSize);
-
-            const initialState: CourseState = {
-                courseOwner: '',
-                courseTitle: '',
-                role: '' 
-            }
-
-            dispatch(updateCourse(initialState));
         }
-    }, [dispatch, props.course]);
+    }, []);
 
     const setSize = () => {
         setWindowSize(window.innerWidth)
@@ -63,9 +41,7 @@ const CourseView = (props: Props): JSX.Element => {
                 }
             </div>
             <CourseNavbar 
-                courseDescription={props.course.description} 
-                courseRole={props.course.role}
-                active={tap} 
+                active={tap}
                 tabHandler={setTap}
             />
         </header>
@@ -79,6 +55,12 @@ const CourseView = (props: Props): JSX.Element => {
             {
                 tap === 2 &&
                 <CourseTeams />
+            }
+            {
+                tap === 3 &&
+                <div className="f1 mt-5 text-center">
+                    Next Semester
+                </div>
             }
         </main>
         </>

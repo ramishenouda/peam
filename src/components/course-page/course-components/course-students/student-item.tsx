@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 type Props = {
     userName: string,
     fullName: string,
-    pictureUrl: string
+    avatar: string
     role: string;
 };
 
@@ -17,7 +17,7 @@ export const Student = (props: Props) => {
                 <Link className="link" to={`/${props.userName}`}>
                     <img
                         className="profile-pic" 
-                        src={`${props.pictureUrl}`} 
+                        src={`${props.avatar}`} 
                         alt={props.fullName? props.fullName : props.userName} 
                     />
                     <span className="title">

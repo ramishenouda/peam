@@ -23,7 +23,7 @@ function CourseStudents(props: Props) {
             return <Student
                 userName={student.username}
                 fullName={student.fullName}
-                pictureUrl={student.pictureUrl}
+                avatar={student.avatar}
                 key={student.username}
                 role={props.role}
             />
@@ -33,7 +33,7 @@ function CourseStudents(props: Props) {
             return <Student
                 userName={student.username}
                 fullName={student.fullName}
-                pictureUrl={student.pictureUrl}
+                avatar={student.avatar}
                 key={student.username}
                 role={props.role}
             />

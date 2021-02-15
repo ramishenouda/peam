@@ -26,7 +26,7 @@ function Register() {
                 setLoginRedirect(true);
             })
             .catch((err: AxiosError) => {
-                showAxiosResponseErrors(err);
+                showAxiosResponseErrors(err, 'Register error');
                 setRegistering(false);
             });
     }

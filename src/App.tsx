@@ -32,7 +32,6 @@ const App = () => {
                 refreshToken(_refreshToken)
                     .then((result: AxiosResponse) => {
                         const token = result.data['access'];
-                        console.log(token);
                         const user = getCurrentUser(token, '');
                         if(typeof user === "object") {
                             dispatch(updateSession(user));
@@ -51,7 +50,6 @@ const App = () => {
         getNewToken();
 
         setInterval(() => {
-            console.log('getting token');
             getNewToken();
         }, 600000);
     }, [dispatch])
@@ -69,8 +67,8 @@ const App = () => {
                 <Route exact path="/logout" render={() => <ProtectedRoute redirectTo="/login" component={Logout}/>} />
                 <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordResetPage}/> } />
                 <Route exact path="/new" render={() => <ProtectedRoute redirectTo="/login" component={NewCourse}/>} />
-                <Route exact path="/:owner/:courseName" render={() => <ProtectedRoute redirectTo="/login" component={CoursePage}/>} />
-                <Route exact path="/:owner/:courseName/add_project_requirement" render={() => <ProtectedRoute redirectTo="/login" component={AddProjectRequirementPage}/>} />
+                <Route exact path="/:owner/:code" render={() => <ProtectedRoute redirectTo="/login" component={CoursePage}/>} />
+                <Route exact path="/:owner/:code/add_project_requirement" render={() => <ProtectedRoute redirectTo="/login" component={AddProjectRequirementPage}/>} />
                 <Route render={() => <Redirect to={{ pathname: '/' }}/>} />
             </Switch>
         </React.Fragment>

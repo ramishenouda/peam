@@ -31,7 +31,7 @@ function Login() {
                     setLoggedIn(true);
                 }
             }).catch((err: AxiosError) => {
-                showAxiosResponseErrors(err);
+                showAxiosResponseErrors(err, 'Sign in error');
                 setLogging(false);
             });
     }

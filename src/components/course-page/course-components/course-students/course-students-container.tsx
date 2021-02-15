@@ -22,7 +22,7 @@ function CourseStudents () {
         let canUnload = false;
         setTimeout(() => { canUnload = true; }, 500);
 
-        GetCourseStudents(courseState.courseOwner, courseState.courseTitle)
+        GetCourseStudents(courseState.courseOwner, courseState.courseCode)
         .then((result) => {
             setStudents(result.data.students);
         }).catch((err) => {

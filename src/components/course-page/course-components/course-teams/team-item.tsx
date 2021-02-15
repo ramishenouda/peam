@@ -14,7 +14,7 @@ type Props = {
 function TeamItem(props: Props) {
     const students = props.students.map(student =>
         <Link key={student.username + props.title} to={`/${student.username}`}>
-            <StyledImg alt={`${student.username}`} className="mr-1" src={student.pictureUrl} />
+            <StyledImg alt={`${student.username}`} className="mr-1" src={student.avatar} />
         </Link>
     )
 

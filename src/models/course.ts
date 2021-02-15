@@ -1,5 +1,6 @@
 import Attachment from "./attachment";
 import ProjectRequirement from "./project-requirement";
+import { StudentForCourseList } from "./student";
 
 export default interface Course {
     uid: string;
@@ -9,6 +10,7 @@ export default interface Course {
     owner: string;
     attachments: Array<Attachment>;
     projectRequirements: Array<ProjectRequirement>;
+    students: Array<StudentForCourseList>;
     role: string; // descripting current user's status to the course
 }
 
