@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import Course from '../../../../models/course';
+import { Course } from '../../../../models/course';
 
 import ProjectRequirement from '../../../project-requirement/project-requirement-course-list/project-requirement-container';
 import { Attachments } from './attachments/attachments';
@@ -33,7 +33,7 @@ export const OverView = (props: Props) => {
             <div>
                 <ProjectRequirement 
                     courseOwner={props.course.owner}
-                    courseTitle={props.course.title}
+                    courseCode={props.course.code}
                     projectReqs={props.course.projectRequirements}
                 />
             </div>

@@ -14,7 +14,7 @@ import './project-requirement-style.css';
 type Props = {
     projectReqs: Array<projectReq>;
     courseOwner: string;
-    courseTitle: string;
+    courseCode: string;
 }
 
 function ProjectRequirement(props: Props): JSX.Element {
@@ -38,7 +38,7 @@ function ProjectRequirement(props: Props): JSX.Element {
             <div>
                 {
                     courseState.role === 'teacher' &&
-                    <Link to={`/${props.courseOwner}/${props.courseTitle}/add_project_requirement`} 
+                    <Link to={`/${props.courseOwner}/${props.courseCode}/add_project_requirement`} 
                     className="mb-2 mt-1 btn btn-dark"
                     >
                         Add a project requirement

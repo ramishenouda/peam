@@ -10,7 +10,7 @@ import { SystemState } from '../../store/system/types';
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
 import { GetCourse } from '../../services/course-service';
 
-import course from '../../models/course';
+import { Course as course } from '../../models/course';
 import { Teacher } from '../../models/teacher';
 
 import CourseView from './course-view';

@@ -4,7 +4,7 @@ import ProjectRequirement from "./project-requirement";
 import { Teacher } from "./teacher";
 import { StudentForCourseList } from "./student";
 
-export default interface Course {
+export interface Course {
     uid: string;
     title: string;
     code: string;
@@ -15,6 +15,14 @@ export default interface Course {
     teachers: Array<Teacher>;
     students: Array<StudentForCourseList>;
     role: string;
+}
+
+export interface CourseForUpdate {
+    title: string;
+    owner: string;
+    code: string;
+    description: string;
+    attachments: Array<Attachment>;
 }
 
 export interface NewCourse {

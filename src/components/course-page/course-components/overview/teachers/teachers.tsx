@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Teacher } from "../../../../../models/teacher";
 
 type Props = {
@@ -11,7 +12,15 @@ export const Teachers = (props: Props) => {
         teachers = props.teachers.map(item => {
             return (
                 <p key={item.username}>
-                    { item.full_name ? item.full_name : item.username }
+                    <img src={'https://cdn2.iconfinder.com/data/icons/education-people/512/22-512.png'}
+                        className="mr-2"
+                        alt='teacher'
+                        width='40px'
+                        height='40px'
+                    />
+                    <Link to={"/" + item.username} className="link">
+                        { item.full_name ? item.full_name : item.username }
+                    </Link>
                 </p>
             )
         })

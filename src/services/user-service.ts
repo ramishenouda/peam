@@ -39,21 +39,47 @@ export const getCurrentUser = (token: string, refreshToken: string): SystemState
     }
 }
 
-// depreacted
-// export const GetCurrentUser = (): SystemState => {
-//     const token = localStorage.getItem('token');
-//     let currentUser: SystemState = {loggedIn: false, session: '', username: '', full_name: ''};
+const filterColors = (inputValue: string) => {
+    return [
+        {
+            "label": "Kandil",
+            "value": "Kandil",
+        },
+        {
+            "label": "Rami",
+            "value": "rami",
+        },
+        {
+            "label": "Sorya",
+            "value": "sorya",
+        }
+    ].filter(i => i.label.toLowerCase().includes(inputValue.toLowerCase()));
+};
 
-//     if (token) {
-//         var decoded: SystemState;
-//          try {
-//             decoded = jwt_decode(token);
-//             decoded.loggedIn = true;
-//             currentUser = decoded;
-//         } catch (error) {
-//             localStorage.clear(); window.location.reload();
-//         }
-//     }
+export const SearchUsers = (inputValue: string): Promise<Array<Object>> =>
+    new Promise(resolve => {
+        setTimeout(() => {
+            resolve(filterColors(inputValue))
+        }, 1000);
+    });
 
-//     return currentUser;
-// }
+/*
+depreacted
+export const GetCurrentUser = (): SystemState => {
+    const token = localStorage.getItem('token');
+    let currentUser: SystemState = {loggedIn: false, session: '', username: '', full_name: ''};
+
+    if (token) {
+        var decoded: SystemState;
+         try {
+            decoded = jwt_decode(token);
+            decoded.loggedIn = true;
+            currentUser = decoded;
+        } catch (error) {
+            localStorage.clear(); window.location.reload();
+        }
+    }
+
+    return currentUser;
+}
+*/

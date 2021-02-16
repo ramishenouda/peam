@@ -8,7 +8,7 @@ import View from './project-requirement-view';
 type Props = {
     projectReqs: Array<projectReq>;
     courseOwner: string;
-    courseTitle: string;
+    courseCode: string;
 };
 
 interface IState {
@@ -35,7 +35,7 @@ class ProjectRequirement extends Component<Props, IState> {
         return (
             <View 
                 courseOwner={this.props.courseOwner}
-                courseTitle={this.props.courseTitle}
+                courseCode={this.props.courseCode}
                 projectReqs={this.props.projectReqs} 
             />
         );

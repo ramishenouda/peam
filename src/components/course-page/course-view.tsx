@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 
-import Course from '../../models/course';
+import { Course } from '../../models/course';
 
 import { OverView } from './course-components/overview/overview-container';
 import { Students } from './course-components/students/students-container';
 import { Teams } from './course-components/teams/teams-container';
+import { Settings } from './course-components/settings/settings-container';
 
 import './course-style.css'
 import CourseNavbar from './course-navbar';
@@ -61,6 +62,10 @@ const CourseView = (props: Props): JSX.Element => {
                 <div className="f1 mt-5 text-center">
                     Next Semester
                 </div>
+            }
+            {
+                tap === 4 &&
+                <Settings />
             }
         </main>
         </>

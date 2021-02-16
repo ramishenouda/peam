@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Course from '../../../../models/course';
+import { Course } from '../../../../models/course';
 
 import { OverView as View } from './overview-view';
 
