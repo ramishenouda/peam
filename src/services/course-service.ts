@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { SystemState } from '../store/system/types';
 
 import { NewCourse } from '../models/course';
+import { Attachment } from '../models/attachment';
 
 const baseURL = process.env.REACT_APP_API_URI;
 const utils = '';
@@ -33,7 +34,7 @@ export const CreateCourse = async (course: NewCourse, system: SystemState) => {
 
 export const GetCourse = async (owner: string, courseCode: string) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/
-    options.url = baseURL + `courses/${owner}/${courseCode}`
+    options.url = baseURL + `courses/${owner}/${courseCode}/`
     options.method = 'GET';
 
     return (await axios(options));
@@ -57,4 +58,21 @@ export const GetCourseTeams = async (owner: string, courseName: string) => {
         url = baseURL + utils + `courses/${owner}/${courseName}/teams`;
 
     return (await axios.get(url, options));
+}
+
+export const GetCourseAttachments = async (owner: string, courseCode: string) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/attachments/
+    options.url = baseURL + `courses/${owner}/${courseCode}/attachments/`
+    options.method = 'GET';
+
+    return (await axios(options));
+}
+
+export const AddCourseAttachment = async (owner: string, courseCode: string, attachment: Attachment) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/attachments/
+    options.url = baseURL + `courses/${owner}/${courseCode}/attachments/`
+    options.method = 'POST';
+    options.data = attachment;
+
+    return (await axios(options));
 }

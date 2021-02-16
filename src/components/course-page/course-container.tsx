@@ -50,12 +50,13 @@ function Course () {
         GetCourse(owner, code)
             .then((result: AxiosResponse) => {
                 const teachers: Array<Teacher> = result.data.teachers;
+                const data: course = result.data;
                 if (teachers.find(x => x.username === systemState.username)) {
                     setCourse({...result.data, role: 'teacher'});
-                    dispatch(updateCourse({ courseOwner: owner, courseCode: code, courseTitle: result.data.title, courseDescription: result.data.description, role: 'teacher' }));
+                    dispatch(updateCourse({ courseId: data.uid, courseOwner: owner, courseCode: code, courseTitle: data.title, courseDescription: data.description, role: 'teacher' }));
                 } else {
                     setCourse({...result.data, role: 'student'});
-                    dispatch(updateCourse({ courseOwner: owner, courseCode: code, courseTitle: result.data.title, courseDescription: result.data.description, role: 'student' }));
+                    dispatch(updateCourse({ courseId: data.uid, courseOwner: owner, courseCode: code, courseTitle: result.data.title, courseDescription: result.data.description, role: 'student' }));
                 }
             }).catch((err: AxiosError) => {
                 showAxiosResponseErrors(err);
@@ -66,11 +67,12 @@ function Course () {
 
         return function cleanup () {
             const initialState: CourseState = {
+                courseId: '',
                 courseOwner: '',
                 courseCode: '',
                 courseTitle: '',
                 courseDescription: '',
-                role: ''
+                role: '',
             }
 
             dispatch(updateCourse(initialState));

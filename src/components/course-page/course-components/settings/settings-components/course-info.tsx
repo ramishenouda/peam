@@ -54,7 +54,7 @@ export const CourseInfo = (props: Props) => {
     return (
         <Section id="course-settings">
             <div>
-                <p className="f1">
+                <p className="peam-title-1 f1">
                     Course
                 </p>
                 <hr />

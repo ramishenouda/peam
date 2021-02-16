@@ -13,8 +13,8 @@ type Props = {
 };
 export const Teachers = (props: Props) => {
     return (
-        <Section id="add-students">
-            <p className="f1 mt-3">
+        <Section id="invite-teachers peam-title-1">
+            <p className="f1">
                 Invite Teachers
             </p>
             <hr />

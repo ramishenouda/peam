@@ -1,6 +1,7 @@
 // Describing the shape of the system's slice of state
 export interface CourseState {
     role: string;
+    courseId: string;
     courseOwner: string;
     courseCode: string;
     courseTitle: string;
