@@ -3,9 +3,14 @@ import styled from 'styled-components';
 import { Container as container, Navbar as navbar } from 'react-bootstrap';
 
 export const Container = styled(container)`
-    display: grid;
-    grid-template-columns: 190px 1px 70%;
-    grid-column-gap: 20px;
+`
+
+export const Section = styled.section`
+    background: #fcfcfc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 1px 3px #1a1a1a;
 `
 
 export const Navbar = styled(navbar)`

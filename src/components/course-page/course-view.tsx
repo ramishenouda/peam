@@ -37,7 +37,7 @@ const CourseView = (props: Props): JSX.Element => {
         <header className="head bg-g-gray">
             <div className="flex-auto mb-4">
                 <h1 className="course-title f2">{ props.course.title } | { props.course.code }</h1>
-                { isSmallScreen && 
+                { isSmallScreen &&
                     <h2 className="course-description f3">{ props.course.description }</h2>
                 }
             </div>

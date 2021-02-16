@@ -4,11 +4,13 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { Form, Button } from 'react-bootstrap';
+import TextareaAutosize from 'react-textarea-autosize';
+
 import { CourseState } from '../../../../../store/course/types';
 import { CourseForUpdate } from '../../../../../models/course';
 
-import { Form, Button } from 'react-bootstrap';
-import TextareaAutosize from 'react-textarea-autosize';
+import { Section } from '../settings-style';
 
 type Props = {
     
@@ -50,7 +52,7 @@ export const CourseInfo = (props: Props) => {
     const { isValid } = formState;
 
     return (
-        <section id="course-settings">
+        <Section id="course-settings">
             <div>
                 <p className="f1">
                     Course
@@ -102,6 +104,6 @@ export const CourseInfo = (props: Props) => {
                     </Button>
                 </Form.Group>
             </Form>
-        </section>
+        </Section>
     );
 };
