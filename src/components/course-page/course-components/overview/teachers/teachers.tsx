@@ -1,16 +1,16 @@
-import { Teacher } from "../../../../models/teacher"
+import { Teacher } from "../../../../../models/teacher";
 
 type Props = {
     teachers: Array<Teacher>
 }
 
-export const CourseTeachers = (props: Props) => {
+export const Teachers = (props: Props) => {
     let teachers;
 
     if (props.teachers.length) {
         teachers = props.teachers.map(item => {
             return (
-                <p>
+                <p key={item.username}>
                     { item.full_name ? item.full_name : item.username }
                 </p>
             )

@@ -44,7 +44,6 @@ function Course () {
     const [course, setCourse] = useState(initialCourse);
 
     useEffect(() => {
-        console.log('course-container');
         const owner = params.owner;
         const code = params.code;
 

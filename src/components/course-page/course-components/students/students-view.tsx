@@ -5,7 +5,7 @@ import { Container, FormControl } from 'react-bootstrap';
 import { StudentForCourseList as StudentType } from '../../../../models/student';
 import { Student } from './student-item';
 
-import './course-students-style.css';
+import './students-style.css';
 
 type Props = {
     students: Array<StudentType>;
@@ -15,7 +15,7 @@ type Props = {
     role:string;
 }
 
-function CourseStudents(props: Props) {
+export const Students = (props: Props) => {
     let students;
 
     if (props.searchValue.length) {
@@ -59,5 +59,3 @@ function CourseStudents(props: Props) {
         );
     }
 }
-
-export default CourseStudents;

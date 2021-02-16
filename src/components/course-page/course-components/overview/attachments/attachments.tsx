@@ -1,18 +1,16 @@
-import React, { useState } from "react"
-
-import Attachment from "../../../../models/attachment"
+import { Attachment } from "../../../../../models/attachment";
 
 type Props = {
     attachments: Array<Attachment>
 }
 
-export const CourseAttachments = (props: Props) => {
+export const Attachments = (props: Props) => {
     let attachments;
 
     if(props.attachments.length) {
         attachments = props.attachments.map((item) => {
             return (
-                <p>
+                <p key={item.uid}>
                     {item.title}
                 </p>
             )

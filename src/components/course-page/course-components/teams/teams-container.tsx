@@ -7,9 +7,9 @@ import { ProjectRequirementForTeams as ProjectRequirement, ProjectRequirementFor
 
 import { GetCourseTeams } from '../../../../services/course-service';
 
-import View from './course-teams-view';
+import { Teams as View } from './teams-view';
 
-function CourseTeams() {
+export const Teams = () => {
     const [fetching, setFetching] = useState(true);
     const [error, setError] = useState(false);
     const [projectRequirements, setProjectRequirements] = useState(Array<ProjectRequirement>());
@@ -52,5 +52,3 @@ function CourseTeams() {
         )
     }
 }
-
-export default CourseTeams;

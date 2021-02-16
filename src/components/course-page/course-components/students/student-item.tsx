@@ -10,7 +10,6 @@ type Props = {
 };
 
 export const Student = (props: Props) => {
-
     return (
         <div className="mt-2" id="student">
             <div>

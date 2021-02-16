@@ -3,16 +3,16 @@ import { useState, useEffect } from 'react';
 import Course from '../../../../models/course';
 
 import ProjectRequirement from '../../../project-requirement/project-requirement-course-list/project-requirement-container';
-import { CourseAttachments } from '../course-attachments/course-attachments';
-import { CourseTeachers } from '../course-teachers/course-teachers';
+import { Attachments } from './attachments/attachments';
+import { Teachers } from './teachers/teachers';
 
-import './course-overview-style.css';
+import './overview-style.css';
 
 type Props = {
     course: Course,
 }
 
-function CourseOverView(props: Props) {
+export const OverView = (props: Props) => {
     const [windowSize, setWindowSize] = useState(window.innerWidth);
     useEffect(() => {
         window.addEventListener('resize', setSize);
@@ -44,7 +44,7 @@ function CourseOverView(props: Props) {
                         <h1 className={`f3 overview-title ${isSmallScreen && 'mt-2'}`}>
                             About
                         </h1>
-                        <p className="mt-2">
+                        <p className="overview-description mt-2">
                             { props.course.description }
                         </p>
                     </div>
@@ -59,7 +59,7 @@ function CourseOverView(props: Props) {
                             <hr style={{width: '140px', textAlign: 'center', margin: 'auto'}} />
                         </div>
                     }
-                    <CourseTeachers teachers={props.course.teachers}/>
+                    <Teachers teachers={props.course.teachers}/>
                 </div>
                 <div className="separator">
                     <hr/>
@@ -71,11 +71,9 @@ function CourseOverView(props: Props) {
                             <hr style={{width: '140px', textAlign: 'center', margin: 'auto'}} />
                         </div>
                     }
-                    <CourseAttachments attachments={props.course.attachments}/>
+                    <Attachments attachments={props.course.attachments}/>
                 </div>
             </div>
         </div>
     );
 }
-
-export default CourseOverView;

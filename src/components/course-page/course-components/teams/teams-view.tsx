@@ -2,11 +2,11 @@
 
 // import { CourseState } from '../../../../store/course/types';
 import { useState, useEffect } from 'react';
-import TeamItem from './team-item';
+import { TeamItem } from './team-item';
 
 import { TeamForCourseList as team } from '../../../../models/team';
 
-import { TeamsContainer, ProjectRequirementTitle, CrossLine } from './course-teams-style';
+import { TeamsContainer, ProjectRequirementTitle, CrossLine } from './teams-style';
 
 type Props = {
     title: string;
@@ -15,7 +15,7 @@ type Props = {
     index: number;
 }
 
-function CourseTeams(props: Props) {
+export const Teams = (props: Props) => {
     // const courseState: CourseStateate = useSelector((state: any) => state.course);
     const [showTeams, setShowTeams] = useState(props.index === 0);
     const [teams, setTeams] = useState(Array<JSX.Element>());
@@ -63,5 +63,3 @@ function CourseTeams(props: Props) {
         </div>
     );
 }
-
-export default CourseTeams;

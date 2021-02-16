@@ -6,10 +6,10 @@ import { CourseState } from '../../../../store/course/types';
 import { StudentForCourseList as student } from '../../../../models/student';
 import { GetCourseStudents } from '../../../../services/course-service';
 
-import View from './course-students-view'
+import { Students as View } from './students-view'
 
 
-function CourseStudents () {
+export const Students = () => {
     const [fetching, setFetching] = useState(true);
     const [error, setError] = useState(false);
     const [students, setStudents] = useState(Array<student>());
@@ -71,5 +71,3 @@ function CourseStudents () {
         )
     }
 }
-
-export default CourseStudents;

@@ -2,16 +2,14 @@ import React from 'react';
 
 import Course from '../../../../models/course';
 
-import View from './course-overview-view';
+import { OverView as View } from './overview-view';
 
 type Props = {
     course: Course;
 }
 
-function CourseOverView(props: Props) {
+export const OverView = (props: Props) => {
     return (
         <View course={props.course} />
     );
 }
-
-export default CourseOverView;

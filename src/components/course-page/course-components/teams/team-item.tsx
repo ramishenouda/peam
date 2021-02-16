@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { StyledDiv, StyledImg, StyledButton, Title } from './course-teams-style';
+import { StyledDiv, StyledImg, StyledButton, Title } from './teams-style';
 
 
 import { StudentForCourseList } from '../../../../models/student';
@@ -11,7 +11,7 @@ type Props = {
     students: Array<StudentForCourseList>;
 };
 
-function TeamItem(props: Props) {
+export const TeamItem = (props: Props) => {
     const students = props.students.map(student =>
         <Link key={student.username + props.title} to={`/${student.username}`}>
             <StyledImg alt={`${student.username}`} className="mr-1" src={student.avatar} />
@@ -46,5 +46,3 @@ function TeamItem(props: Props) {
         </StyledDiv>
     );
 }
-
-export default TeamItem;

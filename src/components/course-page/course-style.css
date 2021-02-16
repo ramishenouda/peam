@@ -42,9 +42,8 @@
     display: none;
 }
 
-.course-navbar .course-description {
-    font-weight: bolder;
-    font-size: large;
+#course .course-description {
+    white-space: pre-wrap;
 }
 
 .material-ui-icon {

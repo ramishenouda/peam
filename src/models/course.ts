@@ -1,4 +1,4 @@
-import Attachment from "./attachment";
+import { Attachment } from "./attachment";
 import ProjectRequirement from "./project-requirement";
 
 import { Teacher } from "./teacher";

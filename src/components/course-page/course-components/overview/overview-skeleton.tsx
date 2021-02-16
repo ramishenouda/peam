@@ -1,6 +1,6 @@
 import Skeleton from 'react-loading-skeleton';
 
-export default function CourseSkeleton() {
+export const Loader = () => {
     return (
         <>
         <div style={{ fontSize: 20, lineHeight: 2 }}>
