@@ -44,7 +44,7 @@ export const OverView = (props: Props) => {
                         <h1 className={`f3 overview-title ${isSmallScreen && 'mt-2'}`}>
                             About
                         </h1>
-                        <p className="overview-description mt-2">
+                        <p className="overview-description peam-title-1 mt-2">
                             { props.course.description }
                         </p>
                     </div>

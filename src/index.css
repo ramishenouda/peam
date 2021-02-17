@@ -125,6 +125,10 @@
   font-family: 'Roboto', 'sans-serif';
 }
 
+.peam-title-2 {
+  font-family: 'Inconsolata', 'sans-serif';
+}
+
 /* .swal2-confirm.swal2-styled {
   background-color: #1a1a1a !important;
   outline: none;
