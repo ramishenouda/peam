@@ -8,9 +8,8 @@ import { Form, Button } from 'react-bootstrap';
 
 import DatePicker from 'react-datepicker';
 import TextareaAutosize from 'react-textarea-autosize';
-import { DropZone } from '../../dropzone/react-dropzone-uploader';
 
-import { ProjectRequirement } from '../../../models/project-requirement';
+import { ProjectRequirement } from '../../../../../../models/project-requirement';
 
 import './add-project-requirement-style.css'
 
@@ -113,7 +112,6 @@ function AddProjectRequirement(props: Props): JSX.Element {
                     </Form.Group>
                     <Form.Group controlId="dropzone">
                         <Form.Label className="f3">Add attachements </Form.Label>
-                        <DropZone />
                     </Form.Group>
                     <Form.Group className="project-requirement-item-options">
                         <Button type="submit" className="px-5 py-2" variant="dark">Add</Button>

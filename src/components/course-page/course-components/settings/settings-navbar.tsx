@@ -12,35 +12,49 @@ export const SettingsNavbar = (props: Props) => {
         <Navbar className="text-center">
             <NavItem
                 onClick={() => props.setTab(0)}
-                className={`py-2 my-2 ${props.active === 0 && 'active-tab'}`}
+                className={`py-2 my-2 ${props.active === 0 && 'active'}`}
             >
                 Course
             </NavItem>
             <hr/>
             <NavItem 
                 onClick={() => props.setTab(1)} 
-                className={`py-2 my-2 ${props.active === 1 && 'active-tab'}`}
+                className={`py-2 my-2 ${props.active === 1 && 'active'}`}
             >
                 Students
             </NavItem>
             <hr/>
             <NavItem 
                 onClick={() => props.setTab(2)} 
-                className={`py-2 my-2 ${props.active === 2 && 'active-tab'}`}
+                className={`py-2 my-2 ${props.active === 2 && 'active'}`}
             >
                 Teachers
             </NavItem>
             <hr/>
             <NavItem 
                 onClick={() => props.setTab(3)} 
-                className={`py-2 my-2 ${props.active === 3 && 'active-tab'}`}
+                className={`py-2 my-2 ${props.active === 3 && 'active'}`}
             >
                 Attachments
             </NavItem>
             <hr/>
             <NavItem 
-                onClick={() => props.setTab(4)}
-                className={`py-2 my-2 text-warning ${props.active === 4 && 'active-tab'}`}
+                onClick={() => props.setTab(4)} 
+                className={`py-2 my-2 ${props.active === 4 && 'active'}`}
+            >
+                Project Requirements
+            </NavItem>
+            <hr/>
+            <NavItem 
+                onClick={() => props.setTab(5)} 
+                className={`py-2 my-2 ${props.active === 5 && 'active'}`}
+            >
+                Pending invitations
+            </NavItem>
+            <hr/>
+            <NavItem 
+                onClick={() => props.setTab(6)}
+                className={`py-2 my-2 text-warning ${props.active === 6 && 'active'}`}
             >
                 Dangerous
             </NavItem>

@@ -24,16 +24,16 @@ export const SettingsView = (props: Props) => {
       }
     }, []);
 
-    const mdScreen = windowSize < 768;
+    const mdscreen = windowSize < 768;
   
     const setSize = () => {
       setWindowSize(window.innerWidth)
     }
 
     return (
-        <Container mdScreen={mdScreen} className="my-4">
+        <Container mdscreen={mdscreen ? 1 : 0} className="my-4">
             <SettingsNavbar active={tab} setTab={setTab} />
-            {mdScreen && <br/>}
+            {mdscreen && <br/>}
             {
                 tab === 0 &&
                 <CourseInfo />

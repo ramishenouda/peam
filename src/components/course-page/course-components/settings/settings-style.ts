@@ -9,7 +9,7 @@ export const Container = styled(container)`
     border-radius: 5px;
     padding: 10px;
 
-    ${({ mdScreen }) => mdScreen && `
+    ${({ mdscreen }) => mdscreen && `
     display: block;
   `}
 `
@@ -53,7 +53,6 @@ export const NavItem = styled.div`
     transition: all 0.3s ease-in-out !important;
     border-radius: 5px;
     :hover {
-        background: gray;
-        color: white;
+        background: #f1f1f1;
     }
 `

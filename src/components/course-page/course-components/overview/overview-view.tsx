@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { CourseState } from '../../../../store/course/types';
 
-import ProjectRequirement from '../../../project-requirement/project-requirement-course-list/project-requirement-container';
+import ProjectRequirement from './project-requirement/project-requirement-course-list/project-requirement-container';
 import { Attachments } from './attachments/attachments';
 import { Teachers } from './teachers/teachers';
 
@@ -34,11 +34,7 @@ export const OverView = (props: Props) => {
     return (
         <div id="course-over-view">
             <div>
-                <ProjectRequirement 
-                    courseOwner={courseState.owner}
-                    courseCode={courseState.code}
-                    projectReqs={courseState.projectRequirements}
-                />
+                <ProjectRequirement />
             </div>
             <div>
                 {
