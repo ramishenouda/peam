@@ -35,7 +35,7 @@ export const NewCourseView = (props: Props) => {
     }
 
     return (
-        <Container>
+        <Container className="mt-2">
             <header>
                 <p className="f3">
                     A project course is where you can invite your students or your coworkers. <br/>

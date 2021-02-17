@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 
 import { Button, Form } from 'react-bootstrap';
 
-import ProjectRequirement from '../../../models/project-requirement';
+import { ProjectRequirement } from '../../../models/project-requirement';
 
 type Props = {
     projectReq: ProjectRequirement,

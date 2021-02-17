@@ -48,7 +48,7 @@ const CourseView = (props: Props): JSX.Element => {
         </header>
         <main>
             {tap === 0 &&
-                <OverView course={props.course} />
+                <OverView />
             }
             {tap === 1 &&
                 <Students />

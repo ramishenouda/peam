@@ -1,6 +1,6 @@
 import { TeamForCourseList } from "./team";
 
-export default interface ProjectRequirement {
+export interface ProjectRequirement {
     uid: string;
     title: string;
     description: string;

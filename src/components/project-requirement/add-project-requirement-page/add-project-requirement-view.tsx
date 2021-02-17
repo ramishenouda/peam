@@ -10,7 +10,7 @@ import DatePicker from 'react-datepicker';
 import TextareaAutosize from 'react-textarea-autosize';
 import { DropZone } from '../../dropzone/react-dropzone-uploader';
 
-import ProjectRequirement from '../../../models/project-requirement';
+import { ProjectRequirement } from '../../../models/project-requirement';
 
 import './add-project-requirement-style.css'
 

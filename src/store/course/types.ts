@@ -1,3 +1,7 @@
+import { ProjectRequirement } from '../../models/project-requirement';
+import { Attachment } from '../../models/attachment';
+import { Teacher } from '../../models/teacher';
+
 // Describing the shape of the system's slice of state
 export interface CourseState {
     role: string;
@@ -6,6 +10,9 @@ export interface CourseState {
     courseCode: string;
     courseTitle: string;
     courseDescription: string;
+    teachers: Array<Teacher>;
+    projectRequirements: Array<ProjectRequirement>;
+    attachments: Array<Attachment>;
 }
 
 // Describing the different ACTION NAMES available

@@ -6,7 +6,10 @@ const initialState: CourseState = {
   courseCode: '',
   courseTitle: '',
   courseDescription: '',
-  role: ''
+  role: '',
+  attachments: [],
+  projectRequirements: [],
+  teachers: []
 }
 
 export function courseReducer(state = initialState, action: CourseActionTypes): CourseState {

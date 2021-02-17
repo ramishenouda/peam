@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-import { Course } from '../../../../models/course';
+import { CourseState } from '../../../../store/course/types';
 
 import ProjectRequirement from '../../../project-requirement/project-requirement-course-list/project-requirement-container';
 import { Attachments } from './attachments/attachments';
@@ -9,10 +10,12 @@ import { Teachers } from './teachers/teachers';
 import './overview-style.css';
 
 type Props = {
-    course: Course,
+
 }
 
 export const OverView = (props: Props) => {
+    const courseState: CourseState = useSelector((state: any) => state.course);
+
     const [windowSize, setWindowSize] = useState(window.innerWidth);
     useEffect(() => {
         window.addEventListener('resize', setSize);
@@ -32,9 +35,9 @@ export const OverView = (props: Props) => {
         <div id="course-over-view">
             <div>
                 <ProjectRequirement 
-                    courseOwner={props.course.owner}
-                    courseCode={props.course.code}
-                    projectReqs={props.course.projectRequirements}
+                    courseOwner={courseState.courseOwner}
+                    courseCode={courseState.courseCode}
+                    projectReqs={courseState.projectRequirements}
                 />
             </div>
             <div>
@@ -45,7 +48,7 @@ export const OverView = (props: Props) => {
                             About
                         </h1>
                         <p className="overview-description peam-title-1 mt-2">
-                            { props.course.description }
+                            { courseState.courseDescription }
                         </p>
                     </div>
                 }
@@ -59,7 +62,7 @@ export const OverView = (props: Props) => {
                             <hr style={{width: '140px', textAlign: 'center', margin: 'auto'}} />
                         </div>
                     }
-                    <Teachers teachers={props.course.teachers}/>
+                    <Teachers teachers={ courseState.teachers }/>
                 </div>
                 <div className="separator">
                     <hr/>
@@ -71,7 +74,7 @@ export const OverView = (props: Props) => {
                             <hr style={{width: '140px', textAlign: 'center', margin: 'auto'}} />
                         </div>
                     }
-                    <Attachments attachments={props.course.attachments}/>
+                    <Attachments attachments={ courseState.attachments }/>
                 </div>
             </div>
         </div>

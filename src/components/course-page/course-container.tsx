@@ -53,10 +53,30 @@ function Course () {
                 const data: course = result.data;
                 if (teachers.find(x => x.username === systemState.username)) {
                     setCourse({...result.data, role: 'teacher'});
-                    dispatch(updateCourse({ courseId: data.uid, courseOwner: owner, courseCode: code, courseTitle: data.title, courseDescription: data.description, role: 'teacher' }));
+                    dispatch(updateCourse({ 
+                        courseId: data.uid, 
+                        courseOwner: owner, 
+                        courseCode: code, 
+                        courseTitle: data.title, 
+                        courseDescription: data.description, 
+                        attachments: data.attachments,
+                        projectRequirements: data.projectRequirements,
+                        teachers: data.teachers,
+                        role: 'teacher',
+                    }));
                 } else {
                     setCourse({...result.data, role: 'student'});
-                    dispatch(updateCourse({ courseId: data.uid, courseOwner: owner, courseCode: code, courseTitle: result.data.title, courseDescription: result.data.description, role: 'student' }));
+                    dispatch(updateCourse({ 
+                        courseId: data.uid, 
+                        courseOwner: owner, 
+                        courseCode: code, 
+                        courseTitle: data.title, 
+                        courseDescription: data.description, 
+                        attachments: data.attachments,
+                        projectRequirements: data.projectRequirements,
+                        teachers: data.teachers,
+                        role: 'teacher',
+                    }));
                 }
             }).catch((err: AxiosError) => {
                 showAxiosResponseErrors(err);
@@ -73,6 +93,9 @@ function Course () {
                 courseTitle: '',
                 courseDescription: '',
                 role: '',
+                attachments: [],
+                projectRequirements: [],
+                teachers: [],
             }
 
             dispatch(updateCourse(initialState));

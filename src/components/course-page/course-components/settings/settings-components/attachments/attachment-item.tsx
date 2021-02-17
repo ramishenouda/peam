@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -14,7 +15,10 @@ import { confirm, success } from '../../../../../../services/notifications-servi
 import { showAxiosResponseErrors } from '../../../../../../services/error-handler-service';
 import { DeleteCourseAttachment, UpdateCourseAttachment } from '../../../../../../services/course-service';
 
+import { CourseState } from '../../../../../../store/course/types';
+import { updateCourse } from '../../../../../../store/course/actions';
 import { Attachment } from '../../../../../../models/attachment';
+
 
 import { Div, DeleteIcon, SettingsIcon, Form } from './attachment-style';
 
@@ -23,13 +27,17 @@ type Props = {
     courseOwner: string,
     courseCode: string,
     showOptions: boolean,
-    removeAttachment?: (id: string) => void
 };
 
 export const AttachmentItem = (props: Props) => {
+    const dispatch = useDispatch()
+
+    const courseState: CourseState = useSelector((state: any) => state.course);
+
     const [edit, setEdit] = useState(false);
     const [editing, setEditing] = useState(false);
     const [attachment, setAttachment] = useState(props.data);
+    const [currentAttachment, setCurrentAttachment] = useState(props.data);
 
     const Icon = props.data.link.includes('pdf') ? <PDF /> : <FolderIcon />;
     const title = attachment.title;
@@ -40,16 +48,31 @@ export const AttachmentItem = (props: Props) => {
     };
 
     const submit = () => {
-        setEditing(!editing)
+        setEditing(true)
         UpdateCourseAttachment(props.courseOwner, props.courseCode, attachment)
             .then(() => {
                 success('Attachment updated successfully');
+                setCurrentAttachment(attachment)
+                const attachmentIndex = courseState.attachments.findIndex(item => item.uid === attachment.uid);
+                const attachments = courseState.attachments;
+
+                if(attachmentIndex > -1) {
+                    attachments[attachmentIndex] = attachment;
+                    dispatch(updateCourse({
+                        ...courseState, attachments: [...attachments]
+                    }))
+                }
             }).catch((err) => {
                 showAxiosResponseErrors(err);
             }).finally(() => {
-                setEditing(editing)
-                setEdit(edit)
+                setEditing(false)
+                setEdit(false)
             });
+    }
+
+    const cancelEditing = () => {
+        setAttachment(currentAttachment)
+        setEdit(false);
     }
 
     const Schema = yup.object().shape({
@@ -66,16 +89,19 @@ export const AttachmentItem = (props: Props) => {
     const { isValid } = formState;
 
     const deleteAttachment = () => {
-        if (!props.removeAttachment)
-            return;
-
         confirm('Are you sure?', 'You won\'t be able to restore this attachment')
-            .then(() => {
+            .then((result) => {
+                if (!result.isConfirmed) {
+                    return;
+                }
+
                 DeleteCourseAttachment(props.courseOwner, props.courseCode, props.data.uid)
                     .then(() => {
                         console.log('Todo: Show loader on the item');
-                        if (props.removeAttachment)
-                            props.removeAttachment(attachment.uid);
+                        dispatch(updateCourse({
+                            ...courseState, 
+                            attachments: [...courseState.attachments.filter(item => item.uid !== props.data.uid)]
+                        }))
                         success('Item deleted successfully');
                     }).catch((err) => {
                         showAxiosResponseErrors(err);
@@ -153,7 +179,7 @@ export const AttachmentItem = (props: Props) => {
                             <Button type="submit" className="px-3 py-2" variant="dark" disabled={ !isValid }>
                                 Update
                             </Button>
-                            <Button onClick={() => setEdit(!edit)} className="ml-2 px-3 py-2" variant="dark">
+                            <Button onClick={cancelEditing} className="ml-2 px-3 py-2" variant="dark">
                                 Cancel
                             </Button>
                         </div>

@@ -1,5 +1,5 @@
 import { Attachment } from "./attachment";
-import ProjectRequirement from "./project-requirement";
+import { ProjectRequirement } from "./project-requirement";
 
 import { Teacher } from "./teacher";
 import { StudentForCourseList } from "./student";

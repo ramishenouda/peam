@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { CourseState } from '../../../store/course/types';
 
-import projectReq from '../../../models/project-requirement';
+import { ProjectRequirement as projectReq } from '../../../models/project-requirement';
 import { ProjectRequirementItem } from './project-requirement-item';
 
 

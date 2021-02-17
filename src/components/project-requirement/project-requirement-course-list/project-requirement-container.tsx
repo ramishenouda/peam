@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 
-import projectReq from '../../../models/project-requirement';
+import { ProjectRequirement as projectReq } from '../../../models/project-requirement';
 
 import View from './project-requirement-view';
 

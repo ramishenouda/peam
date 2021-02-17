@@ -79,7 +79,7 @@ export const AddCourseAttachment = async (owner: string, courseCode: string, att
 
 export const DeleteCourseAttachment = async (owner: string, courseCode: string, attachmentId: string) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/attachments/{attachment_id}/
-    options.url = baseURL + `courses/${owner}/${courseCode}/attachments/${attachmentId}`
+    options.url = baseURL + `courses/${owner}/${courseCode}/attachments/${attachmentId}/`
     options.method = 'DELETE';
 
     return (await axios(options));
@@ -89,6 +89,7 @@ export const UpdateCourseAttachment = async (owner: string, courseCode: string, 
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/attachments/{attachment_id}/
     options.url = baseURL + `courses/${owner}/${courseCode}/attachments/${attachment.uid}/`
     options.method = 'PATCH';
+    options.data = attachment;
 
     return (await axios(options));
 }
