@@ -52,6 +52,10 @@ export const Attachments = (props: Props) => {
         setAttachment({...attachment, [name]: value});
     };
 
+    const removeAttachment = (id: string) => {
+        setAttachments([...attachments.filter(item => item.uid !== id)]);
+    }
+
     const submit = () => {
         setAdding(true);
         AddCourseAttachment(courseState.courseOwner, courseState.courseCode, attachment)
@@ -78,7 +82,13 @@ export const Attachments = (props: Props) => {
 
     const Data = !attachments.length ? [] : (
         attachments.map(item =>
-            <AttachmentItem key={item.uid} data={item} />
+            <AttachmentItem key={item.uid}
+                data={item}
+                courseOwner={courseState.courseOwner}
+                courseCode={courseState.courseCode}
+                showOptions={true}
+                removeAttachment={removeAttachment}
+            />
         )
     )
 
@@ -141,7 +151,18 @@ export const Attachments = (props: Props) => {
                 </Form>
             </div>
             {
-                Data.length > 0 && Data
+                Data.length > 0 && 
+                <div>
+                    <hr />
+                    <div>
+                        <p className="f2 peam-title-1">
+                            Manage current attachments
+                        </p>
+                    </div>
+                    <div>
+                        { Data }
+                    </div>
+                </div>
             }
         </Section>
     );
