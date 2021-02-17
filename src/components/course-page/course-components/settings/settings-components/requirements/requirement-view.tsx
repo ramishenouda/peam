@@ -4,7 +4,7 @@ import { CourseState } from '../../../../../../store/course/types';
 
 import { Div } from './requirement-style';
 
-import { ProjectRequirementItem } from './requirement-item-view';
+import { RequirementItem } from './requirement-item';
 
 type Props = {
 }
@@ -14,11 +14,17 @@ export const ProjectRequirement = (props: Props) => {
     let projectReqs;
 
     if (courseState.requirements) {
-        projectReqs = courseState.requirements.map((pr) =>
-            <ProjectRequirementItem key={pr.uid}
-                teacher={courseState.role === 'teacher'}
-                projectReq={pr}
-            />
+        projectReqs = courseState.requirements.map((requirement, index) =>
+            <>
+                <RequirementItem key={requirement.uid}
+                    requirement={requirement}
+                />
+                { index !== courseState.requirements.length - 1 && 
+                    <div className="separator">
+                        <hr/>
+                    </div>
+                }
+            </>
         );
     }
 

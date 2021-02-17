@@ -38,6 +38,9 @@
 .f3 {
   font-size: 20px !important;
 }
+.f4 {
+  font-size: 18px !important;
+}
 
 @media only screen and (max-width: 600px) {
   .f1 {
@@ -48,6 +51,9 @@
   }
   .f3 {
     font-size: 18px !important;
+  }
+  .f4 {
+    font-size: 16px !important;
   }
 }
 

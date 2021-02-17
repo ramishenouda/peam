@@ -1,29 +1,33 @@
 import React, { useState, ChangeEvent } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import TextareaAutosize from 'react-textarea-autosize';
 import DatePicker from "react-datepicker";
 
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 import { Requirement } from '../../../../../../models/requirement';
+import { CourseState } from '../../../../../../store/course/types';
 
-import { Item, Title, Description } from './requirement-style';
+import { Item, Title, Description, DDate, Form, FormControl, TextareaAutosize, Section } from './requirement-style';
 
 type Props = {
-    projectReq: Requirement,
-    teacher: boolean
+    requirement: Requirement;
+    showOptions?: boolean;
 };
 
-export const ProjectRequirementItem = (props: Props) => {
+export const RequirementItem = (props: Props) => {
+    const courseState: CourseState = useSelector((state: any) => state.course);
+
     // will be used if the use canceled Editing
-    let currentItemData = props.projectReq;
+    let currentItemData = props.requirement;
     // to toggle editing
     const [edit, setEdit] = useState(false);
     // to store the date for react-datepicker
-    const [endDate, setEndDate] = useState(new Date(props.projectReq.to_dt));
-    const [startDate, setStartDate] = useState(new Date(props.projectReq.from_dt));
+    const [endDate, setEndDate] = useState(new Date(props.requirement.to_dt));
+    const [startDate, setStartDate] = useState(new Date(props.requirement.from_dt));
     // to store the edited fields.
-    const [editItem, setEditItem] = useState(props.projectReq);
+    const [editItem, setEditItem] = useState(props.requirement);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
         const {name, value} = event.target;
@@ -64,39 +68,45 @@ export const ProjectRequirementItem = (props: Props) => {
             showStartDate = false;
 
         return (
+            <>
             <Item className="text-light">
-                <div className="requirement-deadline mb-2">
-                    {
-                        showStartDate &&
-                        <span className={`requirement-deadline`}>
-                            From: {startDate.toLocaleDateString()}
-                        </span>
-                    }
-                    <span className={`pl-2`}>
+                <Link to={'/' + courseState.owner + '/' + courseState.code + '/requirement/' + editItem.title} className="link">
+                    <Title className="f1">
+                        { editItem.title }
+                    </Title>
+                </Link>
+                <Section>
+                    <Description className="f2">
+                        { editItem.description }
+                    </Description>
+                    <DDate className="mb-2 f4">
                         {
-                            showStartDate ? 'To:' : 'Deadline:'
+                            showStartDate &&
+                            <span className={`requirement-deadline`}>
+                                From: {startDate.toLocaleDateString()}
+                            </span>
                         }
-                        &nbsp;
-                        {!endDateStatus && endDate.toLocaleString()}
-                        {endDateStatus === 'ShowHours' && endDate.toLocaleTimeString()}
-                        {endDateStatus === 'GameOver' && <span className="date-over"> { endDate.toLocaleString() }</span>}
-                    </span>
-                </div>
-                <Title className="f1">
-                    { editItem.title }
-                </Title>
-                <Description className="f3">
-                    { editItem.description }
-                </Description>
-                <div className="requirement-item-options">
-                    <Button variant="dark">More info</Button>
-                    {props.teacher && (
-                        <Button className="ml-2" variant="danger" onClick={() => setEdit(true)}>
-                            Edit info
-                        </Button>
-                    )}
-                </div>
+                        <span className={`${showStartDate ? 'pl-2' : ''}`}>
+                            {
+                                showStartDate ? 'To:' : 'Deadline:'
+                            }
+                            &nbsp;
+                            {!endDateStatus && endDate.toLocaleString()}
+                            {endDateStatus === 'ShowHours' && endDate.toLocaleTimeString()}
+                            {endDateStatus === 'GameOver' && <span className="date-over"> { endDate.toLocaleString() }</span>}
+                        </span>
+                    </DDate>
+                    {
+                        props.showOptions === true &&
+                        <div className="requirement-item-options">
+                            <Button className="ml-2" variant="danger" onClick={() => setEdit(true)}>
+                                Edit info
+                            </Button>
+                        </div>
+                    }
+                </Section>
             </Item>
+            </>
         );
     }
 
@@ -123,9 +133,9 @@ export const ProjectRequirementItem = (props: Props) => {
                     </span>
                 </Form.Group>
                 <Form.Group controlId="title">
-                    <Form.Control 
+                    <FormControl 
                         value={editItem.title} 
-                        className="requirement-title f2"
+                        className="f2"
                         autoFocus={true} 
                         name="title" 
                         type="text"
@@ -133,22 +143,20 @@ export const ProjectRequirementItem = (props: Props) => {
                     />
                 </Form.Group>
                 <Form.Group controlId="description">
-                    <TextareaAutosize 
-                        style={{width: '100%'}} 
-                        rows={4} 
-                        className="requirement-description f3" 
-                        defaultValue={editItem.description} 
+                    <TextareaAutosize
+                        style={{width: '100%'}}
+                        minRows={3}
+                        className="form-control f3"
+                        defaultValue={editItem.description}
                         name="description"
                         onChange={handleChange}
                     />
                 </Form.Group>
                 <div className="requirement-item-options">
                     <Button variant="dark" onClick={cancelEditing}>Cancel editing</Button>
-                    { props.teacher && (
-                        <Button className="ml-2" variant="success" onClick={saveChanges}>
-                            Save changes
-                        </Button>
-                    )}
+                    <Button className="ml-2" variant="success" onClick={saveChanges}>
+                        Save changes
+                    </Button>
                 </div>
             </Form>
         )
