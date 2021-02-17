@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { CourseState } from '../../../../../../store/course/types';
+import { CourseState } from '../../../../../../../store/course/types';
 
 import { Div } from './project-requirement-style';
 

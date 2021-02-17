@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { ProjectRequirement } from '../../../../../../models/project-requirement';
+import { ProjectRequirement } from '../../../../../../../models/project-requirement';
 
 import View from './add-project-requirement-view';
 

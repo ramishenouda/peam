@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { CourseState } from '../../../../store/course/types';
 
-import ProjectRequirement from './project-requirement/project-requirement-course-list/project-requirement-container';
+import ProjectRequirement from '../settings/settings-components/project-requirement/project-requirement-course-list/project-requirement-container';
 import { Attachments } from './attachments/attachments';
 import { Teachers } from './teachers/teachers';
 
