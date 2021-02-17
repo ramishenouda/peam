@@ -5,11 +5,12 @@ import { Teacher } from '../../models/teacher';
 // Describing the shape of the system's slice of state
 export interface CourseState {
     role: string;
-    courseId: string;
-    courseOwner: string;
-    courseCode: string;
-    courseTitle: string;
-    courseDescription: string;
+    id: string;
+    owner: string;
+    ownerId: string;
+    code: string;
+    title: string;
+    description: string;
     teachers: Array<Teacher>;
     projectRequirements: Array<ProjectRequirement>;
     attachments: Array<Attachment>;

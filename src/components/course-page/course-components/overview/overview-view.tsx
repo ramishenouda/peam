@@ -35,8 +35,8 @@ export const OverView = (props: Props) => {
         <div id="course-over-view">
             <div>
                 <ProjectRequirement 
-                    courseOwner={courseState.courseOwner}
-                    courseCode={courseState.courseCode}
+                    courseOwner={courseState.owner}
+                    courseCode={courseState.code}
                     projectReqs={courseState.projectRequirements}
                 />
             </div>
@@ -48,7 +48,7 @@ export const OverView = (props: Props) => {
                             About
                         </h1>
                         <p className="overview-description peam-title-1 mt-2">
-                            { courseState.courseDescription }
+                            { courseState.description }
                         </p>
                     </div>
                 }

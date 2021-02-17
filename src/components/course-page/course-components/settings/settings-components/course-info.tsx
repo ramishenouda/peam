@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -7,7 +7,12 @@ import * as yup from 'yup';
 import { Form, Button } from 'react-bootstrap';
 import TextareaAutosize from 'react-textarea-autosize';
 
+import { UpdateCourse } from '../../../../../services/course-service';
+import { showAxiosResponseErrors } from '../../../../../services/error-handler-service';
+import { success } from '../../../../../services/notifications-service';
+
 import { CourseState } from '../../../../../store/course/types';
+import { updateCourse } from '../../../../../store/course/actions';
 import { CourseForUpdate } from '../../../../../models/course';
 
 import { Section } from '../settings-style';
@@ -17,14 +22,14 @@ type Props = {
 };
 
 export const CourseInfo = (props: Props) => {
+    const dispatch = useDispatch()
     const courseState: CourseState = useSelector((state: any) => state.course);
 
     const initialCourse: CourseForUpdate = {
-        attachments: [],
-        code: '',
-        description: '',
-        owner: '',
-        title: '',
+        code: courseState.code,
+        description: courseState.description,
+        title: courseState.title,
+        ownerId: courseState.ownerId
     }
 
     const [course, setCourse] = useState(initialCourse);
@@ -35,7 +40,15 @@ export const CourseInfo = (props: Props) => {
     };
 
     const submit = () => {
-        console.log(course);
+        UpdateCourse(courseState.owner, courseState.code, course)
+            .then(() => {
+                dispatch(updateCourse({
+                    ...courseState, ...course
+                }))
+                success('Coures updated successfully');
+            }).catch((err) => {
+                showAxiosResponseErrors(err);
+            });
     }
 
     const Schema = yup.object().shape({
@@ -66,7 +79,7 @@ export const CourseInfo = (props: Props) => {
                         className="f2"
                         type="text"
                         autoComplete="off"
-                        defaultValue={courseState.courseTitle}
+                        defaultValue={courseState.title}
                         onChange={handleChange}
                         name="title"
                         ref={register}
@@ -79,7 +92,7 @@ export const CourseInfo = (props: Props) => {
                         className="f2"
                         type="text"
                         autoComplete="off"
-                        defaultValue={courseState.courseCode}
+                        defaultValue={courseState.code}
                         onChange={handleChange}
                         name="code"
                         ref={register}
@@ -92,7 +105,7 @@ export const CourseInfo = (props: Props) => {
                         minRows={3}
                         className="form-control f3" 
                         onChange={handleChange}
-                        defaultValue={courseState.courseDescription}
+                        defaultValue={courseState.description}
                         name="description"
                         ref={register}
                     />

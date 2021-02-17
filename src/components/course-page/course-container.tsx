@@ -26,22 +26,8 @@ function Course () {
 
     const systemState: SystemState = useSelector((state: any) => state.system);
 
-    const initialCourse: course = {
-        projectRequirements: [],
-        attachments: [],
-        students: [],
-        teachers: [],
-        code: '',
-        description: '',
-        owner: '',
-        role: '',
-        title: '',
-        uid: '',
-    }
-
     const [fetching, setFetching] = useState(true);
     const [error, setError] = useState(false);
-    const [course, setCourse] = useState(initialCourse);
 
     useEffect(() => {
         const owner = params.owner;
@@ -52,26 +38,26 @@ function Course () {
                 const teachers: Array<Teacher> = result.data.teachers;
                 const data: course = result.data;
                 if (teachers.find(x => x.username === systemState.username)) {
-                    setCourse({...result.data, role: 'teacher'});
-                    dispatch(updateCourse({ 
-                        courseId: data.uid, 
-                        courseOwner: owner, 
-                        courseCode: code, 
-                        courseTitle: data.title, 
-                        courseDescription: data.description, 
+                    dispatch(updateCourse({
+                        ownerId: data.owner.uid,
+                        id: data.uid, 
+                        owner: data.owner.username, 
+                        code: code, 
+                        title: data.title, 
+                        description: data.description, 
                         attachments: data.attachments,
                         projectRequirements: data.projectRequirements,
                         teachers: data.teachers,
                         role: 'teacher',
                     }));
                 } else {
-                    setCourse({...result.data, role: 'student'});
-                    dispatch(updateCourse({ 
-                        courseId: data.uid, 
-                        courseOwner: owner, 
-                        courseCode: code, 
-                        courseTitle: data.title, 
-                        courseDescription: data.description, 
+                    dispatch(updateCourse({
+                        ownerId: data.owner.uid,
+                        id: data.uid, 
+                        owner: data.owner.username, 
+                        code: code, 
+                        title: data.title, 
+                        description: data.description, 
                         attachments: data.attachments,
                         projectRequirements: data.projectRequirements,
                         teachers: data.teachers,
@@ -87,11 +73,12 @@ function Course () {
 
         return function cleanup () {
             const initialState: CourseState = {
-                courseId: '',
-                courseOwner: '',
-                courseCode: '',
-                courseTitle: '',
-                courseDescription: '',
+                id: '',
+                ownerId: '',
+                owner: '',
+                code: '',
+                title: '',
+                description: '',
                 role: '',
                 attachments: [],
                 projectRequirements: [],
@@ -111,9 +98,7 @@ function Course () {
         data = <div> Error.... </div>
     } else {
         data =
-            <CourseView
-                course={course}
-            />
+            <CourseView />
     }
 
     return (

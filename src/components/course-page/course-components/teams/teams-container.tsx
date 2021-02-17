@@ -19,7 +19,7 @@ export const Teams = () => {
     const courseState: CourseState = useSelector((state: any) => state.course);
 
     useEffect(() => {
-        GetCourseTeams(courseState.courseOwner, courseState.courseCode)
+        GetCourseTeams(courseState.owner, courseState.code)
         .then((result) => {
             setProjectRequirements(result.data.teams);
         }).catch((err) => {
@@ -28,7 +28,7 @@ export const Teams = () => {
         }).finally(() => {
             setFetching(false);
         });
-    }, [courseState.courseOwner, courseState.courseCode])
+    }, [courseState.owner, courseState.code])
 
 
     if (fetching) {

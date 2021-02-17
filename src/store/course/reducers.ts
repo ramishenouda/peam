@@ -1,11 +1,12 @@
 import { CourseState, CourseActionTypes, UPDATE_COURSE } from './types'
 
 const initialState: CourseState = {
-  courseId: '',
-  courseOwner: '',
-  courseCode: '',
-  courseTitle: '',
-  courseDescription: '',
+  ownerId: '',
+  id: '',
+  owner: '',
+  code: '',
+  title: '',
+  description: '',
   role: '',
   attachments: [],
   projectRequirements: [],

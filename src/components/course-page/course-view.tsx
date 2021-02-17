@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
+import CourseNavbar from './course-navbar';
 
-import { Course } from '../../models/course';
+import { CourseState } from '../../store/course/types';
 
 import { OverView } from './course-components/overview/overview-container';
 import { Students } from './course-components/students/students-container';
@@ -8,13 +9,14 @@ import { Teams } from './course-components/teams/teams-container';
 import { Settings } from './course-components/settings/settings-container';
 
 import './course-style.css'
-import CourseNavbar from './course-navbar';
+import { useSelector } from 'react-redux';
 
 type Props = {
-    course: Course;
 }
 
 const CourseView = (props: Props): JSX.Element => {
+    const courseState: CourseState = useSelector((state: any) => state.course);
+
     const [tap, setTap] = useState(0);
     const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -36,9 +38,9 @@ const CourseView = (props: Props): JSX.Element => {
         <>
         <header className="head bg-g-gray">
             <div className="flex-auto mb-4">
-                <h1 className="course-title f2">{ props.course.title } | { props.course.code }</h1>
+                <h1 className="course-title f2">{ courseState.title } | { courseState.code }</h1>
                 { isSmallScreen &&
-                    <h2 className="course-description f3">{ props.course.description }</h2>
+                    <h2 className="course-description f3">{ courseState.description }</h2>
                 }
             </div>
             <CourseNavbar 

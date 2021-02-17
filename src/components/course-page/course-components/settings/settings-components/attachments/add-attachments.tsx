@@ -28,7 +28,7 @@ export const AddAttachments = (props: Props) => {
 
     const initialAttachment: Attachment = {
         uid: '',
-        course: courseState.courseId,
+        course: courseState.id,
         title: '',
         description: '',
         link: '',
@@ -43,7 +43,7 @@ export const AddAttachments = (props: Props) => {
     
     const submit = () => {
         setAdding(true);
-        AddCourseAttachment(courseState.courseOwner, courseState.courseCode, attachment)
+        AddCourseAttachment(courseState.owner, courseState.code, attachment)
             .then((result: AxiosResponse) => {
                 setAttachment({...attachment, uid: result.data.uid})
                 dispatch(updateCourse({

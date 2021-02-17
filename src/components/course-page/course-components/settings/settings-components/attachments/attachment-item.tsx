@@ -116,7 +116,7 @@ export const AttachmentItem = (props: Props) => {
                     {Icon}
                     <a href={attachment.link} rel="noreferrer" target="_blank" className="ml-1 link">
                         {title}
-                    </a> 
+                    </a>
                 </div>
                 {
                     props.showOptions &&

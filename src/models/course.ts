@@ -3,13 +3,14 @@ import { ProjectRequirement } from "./project-requirement";
 
 import { Teacher } from "./teacher";
 import { StudentForCourseList } from "./student";
+import { User } from "./user";
 
 export interface Course {
     uid: string;
     title: string;
     code: string;
     description: string;
-    owner: string;
+    owner: User;
     attachments: Array<Attachment>;
     projectRequirements: Array<ProjectRequirement>;
     teachers: Array<Teacher>;
@@ -19,10 +20,9 @@ export interface Course {
 
 export interface CourseForUpdate {
     title: string;
-    owner: string;
     code: string;
     description: string;
-    attachments: Array<Attachment>;
+    ownerId: string;
 }
 
 export interface NewCourse {

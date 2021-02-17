@@ -1,3 +1,11 @@
+export interface User {
+    uid: string;
+    username: string;
+    email: string;
+    full_name: string;
+    avatar: string;
+}
+
 export interface UserForRegistration {
     email: string;
     password1: string;

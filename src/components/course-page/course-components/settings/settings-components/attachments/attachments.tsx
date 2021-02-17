@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { CourseState } from '../../../../../../store/course/types';
-import { Attachment } from '../../../../../../models/attachment';
 import { AttachmentItem } from './attachment-item';
 
 import { AddAttachments } from './add-attachments';
@@ -34,8 +33,8 @@ export const Attachments = (props: Props) => {
         courseState.attachments.map(item =>
             <AttachmentItem key={item.uid}
                 data={item}
-                courseOwner={courseState.courseOwner}
-                courseCode={courseState.courseCode}
+                courseOwner={courseState.owner}
+                courseCode={courseState.code}
                 showOptions={true}
             />
         )

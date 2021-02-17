@@ -22,7 +22,7 @@ export const Students = () => {
         let canUnload = false;
         setTimeout(() => { canUnload = true; }, 500);
 
-        GetCourseStudents(courseState.courseOwner, courseState.courseCode)
+        GetCourseStudents(courseState.owner, courseState.code)
         .then((result) => {
             setStudents(result.data.students);
         }).catch((err) => {

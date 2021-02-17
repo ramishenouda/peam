@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 
 import { SystemState } from '../store/system/types';
 
-import { NewCourse } from '../models/course';
+import { CourseForUpdate, NewCourse } from '../models/course';
 import { Attachment } from '../models/attachment';
 
 const baseURL = process.env.REACT_APP_API_URI;
@@ -27,8 +27,6 @@ export const CreateCourse = async (course: NewCourse, system: SystemState) => {
         ...course
     }
 
-    console.log(options);
-
     return (await axios(options));
 }
 
@@ -36,6 +34,15 @@ export const GetCourse = async (owner: string, courseCode: string) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/
     options.url = baseURL + `courses/${owner}/${courseCode}/`
     options.method = 'GET';
+
+    return (await axios(options));
+}
+
+export const UpdateCourse = async (owner: string, courseCode: string, course: CourseForUpdate) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/
+    options.url = baseURL + `courses/${owner}/${courseCode}/`
+    options.method = 'PATCH';
+    options.data = course;
 
     return (await axios(options));
 }
