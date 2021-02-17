@@ -3,14 +3,24 @@ import styled from 'styled-components';
 import { Container as container, Navbar as navbar } from 'react-bootstrap';
 
 export const Container = styled(container)`
+    display: grid;
+    grid-template-columns: 23% 77%;
+    grid-column-gap: 20px;
+    border-radius: 5px;
+    padding: 10px;
+
+    ${({ mdScreen }) => mdScreen && `
+    display: block;
+  `}
 `
 
 export const Section = styled.section`
     background: #fcfcfc;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: auto;
     border-radius: 5px;
     box-shadow: 2px 1px 3px #1a1a1a;
+
 `
 
 export const Navbar = styled(navbar)`
@@ -20,8 +30,7 @@ export const Navbar = styled(navbar)`
     display: block;
     border-radius: 5px;
     height: fit-content;
-    border: 0.1em solid gray;
-
+    box-shadow: 2px 1px 3px #1a1a1a;
 
     ::-webkit-scrollbar {
         display: none;
