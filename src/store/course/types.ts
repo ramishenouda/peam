@@ -1,4 +1,4 @@
-import { ProjectRequirement } from '../../models/project-requirement';
+import { Requirement } from '../../models/requirement';
 import { Attachment } from '../../models/attachment';
 import { Teacher } from '../../models/teacher';
 
@@ -12,7 +12,7 @@ export interface CourseState {
     title: string;
     description: string;
     teachers: Array<Teacher>;
-    projectRequirements: Array<ProjectRequirement>;
+    requirements: Array<Requirement>;
     attachments: Array<Attachment>;
 }
 

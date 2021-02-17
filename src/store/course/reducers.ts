@@ -9,7 +9,7 @@ const initialState: CourseState = {
   description: '',
   role: '',
   attachments: [],
-  projectRequirements: [],
+  requirements: [],
   teachers: []
 }
 

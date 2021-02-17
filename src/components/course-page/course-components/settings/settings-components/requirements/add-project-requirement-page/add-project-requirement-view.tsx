@@ -9,12 +9,12 @@ import { Form, Button } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { ProjectRequirement } from '../../../../../../../models/project-requirement';
+import { Requirement } from '../../../../../../../models/requirement';
 
 import './add-project-requirement-style.css'
 
 type Props = {
-    add: (pr: ProjectRequirement) => void;
+    add: (pr: Requirement) => void;
 }
 
 function AddProjectRequirement(props: Props): JSX.Element {
@@ -30,13 +30,13 @@ function AddProjectRequirement(props: Props): JSX.Element {
         description: yup.string().required('Description is a required field'),
     });
 
-    const { register , handleSubmit, errors } = useForm<ProjectRequirement>({
+    const { register , handleSubmit, errors } = useForm<Requirement>({
         mode: "all",
         resolver: yupResolver(AddProjectRequirementSchema)
     });
 
     const submit = () => {
-        const pr: ProjectRequirement = {
+        const pr: Requirement = {
             uid: '',
             title: title,
             description: description,
@@ -89,7 +89,7 @@ function AddProjectRequirement(props: Props): JSX.Element {
                     <Form.Group controlId="title">
                         <Form.Label className="f3">Title <span className="required-text">*</span></Form.Label>
                         <Form.Control 
-                            className="project-req-title f2"
+                            className="requirement-title f2"
                             type="text"
                             autoComplete="off"
                             onChange={(e) => setTitle(e.target.value)}

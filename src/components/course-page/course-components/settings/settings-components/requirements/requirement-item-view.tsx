@@ -5,10 +5,12 @@ import DatePicker from "react-datepicker";
 
 import { Button, Form } from 'react-bootstrap';
 
-import { ProjectRequirement } from '../../../../../../../models/project-requirement';
+import { Requirement } from '../../../../../../models/requirement';
+
+import { Item, Title, Description } from './requirement-style';
 
 type Props = {
-    projectReq: ProjectRequirement,
+    projectReq: Requirement,
     teacher: boolean
 };
 
@@ -62,11 +64,11 @@ export const ProjectRequirementItem = (props: Props) => {
             showStartDate = false;
 
         return (
-            <div className="project-req-item text-light">
-                <div className="project-req-deadline mb-2">
+            <Item className="text-light">
+                <div className="requirement-deadline mb-2">
                     {
                         showStartDate &&
-                        <span className={`project-req-deadline`}>
+                        <span className={`requirement-deadline`}>
                             From: {startDate.toLocaleDateString()}
                         </span>
                     }
@@ -80,30 +82,30 @@ export const ProjectRequirementItem = (props: Props) => {
                         {endDateStatus === 'GameOver' && <span className="date-over"> { endDate.toLocaleString() }</span>}
                     </span>
                 </div>
-                <h1 className="project-req-title f1">
+                <Title className="f1">
                     { editItem.title }
-                </h1>
-                <p className="project-req-description f3">
+                </Title>
+                <Description className="f3">
                     { editItem.description }
-                </p>
-                <div className="project-requirement-item-options">
-                <Button variant="dark">More info</Button>
+                </Description>
+                <div className="requirement-item-options">
+                    <Button variant="dark">More info</Button>
                     {props.teacher && (
                         <Button className="ml-2" variant="danger" onClick={() => setEdit(true)}>
                             Edit info
                         </Button>
                     )}
                 </div>
-            </div>
+            </Item>
         );
     }
 
     const EditItem = () => 
     {
         return (
-            <Form className="project-req-item text-light">
+            <Form className="req-item text-light">
                 <Form.Group>
-                    <span className={`project-req-deadline`}>
+                    <span className={`requirement-deadline`}>
                         From: &nbsp;
                         <DatePicker
                             showTimeSelect
@@ -111,7 +113,7 @@ export const ProjectRequirementItem = (props: Props) => {
                             selected={startDate}
                         />
                     </span>
-                    <span className={`pl-2 project-req-deadline`}>
+                    <span className={`pl-2 requirement-deadline`}>
                         To: &nbsp;
                         <DatePicker
                             showTimeSelect
@@ -123,7 +125,7 @@ export const ProjectRequirementItem = (props: Props) => {
                 <Form.Group controlId="title">
                     <Form.Control 
                         value={editItem.title} 
-                        className="project-req-title f2"
+                        className="requirement-title f2"
                         autoFocus={true} 
                         name="title" 
                         type="text"
@@ -134,13 +136,13 @@ export const ProjectRequirementItem = (props: Props) => {
                     <TextareaAutosize 
                         style={{width: '100%'}} 
                         rows={4} 
-                        className="project-req-description f3" 
+                        className="requirement-description f3" 
                         defaultValue={editItem.description} 
                         name="description"
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <div className="project-requirement-item-options">
+                <div className="requirement-item-options">
                     <Button variant="dark" onClick={cancelEditing}>Cancel editing</Button>
                     { props.teacher && (
                         <Button className="ml-2" variant="success" onClick={saveChanges}>

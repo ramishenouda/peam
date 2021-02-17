@@ -46,7 +46,7 @@ function Course () {
                         title: data.title, 
                         description: data.description, 
                         attachments: data.attachments,
-                        projectRequirements: data.projectRequirements,
+                        requirements: data.requirements,
                         teachers: data.teachers,
                         role: 'teacher',
                     }));
@@ -59,7 +59,7 @@ function Course () {
                         title: data.title, 
                         description: data.description, 
                         attachments: data.attachments,
-                        projectRequirements: data.projectRequirements,
+                        requirements: data.requirements,
                         teachers: data.teachers,
                         role: 'teacher',
                     }));
@@ -81,7 +81,7 @@ function Course () {
                 description: '',
                 role: '',
                 attachments: [],
-                projectRequirements: [],
+                requirements: [],
                 teachers: [],
             }
 

@@ -7,6 +7,7 @@ import { Teachers } from './settings-components/teachers';
 import { Attachments } from './settings-components/attachments/attachments';
 import { Container } from './settings-style';
 import { SettingsNavbar } from './settings-navbar';
+import { ProjectRequirements } from './settings-components/requirements/requirements';
 
 type Props = {
 
@@ -24,7 +25,7 @@ export const SettingsView = (props: Props) => {
       }
     }, []);
 
-    const mdscreen = windowSize < 768;
+    const mdscreen = windowSize < 769;
   
     const setSize = () => {
       setWindowSize(window.innerWidth)
@@ -49,6 +50,10 @@ export const SettingsView = (props: Props) => {
             {
                 tab === 3 &&
                 <Attachments />
+            }
+            {
+                tab === 4 &&
+                <ProjectRequirements />
             }
         </Container>
     );

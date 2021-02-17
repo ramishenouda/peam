@@ -1,6 +1,6 @@
 import { TeamForCourseList } from "./team";
 
-export interface ProjectRequirement {
+export interface Requirement {
     uid: string;
     title: string;
     description: string;
@@ -8,7 +8,7 @@ export interface ProjectRequirement {
     to_dt: Date;
 }
 
-export interface ProjectRequirementForTeams {
+export interface RequirementForTeams {
     projectRequirement: string;
     id: string;
     teams: Array<TeamForCourseList>

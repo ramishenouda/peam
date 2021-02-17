@@ -1,14 +1,10 @@
 import { useSelector } from 'react-redux';
 
-import { CourseState } from '../../../../../../../store/course/types';
+import { CourseState } from '../../../../../../store/course/types';
 
-import { Div } from './project-requirement-style';
+import { Div } from './requirement-style';
 
-import { ProjectRequirementItem } from './project-requirement-item';
-
-
-import './project-requirement-style.css';
-
+import { ProjectRequirementItem } from './requirement-item-view';
 
 type Props = {
 }
@@ -17,19 +13,17 @@ export const ProjectRequirement = (props: Props) => {
     const courseState: CourseState = useSelector((state: any) => state.course);
     let projectReqs;
 
-    if (courseState.projectRequirements) {
-        projectReqs = courseState.projectRequirements.map((pr) =>
-            <div key={pr.uid} className='mb-4'>
-                <ProjectRequirementItem
-                    teacher={courseState.role === 'teacher'}
-                    projectReq={pr}
-                />
-            </div>
+    if (courseState.requirements) {
+        projectReqs = courseState.requirements.map((pr) =>
+            <ProjectRequirementItem key={pr.uid}
+                teacher={courseState.role === 'teacher'}
+                projectReq={pr}
+            />
         );
     }
 
     return (
-        <div id="project-req">
+        <div id="requirement">
             <h1 className="f3 overview-title">Project requirements</h1>
             <Div>
                 { projectReqs && projectReqs }
@@ -43,5 +37,3 @@ export const ProjectRequirement = (props: Props) => {
         </div>
     )
 }
-
-export default ProjectRequirement;

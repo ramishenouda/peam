@@ -1,5 +1,5 @@
 import { Attachment } from "./attachment";
-import { ProjectRequirement } from "./project-requirement";
+import { Requirement } from "./requirement";
 
 import { Teacher } from "./teacher";
 import { StudentForCourseList } from "./student";
@@ -12,7 +12,7 @@ export interface Course {
     description: string;
     owner: User;
     attachments: Array<Attachment>;
-    projectRequirements: Array<ProjectRequirement>;
+    requirements: Array<Requirement>;
     teachers: Array<Teacher>;
     students: Array<StudentForCourseList>;
     role: string;

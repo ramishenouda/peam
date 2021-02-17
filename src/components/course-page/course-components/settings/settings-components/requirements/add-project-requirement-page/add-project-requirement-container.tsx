@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { ProjectRequirement } from '../../../../../../../models/project-requirement';
+import { Requirement } from '../../../../../../../models/requirement';
 
 import View from './add-project-requirement-view';
 
@@ -29,7 +29,7 @@ class AddProjectRequirement extends Component<ComponentProps, IState> {
         console.log(this.props.match.params.courseName, '  ', this.props.match.params.owner);
     }
 
-    add = (pr: ProjectRequirement) => {
+    add = (pr: Requirement) => {
         console.log(pr);
         // calling the akandil's server hehehe
         this.setState({status: true})
