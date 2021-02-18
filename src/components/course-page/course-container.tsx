@@ -33,7 +33,7 @@ function Course () {
         const owner = params.owner;
         const code = params.code;
 
-        GetCourse(owner, code)
+        GetCourse(owner, code, systemState)
             .then((result: AxiosResponse) => {
                 const teachers: Array<Teacher> = result.data.teachers;
                 const data: course = result.data;

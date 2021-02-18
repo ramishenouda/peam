@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import FolderIcon from '@material-ui/icons/Folder';
 import WebIcon from '@material-ui/icons/Link';
 import PDF from '@material-ui/icons/PictureAsPdf';
+import Video from '@material-ui/icons/VideoCall';
+import Audio from '@material-ui/icons/Audiotrack';
 
 import { CircleLoader } from 'react-spinners';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -17,6 +18,7 @@ import { showAxiosResponseErrors } from '../../../../../../services/error-handle
 import { DeleteCourseAttachment, UpdateCourseAttachment } from '../../../../../../services/course-service';
 
 import { CourseState } from '../../../../../../store/course/types';
+import { SystemState } from '../../../../../../store/system/types';
 import { updateCourse } from '../../../../../../store/course/actions';
 import { Attachment } from '../../../../../../models/attachment';
 
@@ -34,21 +36,24 @@ export const AttachmentItem = (props: Props) => {
     const dispatch = useDispatch()
 
     const courseState: CourseState = useSelector((state: any) => state.course);
+    const systemState: SystemState = useSelector((state: any) => state.system);
 
     const [edit, setEdit] = useState(false);
     const [editing, setEditing] = useState(false);
+    const [deleteing, setDeleteing] = useState(false);
+
     const [attachment, setAttachment] = useState(props.data);
     const [currentAttachment, setCurrentAttachment] = useState(props.data);
 
-    const link = props.data.link;
+    const link = props.data.link.toLowerCase();
     let Icon;
 
     if (link.includes('pdf')) {
         Icon = <PDF />
-    } else if (link.slice(link.length - 4, link.length).includes('.') && 
-        link.slice(link.length - 3, link.length).toLowerCase() !== ('com' || 'net')
-    ) {
-        Icon = <FolderIcon />
+    } else if (link.includes('youtube') || link.includes('mp4') || link.includes('vlc')) {
+        Icon = <Video />
+    } else if (link.includes('wav') || link.includes('mp3')) {
+        Icon = <Audio />
     } else {
         Icon = <WebIcon />
     }
@@ -62,7 +67,7 @@ export const AttachmentItem = (props: Props) => {
 
     const submit = () => {
         setEditing(true)
-        UpdateCourseAttachment(props.courseOwner, props.courseCode, attachment)
+        UpdateCourseAttachment(props.courseOwner, props.courseCode, attachment, systemState)
             .then(() => {
                 success('Attachment updated successfully');
                 setCurrentAttachment(attachment)
@@ -75,11 +80,11 @@ export const AttachmentItem = (props: Props) => {
                         ...courseState, attachments: [...attachments]
                     }))
                 }
+                setEdit(false)
             }).catch((err) => {
                 showAxiosResponseErrors(err);
             }).finally(() => {
                 setEditing(false)
-                setEdit(false)
             });
     }
 
@@ -110,8 +115,8 @@ export const AttachmentItem = (props: Props) => {
                 if (!result.isConfirmed) {
                     return;
                 }
-
-                DeleteCourseAttachment(props.courseOwner, props.courseCode, props.data.uid)
+                setDeleteing(true);
+                DeleteCourseAttachment(props.courseOwner, props.courseCode, props.data.uid, systemState)
                     .then(() => {
                         console.log('Todo: Show loader on the item');
                         dispatch(updateCourse({
@@ -121,7 +126,7 @@ export const AttachmentItem = (props: Props) => {
                         success('Item deleted successfully');
                     }).catch((err) => {
                         showAxiosResponseErrors(err);
-                    });
+                    }).finally(() => setDeleteing(false));
             })
     }
 
@@ -135,7 +140,13 @@ export const AttachmentItem = (props: Props) => {
                     </a>
                 </div>
                 {
-                    props.showOptions &&
+                    deleteing &&
+                    <div className="float-right">
+                        <CircleLoader size={35} color={"#1a1a1a"} loading={deleteing} />
+                    </div>
+                }
+                {
+                    (props.showOptions && !deleteing) &&
                     <div className="float-right">
                         <SettingsIcon onClick={() => setEdit(!edit)} className="mr-2" />
                         <DeleteIcon onClick={deleteAttachment} />

@@ -37,7 +37,10 @@ export const Requirements = (props: Props) => {
                 props.showAdd &&
                 <>
                     <AddRequirement />
-                    <hr />
+                    {
+                        courseState.requirements.length > 0 &&
+                        <hr />
+                    }
                 </>
             }
             {
@@ -57,6 +60,12 @@ export const Requirements = (props: Props) => {
                     <div>
                         { projectReqs }
                     </div>
+                </div>
+            }
+            {
+                (courseState.requirements.length < 1 && !props.showAdd) && 
+                <div className="mt-5 f1 text-center">
+                    No requirements yet.
                 </div>
             }
         </Element>

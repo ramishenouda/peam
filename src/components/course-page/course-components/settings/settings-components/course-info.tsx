@@ -16,6 +16,7 @@ import { updateCourse } from '../../../../../store/course/actions';
 import { CourseForUpdate } from '../../../../../models/course';
 
 import { Section } from '../settings-style';
+import { SystemState } from '../../../../../store/system/types';
 
 type Props = {
     
@@ -24,6 +25,7 @@ type Props = {
 export const CourseInfo = (props: Props) => {
     const dispatch = useDispatch()
     const courseState: CourseState = useSelector((state: any) => state.course);
+    const systemState: SystemState = useSelector((state: any) => state.system);
 
     const initialCourse: CourseForUpdate = {
         code: courseState.code,
@@ -40,7 +42,7 @@ export const CourseInfo = (props: Props) => {
     };
 
     const submit = () => {
-        UpdateCourse(courseState.owner, courseState.code, course)
+        UpdateCourse(courseState.owner, courseState.code, course, systemState)
             .then(() => {
                 dispatch(updateCourse({
                     ...courseState, ...course

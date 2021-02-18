@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
 import { CourseState } from '../../../../store/course/types';
+import { SystemState } from '../../../../store/system/types';
 
 import { RequirementForTeams as Requirement } from '../../../../models/requirement';
 
@@ -17,9 +18,10 @@ export const Teams = () => {
     // const [searchValue, setSearchValue] = useState('');
 
     const courseState: CourseState = useSelector((state: any) => state.course);
+    const systemState: SystemState = useSelector((state: any) => state.system);
 
     useEffect(() => {
-        GetCourseTeams(courseState.owner, courseState.code)
+        GetCourseTeams(courseState.owner, courseState.code, systemState)
         .then((result) => {
             setProjectRequirements(result.data.teams);
         }).catch((err) => {
@@ -28,6 +30,8 @@ export const Teams = () => {
         }).finally(() => {
             setFetching(false);
         });
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [courseState.owner, courseState.code])
 
 

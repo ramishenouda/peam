@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-
 import { useSelector } from 'react-redux'
+
 import { CourseState } from '../../../../store/course/types';
+import { SystemState } from '../../../../store/system/types';
 
 import { StudentForCourseList as student } from '../../../../models/student';
 import { GetCourseStudents } from '../../../../services/course-service';
@@ -17,12 +18,13 @@ export const Students = () => {
     const [searchValue, setSearchValue] = useState('');
 
     const courseState: CourseState = useSelector((state: any) => state.course);
+    const systemState: SystemState = useSelector((state: any) => state.system);
 
     useEffect(() => {
         let canUnload = false;
         setTimeout(() => { canUnload = true; }, 500);
 
-        GetCourseStudents(courseState.owner, courseState.code)
+        GetCourseStudents(courseState.owner, courseState.code, systemState)
         .then((result) => {
             setStudents(result.data.students);
         }).catch((err) => {

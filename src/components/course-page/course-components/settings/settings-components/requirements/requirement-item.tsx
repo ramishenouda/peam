@@ -11,14 +11,17 @@ import DatePicker from "react-datepicker";
 
 import { Button } from 'react-bootstrap';
 
-import { RequirementForCreation as Requirement } from '../../../../../../models/requirement';
-import { CourseState } from '../../../../../../store/course/types';
-import { updateCourse } from '../../../../../../store/course/actions';
-
-import { Item, Title, Description, DDate, Form, FormControl, TextareaAutosize, Section } from './requirement-style';
 import { DeleteRequirement, UpdateRequirement } from '../../../../../../services/requirement-service';
 import { showAxiosResponseErrors } from '../../../../../../services/error-handler-service';
 import { confirmText, error, success } from '../../../../../../services/notification-service';
+
+import { SystemState } from '../../../../../../store/system/types';
+import { CourseState } from '../../../../../../store/course/types';
+import { updateCourse } from '../../../../../../store/course/actions';
+
+import { RequirementForCreation as Requirement } from '../../../../../../models/requirement';
+
+import { Item, Title, Description, DDate, Form, FormControl, TextareaAutosize, Section } from './requirement-style';
 
 type Props = {
     requirement: Requirement;
@@ -27,6 +30,8 @@ type Props = {
 
 export const RequirementItem = (props: Props) => {
     const courseState: CourseState = useSelector((state: any) => state.course);
+    const systemState: SystemState = useSelector((state: any) => state.system);
+
     const disPatch = useDispatch();
 
     // will be used if the use canceled Editing
@@ -34,6 +39,7 @@ export const RequirementItem = (props: Props) => {
     // to toggle editing
     const [edit, setEdit] = useState(false);
     const [editing, setEditing] = useState(false);
+    const [deleting, setDeleting] = useState(false);
     // to store the date for react-datepicker
     const [endDate, setEndDate] = useState(new Date(props.requirement.to_dt));
     const [startDate, setStartDate] = useState(new Date(props.requirement.from_dt));
@@ -64,7 +70,7 @@ export const RequirementItem = (props: Props) => {
             to_dt: endDate
         }
 
-        UpdateRequirement(courseState.owner, courseState.code, requirement, currentItemData.title)
+        UpdateRequirement(courseState.owner, courseState.code, requirement, currentItemData.title, systemState)
             .then(() => {
                 success('Requirement updated successfully')
                 const requirementIndex = courseState.requirements.findIndex(item => item.uid === requirement.uid);
@@ -94,20 +100,20 @@ export const RequirementItem = (props: Props) => {
             'Requirement title',
             editItem.title
         ).then((result) => {
-            console.log(result)
-            console.log(editItem.title);
             if (!result.isConfirmed) {
                 return;
             }
 
             const value: string = result.value;
             if (value !== editItem.title) {
-                error('Wrong title', 'Deleteing has been canceled.');
+                error('Wrong title', 'Deleting has been canceled.');
                 return;
             }
 
-            DeleteRequirement(courseState.owner, courseState.code, currentItemData.title)
-                .then((result) => {
+            setDeleting(true);
+
+            DeleteRequirement(courseState.owner, courseState.code, currentItemData.title, systemState)
+                .then(() => {
                     success('Requirement deleted successfully')
                     disPatch(updateCourse({
                         ...courseState, 
@@ -115,6 +121,7 @@ export const RequirementItem = (props: Props) => {
                     }))
                 }).catch((err) => {
                     showAxiosResponseErrors(err);
+                    setDeleting(false);
                 });
         })
     }
@@ -171,12 +178,16 @@ export const RequirementItem = (props: Props) => {
                         </span>
                     </DDate>
                     {
-                        props.showOptions === true &&
+                        deleting && 
+                        <CircleLoader size={35} color={"#1a1a1a"} loading={deleting} />
+                    }
+                    {
+                        (props.showOptions && !deleting) &&
                         <div className="requirement-item-options">
                             <Button className="ml-2" variant="dark" onClick={() => setEdit(true)}>
                                 Edit info
                             </Button>
-                            <Button className="ml-2" variant="danger" onClick={triggerDelete}>
+                            <Button className="ml-2" variant="danger" onClick={() => triggerDelete()}>
                                 Delete requirement
                             </Button>
                         </div>

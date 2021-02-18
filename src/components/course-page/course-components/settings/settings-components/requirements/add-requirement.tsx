@@ -19,6 +19,7 @@ import { showAxiosResponseErrors } from '../../../../../../services/error-handle
 import { success } from '../../../../../../services/notification-service';
 
 import { CourseState } from '../../../../../../store/course/types';
+import { SystemState } from '../../../../../../store/system/types';
 import { updateCourse } from '../../../../../../store/course/actions';
 
 
@@ -26,6 +27,8 @@ import './add-requirement-style.css'
 
 export const AddRequirement = () => {
     const courseState: CourseState = useSelector((state: any) => state.course);
+    const systemState: SystemState = useSelector((state: any) => state.system);
+
     const disPatch = useDispatch();
 
     const [adding, setAdding] = useState(false);
@@ -62,7 +65,7 @@ export const AddRequirement = () => {
             to_dt: endDate
         };
 
-        CreateRequirement(courseState.owner, courseState.code, requirement)
+        CreateRequirement(courseState.owner, courseState.code, requirement, systemState)
             .then((result) => {
                 const requirement: Requirement = result.data;
 

@@ -15,6 +15,8 @@ import { success } from '../../../../../../services/notification-service';
 
 import { updateCourse } from '../../../../../../store/course/actions';
 import { CourseState } from '../../../../../../store/course/types';
+import { SystemState } from '../../../../../../store/system/types';
+
 import { Attachment } from '../../../../../../models/attachment';
 
 type Props = {
@@ -25,6 +27,7 @@ export const AddAttachments = (props: Props) => {
 
     const [adding, setAdding] = useState(false);
     const courseState: CourseState = useSelector((state: any) => state.course);
+    const systemState: SystemState = useSelector((state: any) => state.system);
 
     const initialAttachment: Attachment = {
         uid: '',
@@ -43,11 +46,11 @@ export const AddAttachments = (props: Props) => {
     
     const submit = () => {
         setAdding(true);
-        AddCourseAttachment(courseState.owner, courseState.code, attachment)
+        AddCourseAttachment(courseState.owner, courseState.code, attachment, systemState)
             .then((result: AxiosResponse) => {
                 setAttachment({...attachment, uid: result.data.uid})
                 dispatch(updateCourse({
-                    ...courseState, attachments: [...courseState.attachments, attachment]
+                    ...courseState, attachments: [...courseState.attachments, {...attachment, uid: result.data.uid}]
                 }))
                 success('Attachment added successfully');
             }).catch((err: AxiosError) => {

@@ -31,24 +31,26 @@ export const CreateCourse = async (course: NewCourse, system: SystemState) => {
     return (await axios(options));
 }
 
-export const GetCourse = async (owner: string, courseCode: string) => {
+export const GetCourse = async (owner: string, courseCode: string, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/
     options.url = baseURL + `courses/${owner}/${courseCode}/`
+    options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'GET';
 
     return (await axios(options));
 }
 
-export const UpdateCourse = async (owner: string, courseCode: string, course: CourseForUpdate) => {
+export const UpdateCourse = async (owner: string, courseCode: string, course: CourseForUpdate, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/
     options.url = baseURL + `courses/${owner}/${courseCode}/`
+    options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'PATCH';
     options.data = course;
 
     return (await axios(options));
 }
 
-export const GetCourseStudents = async (owner: string, courseName: string) => {
+export const GetCourseStudents = async (owner: string, courseName: string, system: SystemState) => {
     let url;
     if(process.env.NODE_ENV === 'development')
         url = baseURL + `${owner}/${courseName}`;
@@ -58,7 +60,7 @@ export const GetCourseStudents = async (owner: string, courseName: string) => {
     return (await axios.get(url, options));
 }
 
-export const GetCourseTeams = async (owner: string, courseName: string) => {
+export const GetCourseTeams = async (owner: string, courseName: string, system: SystemState) => {
     let url;
     if(process.env.NODE_ENV === 'development')
         url = baseURL + `${owner}/${courseName}`;
@@ -68,34 +70,38 @@ export const GetCourseTeams = async (owner: string, courseName: string) => {
     return (await axios.get(url, options));
 }
 
-export const GetCourseAttachments = async (owner: string, courseCode: string) => {
+export const GetCourseAttachments = async (owner: string, courseCode: string, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/attachments/
     options.url = baseURL + `courses/${owner}/${courseCode}/attachments/`
+    options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'GET';
 
     return (await axios(options));
 }
 
-export const AddCourseAttachment = async (owner: string, courseCode: string, attachment: Attachment) => {
+export const AddCourseAttachment = async (owner: string, courseCode: string, attachment: Attachment, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/attachments/
     options.url = baseURL + `courses/${owner}/${courseCode}/attachments/`
+    options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'POST';
     options.data = attachment;
 
     return (await axios(options));
 }
 
-export const DeleteCourseAttachment = async (owner: string, courseCode: string, attachmentId: string) => {
+export const DeleteCourseAttachment = async (owner: string, courseCode: string, attachmentId: string, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/attachments/{attachment_id}/
     options.url = baseURL + `courses/${owner}/${courseCode}/attachments/${attachmentId}/`
+    options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'DELETE';
 
     return (await axios(options));
 }
 
-export const UpdateCourseAttachment = async (owner: string, courseCode: string, attachment: Attachment) => {
+export const UpdateCourseAttachment = async (owner: string, courseCode: string, attachment: Attachment, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/attachments/{attachment_id}/
     options.url = baseURL + `courses/${owner}/${courseCode}/attachments/${attachment.uid}/`
+    options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'PATCH';
     options.data = attachment;
 
