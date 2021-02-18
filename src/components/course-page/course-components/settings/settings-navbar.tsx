@@ -21,14 +21,14 @@ export const SettingsNavbar = (props: Props) => {
                 onClick={() => props.setTab(1)} 
                 className={`py-2 my-2 ${props.active === 1 && 'active'}`}
             >
-                Students
+                Invite students
             </NavItem>
             <hr/>
             <NavItem 
                 onClick={() => props.setTab(2)} 
                 className={`py-2 my-2 ${props.active === 2 && 'active'}`}
             >
-                Teachers
+                Invite teachers
             </NavItem>
             <hr/>
             <NavItem 

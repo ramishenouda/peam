@@ -4,6 +4,7 @@ import { SystemState } from '../store/system/types';
 
 import { CourseForUpdate, NewCourse } from '../models/course';
 import { Attachment } from '../models/attachment';
+import { UserToInviteToCourse } from '../models/user';
 
 const baseURL = process.env.REACT_APP_API_URI;
 const utils = '';
@@ -97,6 +98,15 @@ export const UpdateCourseAttachment = async (owner: string, courseCode: string, 
     options.url = baseURL + `courses/${owner}/${courseCode}/attachments/${attachment.uid}/`
     options.method = 'PATCH';
     options.data = attachment;
+
+    return (await axios(options));
+}
+
+export const InviteToCourse = async (owner: string, courseCode: string, users: UserToInviteToCourse) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/invitations/
+    options.url = baseURL + `courses/${owner}/${courseCode}/invitations/`
+    options.method = 'POST';
+    options.data = users;
 
     return (await axios(options));
 }

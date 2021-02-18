@@ -20,16 +20,11 @@ export const Requirements = (props: Props) => {
 
     if (courseState.requirements) {
         projectReqs = courseState.requirements.map((requirement, index) =>
-            <div key={requirement.uid}>
+            <div className={`${index !== 0 && 'mt-3'}`} key={requirement.uid}>
                 <RequirementItem 
                     requirement={requirement}
                     showOptions={props.showOptions}
                 />
-                { index !== courseState.requirements.length - 1 && 
-                    <div className="separator">
-                        <hr/>
-                    </div>
-                }
             </div>
         );
     }

@@ -6,6 +6,13 @@ export interface User {
     avatar: string;
 }
 
+export interface UserToInviteToCourse {
+    emails: Array<string>;
+    course: string;
+    expiry_date: Date;
+    type: string;
+}
+
 export interface UserForRegistration {
     email: string;
     password1: string;

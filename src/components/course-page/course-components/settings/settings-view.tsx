@@ -25,7 +25,7 @@ export const SettingsView = (props: Props) => {
       }
     }, []);
 
-    const mdscreen = windowSize < 769;
+    const mdscreen = windowSize < 801;
   
     const setSize = () => {
       setWindowSize(window.innerWidth)
