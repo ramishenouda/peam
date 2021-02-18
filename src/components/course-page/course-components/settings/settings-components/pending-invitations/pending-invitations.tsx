@@ -21,6 +21,7 @@ interface Invitation {
     status: string;
     type: string;
     email: string;
+    token: string;
 }
 
 export const PendingInvitations  = (props: Props) => {
@@ -30,6 +31,10 @@ export const PendingInvitations  = (props: Props) => {
     const [fetching, setFetching] = useState(true);
     const [error, setError] = useState(false);
     const [invitations_data, setInvitations] = useState(Array<Invitation>());
+
+    const removeInvitation = (token: string) => {
+        setInvitations(prevState => prevState.filter(item => item.token !== token));
+    }
 
     useEffect(() => {
         getCourseInvitationsList(courseState.owner, courseState.code, systemState)
@@ -53,11 +58,25 @@ export const PendingInvitations  = (props: Props) => {
         </div>
     }
 
-    const invitations = invitations_data.map((item, index) => <PendingInvitationItem key={index + item.sender + item.status} invitation={item} />);
+    const invitations = invitations_data.map((item, index) => 
+        <PendingInvitationItem 
+            key={item.token} 
+            invitation={item}
+            courseCode={courseState.code}
+            courseOwner={courseState.owner}
+            token={systemState.token}
+            removeInvitation={removeInvitation}
+        />
+    );
 
     return (
         <div>
-            { invitations }
+            { invitations.length > 0 && invitations }
+            { !invitations.length && 
+                <div className="mt-5 text-center f1">
+                    No pending invitations
+                </div> 
+            }
         </div>
     );
 };

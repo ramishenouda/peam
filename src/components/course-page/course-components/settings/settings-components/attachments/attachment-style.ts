@@ -31,10 +31,10 @@ export const Div = styled.div`
 
 export const DeleteIcon = styled(deleteIcon)`
     cursor: pointer;
-    color: red;
+    color: #ca3623;
 
     :hover {
-        color: #c23e34;
+        color: #ff1111;
     }
 `
 

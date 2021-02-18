@@ -24,7 +24,7 @@ export const CreateCourse = async (course: NewCourse, system: SystemState) => {
     options.method = 'POST';
 
     options.data = {
-        owner_id: system.user_id,
+        owner: system.user_id,
         ...course
     }
 
@@ -33,7 +33,7 @@ export const CreateCourse = async (course: NewCourse, system: SystemState) => {
 
 export const GetCourse = async (owner: string, courseCode: string, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/
-    options.url = baseURL + `courses/${owner}/${courseCode}/`
+    options.url = baseURL + `courses/${owner}/${courseCode}/?expand=*&omit=students`
     options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'GET';
 
@@ -123,6 +123,15 @@ export const getCourseInvitationsList = async (owner: string, courseCode: string
     options.url = baseURL + `courses/${owner}/${courseCode}/invitations/`
     options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'GET';
+
+    return (await axios(options));
+}
+
+export const DeleteCourseInvitation = async (owner: string, courseCode: string, invToken: string, token: string) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/invitations/{token}/
+    options.url = baseURL + `courses/${owner}/${courseCode}/invitations/${invToken}`
+    options.headers["Authorization"] = "Bearer " + token;
+    options.method = 'DELETE';
 
     return (await axios(options));
 }

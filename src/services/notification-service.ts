@@ -24,7 +24,7 @@ export const confirm = (title: string, text: string) => {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#dc3545',
-        cancelButtonColor: '#99FF11',
+        cancelButtonColor: '#64ce60',
         confirmButtonText: 'Yes, delete it!'
     })
 }
@@ -37,7 +37,7 @@ export const confirmText = (title: string, text: string, placeHolder: string, co
         inputPlaceholder: placeHolder,
         showCancelButton: true,
         confirmButtonColor: '#dc3545',
-        cancelButtonColor: '#99FF11',
+        cancelButtonColor: '#64ce60',
         confirmButtonText: 'Confirm',
       })
 }

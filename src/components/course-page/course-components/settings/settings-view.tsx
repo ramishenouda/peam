@@ -33,7 +33,7 @@ export const SettingsView = (props: Props) => {
     }
 
     return (
-        <Container mdscreen={mdscreen ? 1 : 0} className="my-4">
+        <Container mdscreen={mdscreen ? 1 : 0} className="py-4">
             <SettingsNavbar active={tab} setTab={setTab} />
             {mdscreen && <br/>}
             {
