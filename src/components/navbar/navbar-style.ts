@@ -67,6 +67,10 @@ export const Dropdown = styled(NavDropdown)`
     font-family: Inter, 'Roboto', Inconsolata, sans-serif;
     border-radius: 4px;
     font-size: larger;
+    .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
 `
 
 export const Nav = styled(nav)`

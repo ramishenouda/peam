@@ -53,3 +53,14 @@ export const Logout = async () => {
     localStorage.clear();
     return (await axios(options));
 }
+
+export const Verify = async (key: string) => {
+    // http://localhost:8000/api/v1/auth/signup/verify-email/
+    options.url = baseURL + 'auth/signup/verify-email/';
+    options.method = 'POST';
+    options.data = {
+        "key": key
+    };
+
+    return (await axios(options));
+}
