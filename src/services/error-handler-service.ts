@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { error } from './notifications-service';
+import { error } from './notification-service';
 
 export const showAxiosResponseErrors = (errors: AxiosError, title?: string) => {
     const res = errors.response?.data;

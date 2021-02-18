@@ -1,7 +1,7 @@
 import jwt_decode from "jwt-decode";
 import { useSelector } from 'react-redux';
 
-import { error, success } from './notifications-service';
+import { error, success } from './notification-service';
 
 import { SystemState } from '../store/system/types';
 

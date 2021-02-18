@@ -50,7 +50,13 @@ export const Requirements = (props: Props) => {
                 <div>
                     <div>
                         <p className="f2 peam-title-1">
-                            Manage current requirements
+                            {
+                                props.showAdd ? (
+                                    'Manage current requirements'
+                                ) : (
+                                    'Project requirements'
+                                )
+                            }
                         </p>
                     </div>
                     <div>

@@ -16,9 +16,9 @@ import { CourseState } from '../../../../../../store/course/types';
 import { updateCourse } from '../../../../../../store/course/actions';
 
 import { Item, Title, Description, DDate, Form, FormControl, TextareaAutosize, Section } from './requirement-style';
-import { UpdateRequirement } from '../../../../../../services/requirement-service';
+import { DeleteRequirement, UpdateRequirement } from '../../../../../../services/requirement-service';
 import { showAxiosResponseErrors } from '../../../../../../services/error-handler-service';
-import { success } from '../../../../../../services/notifications-service';
+import { confirmText, error, success } from '../../../../../../services/notification-service';
 
 type Props = {
     requirement: Requirement;
@@ -87,6 +87,38 @@ export const RequirementItem = (props: Props) => {
             });
     }
 
+    const triggerDelete = () => {
+        confirmText('You can\'t revert this', 
+            `This will also delete the attachments and the teams of the requirement.
+                </br>type the requirement title to confirm: </br> <strong> ${editItem.title} </strong>`,
+            'Requirement title',
+            editItem.title
+        ).then((result) => {
+            console.log(result)
+            console.log(editItem.title);
+            if (!result.isConfirmed) {
+                return;
+            }
+
+            const value: string = result.value;
+            if (value !== editItem.title) {
+                error('Wrong title', 'Deleteing has been canceled.');
+                return;
+            }
+
+            DeleteRequirement(courseState.owner, courseState.code, currentItemData.title)
+                .then((result) => {
+                    success('Requirement deleted successfully')
+                    disPatch(updateCourse({
+                        ...courseState, 
+                        requirements: [...courseState.requirements.filter(item => item.title !== currentItemData.title)]
+                    }))
+                }).catch((err) => {
+                    showAxiosResponseErrors(err);
+                });
+        })
+    }
+
     const ViewItem = () => {
         if(edit)
         return <></>
@@ -143,6 +175,9 @@ export const RequirementItem = (props: Props) => {
                         <div className="requirement-item-options">
                             <Button className="ml-2" variant="dark" onClick={() => setEdit(true)}>
                                 Edit info
+                            </Button>
+                            <Button className="ml-2" variant="danger" onClick={triggerDelete}>
+                                Delete requirement
                             </Button>
                         </div>
                     }

@@ -20,20 +20,33 @@ export const message = (title: string, message?: string, callback?: () => any) =
 export const confirm = (title: string, text: string) => {
     return Swal.fire({
         title: title,
-        text: text,
+        html: text,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#99FF11',
         confirmButtonText: 'Yes, delete it!'
     })
+}
+
+export const confirmText = (title: string, text: string, placeHolder: string, confirmationText: string) => {
+    return Swal.fire({
+        title: title,
+        html: text,
+        input: 'text',
+        inputPlaceholder: placeHolder,
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#99FF11',
+        confirmButtonText: 'Confirm',
+      })
 }
 
 export const error = (title: string, message?: string, callback?: () => any) => {
     Swal.fire({
         icon: 'error',
         title: title,
-        text: message,
+        html: message,
     }).then(() => {
         if (callback)
             callback();

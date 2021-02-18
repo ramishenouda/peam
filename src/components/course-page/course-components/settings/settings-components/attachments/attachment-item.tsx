@@ -12,7 +12,7 @@ import { CircleLoader } from 'react-spinners';
 import TextareaAutosize from 'react-textarea-autosize';
 import { Button } from 'react-bootstrap';
 
-import { confirm, success } from '../../../../../../services/notifications-service';
+import { confirm, success } from '../../../../../../services/notification-service';
 import { showAxiosResponseErrors } from '../../../../../../services/error-handler-service';
 import { DeleteCourseAttachment, UpdateCourseAttachment } from '../../../../../../services/course-service';
 

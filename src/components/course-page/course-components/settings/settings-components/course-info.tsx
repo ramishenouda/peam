@@ -9,7 +9,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 import { UpdateCourse } from '../../../../../services/course-service';
 import { showAxiosResponseErrors } from '../../../../../services/error-handler-service';
-import { success } from '../../../../../services/notifications-service';
+import { success } from '../../../../../services/notification-service';
 
 import { CourseState } from '../../../../../store/course/types';
 import { updateCourse } from '../../../../../store/course/actions';

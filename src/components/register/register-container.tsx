@@ -4,7 +4,7 @@ import { SignUp } from '../../services/auth-service';
 import { UserForRegistration as User } from '../../models/user';
 
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
-import { success, message } from '../../services/notifications-service';
+import { success, message } from '../../services/notification-service';
 
 import RegisterView from './register-view'
 import { Redirect } from 'react-router-dom';

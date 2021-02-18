@@ -16,7 +16,7 @@ import { RequirementForCreation as Requirement } from '../../../../../../models/
 
 import { CreateRequirement } from '../../../../../../services/requirement-service';
 import { showAxiosResponseErrors } from '../../../../../../services/error-handler-service';
-import { success } from '../../../../../../services/notifications-service';
+import { success } from '../../../../../../services/notification-service';
 
 import { CourseState } from '../../../../../../store/course/types';
 import { updateCourse } from '../../../../../../store/course/actions';

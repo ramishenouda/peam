@@ -11,7 +11,7 @@ import { Form, Button, Container } from 'react-bootstrap';
 
 import { AddCourseAttachment } from '../../../../../../services/course-service';
 import { showAxiosResponseErrors } from '../../../../../../services/error-handler-service';
-import { success } from '../../../../../../services/notifications-service';
+import { success } from '../../../../../../services/notification-service';
 
 import { updateCourse } from '../../../../../../store/course/actions';
 import { CourseState } from '../../../../../../store/course/types';

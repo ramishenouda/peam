@@ -10,7 +10,7 @@ import { NewCourse as course } from '../../models/course';
 
 import { NewCourseView } from './new-course-view';
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
-import { success } from '../../services/notifications-service';
+import { success } from '../../services/notification-service';
 
 type Props = {
     

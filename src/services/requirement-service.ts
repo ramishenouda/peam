@@ -22,10 +22,18 @@ export const CreateRequirement = async (owner: string, courseCode: string, requi
 }
 
 export const UpdateRequirement = async (owner: string, courseCode: string, requirement: Requirement, title: string) => {
-    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/
     options.url = baseURL + `courses/${owner}/${courseCode}/requirements/${title}/`
     options.method = 'PATCH';
     options.data = requirement;
+
+    return (await axios(options));
+}
+
+export const DeleteRequirement = async (owner: string, courseCode: string, title: string) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/
+    options.url = baseURL + `courses/${owner}/${courseCode}/requirements/${title}/`
+    options.method = 'DELETE';
 
     return (await axios(options));
 }
