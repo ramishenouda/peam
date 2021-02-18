@@ -111,3 +111,12 @@ export const InviteToCourse = async (owner: string, courseCode: string, users: U
 
     return (await axios(options));
 }
+
+export const getCourseInvitationsList = async (owner: string, courseCode: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/invitations/
+    options.url = baseURL + `courses/${owner}/${courseCode}/invitations/`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'GET';
+
+    return (await axios(options));
+}

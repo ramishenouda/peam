@@ -8,6 +8,7 @@ import { Attachments } from './settings-components/attachments/attachments';
 import { Container } from './settings-style';
 import { SettingsNavbar } from './settings-navbar';
 import { Requirements } from './settings-components/requirements/requirements';
+import { PendingInvitations } from './settings-components/pending-invitations/pending-invitations';
 
 type Props = {
 
@@ -54,6 +55,10 @@ export const SettingsView = (props: Props) => {
             {
                 tab === 4 &&
                 <Requirements showOptions={true} showAdd={true} />
+            }
+            {
+                tab === 5 &&
+                <PendingInvitations />
             }
         </Container>
     );
