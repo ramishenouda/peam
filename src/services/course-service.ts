@@ -102,9 +102,10 @@ export const UpdateCourseAttachment = async (owner: string, courseCode: string, 
     return (await axios(options));
 }
 
-export const InviteToCourse = async (owner: string, courseCode: string, users: UserToInviteToCourse) => {
+export const InviteToCourse = async (owner: string, courseCode: string, users: UserToInviteToCourse, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/invitations/
     options.url = baseURL + `courses/${owner}/${courseCode}/invitations/`
+    options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'POST';
     options.data = users;
 

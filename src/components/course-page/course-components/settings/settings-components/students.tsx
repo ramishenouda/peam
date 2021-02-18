@@ -10,6 +10,7 @@ import { showAxiosResponseErrors } from '../../../../../services/error-handler-s
 
 import { UserToInviteToCourse } from '../../../../../models/user';
 import { CourseState } from '../../../../../store/course/types';
+import { SystemState } from '../../../../../store/system/types';
 
 import { Section } from '../settings-style';
 
@@ -22,11 +23,24 @@ interface Email {
     value: string;
 }
 
+interface Fail {
+    email: string;
+    error: Array<string>;
+}
+
 export const Students = (props: Props) => {
     const courseState: CourseState = useSelector((state: any) => state.course);
+    const systemState: SystemState = useSelector((state: any) => state.system);
+
     const [emails, setEmails] = useState(Array<Email>());
 
     const handleInputChange = (_value: any, action: any) => {
+        if(action.action === 'remove-value') {
+            const removedValue = action.removedValue.value;
+            setEmails(emails.filter(item => item.value !== removedValue));
+            return;
+        }
+
         if (_value.length < 1) {
             setEmails([]);
             return;
@@ -53,10 +67,18 @@ export const Students = (props: Props) => {
             type: 'student'
         }
 
-        InviteToCourse(courseState.owner, courseState.code, users)
+        InviteToCourse(courseState.owner, courseState.code, users, systemState)
             .then((result) => {
-                console.log(result)
-                success('Students invited successfully')
+                const fails: Array<Fail> = result.data.fail;
+                if (fails.length < 1) {
+                    success('Students invited successfully')
+                } else {
+                    let message = '';
+                    for(let i = 0; i < fails.length; i++) {
+                        message += fails[i].email + '</br>';
+                    }
+                    error('The following emails coudln\'t be invited', message);
+                }
             }).catch((err) => {
                 showAxiosResponseErrors(err);
             });
