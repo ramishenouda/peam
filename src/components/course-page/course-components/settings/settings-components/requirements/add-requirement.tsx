@@ -1,68 +1,102 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux';
 
+import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { Form, Button } from 'react-bootstrap';
+
+import { CircleLoader } from 'react-spinners';
+import { Form, Button, Container } from 'react-bootstrap';
 
 import DatePicker from 'react-datepicker';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { Requirement } from '../../../../../../../models/requirement';
+import { RequirementForCreation as Requirement } from '../../../../../../models/requirement';
 
-import './add-project-requirement-style.css'
+import { CreateRequirement } from '../../../../../../services/requirement-service';
+import { showAxiosResponseErrors } from '../../../../../../services/error-handler-service';
+import { success } from '../../../../../../services/notifications-service';
 
-type Props = {
-    add: (pr: Requirement) => void;
-}
+import { CourseState } from '../../../../../../store/course/types';
+import { updateCourse } from '../../../../../../store/course/actions';
 
-function AddProjectRequirement(props: Props): JSX.Element {
+
+import './add-requirement-style.css'
+
+export const AddRequirement = () => {
+    const courseState: CourseState = useSelector((state: any) => state.course);
+    const disPatch = useDispatch();
+
+    const [adding, setAdding] = useState(false);
+
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    // const [attachements, setAttachements] = useState('');
 
-    const AddProjectRequirementSchema = yup.object().shape({
-        title: yup.string().required('Title is a required field'),
-        description: yup.string().required('Description is a required field'),
+    const Schema = yup.object().shape({
+        title: yup.string().required('Title is a required field').max(50)
+            .test('Doesn\'t contain special characters test', 'Title can\'t contain special characters', (value) => {
+                return !value?.match(/[$-/:-?{-~!"^_`[\]]/);
+            }),
+        description: yup.string().max(300),
     });
 
-    const { register , handleSubmit, errors } = useForm<Requirement>({
+    const { register , handleSubmit, errors, formState } = useForm<Requirement>({
         mode: "all",
-        resolver: yupResolver(AddProjectRequirementSchema)
+        resolver: yupResolver(Schema)
     });
+
+    const { isValid } = formState;
 
     const submit = () => {
-        const pr: Requirement = {
+        setAdding(true);
+        const requirement: Requirement = {
             uid: '',
+            course: courseState.id,
             title: title,
             description: description,
             from_dt: startDate,
             to_dt: endDate
         };
-        props.add(pr);
+
+        CreateRequirement(courseState.owner, courseState.code, requirement)
+            .then((result) => {
+                const requirement: Requirement = result.data;
+
+                success('Requirement created successfully')
+                disPatch(updateCourse({
+                    ...courseState, requirements: [...courseState.requirements, requirement]
+                }))
+            }).catch((err) => {
+                showAxiosResponseErrors(err)
+            }).finally(() => setAdding(false));
     }
 
     return (
-        <div id="add-project-requirement" className="center-big-wide-small mb-2 mt-3 px-3">
-            <p className="f3">
-                A project requirement is where the students can submit their projects.
-                it also contains information like the start date of submitting the projects, end date, and other information that could be added in the description. 
-            </p>
+        <Container>
+            <div>
+                <h1 className="f2 mb-4">
+                    Project requirement
+                </h1>
+                <p className="f3">
+                    A project requirement is where the students can submit their projects.
+                    it also contains information like the start date of submitting the projects, end date, and other information that could be added in the description. 
+                </p>
+            </div>
             <div className="mt-4">
-                <h1 className="f1 title">
+                <h1 className="f2 title">
                     Add a project requirement
                 </h1>
                 <hr />
             </div>
             <div className="mt-2">
-                <Form className="" onSubmit={handleSubmit(() => submit())}>
+                <Form onSubmit={handleSubmit(() => submit())}>
                     <Form.Group>
                         <span className="f3">
-                            Start date: &nbsp;
+                            Form: &nbsp;
                         </span>
                         <DatePicker
                             showTimeSelect
@@ -75,7 +109,7 @@ function AddProjectRequirement(props: Props): JSX.Element {
                     </Form.Group>
                     <Form.Group>
                         <span className="f3">
-                            End date: &nbsp;&nbsp;
+                            To: &nbsp;&nbsp;
                         </span>
                         <DatePicker
                             showTimeSelect
@@ -89,7 +123,7 @@ function AddProjectRequirement(props: Props): JSX.Element {
                     <Form.Group controlId="title">
                         <Form.Label className="f3">Title <span className="required-text">*</span></Form.Label>
                         <Form.Control 
-                            className="requirement-title f2"
+                            className="f2"
                             type="text"
                             autoComplete="off"
                             onChange={(e) => setTitle(e.target.value)}
@@ -102,7 +136,7 @@ function AddProjectRequirement(props: Props): JSX.Element {
                         <Form.Label className="f3">Description <span className="required-text">*</span></Form.Label>
                         <TextareaAutosize
                             style={{width: '100%'}}
-                            rows={10}
+                            minRows={3}
                             className="form-control f3" 
                             onChange={(e) => setDescription(e.target.value)}
                             name="description"
@@ -110,16 +144,19 @@ function AddProjectRequirement(props: Props): JSX.Element {
                         />
                         <p className="required-text"> {errors.description?.message} </p>
                     </Form.Group>
-                    <Form.Group controlId="dropzone">
-                        <Form.Label className="f3">Add attachements </Form.Label>
-                    </Form.Group>
                     <Form.Group className="project-requirement-item-options">
-                        <Button type="submit" className="px-5 py-2" variant="dark">Add</Button>
+                        {
+                            adding ? (
+                                <CircleLoader size={35} color={"#1a1a1a"} loading={adding} />
+                            ) : (
+                                <Button type="submit" className="px-5 py-2" variant="dark" disabled={ !isValid }>
+                                    Add requirement
+                                </Button>
+                            )
+                        }
                     </Form.Group>
                 </Form>
             </div>
-        </div>
+        </Container>
     )
 }
-
-export default AddProjectRequirement;

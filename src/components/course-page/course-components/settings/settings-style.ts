@@ -15,12 +15,10 @@ export const Container = styled(container)`
 `
 
 export const Section = styled.section`
-    background: #fcfcfc;
+    background: #f9f9f9;
     padding: 10px;
     margin-bottom: auto;
     border-radius: 5px;
-    box-shadow: 2px 1px 3px #1a1a1a;
-
 `
 
 export const Navbar = styled(navbar)`
@@ -30,8 +28,8 @@ export const Navbar = styled(navbar)`
     display: block;
     border-radius: 5px;
     height: fit-content;
-    box-shadow: 2px 1px 3px #1a1a1a;
-
+    background: #f9f9f9;
+    padding: 10px;
     ::-webkit-scrollbar {
         display: none;
     }

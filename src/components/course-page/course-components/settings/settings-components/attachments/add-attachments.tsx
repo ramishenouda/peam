@@ -7,7 +7,7 @@ import * as yup from 'yup';
 
 import { CircleLoader } from 'react-spinners';
 import TextareaAutosize from 'react-textarea-autosize';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 
 import { AddCourseAttachment } from '../../../../../../services/course-service';
 import { showAxiosResponseErrors } from '../../../../../../services/error-handler-service';
@@ -56,7 +56,10 @@ export const AddAttachments = (props: Props) => {
     }
 
     const Schema = yup.object().shape({
-        title: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.'),
+        title: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.')
+            .test('Doesn\'t contain special characters test', 'Title can\'t contain special characters', (value) => {
+                return !value?.match(/[$-/:-?{-~!"^_`[\]]/);
+            }),
         link: yup.string().required('Link is a required field').url('Link must be a vaild URL'),
         description: yup.string(),
     });
@@ -69,7 +72,7 @@ export const AddAttachments = (props: Props) => {
     const { isValid } = formState;
 
     return (
-        <div>
+        <Container>
             <div>
                 <p className="f1 peam-title-1">
                     Add attachments
@@ -126,6 +129,6 @@ export const AddAttachments = (props: Props) => {
                     </Form.Group>
                 </Form>
             </div>
-        </div>
+        </Container>
     );
 };

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { AxiosError } from 'axios';
 
-import { useSelector } from 'react-redux';
 import { SystemState } from '../../store/system/types';
 
 import { CreateCourse } from '../../services/course-service';
@@ -10,6 +10,7 @@ import { NewCourse as course } from '../../models/course';
 
 import { NewCourseView } from './new-course-view';
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
+import { success } from '../../services/notifications-service';
 
 type Props = {
     
@@ -24,6 +25,7 @@ export const NewCourse = (props: Props) => {
         setCreating(true);
         CreateCourse(course, systemState)
             .then(() => {
+                success('Course created successfully');
                 setRedirect(course.code);
             }).catch((err: AxiosError) => {
                 showAxiosResponseErrors(err, 'Error');

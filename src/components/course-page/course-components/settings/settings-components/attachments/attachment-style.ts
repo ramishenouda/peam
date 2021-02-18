@@ -14,6 +14,7 @@ export const Div = styled.div`
     clear: both;
     background: #f0f0f0;
     border-radius: 5px;
+    transition: 0.5s;
 
     :hover {
         background: #e3e3e3;

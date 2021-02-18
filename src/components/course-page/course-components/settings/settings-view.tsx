@@ -7,7 +7,7 @@ import { Teachers } from './settings-components/teachers';
 import { Attachments } from './settings-components/attachments/attachments';
 import { Container } from './settings-style';
 import { SettingsNavbar } from './settings-navbar';
-import { ProjectRequirements } from './settings-components/requirements/requirements';
+import { Requirements } from './settings-components/requirements/requirements';
 
 type Props = {
 
@@ -53,7 +53,7 @@ export const SettingsView = (props: Props) => {
             }
             {
                 tab === 4 &&
-                <ProjectRequirements />
+                <Requirements showOptions={true} showAdd={true} />
             }
         </Container>
     );

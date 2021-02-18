@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import FolderIcon from '@material-ui/icons/Folder';
+import WebIcon from '@material-ui/icons/Link';
 import PDF from '@material-ui/icons/PictureAsPdf';
 
 import { CircleLoader } from 'react-spinners';
@@ -39,7 +40,19 @@ export const AttachmentItem = (props: Props) => {
     const [attachment, setAttachment] = useState(props.data);
     const [currentAttachment, setCurrentAttachment] = useState(props.data);
 
-    const Icon = props.data.link.includes('pdf') ? <PDF /> : <FolderIcon />;
+    const link = props.data.link;
+    let Icon;
+
+    if (link.includes('pdf')) {
+        Icon = <PDF />
+    } else if (link.slice(link.length - 4, link.length).includes('.') && 
+        link.slice(link.length - 3, link.length).toLowerCase() !== ('com' || 'net')
+    ) {
+        Icon = <FolderIcon />
+    } else {
+        Icon = <WebIcon />
+    }
+
     const title = attachment.title;
 
     const handleChange = (event: any) => {
@@ -76,7 +89,10 @@ export const AttachmentItem = (props: Props) => {
     }
 
     const Schema = yup.object().shape({
-        title: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.'),
+        title: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.')
+            .test('Doesn\'t contain special characters test', 'Title can\'t contain special characters', (value) => {
+                return !value?.match(/[$-/:-?{-~!"^_`[\]]/);
+            }),
         link: yup.string().required('Link is a required field').url('Link must be a vaild URL'),
         description: yup.string(),
     });

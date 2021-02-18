@@ -1,4 +1,4 @@
-import { Requirement } from '../../models/requirement';
+import { RequirementForCreation as Requirement } from '../../models/requirement';
 import { Attachment } from '../../models/attachment';
 import { Teacher } from '../../models/teacher';
 

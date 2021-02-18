@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { CircleLoader } from 'react-spinners';
+
 import { NewCourse } from '../../models/course';
 
 import { Container, Form, FormControl, FormLabel, TextareaAutosize, Button } from './new-course-style';
@@ -15,7 +17,10 @@ type Props = {
 
 export const NewCourseView = (props: Props) => {
     const Schema = yup.object().shape({
-        title: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.'),
+        title: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.')
+            .test('Doesn\'t contain special characters test', 'Title can\'t contain special characters', (value) => {
+                return !value?.match(/[$-/:-?{-~!"^_`[\]]/);
+            }),
         code: yup.string().required('Code is a required field').max(10, 'Ensure this field has no more than 10 characters.'),
         description: yup.string(),
     });
@@ -87,7 +92,15 @@ export const NewCourseView = (props: Props) => {
                             <p className="required-text"> {errors.description?.message} </p>
                         </Form.Group>
                         <Form.Group>
-                            <Button type="submit" className="px-5 py-2" variant="dark" disabled={ !isValid || props.creating }>Create</Button>
+                            {
+                                props.creating ? (
+                                    <CircleLoader size={35} color={"#1a1a1a"} loading={props.creating} />
+                                ) : (
+                                    <Button type="submit" className="px-5 py-2" variant="dark" disabled={ !isValid }>
+                                        Create course
+                                    </Button>
+                                )
+                            }
                         </Form.Group>
                     </Form>
                 </div>

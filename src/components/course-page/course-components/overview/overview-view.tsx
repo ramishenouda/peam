@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { CourseState } from '../../../../store/course/types';
 
-import { ProjectRequirements } from '../settings/settings-components/requirements/requirements';
+import { Requirements } from '../settings/settings-components/requirements/requirements';
 import { Attachments } from './attachments/attachments';
 import { Teachers } from './teachers/teachers';
 
@@ -34,7 +34,7 @@ export const OverView = (props: Props) => {
     return (
         <div id="course-over-view">
             <div>
-                <ProjectRequirements />
+                <Requirements />
             </div>
             <div>
                 {

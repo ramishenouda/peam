@@ -52,7 +52,10 @@ export const CourseInfo = (props: Props) => {
     }
 
     const Schema = yup.object().shape({
-        title: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.'),
+        title: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.')
+            .test('Doesn\'t contain special characters test', 'Title can\'t contain special characters', (value) => {
+                return !value?.match(/[$-/:-?{-~!"^_`[\]]/);
+            }),
         code: yup.string().required('Code is a required field').max(10, 'Ensure this field has no more than 10 characters.'),
         description: yup.string(),
     });

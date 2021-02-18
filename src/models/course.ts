@@ -1,5 +1,5 @@
 import { Attachment } from "./attachment";
-import { Requirement } from "./requirement";
+import { RequirementForCreation as Requirement } from "./requirement";
 
 import { Teacher } from "./teacher";
 import { StudentForCourseList } from "./student";

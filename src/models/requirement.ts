@@ -1,7 +1,8 @@
 import { TeamForCourseList } from "./team";
 
-export interface Requirement {
+export interface RequirementForCreation {
     uid: string;
+    course: string;
     title: string;
     description: string;
     from_dt: Date;

@@ -16,6 +16,9 @@ export const Item = styled.div`
     background: #f0f0f0;
     padding: 10px;
     border-radius: 10px;
+    :hover {
+        background: #e3e3e3;
+    }
 `
 
 const style = `
@@ -46,6 +49,13 @@ export const Description = styled.p`
     border-radius: 5px;
     overflow-y: hidden;
     outline: none;
+    white-space: pre-wrap;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
 `
 
 export const Form = styled(form)`
