@@ -1,6 +1,8 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
+import { SystemState } from './store/system/types';
 
 type Props = {
     token?: string,
@@ -9,20 +11,19 @@ type Props = {
 }
 
 // This can only work if u are authorized.
-class ProtectedRoute extends React.Component<Props> {
-    render() {
-        const token = this.props.token === undefined ? 'token' : this.props.token;
-        const redirectTo = this.props.redirectTo === undefined ? '/' : this.props.redirectTo;
+function ProtectedRoute (props: Props) {
+    const systemState: SystemState = useSelector((state: any) => state.system);
 
-        const Component = this.props.component;
-        const isAuthenticated = localStorage.getItem(token);
-       
-        return isAuthenticated ? (
-            <Component />
-        ) : (
-            <Redirect to={{ pathname: redirectTo }} />
-        );
-    }
+    const redirectTo = props.redirectTo === undefined ? '/' : props.redirectTo;
+
+    const Component = props.component;
+    const isAuthenticated = systemState.username !== '';
+
+    return isAuthenticated ? (
+        <Component />
+    ) : (
+        <Redirect to={{ pathname: redirectTo }} />
+    );
 }
 
 export default ProtectedRoute;

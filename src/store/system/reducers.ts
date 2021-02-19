@@ -2,8 +2,11 @@ import { SystemState, SystemActionTypes, UPDATE_SESSION } from './types'
 
 const initialState: SystemState = {
   loggedIn: false,
-  session: '',
-  userName: '',
+  token: '',
+  username: '',
+  full_name: '',
+  jwt_id: '',
+  user_id: '',
 }
 
 export function systemReducer(state = initialState, action: SystemActionTypes): SystemState {

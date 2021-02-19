@@ -3,27 +3,39 @@ import React, { useState } from 'react';
 import { SignUp } from '../../services/auth-service';
 import { UserForRegistration as User } from '../../models/user';
 
+import { showAxiosResponseErrors } from '../../services/error-handler-service';
+import { success, message } from '../../services/notification-service';
 
-import Navbar from '../navbar/navbar-container';
 import RegisterView from './register-view'
+import { Redirect } from 'react-router-dom';
+import { AxiosError } from 'axios';
 
 function Register() {
     const [registering, setRegistering] = useState(false);
+    const [loginRedirect, setLoginRedirect] = useState(false);
 
     const register = (user: User) => {
         setRegistering(true);
 
         SignUp(user)
-            .then((result) => {
-                console.log(result);
-            }).catch((err) => {
-                console.log(err);
+            .then(() => {
+                success('Registration successful', 'verficication code sent to your email', 
+                    () => {
+                        message('Verify your account then login here')
+                    });
+                setLoginRedirect(true);
+            })
+            .catch((err: AxiosError) => {
+                showAxiosResponseErrors(err, 'Register error');
+                setRegistering(false);
             });
     }
 
+    if (loginRedirect)
+        return <Redirect to="/login" />
+
     return (
         <>
-        <Navbar signUp={false} />
         <RegisterView
             register={register}
             registering={registering}

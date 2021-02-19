@@ -1,13 +1,32 @@
-import Attachment from "./attachment";
-import ProjectRequirement from "./project-requirement";
+import { Attachment } from "./attachment";
+import { RequirementForCreation as Requirement } from "./requirement";
 
-export default interface Course {
+import { Teacher } from "./teacher";
+import { StudentForCourseList } from "./student";
+import { User } from "./user";
+
+export interface Course {
     uid: string;
     title: string;
     code: string;
     description: string;
-    owner: string;
+    owner: User;
     attachments: Array<Attachment>;
-    projectRequirements: Array<ProjectRequirement>;
-    role: string; // descripting current user's status to the course
+    requirements: Array<Requirement>;
+    teachers: Array<Teacher>;
+    students: Array<StudentForCourseList>;
+    role: string;
+}
+
+export interface CourseForUpdate {
+    title: string;
+    code: string;
+    description: string;
+    ownerId: string;
+}
+
+export interface NewCourse {
+    title: string;
+    code: string;
+    description: string;
 }

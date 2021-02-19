@@ -1,4 +1,4 @@
-.navbar-view, .navbar-view .shiny {
+.navbar-view {
     width: 100%;
 	-webkit-box-shadow: 0 4px 6px -6px black;
 	   -moz-box-shadow: 0 4px 6px -6px black;
@@ -19,6 +19,7 @@
 .navbar .navbar-brand {
     padding-left: 1.5vw !important;
     padding-right: 1.5vw !important;
+    margin: 0;
     background: #1a1a1a;
     font-weight: 500;
     font-family: 'Inter', sans-serif;

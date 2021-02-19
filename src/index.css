@@ -1,7 +1,9 @@
+@import '~react-datepicker/dist/react-datepicker.css';
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900');
+
 
 * {
   padding: 0;
@@ -22,6 +24,14 @@
   margin-top: -60px;
   margin-left: -60px;
 }
+
+.no-select {
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -36,6 +46,9 @@
 .f3 {
   font-size: 20px !important;
 }
+.f4 {
+  font-size: 18px !important;
+}
 
 @media only screen and (max-width: 600px) {
   .f1 {
@@ -46,6 +59,9 @@
   }
   .f3 {
     font-size: 18px !important;
+  }
+  .f4 {
+    font-size: 16px !important;
   }
 }
 
@@ -73,6 +89,11 @@
 .disable-link-style {
   color: inherit;
   text-decoration: none;
+}
+
+.active {
+  background-color: #f1f1f1;
+  border-radius: 5px;
 }
 
 .link {
@@ -123,5 +144,13 @@
 
 .peam-title-1 {
   font-family: 'Roboto', 'sans-serif';
-  font-weight: 600;
+}
+
+.peam-title-2 {
+  font-family: 'Inconsolata', 'sans-serif';
+}
+
+.date-over {
+  color: red;
+  text-decoration: line-through;
 }

@@ -1,0 +1,26 @@
+#course-over-view {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 70% 25%;
+    grid-column-gap: 40px;
+}
+
+@media only screen and (max-width: 768px) {
+    #course-over-view {
+        grid-template-columns: 100%;
+    }
+}
+
+#course-over-view .separator {
+    background: #cacaca;
+    box-shadow: 0px 0px 1px #e2e2e2;
+}
+
+#course-over-view .overview-title {
+    font-family: 'Inter', 'Roboto', 'sans-serif', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+}
+
+#course-over-view .overview-description {
+    white-space: pre-wrap;
+}

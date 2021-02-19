@@ -1,8 +1,11 @@
 // Describing the shape of the system's slice of state
 export interface SystemState {
     loggedIn: boolean;
-    session: string;
-    userName: string;
+    token: string;
+    username: string;
+    full_name: string;
+    user_id: string;
+    jwt_id: string;
 }
 
 // Describing the different ACTION NAMES available

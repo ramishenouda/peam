@@ -21,16 +21,16 @@ const SignupSchema = yup.object().shape({
   username: yup.string().required('Username is a required field').min(2, 'Username can\'t be less than 2 characters').test('Doesn\'t contain special characters test', 'Username can\'t contain special characters', (value) => {
     return !value?.match(/[_\W]/);
   }),
-  password: yup.string().required('Password is a required field').min(6, 'Password can\'t be less than 6 characters'),
-  confirmPassword: yup.string().required('Confirm password is a required field').min(6, 'Confirm password can\'t be less than 6 characters').oneOf([yup.ref('password'), null], 'Passwords must match'),
+  password1: yup.string().required('password is a required field').min(6, 'password can\'t be less than 6 characters'),
+  password2: yup.string().required('Confirm password is a required field').min(6, 'Confirm password can\'t be less than 6 characters').oneOf([yup.ref('password1'), null], 'Passwords must match'),
   emailPreferences: yup.boolean()
 });
 
 function RegisterView(props: Props) {
   const initialUser: User = {
-    confirmPassword: '',
     email: '',
-    password: '',
+    password1: '',
+    password2: '',
     username: '',
   }
 
@@ -65,15 +65,15 @@ function RegisterView(props: Props) {
             <Form.Control disabled={props.registering} className="form-peam" onChange={handleChange} name="email" ref={register} type="email" />
             <p className="required-text"> {errors.email && errors.email.message} </p>
           </Form.Group>
-          <Form.Group controlId="password">
-            <Form.Label>Password <span className="required-text">*</span></Form.Label>
-            <Form.Control disabled={props.registering} className="form-peam" onChange={handleChange} name="password" ref={register} type="password" />
-            <p className="required-text"> {errors.password?.message} </p>
+          <Form.Group controlId="password1">
+            <Form.Label>password <span className="required-text">*</span></Form.Label>
+            <Form.Control disabled={props.registering} className="form-peam" onChange={handleChange} name="password1" ref={register} type="password" />
+            <p className="required-text"> {errors.password1?.message} </p>
           </Form.Group>
-          <Form.Group controlId="confirmPassword">
+          <Form.Group controlId="password2">
             <Form.Label>Confirm password <span className="required-text">*</span></Form.Label>
-            <Form.Control disabled={props.registering} className="form-peam" onChange={handleChange} name="confirmPassword" ref={register} type="password" />
-            <p className="required-text"> {errors.confirmPassword?.message} </p>
+            <Form.Control disabled={props.registering} className="form-peam" onChange={handleChange} name="password2" ref={register} type="password" />
+            <p className="required-text"> {errors.password2?.message} </p>
           </Form.Group>
             {props.registering? (
               <CircleLoader size={35} color={"#1a1a1a"} loading={props.registering} />

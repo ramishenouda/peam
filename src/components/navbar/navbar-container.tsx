@@ -1,5 +1,11 @@
-import React, { Component } from 'react';
-import NavbarView from './navbar-view';
+import React from 'react';
+
+import { useSelector } from 'react-redux';
+import { SystemState } from '../../store/system/types';
+
+import { AnonymousNavbar } from './anonymous-navbar-view';
+import { AuthorizedNavbar } from './authorized-navbar-view';
+
 
 type Props = {
     signIn?: boolean;
@@ -9,19 +15,25 @@ type Props = {
     logo?: boolean;
 }
 
-class Navbar extends Component<Props> {
-    render() {
-        return (
-            <NavbarView 
-                signIn={this.props.signIn} 
-                signUp={this.props.signUp} 
-                logo={this.props.logo} 
-                hide={this.props.hide} 
-                search={this.props.search}
-                color="shiny"
-            />
-        );
-    }
+function Navbar(props: Props) {
+    const systemState: SystemState = useSelector((state: any) => state.system);
+
+    if (props.hide)
+        return <> </>
+
+    if (systemState.loggedIn)
+        return <AuthorizedNavbar />
+
+    return (
+        <AnonymousNavbar
+            signIn={props.signIn}
+            signUp={props.signUp}
+            logo={props.logo}
+            hide={props.hide}
+            search={props.search}
+            color="shiny"
+        />
+    );
 }
 
 export default Navbar;

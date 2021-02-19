@@ -1,9 +1,16 @@
 import { CourseState, CourseActionTypes, UPDATE_COURSE } from './types'
 
 const initialState: CourseState = {
-  courseOwner: '',
-  courseTitle: '',
-  role: ''
+  ownerId: '',
+  id: '',
+  owner: '',
+  code: '',
+  title: '',
+  description: '',
+  role: '',
+  attachments: [],
+  requirements: [],
+  teachers: []
 }
 
 export function courseReducer(state = initialState, action: CourseActionTypes): CourseState {
