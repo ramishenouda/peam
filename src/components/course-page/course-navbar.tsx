@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 import { Navbar } from 'react-bootstrap';
 
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
@@ -5,8 +7,8 @@ import PeopleIcon from '@material-ui/icons/People';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import SettingsIcon from '@material-ui/icons/Settings';
+
 import { CourseState } from '../../store/course/types';
-import { useSelector } from 'react-redux';
 
 type Props = {
     active: number,

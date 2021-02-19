@@ -61,7 +61,7 @@ function Course () {
                         attachments: data.attachments,
                         requirements: data.requirements,
                         teachers: data.teachers,
-                        role: 'teacher',
+                        role: 'student',
                     }));
                 }
             }).catch((err: AxiosError) => {

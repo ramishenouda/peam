@@ -10,6 +10,10 @@
 
 .course-navbar {
     padding: 0 5vw 1.1vh 5vw;
+    overflow-x: scroll;
+    padding-right: 100px !important;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .course-navbar .course-nav-item {
@@ -21,13 +25,6 @@
     cursor: pointer;
     transition: all 0.3s ease-in-out !important;
     display: inline-flex !important;
-}
-
-.course-navbar {
-    overflow-x: scroll;
-    padding-right: 100px !important;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
 }
 
 .course-navbar .course-nav-item:hover {
