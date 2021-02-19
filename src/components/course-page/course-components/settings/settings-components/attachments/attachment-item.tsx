@@ -118,7 +118,6 @@ export const AttachmentItem = (props: Props) => {
                 setDeleteing(true);
                 DeleteCourseAttachment(props.courseOwner, props.courseCode, props.data.uid, systemState)
                     .then(() => {
-                        console.log('Todo: Show loader on the item');
                         dispatch(updateCourse({
                             ...courseState, 
                             attachments: [...courseState.attachments.filter(item => item.uid !== props.data.uid)]

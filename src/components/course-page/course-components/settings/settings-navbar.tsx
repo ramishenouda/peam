@@ -1,4 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { CourseState } from '../../../../store/course/types';
+import { SystemState } from '../../../../store/system/types';
 
 import { NavItem, Navbar } from './settings-style';
 
@@ -8,6 +11,9 @@ type Props = {
 };
 
 export const SettingsNavbar = (props: Props) => {
+    const courseState: CourseState = useSelector((state: any) => state.course);
+    const systemState: SystemState = useSelector((state: any) => state.system);
+
     return (
         <Navbar className="text-center">
             <NavItem
@@ -21,16 +27,29 @@ export const SettingsNavbar = (props: Props) => {
                 onClick={() => props.setTab(1)} 
                 className={`py-2 my-2 ${props.active === 1 && 'active'}`}
             >
-                Invite students
+                Students
             </NavItem>
             <hr/>
-            <NavItem 
-                onClick={() => props.setTab(2)} 
-                className={`py-2 my-2 ${props.active === 2 && 'active'}`}
-            >
-                Invite teachers
-            </NavItem>
-            <hr/>
+            {
+                courseState.owner === systemState.username ? (
+                    <>
+                        <NavItem
+                            onClick={() => props.setTab(2)}
+                            className={`py-2 my-2 ${props.active === 2 && 'active'}`}
+                        >
+                            Teachers
+                        </NavItem>
+                        <hr/>
+                    </> 
+                ) : (
+                    <>
+                        <div className="no-select text-muted f2 py-2 my-2">
+                            Teachers
+                        </div>
+                        <hr/>
+                    </>
+                )
+            }
             <NavItem 
                 onClick={() => props.setTab(3)} 
                 className={`py-2 my-2 ${props.active === 3 && 'active'}`}

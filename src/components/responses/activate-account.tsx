@@ -16,7 +16,6 @@ export const ActivateAccount = () => {
     useEffect(() => {
         Verify(params.key)
             .then((result) => {
-                console.log(result);
                 success("Email verified successfully.", "You can now login.");
                 setRedirect(true);
             }).catch((err) => {

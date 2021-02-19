@@ -30,6 +30,7 @@ export const RespondCourse = (props: Props) => {
     const [redirect, setRedirect] = useState('');
     const [sender, setSender] = useState('');
     const [course, setCourse] = useState('');
+    const [fetching, setFetching] = useState(true);
 
     const respond = (status: string) => {
         const title = status === 'Accepted' ? 'Are you sure you want to join the course?' : 'Are you sure you want to reject the invitation';
@@ -40,7 +41,7 @@ export const RespondCourse = (props: Props) => {
                 }
 
                 RespondToCourseInvitation(params.token, status, systemState.token)
-                    .then((result) => {
+                    .then(() => {
                         success(`${status} the course successfully`);
                         setRedirect('/');
                     }).catch((err) => {
@@ -68,6 +69,7 @@ export const RespondCourse = (props: Props) => {
                     SearchUsers(email)
                         .then((result) => {
                             if (result.data.users.length < 1) {
+                                console.log(result);
                                 error("You don't have access to this page");
                                 setRedirect('/')
                                 return;
@@ -77,17 +79,21 @@ export const RespondCourse = (props: Props) => {
                             if (username) {
                                 // if its not the invited user
                                 if (username !== systemState.username) {
-                                    console.log(username, systemState.username)
+                                    console.log('error2');
                                     error("You don't have access to this page");
                                     setRedirect('/');
                                 }
                             }
                         }).catch((err) => {
-                            console.log(err)
                             showAxiosResponseErrors(err);
                             setRedirect('/');
                         });
+
+                    setFetching(false);
+                } else {
+                    setRedirect('/');
                 }
+
             }).catch((err) => {
                 showAxiosResponseErrors(err);
                 setRedirect('/');
@@ -99,6 +105,15 @@ export const RespondCourse = (props: Props) => {
         return <Redirect to={redirect} />
     }
 
+    if (fetching) {
+        return  (
+            <Container className="text-center my-5 py-5">
+                <div className="f1 text-center mb-4">
+                    Loading....
+                </div>
+            </Container>
+        )
+    }
     return (
         <Container className="text-center my-5 py-5">
             <div className="f1 text-center mb-4">
