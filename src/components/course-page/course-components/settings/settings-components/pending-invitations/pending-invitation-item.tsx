@@ -41,8 +41,7 @@ export const PendingInvitationItem = (props: Props) => {
             }
 
             setDeleting(true);
-
-            DeleteCourseInvitation(props.courseOwner, props.courseCode, props.invitation.token, props.token)
+            DeleteCourseInvitation(props.invitation.token, props.token)
             .then(() => {
                 props.removeInvitation(props.invitation.token);
                 success('Invitation has been canceled successfully');

@@ -17,7 +17,7 @@ export const message = (title: string, message?: string, callback?: () => any) =
         })
 }
 
-export const confirm = (title: string, text: string) => {
+export const confirm = (title: string, text: string, confirmButtonText?: string) => {
     return Swal.fire({
         title: title,
         html: text,
@@ -25,7 +25,7 @@ export const confirm = (title: string, text: string) => {
         showCancelButton: true,
         confirmButtonColor: '#dc3545',
         cancelButtonColor: '#64ce60',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: confirmButtonText ? confirmButtonText : 'Yes, delete it!'
     })
 }
 

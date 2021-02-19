@@ -14,12 +14,13 @@ import { updateSession } from './store/system/actions';
 import Navbar from './components/navbar/navbar-container';
 import HomePage from './components/home/home-container';
 import RegisterPage from './components/register/register-container';
+import { ActivateAccount } from './components/responses/activate-account';
 import LoginPage from './components/login/login-container';
 import { Logout } from './components/logout/logout';
 import PasswordResetPage from './components/password-reset/password-reset-container';
 import { NewCourse } from './components/course-new/new-course-container';
 import CoursePage from './components/course-page/course-container';
-import { ActivateAccount } from './components/responses/activate-account';
+import { RespondCourse } from './components/responses/course-invitation';
 
 const App = () => {
     const [fetchingToken, setFetchingToken] = useState(true);
@@ -63,13 +64,14 @@ const App = () => {
             <Switch>
                 <Route exact path="/" render={() => <HomePage />} />
                 <Route exact path="/join" render={() => <AnonymousRoute component={RegisterPage}/>} />
-                <Route exact path="/signup/email/verify/:key" render={() => <AnonymousRoute component={ActivateAccount}/>} />
-                <Route exact path="/login" render={() => <AnonymousRoute component={LoginPage}/>} />
-                <Route exact path="/logout" render={() => <ProtectedRoute redirectTo="/login" component={Logout}/>} />
-                <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordResetPage}/> } />
-                <Route exact path="/new" render={() => <ProtectedRoute redirectTo="/login" component={NewCourse}/>} />
-                <Route exact path="/:owner/:code" render={() => <ProtectedRoute redirectTo="/login" component={CoursePage}/>} />
-                <Route render={() => <Redirect to={{ pathname: '/' }}/>} />
+                <Route exact path="/signup/email/verify/:key" render={() => <AnonymousRoute component={ActivateAccount} />} />
+                <Route path="/login/:query?" render={() => <AnonymousRoute component={LoginPage}/>} />
+                <Route exact path="/logout" render={() => <ProtectedRoute redirectTo="/login" component={Logout} />} />
+                <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordResetPage} /> } />
+                <Route exact path="/new" render={() => <ProtectedRoute redirectTo="/login" component={NewCourse} />} />
+                <Route exact path="/:owner/:code" render={() => <ProtectedRoute redirectTo="/login" component={CoursePage} />} />
+                <Route exact path="/courses/invitations/:token" render={() => <ProtectedRoute redirectTo="/login" component={RespondCourse} />} />
+                <Route render={() => <Redirect to={{ pathname: '/' }} />} />
             </Switch>
         </React.Fragment>
     );

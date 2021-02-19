@@ -135,7 +135,7 @@ export const AttachmentItem = (props: Props) => {
             <Div className="p-3 mb-2">
                 <div className="float-left">
                     {Icon}
-                    <a href={attachment.link} rel="noreferrer" target="_blank" className="ml-1 link">
+                    <a href={attachment.link} rel="noopener noreferrer" target="_blank" className="ml-1 link">
                         {title}
                     </a>
                 </div>

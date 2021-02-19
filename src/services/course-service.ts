@@ -127,11 +127,31 @@ export const getCourseInvitationsList = async (owner: string, courseCode: string
     return (await axios(options));
 }
 
-export const DeleteCourseInvitation = async (owner: string, courseCode: string, invToken: string, token: string) => {
-    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/invitations/{token}/
-    options.url = baseURL + `courses/${owner}/${courseCode}/invitations/${invToken}`
+export const DeleteCourseInvitation = async (invToken: string, token: string) => {
+    // http://localhost:8000/api/v1/courses/invitations/{token}/
+    options.url = baseURL + `courses/invitations/${invToken}/`
     options.headers["Authorization"] = "Bearer " + token;
     options.method = 'DELETE';
+
+    return (await axios(options));
+}
+
+export const RespondToCourseInvitation = async (invToken: string, status: string, token: string) => {
+    // http://localhost:8000/api/v1/courses/invitations/{token}/
+    options.url = baseURL + `courses/invitations/${invToken}/`
+    options.headers["Authorization"] = "Bearer " + token;
+    options.method = 'POST';
+    options.data = {
+        "status": status
+    }
+
+    return (await axios(options));
+}
+
+export const RetreieveCourseInvitation = async (invToken: string) => {
+    // http://localhost:8000/api/v1/courses/invitations/{token}/
+    options.url = baseURL + `courses/invitations/${invToken}?expand=sender&expand=course`
+    options.method = 'GET';
 
     return (await axios(options));
 }

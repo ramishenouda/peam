@@ -1,9 +1,23 @@
+import axios, { AxiosRequestConfig } from "axios";
 import jwt_decode from "jwt-decode";
 import { useSelector } from 'react-redux';
 
 import { error, success } from './notification-service';
 
 import { SystemState } from '../store/system/types';
+
+
+const baseURL = process.env.REACT_APP_API_URI;
+
+const options: AxiosRequestConfig = {
+    url: '',
+    headers: {
+        "Accept": 'application/json',
+        "Content-Type": "application/json",
+    },
+    data: { }
+};
+
 
 export const CurrentUser = (): SystemState => {
     const systemState = useSelector((state: any) => state.system);
@@ -39,29 +53,13 @@ export const getCurrentUser = (token: string, refreshToken: string): SystemState
     }
 }
 
-const filterColors = (inputValue: string) => {
-    return [
-        {
-            "label": "Kandil",
-            "value": "Kandil",
-        },
-        {
-            "label": "Rami",
-            "value": "rami",
-        },
-        {
-            "label": "Sorya",
-            "value": "sorya",
-        }
-    ].filter(i => i.label.toLowerCase().includes(inputValue.toLowerCase()));
-};
+export const SearchUsers = async (inputValue: string) => {
+    // http://localhost:8000/api/v1/users/?search=ramishenouda
+    options.url = baseURL + `users/?search=${inputValue}`
+    options.method = "GET";
 
-export const SearchUsers = (inputValue: string): Promise<Array<Object>> =>
-    new Promise(resolve => {
-        setTimeout(() => {
-            resolve(filterColors(inputValue))
-        }, 1000);
-    });
+    return (await axios(options));
+}
 
 /*
 depreacted

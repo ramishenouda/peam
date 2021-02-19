@@ -22,6 +22,7 @@ export const ActivateAccount = () => {
             }).catch((err) => {
                 showAxiosResponseErrors(err)
             });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (redirect) {
