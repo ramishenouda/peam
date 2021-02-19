@@ -42,10 +42,9 @@ export const RespondCourse = (props: Props) => {
                 RespondToCourseInvitation(params.token, status, systemState.token)
                     .then((result) => {
                         success(`${status} the course successfully`);
-                        console.log(result);
+                        setRedirect('/');
                     }).catch((err) => {
                         showAxiosResponseErrors(err);
-                        console.log(err);
                     });
             })
     }

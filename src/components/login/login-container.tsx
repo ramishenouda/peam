@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useDispatch } from 'react-redux';
 
@@ -15,7 +14,6 @@ import LoginView from './login-view'
 
 function Login() {
     const [logging, setLogging] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
     const dispatch = useDispatch();
 
     const login = (user: User) => {
@@ -28,20 +26,11 @@ function Login() {
                 const user = getCurrentUser(accessToken, refreshToken);
                 if (typeof user === 'object') {
                     dispatch(updateSession(user));
-                    setLoggedIn(true);
                 }
             }).catch((err: AxiosError) => {
                 showAxiosResponseErrors(err, 'Sign in error');
                 setLogging(false);
             });
-    }
-
-    if (loggedIn) {
-        const redirectTo = localStorage.getItem('redirect_to');
-        if (redirectTo)
-            localStorage.removeItem('redirect_to');
-
-        return <Redirect to={redirectTo ? redirectTo : '/'} />
     }
 
     return (

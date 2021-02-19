@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useParams } from 'react-router-dom'
 
 import { useSelector } from 'react-redux';
 import { SystemState } from './store/system/types';
@@ -8,6 +8,10 @@ type Props = {
     token?: string,
     redirectTo?: string,
     component: React.ElementType
+}
+
+interface Query {
+    query: string;
 }
 
 // This can only work if u are unauthorized.
@@ -19,6 +23,20 @@ function AnonymousRoute (props: Props) {
 
     const Component = props.component;
     const isAuthenticated = localStorage.getItem(refreshToken) && systemState.username !== '';
+    
+    const data: Query = useParams();
+    const equalIndex = data.query ? data.query.indexOf('=') : 0;
+    
+    if (equalIndex) {
+        const action = data.query.slice(0, equalIndex);
+        const token = data.query.slice(equalIndex + 1, data.query.length);
+
+        console.log('here')
+        if (action === 'course-invitation' && isAuthenticated) {
+            console.log('here')
+            return <Redirect to={{ pathname: `/courses/invitations/${token}` }} />
+        }
+    }
 
     return isAuthenticated === null ? (
         <Component />
