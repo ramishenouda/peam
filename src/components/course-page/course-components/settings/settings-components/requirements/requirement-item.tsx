@@ -151,7 +151,7 @@ export const RequirementItem = (props: Props) => {
         return (
             <>
             <Item className="text-light">
-                <Link to={'/' + courseState.owner + '/' + courseState.code + '/requirement/' + editItem.title} className="link">
+                <Link to={'/' + courseState.owner + '/' + courseState.code + '/requirements/' + editItem.title} className="link">
                     <Title className="f1">
                         { editItem.title }
                     </Title>

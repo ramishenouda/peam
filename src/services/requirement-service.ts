@@ -14,6 +14,15 @@ const options: AxiosRequestConfig = {
     }
 };
 
+export const GetRequirement = async (owner: string, courseCode: string, requirementTitle: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/
+    options.url = baseURL + `courses/${owner}/${courseCode}/requirements/${requirementTitle}`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'GET';
+
+    return (await axios(options));
+}
+
 export const CreateRequirement = async (owner: string, courseCode: string, requirement: Requirement, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/
     options.url = baseURL + `courses/${owner}/${courseCode}/requirements/`
