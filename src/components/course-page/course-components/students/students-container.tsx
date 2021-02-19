@@ -37,7 +37,8 @@ export const Students = () => {
                 setTimeout(() => { setFetching(false); }, 500);
             }
         });
-    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const searchStudents = (event: React.ChangeEvent<HTMLInputElement>) => {
         const searchValue = event.target.value;
@@ -49,6 +50,9 @@ export const Students = () => {
         }
 
         const filterdStudents = students.filter(student => {
+            if (!student.fullName)
+                student.fullName = '';
+
             return searchValue.trimStart().toLowerCase() === (
                 student.fullName.slice(0, searchValue.length).toLowerCase() || student.username.slice(0, searchValue.length).toLowerCase()
             )
@@ -58,9 +62,9 @@ export const Students = () => {
     }
 
     if (fetching) {
-        return <div> Loading </div>
+        return <div className="text-center f1 mt-5"> Loading... </div>
     } else if (error) {
-        return <div> Error </div>
+        return <div className="text-center f1 mt-5"> Error while loading the students. </div>
     } else {
         return (
             <View

@@ -31,9 +31,7 @@ function AnonymousRoute (props: Props) {
         const action = data.query.slice(0, equalIndex);
         const token = data.query.slice(equalIndex + 1, data.query.length);
 
-        console.log('here')
         if (action === 'course-invitation' && isAuthenticated) {
-            console.log('here')
             return <Redirect to={{ pathname: `/courses/invitations/${token}` }} />
         }
     }

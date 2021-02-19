@@ -50,26 +50,6 @@ export const UpdateCourse = async (owner: string, courseCode: string, course: Co
     return (await axios(options));
 }
 
-export const GetCourseStudents = async (owner: string, courseName: string, system: SystemState) => {
-    let url;
-    if(process.env.NODE_ENV === 'development')
-        url = baseURL + `${owner}/${courseName}`;
-    else
-        url = baseURL + utils + `courses/${owner}/${courseName}/students`;
-
-    return (await axios.get(url, options));
-}
-
-export const GetCourseTeams = async (owner: string, courseName: string, system: SystemState) => {
-    let url;
-    if(process.env.NODE_ENV === 'development')
-        url = baseURL + `${owner}/${courseName}`;
-    else
-        url = baseURL + utils + `courses/${owner}/${courseName}/teams`;
-
-    return (await axios.get(url, options));
-}
-
 export const GetCourseAttachments = async (owner: string, courseCode: string, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/attachments/
     options.url = baseURL + `courses/${owner}/${courseCode}/attachments/`
@@ -154,4 +134,23 @@ export const RetreieveCourseInvitation = async (invToken: string) => {
     options.method = 'GET';
 
     return (await axios(options));
+}
+
+export const GetCourseStudents = async (owner: string, courseCode: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/
+    options.url = baseURL + `courses/${owner}/${courseCode}/?expand=students&omit=*`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'GET';
+
+    return (await axios(options));
+}
+
+export const GetCourseTeams = async (owner: string, courseName: string, system: SystemState) => {
+    let url;
+    if(process.env.NODE_ENV === 'development')
+        url = baseURL + `${owner}/${courseName}`;
+    else
+        url = baseURL + utils + `courses/${owner}/${courseName}/teams`;
+
+    return (await axios.get(url, options));
 }

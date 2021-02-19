@@ -34,8 +34,6 @@
 #student .title {
     font-family: Inter, sans-serif;
     padding-left: 4px;
-    font-size: medium;
-    font-weight: 500;
 }
 
 #student .remove-btn {

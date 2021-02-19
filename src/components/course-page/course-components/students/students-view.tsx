@@ -40,7 +40,7 @@ export const Students = (props: Props) => {
         })
     }
 
-    if (students.length) {
+    if (students.length || props.searchValue !== '') {
         return (
             <Container id="course-students" className="mt-2">
                 <div>
@@ -49,11 +49,17 @@ export const Students = (props: Props) => {
                 <div id="student-list">
                     { students }
                 </div>
+                {
+                    (props.searchValue !== '' && students.length === 0) &&
+                    <div className="text-center f1 mt-5">
+                        Couldn't find any students.
+                    </div>
+                }
             </Container>
         );
     } else {
         return (
-            <Container id="course-students" className="mt-2">
+            <Container id="course-students" className="text-center f1 mt-5">
                 No students yet. Go to settings to add students.
             </Container>
         );
