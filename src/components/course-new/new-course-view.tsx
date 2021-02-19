@@ -18,10 +18,13 @@ type Props = {
 export const NewCourseView = (props: Props) => {
     const Schema = yup.object().shape({
         title: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.')
-            .test('Doesn\'t contain special characters test', 'Title can\'t contain special characters', (value) => {
+            .test('Doesn\'t contain special characters test', 'Title can only contain @ and # as special characters', (value) => {
                 return !value?.match(/[$-/:-?{-~!"^_`[\]]/);
             }),
-        code: yup.string().required('Code is a required field').max(10, 'Ensure this field has no more than 10 characters.'),
+        code: yup.string().required('Code is a required field').max(10, 'Ensure this field has no more than 10 characters.')
+            .test('Doesn\'t contain special characters test', 'Code can\'t contain any special characters', (value) => {
+            return !value?.match(/[_\W]/)
+        }),
         description: yup.string(),
     });
 
