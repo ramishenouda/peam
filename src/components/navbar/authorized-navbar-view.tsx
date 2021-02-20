@@ -49,15 +49,15 @@ export const AuthorizedNavbar = (props: Props) => {
                                 </span>
                                 <hr/>
                             </Dropdown.Item>
-                            <Link to={"/" + systemState.username} className="link dropdown-item">
+                            <Link to={"/user/profile"} className="link dropdown-item mb-1">
                                 Your Profile
                             </Link>
-                            <Link to={"/" + systemState.username + "/courses"} className="link dropdown-item">
+                            {/* <Link to={"/user/courses"} className="link dropdown-item">
                                 Your Courses
                             </Link>
-                            <Link to={"/" + systemState.username + "/settings"} className="link dropdown-item">
+                            <Link to={"/user/settings"} className="link dropdown-item">
                                 Settings
-                            </Link>
+                            </Link> */}
                             <Link to="/logout" className="link dropdown-item">
                                 Sign out
                             </Link>
@@ -85,25 +85,25 @@ export const AuthorizedNavbar = (props: Props) => {
                             <span>
                                 Signed in as <br /> <strong>{systemState.username}</strong>
                             </span>
-                            <hr/>
                         </NavItem>
+                            <hr/>
                         <NavItem>
-                            <Link to={"/" + systemState.username} className="disable-link-style">
+                            <Link to={"/user/profile"} className="disable-link-style">
                                 Your Profile
                             </Link>
                         </NavItem>
 
-                        <NavItem>
-                            <Link to={"/" + systemState.username + "/courses"} className="disable-link-style">
+                        {/* <NavItem>
+                            <Link to={"/user/courses"} className="disable-link-style">
                                 Your Courses
                             </Link>
                         </NavItem>
 
                         <NavItem>
-                            <Link to={"/" + systemState.username + "/settings"} className="disable-link-style">
+                            <Link to={"/user/settings"} className="disable-link-style">
                                 Settings
                             </Link>
-                        </NavItem>
+                        </NavItem> */}
                         <NavItem>
                             <Link to="/logout" className="disable-link-style">
                                 Sign out

@@ -63,7 +63,7 @@ export const SearchUsers = async (inputValue: string) => {
 
 export const GetUserProfile = async(username: string, token: string) => {
     // http://localhost:8000/api/v1/users/{username}/
-    options.url = baseURL + `user/profile/?expand=courses&expand=teams`
+    options.url = baseURL + `user/profile/?expand=courses&expand=teams&expand=courses.owner`
     options.method = "GET";
     options.headers["Authorization"] = "Bearer " + token;
     options.headers["Content-Type"] = "application/json"
@@ -86,16 +86,16 @@ export const UpdateUser = async(name: string, email: string, token: string) => {
     return (await axios(options));
 }
 
-export const UpdateAvatar = async(avatar: any, token: string) => {
-    // http://localhost:8000/api/v1/user/avatar/
-    options.url = baseURL + `user/avatar/`
-    options.method = "PATCH";
-    options.headers["Authorization"] = "Bearer " + token;
-    options.headers["Content-Type"] = "multipart/form-data; boundary=----WebKitFormBoundaryWP4KnN0qX6fToVf3";
+// export const UpdateAvatar = async(avatar: any, token: string) => {
+//     // http://localhost:8000/api/v1/user/avatar/
+//     options.url = baseURL + `user/avatar/`
+//     options.method = "PATCH";
+//     options.headers["Authorization"] = "Bearer " + token;
+//     options.headers["Content-Type"] = "multipart/form-data; boundary=----WebKitFormBoundaryWP4KnN0qX6fToVf3";
     
-    options.data = {
-        "avatar": "------WebKitFormBoundaryNujaYiLogb1FZ9Qz\r\nContent-Disposition: form-data; name=\"avatar\"; filename=\"59.png\"\r\nContent-Type: image/png\r\n\r\n\r\n------WebKitFormBoundaryNujaYiLogb1FZ9Qz--\r\n"
-    }
+//     options.data = {
+//         "avatar": "------WebKitFormBoundaryNujaYiLogb1FZ9Qz\r\nContent-Disposition: form-data; name=\"avatar\"; filename=\"59.png\"\r\nContent-Type: image/png\r\n\r\n\r\n------WebKitFormBoundaryNujaYiLogb1FZ9Qz--\r\n"
+//     }
 
-    return (await axios(options));
-}
+//     return (await axios(options));
+// }
