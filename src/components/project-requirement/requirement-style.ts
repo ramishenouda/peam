@@ -18,6 +18,8 @@ export const Description = styled.h2`
 export const Navbar = styled(navbar)`
     padding: 0 5vw 1.1vh 5vw;
     overflow-x: scroll;
+    margin: 0 auto;
+    text-align: center;
     padding-right: 100px !important;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */

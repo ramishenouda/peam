@@ -1,3 +1,5 @@
+import styled, { css } from 'styled-components';
+
 import { 
     Navbar as navbar, 
     Nav as nav,
@@ -6,7 +8,7 @@ import {
     NavDropdown
 } from 'react-bootstrap';
 
-import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Navbar = styled(navbar)`
     width: 100%;
@@ -55,6 +57,18 @@ export const SearchControl = styled(formControl) `
 
 export const NavItem = styled(nav.Item)`
     ${NavItemStyle}
+    :hover {
+        -webkit-box-shadow: 0 3px 5px -5px black;
+        -moz-box-shadow: 0 3px 5px -5px black;
+        box-shadow: 0px 16px 12px -20px black;
+    }
+`
+
+export const NewCourse = styled(Link)`
+    ${NavItemStyle}
+    position: absolute;
+    right: 70px;
+    top: -5px;
     :hover {
         -webkit-box-shadow: 0 3px 5px -5px black;
         -moz-box-shadow: 0 3px 5px -5px black;
