@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form'
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -34,6 +33,7 @@ export const NewCourseView = (props: Props) => {
     });
 
     const { isValid } = formState;
+
     const [title, setTitle] = useState('');
     const [code, setCode] = useState('');
     const [description, setDescription] = useState('');

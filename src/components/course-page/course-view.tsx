@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -20,7 +20,8 @@ type Props = {
 interface Params {
     code: string;
     owner: string;
-    type: string;
+    type_1: string;
+    type_2: string;
     title_1: string;
     title_2: string;
 }
@@ -58,34 +59,34 @@ const CourseView = (props: Props): JSX.Element => {
             <CourseNavbar 
                 active={tap}
                 tabHandler={setTap}
-                type={params.type}
+                type={params.type_1}
             />
         </header>
         <main>
             {
-                (tap === 0 && params.type === undefined) &&
+                (tap === 0 && params.type_1 === undefined) &&
                 <OverView />
             }
             {
-                (tap === 1 && params.type === undefined) &&
+                (tap === 1 && params.type_1 === undefined) &&
                 <Students />
             }
             {
-                (tap === 2 && params.type === undefined) &&
+                (tap === 2 && params.type_1 === undefined) &&
                 <Teams />
             }
             {
-                (tap === 3 && params.type === undefined) &&
+                (tap === 3 && params.type_1 === undefined) &&
                 <div className="f1 mt-5 text-center">
                     Next Semester
                 </div>
             }
             {
-                (tap === 4 && params.type === undefined) &&
+                (tap === 4 && params.type_1 === undefined) &&
                 <Settings />
             }
             {
-                tap === 5 &&
+                (params.type_1 === 'requirements' && !params.type_2) &&
                 <Requirement />
             }
         </main>

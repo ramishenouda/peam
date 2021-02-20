@@ -1,5 +1,5 @@
 import { Attachment } from "./attachment";
-import { Team, TeamForCourseList } from "./team";
+import { TeamForCourseList } from "./team";
 
 export interface Requirement {
     uid: string;
@@ -8,7 +8,7 @@ export interface Requirement {
     description: string;
     from_dt: Date;
     to_dt: Date;
-    teams: Array<Team>;
+    teams: Array<TeamForCourseList>;
     attachments: Array<Attachment>
 }
 

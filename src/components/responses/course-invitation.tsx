@@ -30,7 +30,6 @@ export const RespondCourse = (props: Props) => {
     const [redirect, setRedirect] = useState('');
     const [sender, setSender] = useState('');
     const [course, setCourse] = useState('');
-    const [fetching, setFetching] = useState(true);
 
     const respond = (status: string) => {
         const title = status === 'Accepted' ? 'Are you sure you want to join the course?' : 'Are you sure you want to reject the invitation';
@@ -56,6 +55,13 @@ export const RespondCourse = (props: Props) => {
             setRedirect('/login');
             return;
         }
+
+        RetreieveCourseInvitation(params.token, systemState.token)
+            .then((result) => {
+                console.log(result);
+            }).catch((err) => {
+                console.log(err);
+            });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

@@ -13,6 +13,7 @@ type Props = {
     teams: Array<team>;
     role: string;
     index: number;
+    hideSeparator?: boolean;
 }
 
 export const Teams = (props: Props) => {
@@ -22,13 +23,13 @@ export const Teams = (props: Props) => {
 
     useEffect(() => {
         const getData = () => {
-            return props.teams.map((team) =>
-                <TeamItem
-                    description={team.description}
+            return props.teams.map((team) => {
+                return <TeamItem
                     students={team.students}
-                    title={team.title}
-                    key={team.title}
+                    name={team.name}
+                    key={team.uid}
                 />
+            }
             )
         }
 
@@ -39,10 +40,13 @@ export const Teams = (props: Props) => {
 
     return (
         <div className="mt-4">
-            <ProjectRequirementTitle onClick={() => setShowTeams(!showTeams)} className="f2 mb-4">
-                <span>{props.title}</span>
-                <CrossLine></CrossLine>
-            </ProjectRequirementTitle>
+            {
+                !props.hideSeparator &&
+                <ProjectRequirementTitle onClick={() => setShowTeams(!showTeams)} className="f2 mb-4">
+                    <span className="f1 bg-g-gray">{props.title}</span>
+                    <CrossLine></CrossLine>
+                </ProjectRequirementTitle>
+            }
             {
                 !showTeams && 
                 <div className="text-center f3">

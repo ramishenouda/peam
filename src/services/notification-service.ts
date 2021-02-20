@@ -38,7 +38,7 @@ export const confirmText = (title: string, text: string, placeHolder: string, co
         showCancelButton: true,
         confirmButtonColor: '#dc3545',
         cancelButtonColor: '#64ce60',
-        confirmButtonText: 'Confirm',
+        confirmButtonText: confirmationText,
       })
 }
 

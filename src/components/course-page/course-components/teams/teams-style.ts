@@ -16,17 +16,12 @@ export const ProjectRequirementTitle = styled.div`
     font-family: Inconsolata;
     text-align: center;
     width: 85%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #ececec;
-    border-radius: 50px;
-    box-shadow: 1px 1px 4px #000;
+    margin: 0 auto;
     position: relative;
     cursor: pointer;
     z-index: 1;
 
     span {
-        background: #ececec;
         z-index: 3;
         border-radius: 50px;
         padding: 0 5px;

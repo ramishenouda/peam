@@ -7,7 +7,6 @@ import { Attachment } from '../models/attachment';
 import { UserToInviteToCourse } from '../models/user';
 
 const baseURL = process.env.REACT_APP_API_URI;
-const utils = '';
 
 const options: AxiosRequestConfig = {
     url: '',
@@ -146,12 +145,12 @@ export const GetCourseStudents = async (owner: string, courseCode: string, syste
     return (await axios(options));
 }
 
-export const GetCourseTeams = async (owner: string, courseName: string, system: SystemState) => {
-    let url;
-    if(process.env.NODE_ENV === 'development')
-        url = baseURL + `${owner}/${courseName}`;
-    else
-        url = baseURL + utils + `courses/${owner}/${courseName}/teams`;
+export const GetCourseTeams = async (owner: string, courseCode: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/
+    console.log('here');
+    options.url = baseURL + `courses/${owner}/${courseCode}/?expand=requirements&omit=*`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'GET';
 
-    return (await axios.get(url, options));
+    return (await axios(options));
 }
