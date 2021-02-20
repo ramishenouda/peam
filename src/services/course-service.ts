@@ -154,6 +154,24 @@ export const GetCourseTeams = async (owner: string, courseCode: string, system: 
     return (await axios(options));
 }
 
+export const GetCourseTeachers = async (owner: string, courseCode: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/teachers/
+    options.url = baseURL + `courses/${owner}/${courseCode}/teachers/?expand=teacher`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'GET';
+
+    return (await axios(options));
+}
+
+export const DeleteCourseTeacher = async (owner: string, courseCode: string, courseTeacher: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/teachers/{course_teacher}/
+    options.url = baseURL + `courses/${owner}/${courseCode}/teachers/${courseTeacher}`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'DELETE';
+
+    return (await axios(options));
+}
+
 export const DeleteCourseStudent = async (owner: string, courseCode: string, courseStudent: string, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/students/{course_student}/
     options.url = baseURL + `courses/${owner}/${courseCode}/students/${courseStudent}`

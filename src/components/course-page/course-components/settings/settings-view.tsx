@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { CourseInfo } from './settings-components/course-info';
 import { Students } from './settings-components/students';
-import { Teachers } from './settings-components/teachers';
+import { Teachers } from './settings-components/teachers/teachers';
 import { Attachments } from './settings-components/attachments/attachments';
 import { Container } from './settings-style';
 import { SettingsNavbar } from './settings-navbar';
