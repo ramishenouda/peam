@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Container as container, Navbar as navbar } from 'react-bootstrap';
 
@@ -30,4 +30,18 @@ export const NavItem = styled.div`
     :hover {
         text-decoration: underline #1a1a1a;
     }
+`
+
+const style = css`
+    font-family: 'Inter', sans-serif;
+`
+
+export const Title = styled.div`
+    ${style}
+    padding-top: 10px;
+`
+
+export const Description = styled.div`
+    ${style}
+    padding-bottom: 10px;
 `
