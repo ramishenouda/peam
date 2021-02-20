@@ -1,6 +1,6 @@
 export interface StudentForCourseList {
     uid: string;
     username: string;
-    fullName: string;
+    name: string;
     avatar: string;
 }

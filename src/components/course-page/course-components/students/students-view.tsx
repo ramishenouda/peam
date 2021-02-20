@@ -13,6 +13,7 @@ type Props = {
     searchStudents: (event: React.ChangeEvent<HTMLInputElement>) => void;
     searchValue: string;
     role:string;
+    remove: (arg1: string, arg2: string) => void;
 }
 
 export const Students = (props: Props) => {
@@ -21,21 +22,23 @@ export const Students = (props: Props) => {
     if (props.searchValue.length) {
         students = props.filteredStudents.map(student => {
             return <Student
-                userName={student.username}
-                fullName={student.fullName}
+                username={student.username}
+                name={student.name}
                 avatar={student.avatar}
                 key={student.username}
                 role={props.role}
+                remove={props.remove}
             />
         })
     } else {
         students = props.students.map(student => {
             return <Student
-                userName={student.username}
-                fullName={student.fullName}
+                username={student.username}
+                name={student.name}
                 avatar={student.avatar}
                 key={student.username}
                 role={props.role}
+                remove={props.remove}
             />
         })
     }
