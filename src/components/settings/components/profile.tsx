@@ -9,20 +9,18 @@ import { Button, Container } from 'react-bootstrap';
 import { CircleLoader } from 'react-spinners';
 
 import { UserForUpdate as User } from '../../../models/user';
-import { User as Info } from '../../../models/user';
 import { SystemState } from '../../../store/system/types';
 
 import defaultAvatar from '../../../assets/default-avatar.png'
 
 import { Title, Description, Form } from '../settings-style';
-import { FileToggle, FileUpload } from './style';
-import { UpdateAvatar, UpdateUser } from '../../../services/user-service';
+import { FileToggle } from './style';
+import { UpdateUser } from '../../../services/user-service';
 import { showAxiosResponseErrors } from '../../../services/error-handler-service';
 import { success } from '../../../services/notification-service';
-import { SettingsInputAntennaTwoTone } from '@material-ui/icons';
 
 type Props = {
-    user: Info
+    options: {}
 };
 
 const SignupSchema = yup.object().shape({
@@ -31,11 +29,13 @@ const SignupSchema = yup.object().shape({
   });
 
 export const Profile = (props: Props) => {
+    const options: any = props.options;
+
     const systemState: SystemState = useSelector((state: any) => state.system);
     const initialUser: User = {
         uid: '',
-        email: props.user.email,
-        name: props.user.name,
+        email: options.email,
+        name: options.name,
     }
 
     const [user, setUser] = useState(initialUser);
@@ -43,8 +43,8 @@ export const Profile = (props: Props) => {
     const [isdirty, setIsdirty] = useState(false);
 
     useEffect(() => {
-        setUser({ uid: '', email: props.user.email, name: props.user.name })
-    }, [props.user.email, props.user.name])
+        setUser({ uid: '', email: options.email, name: options.name })
+    }, [options.email, options.name])
 
     const handleChange = (event: any) => {
         if(!isdirty)
@@ -64,8 +64,10 @@ export const Profile = (props: Props) => {
         setUpdatingUser(true);
         UpdateUser(user.name, user.email, systemState.token)
             .then((result) => {
-                console.log(result)
                 success("Your public profile was updated successfully")
+                setTimeout(() => {
+                    window.location.reload();
+                }, 250);
             }).catch((err) => {
                 showAxiosResponseErrors(err)
             }).finally(() => setUpdatingUser(false));

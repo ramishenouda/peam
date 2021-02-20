@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { error, success } from './notification-service';
 
 import { SystemState } from '../store/system/types';
-import { stringify } from "querystring";
 
 
 const baseURL = process.env.REACT_APP_API_URI;
@@ -62,9 +61,9 @@ export const SearchUsers = async (inputValue: string) => {
     return (await axios(options));
 }
 
-export const GetUser = async(username: string, token: string) => {
+export const GetUserProfile = async(username: string, token: string) => {
     // http://localhost:8000/api/v1/users/{username}/
-    options.url = baseURL + `users/?search=${username}`
+    options.url = baseURL + `user/profile/?expand=courses&expand=teams`
     options.method = "GET";
     options.headers["Authorization"] = "Bearer " + token;
     options.headers["Content-Type"] = "application/json"
