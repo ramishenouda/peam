@@ -24,3 +24,13 @@ export interface UserForLogin {
     username: string;
     password: string;
 }
+
+export interface UserForUpdate {
+    uid: string;
+    full_name: string;
+    email: string;
+    avatar: string;
+    current_password: string;
+    new_password1: string;
+    new_password2: string;
+}

@@ -22,6 +22,7 @@ import { NewCourse } from './components/course-new/new-course-container';
 import CoursePage from './components/course-page/course-container';
 import { RespondCourse } from './components/responses/course-invitation';
 import { RequirementContainer } from './components/project-requirement/requirement-container';
+import { Profile } from './components/profile/profile';
 
 const App = () => {
     const [fetchingToken, setFetchingToken] = useState(true);
@@ -70,6 +71,7 @@ const App = () => {
                 <Route exact path="/logout" render={() => <ProtectedRoute redirectTo="/login" component={Logout} />} />
                 <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordResetPage} /> } />
                 <Route exact path="/new" render={() => <ProtectedRoute redirectTo="/login" component={NewCourse} />} />
+                <Route exact path="/:username" render={() => <Profile />} />
                 <Route exact path="/:owner/:code" render={() => <ProtectedRoute redirectTo="/login" component={CoursePage} />} />
                 <Route exact path="/:owner/:code/requirements/:title" render={() => <ProtectedRoute redirectTo="/login" component={RequirementContainer} />} />
                 <Route exact path="/courses/invitations/:token" render={() => <ProtectedRoute redirectTo="/login" component={RespondCourse} />} />

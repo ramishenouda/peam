@@ -119,6 +119,14 @@
   font-weight: bold;
 }
 
+.offset-icon {
+  margin: 7px 10px 0px 0px;
+}
+
+.highlighted-text {
+  text-decoration: underline #aa3b3b !important;
+}
+
 .title-hr {
   border-radius: 100px;
   color: #000000;
