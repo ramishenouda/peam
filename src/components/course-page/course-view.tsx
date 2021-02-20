@@ -73,7 +73,7 @@ const CourseView = (props: Props): JSX.Element => {
             }
             {
                 (tap === 2 && params.type_1 === undefined) &&
-                <Teams />
+                <Teams fetch={true} />
             }
             {
                 (tap === 3 && params.type_1 === undefined) &&

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button, Container } from 'react-bootstrap';
 
 export const CrossLine = styled.div`
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #ddd;
     border-radius: 100px;
     position: absolute;
     top: 50%;
@@ -13,18 +13,18 @@ export const CrossLine = styled.div`
 `
 
 export const ProjectRequirementTitle = styled.div`
-    font-family: Inconsolata;
     text-align: center;
     width: 85%;
     margin: 0 auto;
     position: relative;
     cursor: pointer;
     z-index: 1;
-
     span {
+        font-family: 'Inter';
         z-index: 3;
         border-radius: 50px;
-        padding: 0 5px;
+        padding: 10px 20px;
+        background: #ddd;
     }
 `;
 

@@ -46,27 +46,23 @@ export const Teams = (props: Props) => {
         <div className="mt-4">
             {
                 !props.hideSeparator &&
-                <ProjectRequirementTitle onClick={() => setShowTeams(!showTeams)} className="f2 mb-4">
-                    <span className="f1 bg-g-gray">{props.title}</span>
+                <ProjectRequirementTitle onClick={() => setShowTeams(!showTeams)} className="f2 my-5">
+                    <span className="f1 link">{props.title}</span>
                     <CrossLine></CrossLine>
                 </ProjectRequirementTitle>
             }
+            <div className="my-1">&nbsp;</div>
             {
-                !showTeams && 
-                <div className="text-center f3">
-                    Click on title to see teams.
-                </div>
+                (showTeams && data.length) &&
+                <TeamsContainer className="mt-3">
+                    { data }
+                </TeamsContainer>
             }
             {
-                (showTeams) &&
-                <TeamsContainer className="mt-3">
-                    {
-                        data.length ? data : 
-                        <div className="text-center f3">
-                            No teams yet.
-                        </div>
-                    }
-                </TeamsContainer>
+                (showTeams && !data.length) &&
+                <div className="text-center f1">
+                    No teams yet.
+                </div>
             }
         </div>
     );

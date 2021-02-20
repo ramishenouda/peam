@@ -147,8 +147,7 @@ export const GetCourseStudents = async (owner: string, courseCode: string, syste
 
 export const GetCourseTeams = async (owner: string, courseCode: string, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/
-    console.log('here');
-    options.url = baseURL + `courses/${owner}/${courseCode}/?expand=requirements&omit=*`
+    options.url = baseURL + `courses/${owner}/${courseCode}/requirements/?expand=teams.students`
     options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'GET';
 

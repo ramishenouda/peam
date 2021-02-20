@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { CourseState } from '../../../../store/course/types';
 import { SystemState } from '../../../../store/system/types';
 
@@ -9,7 +9,6 @@ import { Requirement } from '../../../../models/requirement';
 import { GetCourseTeams } from '../../../../services/course-service';
 
 import { Teams as View } from './teams-view';
-import { updateCourse } from '../../../../store/course/actions';
 
 type Props = {
     fetch?: boolean;
@@ -23,7 +22,6 @@ export const Teams = (props: Props) => {
     // const [filterdStudents, setFilterdTeams] = useState(Array<team>());
     // const [searchValue, setSearchValue] = useState('');
 
-    const dispatch = useDispatch();
     const courseState: CourseState = useSelector((state: any) => state.course);
     const systemState: SystemState = useSelector((state: any) => state.system);
 
@@ -31,7 +29,7 @@ export const Teams = (props: Props) => {
         if (props.fetch) {
             GetCourseTeams(courseState.owner, courseState.code, systemState)
             .then((result) => {
-                setProjectRequirements(result.data.teams);
+                setProjectRequirements(result.data.requirements);
             }).catch((err) => {
                 setError(true);
                 console.log(err);
@@ -54,6 +52,7 @@ export const Teams = (props: Props) => {
     } else if (error) {
         return <div> error </div>
     } else if(projectRequirements) {
+        console.log(projectRequirements)
         const Teams = projectRequirements.map((pr: Requirement, index: number) => 
             <View
                 title={pr.title}

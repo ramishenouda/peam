@@ -28,8 +28,8 @@ export const TeamItem = (props: Props) => {
     const remove = () => {
         confirmText(
             'You can\'t revert this', 
-            `You will delete everything the students did.
-                </br>type the team title to confirm: </br> <strong> ${props.name} </strong>`,
+            `You will delete everything the students have done.
+                </br>Type the team title to confirm: </br> <strong> ${props.name} </strong>`,
             'Team title'
         ).then(result => {
             if (!result.isConfirmed)
