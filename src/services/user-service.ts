@@ -65,7 +65,7 @@ export const SearchUsers = async (inputValue: string) => {
 depreacted
 export const GetCurrentUser = (): SystemState => {
     const token = localStorage.getItem('token');
-    let currentUser: SystemState = {loggedIn: false, session: '', username: '', full_name: ''};
+    let currentUser: SystemState = {loggedIn: false, session: '', username: '', name: ''};
 
     if (token) {
         var decoded: SystemState;

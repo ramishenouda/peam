@@ -4,7 +4,7 @@ const initialState: SystemState = {
   loggedIn: false,
   token: '',
   username: '',
-  full_name: '',
+  name: '',
   jwt_id: '',
   user_id: '',
 }

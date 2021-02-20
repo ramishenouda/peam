@@ -3,7 +3,7 @@ export interface SystemState {
     loggedIn: boolean;
     token: string;
     username: string;
-    full_name: string;
+    name: string;
     user_id: string;
     jwt_id: string;
 }

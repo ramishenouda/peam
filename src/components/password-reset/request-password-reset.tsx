@@ -8,7 +8,14 @@ import { UserForPasswordReset as User } from '../../models/user';
 import PasswordResetView from './request-password-reset-view'
 import { success } from '../../services/notification-service';
 
-export const RequestPasswordReset = () => {
+
+type Props = {
+    hideTitle?: boolean;
+    hideOptions?: boolean;
+}
+
+  
+export const RequestPasswordReset = (props: Props) => {
     const reset = (user: User) => {
         RequestReset(user)
             .then((result) => {
@@ -23,6 +30,8 @@ export const RequestPasswordReset = () => {
         <>
             <PasswordResetView
                 register={reset}
+                hideOptions={props.hideOptions}
+                hideTitle={props.hideTitle}
             />
         </>
     );

@@ -55,7 +55,7 @@ export const RespondCourse = (props: Props) => {
         RetreieveCourseInvitation(params.token)
             .then((result) => {
                 const email = result.data.email
-                setSender(result.data.sender.full_name === null ? result.data.sender.username : result.data.sender.full_name);
+                setSender(result.data.sender.name === null ? result.data.sender.username : result.data.sender.name);
                 setCourse(result.data.course.title + '|' + result.data.course.code);
 
                 if (systemState.username === '' || !systemState.loggedIn) {

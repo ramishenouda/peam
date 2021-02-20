@@ -27,10 +27,10 @@ function PasswordResetView(props: Props) {
   const { isValid } = formState;
 
   return (
-    <div className="login">
+  <div className="login">
       {
         (!props.hideTitle) &&
-        <h2 className="login-header">
+        <h2 className="login-header no-select">
           Reset your password
         </h2>
       }

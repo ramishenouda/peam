@@ -14,7 +14,7 @@ export const Logout = () => {
         localStorage.clear();
         success('Signed out successfully')
         dispatch(updateSession({
-            full_name: '',
+            name: '',
             jwt_id: '',
             loggedIn: false,
             token: '',

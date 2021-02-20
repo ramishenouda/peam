@@ -3,5 +3,5 @@ export interface Teacher {
     username: string;
     avatar: string;
     email: string;
-    full_name: string;
+    name: string;
 }

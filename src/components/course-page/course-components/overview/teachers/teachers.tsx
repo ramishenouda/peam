@@ -21,7 +21,7 @@ export const Teachers = (props: Props) => {
                         height='40px'
                     />
                     <Link to={"/" + item.username} className="link">
-                        { item.full_name ? item.full_name : item.username }
+                        { item.name ? item.name : item.username }
                     </Link>
                 </p>
             )

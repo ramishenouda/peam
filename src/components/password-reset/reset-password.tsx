@@ -6,7 +6,7 @@ import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { CircleLoader } from 'react-spinners';
 
 import { UserForPasswordReset as User } from '../../models/user';
@@ -14,6 +14,10 @@ import { SystemState } from '../../store/system/types';
 import { PasswordReset } from '../../services/auth-service';
 import { message, success } from '../../services/notification-service';
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
+
+import { Title } from '../settings/settings-style';
+import { Form } from './reset-password-style';
+
 
 interface Params {
     uid: string;
@@ -63,14 +67,16 @@ export const ResetPassword = (props: Props) => {
 
         PasswordReset(user)
             .then((result) => {
-                success('Password was reset successfully', '', () => {
-                    message("You can sign in with you new password now.");
-                });
                 if (systemState.username !== '') {
                     setRedirect(`/${systemState.username}`);
                 } else {
                     setRedirect(`/login`);
                 }
+                    success('Password was reset successfully', '', () => {
+                    if (redirect === `/login`) {
+                        message("You can sign in with you new password now.");
+                    }
+                });
             }).catch((err) => {
                 showAxiosResponseErrors(err);
                 setReseting(false);
@@ -82,10 +88,13 @@ export const ResetPassword = (props: Props) => {
 
     return (
         <Container className="p-5">
-            <h1 className="mb-3">
+            <Title className="mb-3 f1">
                 Reset Password
-            </h1>
-            <Form className="mt-2" onSubmit={handleSubmit(resetPassword)}>
+            </Title>
+            <Title className="f2 text-center">
+                Enter your new password
+            </Title>
+            <Form className="login" onSubmit={handleSubmit(resetPassword)}>
                 <Form.Group controlId="new_password1">
                     <Form.Label>New password:</Form.Label>
                     <Form.Control 

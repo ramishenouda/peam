@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { CircleLoader } from 'react-spinners';
 
 import { UserForUpdate as User } from '../../../models/user';
 
-import { Title, Description } from '../profile-style';
+import { Title, Description, Form } from '../settings-style';
+import { RequestPasswordReset } from '../../password-reset/request-password-reset';
 
 type Props = {
     
@@ -25,7 +26,7 @@ export const Security = (props: Props) => {
     const initialUser: User = {
         avatar: '',
         email: '',
-        full_name: '',
+        name: '',
         current_password: '',
         new_password1: '',
         new_password2: '',
@@ -53,14 +54,20 @@ export const Security = (props: Props) => {
     }
 
     return (
-        <Container>
-        <Title className="f1 no-select">
+        <Container className="login">
+        <Title className="f1 no-select text-left">
             Security
         </Title>
-        <Description className="f3 no-select">
-            Here you can change your password.
+        <Description className="f3 no-select text-left">
+            Here you can change or reset your password.
         </Description>
-        <Form className="mt-2" onSubmit={handleSubmit(updateUser)}>
+        <Container className="mt-4">
+        <Title className="no-select">
+            <h2>
+                Change your password
+            </h2>
+        </Title>
+        <Form className="mb-5 text-left" onSubmit={handleSubmit(updateUser)}>
             <Form.Group controlId="current_password">
                 <Form.Label>Current password: <span className="required-text">*</span></Form.Label>
                 <Form.Control 
@@ -69,6 +76,7 @@ export const Security = (props: Props) => {
                     name="current_password"
                     ref={register}
                     type="password"
+                    placeholder="Current password"
                 />
                 <p className="required-text"> { errors.current_password?.message } </p>
             </Form.Group>
@@ -79,7 +87,8 @@ export const Security = (props: Props) => {
                 onChange={handleChange} 
                 name="new_password1" 
                 ref={register}
-                type="password" 
+                type="password"
+                placeholder="New password"
             />
                 <p className="required-text"> { errors.new_password1?.message } </p>
             </Form.Group>
@@ -90,18 +99,24 @@ export const Security = (props: Props) => {
                     onChange={handleChange} 
                     name="new_password2" 
                     ref={register} 
-                    type="password" 
+                    type="password"
+                    placeholder="Confirm new password"
                 />
                 <p className="required-text"> {errors.new_password2?.message} </p>
             </Form.Group>
-            {updatingUser? (
-            <CircleLoader size={35} color={"#1a1a1a"} loading={updatingUser} />
-            ) : (
-            <Button variant="dark" type="submit" disabled={ !isValid }>
-                Update my security
-            </Button>
-            )}
+            <Form.Group className="text-center">
+                {updatingUser? (
+                <CircleLoader size={35} color={"#1a1a1a"} loading={updatingUser} />
+                ) : (
+                <Button variant="dark" type="submit" disabled={ !isValid }>
+                    Update my security
+                </Button>
+                )}
+            </Form.Group>
         </Form>
+        </Container>
+        <hr/>
+        <RequestPasswordReset hideOptions={true} />
       </Container>
     );
 };

@@ -2,7 +2,7 @@ export interface User {
     uid: string;
     username: string;
     email: string;
-    full_name: string;
+    name: string;
     avatar: string;
 }
 
@@ -27,7 +27,7 @@ export interface UserForLogin {
 
 export interface UserForUpdate {
     uid: string;
-    full_name: string;
+    name: string;
     email: string;
     avatar: string;
     current_password: string;
