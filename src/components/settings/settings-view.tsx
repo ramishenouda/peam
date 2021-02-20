@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { SettingsNavbar } from './settings-navbar';
 import { Profile, Security } from './components/';
 import { Container } from './settings-style';
+import { User } from '../../models/user';
 
 interface Props {
+    user: User;
 }
 
 export const SettingsView = (props: Props) => {
@@ -15,7 +17,7 @@ export const SettingsView = (props: Props) => {
             <SettingsNavbar active={tab} setTab={setTab} />
             {
                 tab === 0 &&
-                <Profile />
+                <Profile user={props.user} />
             }
             {
                 tab === 1 &&

@@ -46,7 +46,7 @@ export const Teams = (props: Props) => {
         <div className="mt-4">
             {
                 !props.hideSeparator &&
-                <ProjectRequirementTitle onClick={() => setShowTeams(!showTeams)} className="f2 my-5">
+                <ProjectRequirementTitle onClick={() => setShowTeams(!showTeams)} className="f2 mt-5">
                     <span className="f1 link">{props.title}</span>
                     <CrossLine></CrossLine>
                 </ProjectRequirementTitle>

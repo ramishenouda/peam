@@ -7,7 +7,7 @@ import * as yup from 'yup';
 import { Button, Container } from 'react-bootstrap';
 import { CircleLoader } from 'react-spinners';
 
-import { UserForUpdate as User } from '../../../models/user';
+import { UserForSecurityUpdate as User } from '../../../models/user';
 
 import { Title, Description, Form } from '../settings-style';
 import { RequestPasswordReset } from '../../password-reset/request-password-reset';
@@ -24,13 +24,9 @@ const SignupSchema = yup.object().shape({
 
 export const Security = (props: Props) => {
     const initialUser: User = {
-        avatar: '',
-        email: '',
-        name: '',
         current_password: '',
         new_password1: '',
-        new_password2: '',
-        uid: ''
+        new_password2: ''
     }
 
     const [user, setUser] = useState(initialUser);
@@ -50,7 +46,6 @@ export const Security = (props: Props) => {
 
     const updateUser = () => {
         setUpdatingUser(true);
-        console.log(user);
     }
 
     return (
