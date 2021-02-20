@@ -49,7 +49,7 @@ export const Profile = (props: Props) => {
         mode: "all",
         resolver: yupResolver(SignupSchema)
     });
-    
+
     const { isValid } = formState;
 
     useEffect(() => {

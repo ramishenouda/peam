@@ -21,7 +21,6 @@ export const Logout = () => {
             user_id: '',
             username: ''
         }));
-        window.location.reload();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

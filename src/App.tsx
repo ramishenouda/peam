@@ -17,7 +17,8 @@ import RegisterPage from './components/register/register-container';
 import { ActivateAccount } from './components/responses/activate-account';
 import LoginPage from './components/login/login-container';
 import { Logout } from './components/logout/logout';
-import PasswordResetPage from './components/password-reset/password-reset-container';
+import { RequestPasswordReset } from './components/password-reset/request-password-reset';
+import { ResetPassword } from './components/password-reset/reset-password';
 import { NewCourse } from './components/course-new/new-course-container';
 import CoursePage from './components/course-page/course-container';
 import { RespondCourse } from './components/responses/course-invitation';
@@ -69,7 +70,8 @@ const App = () => {
                 <Route exact path="/signup/email/verify/:key" render={() => <AnonymousRoute component={ActivateAccount} />} />
                 <Route path="/login/:query?" render={() => <AnonymousRoute component={LoginPage}/>} />
                 <Route exact path="/logout" render={() => <ProtectedRoute redirectTo="/login" component={Logout} />} />
-                <Route exact path="/password_reset" render={() => <AnonymousRoute component={PasswordResetPage} /> } />
+                <Route exact path="/password_reset" render={() => <RequestPasswordReset /> } />
+                <Route exact path="/password/reset/confirm/:uid/:token" render={() => <ResetPassword /> } />
                 <Route exact path="/new" render={() => <ProtectedRoute redirectTo="/login" component={NewCourse} />} />
                 <Route exact path="/:username" render={() => <Profile />} />
                 <Route exact path="/:owner/:code" render={() => <ProtectedRoute redirectTo="/login" component={CoursePage} />} />

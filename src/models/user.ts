@@ -34,3 +34,11 @@ export interface UserForUpdate {
     new_password1: string;
     new_password2: string;
 }
+
+export interface UserForPasswordReset {
+    uid: string;
+    email: string;
+    token: string;
+    new_password1: string;
+    new_password2: string;
+}

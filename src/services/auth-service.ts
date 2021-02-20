@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
-import { UserForLogin, UserForRegistration } from "../models/user";
+import { UserForLogin, UserForPasswordReset, UserForRegistration } from "../models/user";
 
 const baseURL = process.env.REACT_APP_API_URI;
 
@@ -63,4 +63,22 @@ export const Verify = async (key: string) => {
     };
 
     return (await axios(options));
+}
+
+export const RequestPasswordReset = async(user: UserForPasswordReset) => {
+    // http://localhost:8000/api/v1/auth/password/reset/
+    options.url = baseURL + 'auth/password/reset/';
+    options.method = 'POST';
+    options.data = user;
+
+    return (await axios(options));
+}
+
+export const PasswordReset = async(user: UserForPasswordReset) => {
+    // http://localhost:8000/api/v1/auth/password/reset/confirm/
+    options.url = baseURL + 'auth/password/reset/confirm/';
+    options.method = 'POST';
+    options.data = user;
+
+    return (await axios(options));        
 }

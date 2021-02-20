@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom';
 
 import { Button, Container, Form } from 'react-bootstrap';
 
-import { UserForRegistration as User } from '../../models/user';
-import './password-reset-styles.css';
+import { UserForPasswordReset as User } from '../../models/user';
 
 type Props = {
   register: (user: User) => void
+  hideTitle?: boolean;
+  hideOptions?: boolean;
 }
 
 const SignupSchema = yup.object().shape({
@@ -27,9 +28,12 @@ function PasswordResetView(props: Props) {
 
   return (
     <div className="login">
-      <h2 className="login-header">
-        Reset your password
-      </h2>
+      {
+        (!props.hideTitle) &&
+        <h2 className="login-header">
+          Reset your password
+        </h2>
+      }
       <Container>
         <Form className="login-form md-lg-8 mb-5" onSubmit={handleSubmit(props.register)}>
           <Form.Group controlId="username">
@@ -42,11 +46,14 @@ function PasswordResetView(props: Props) {
           </Button>
         </Form>
       </Container>
-      <Container className={`register-to-peam text-center`}>
-      <Link to="/join" className="link">Create an account</Link>
-        |
-      <Link to="/login" className="link">Login</Link>
-      </Container>
+      {
+        (!props.hideOptions) &&
+        <Container className={`register-to-peam text-center`}>
+          <Link to="/join" className="link">Create an account</Link>
+            |
+          <Link to="/login" className="link">Login</Link>
+        </Container>
+      }
     </div>
   );
 }
