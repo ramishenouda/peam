@@ -51,53 +51,12 @@ export const RespondCourse = (props: Props) => {
     }
 
     useEffect(() => {
-        // getting the email and other data from the invitation
-        RetreieveCourseInvitation(params.token)
-            .then((result) => {
-                const email = result.data.email
-                setSender(result.data.sender.name === null ? result.data.sender.username : result.data.sender.name);
-                setCourse(result.data.course.title + '|' + result.data.course.code);
+        if (systemState.username === '' || !systemState.loggedIn) {
+            message(`Login or register to peam to be able to join the course`)
+            setRedirect('/login');
+            return;
+        }
 
-                if (systemState.username === '' || !systemState.loggedIn) {
-                    message(`Login or register to peam to be able to join the course`)
-                    setRedirect('/login');
-                    return;
-                }
-
-                // search using the email to get the username and compare current logged in user.
-                if (email.length > 0) {
-                    SearchUsers(email)
-                        .then((result) => {
-                            if (result.data.users.length < 1) {
-                                console.log(result);
-                                error("You don't have access to this page");
-                                setRedirect('/')
-                                return;
-                            }
-
-                            const username = result.data.users[0].username
-                            if (username) {
-                                // if its not the invited user
-                                if (username !== systemState.username) {
-                                    console.log('error2');
-                                    error("You don't have access to this page");
-                                    setRedirect('/');
-                                }
-                            }
-                        }).catch((err) => {
-                            showAxiosResponseErrors(err);
-                            setRedirect('/');
-                        });
-
-                    setFetching(false);
-                } else {
-                    setRedirect('/');
-                }
-
-            }).catch((err) => {
-                showAxiosResponseErrors(err);
-                setRedirect('/');
-            });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -105,15 +64,6 @@ export const RespondCourse = (props: Props) => {
         return <Redirect to={redirect} />
     }
 
-    if (fetching) {
-        return  (
-            <Container className="text-center my-5 py-5">
-                <div className="f1 text-center mb-4">
-                    Loading....
-                </div>
-            </Container>
-        )
-    }
     return (
         <Container className="text-center my-5 py-5">
             <div className="f1 text-center mb-4">

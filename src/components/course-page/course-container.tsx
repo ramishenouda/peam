@@ -97,8 +97,7 @@ function Course () {
     } else if (error) {
         data = <div> Error.... </div>
     } else {
-        data =
-            <CourseView />
+        data = <CourseView />
     }
 
     return (

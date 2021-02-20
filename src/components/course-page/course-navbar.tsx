@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { Navbar } from 'react-bootstrap';
 
@@ -13,6 +14,7 @@ import { CourseState } from '../../store/course/types';
 type Props = {
     active: number,
     tabHandler: (tab: number) => void,
+    type?: string;
 }
 
 export default function CourseNavbar(props: Props): JSX.Element {
@@ -21,26 +23,36 @@ export default function CourseNavbar(props: Props): JSX.Element {
 
     return (
         <Navbar className="course-navbar">
-            <span onClick={() => props.tabHandler(0)} className={`course-nav-item ${props.active === 0 && 'active-tab'}`}>
-                <ImportContactsIcon className="material-ui-icon"/> Overview
-            </span>
-            <span onClick={() => props.tabHandler(1)} className={`course-nav-item ${props.active === 1 && 'active-tab'} ml-5`}>
-                <PeopleIcon className="material-ui-icon"/> Students
-            </span>
-            <span onClick={() => props.tabHandler(2)} className={`course-nav-item ${props.active === 2 && 'active-tab'} ml-5`}>
-                <GroupWorkIcon className="material-ui-icon"/> Teams
-            </span>
+            <Link to={`/${courseState.owner}/${courseState.code}`} className="disable-link-style">
+                <span onClick={() => props.tabHandler(0)} className={`course-nav-item ${(props.active === 0 && !props.type)&& 'active-tab'}`}>
+                    <ImportContactsIcon className="material-ui-icon"/> Overview
+                </span>
+            </Link>
+            <Link to={`/${courseState.owner}/${courseState.code}`} className="disable-link-style">
+                <span onClick={() => props.tabHandler(1)} className={`course-nav-item ${(props.active === 1 && !props.type)&& 'active-tab'} ml-5`}>
+                    <PeopleIcon className="material-ui-icon"/> Students
+                </span>
+            </Link>
+            <Link to={`/${courseState.owner}/${courseState.code}`} className="disable-link-style">
+                <span onClick={() => props.tabHandler(2)} className={`course-nav-item ${(props.active === 2 && !props.type)&& 'active-tab'} ml-5`}>
+                    <GroupWorkIcon className="material-ui-icon"/> Teams
+                </span>
+            </Link>
             {
                 courseState.role === 'teacher' &&
-                <span onClick={() => props.tabHandler(3)} className={`course-nav-item ${props.active === 3 && 'active-tab'} ml-5`}>
-                    <AssessmentIcon className="material-ui-icon"/> Reports 
-                </span>
+                <Link to={`/${courseState.owner}/${courseState.code}`} className="disable-link-style">
+                    <span onClick={() => props.tabHandler(3)} className={`course-nav-item ${(props.active === 3 && !props.type)&& 'active-tab'} ml-5`}>
+                        <AssessmentIcon className="material-ui-icon"/> Reports 
+                    </span>
+                </Link>
             }
             {
                 courseState.role === 'teacher' &&
-                <span onClick={() => props.tabHandler(4)} className={`course-nav-item ${props.active === 4 && 'active-tab'} ml-5 mr-4`}>
-                    <SettingsIcon className="material-ui-icon"/> Settings
-                </span>
+                <Link to={`/${courseState.owner}/${courseState.code}`} className="disable-link-style">
+                    <span onClick={() => props.tabHandler(4)} className={`course-nav-item ${(props.active === 4 && !props.type)&& 'active-tab'} ml-5 mr-4`}>
+                        <SettingsIcon className="material-ui-icon"/> Settings
+                    </span>
+                </Link>
             }
             <span className="">&nbsp;</span>
         </Navbar>

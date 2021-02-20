@@ -124,14 +124,15 @@ export const RespondToCourseInvitation = async (invToken: string, status: string
     options.data = {
         "status": status
     }
-
+    
     return (await axios(options));
 }
 
-export const RetreieveCourseInvitation = async (invToken: string) => {
+export const RetreieveCourseInvitation = async (invToken: string, token: string) => {
     // http://localhost:8000/api/v1/courses/invitations/{token}/
     options.url = baseURL + `courses/invitations/${invToken}?expand=sender&expand=course`
     options.method = 'GET';
+    options.headers["Authorization"] = "Bearer " + token;
 
     return (await axios(options));
 }

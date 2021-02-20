@@ -6,8 +6,7 @@
 }
 
 .navbar .navbar-item, .navbar .navbar-search {
-    font-weight: 300;
-    font-family: Inter, 'Roboto', Inconsolata, sans-serif;
+    font-family: 'Inter', 'Roboto', Inconsolata, sans-serif;
     border-radius: 4px;
     font-size: larger;
     display: block;

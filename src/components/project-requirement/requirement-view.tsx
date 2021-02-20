@@ -11,7 +11,8 @@ import { Title, Description } from './requirement-style';
 interface Params {
     owner: string;
     code: string;
-    title: string;
+    type: string;
+    title_1: string;
 }
 
 type Props = {

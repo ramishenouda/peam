@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { SystemState } from '../../store/system/types';
 import { GetRequirement } from '../../services/requirement-service';
 
-import { Requirement } from '../../models/requirement';
+import { Requirement as requirement } from '../../models/requirement';
 
 import { RequirementView } from './requirement-view';
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
@@ -15,16 +15,18 @@ type Props = {
 };
 
 interface Params {
-    owner: string;
     code: string;
-    title: string;
+    owner: string;
+    type: string;
+    title_1: string;
+    title_2: string;
 }
 
-export const RequirementContainer = (props: Props) => {
+export const Requirement = (props: Props) => {
     const params: Params = useParams();
     const systemState: SystemState = useSelector((state: any) => state.system);
 
-    const initialReq: Requirement = {
+    const initialReq: requirement = {
         attachments: [],
         course: '',
         description: '',
@@ -40,13 +42,15 @@ export const RequirementContainer = (props: Props) => {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        GetRequirement(params.owner, params.code, params.title, systemState)
-            .then((result) => {
-                setRequirement(result.data);
-            }).catch((err) => {
-                showAxiosResponseErrors(err)
-                setError(true);
-            }).finally(() => setFetching(false));
+        console.log(params);
+
+        // GetRequirement(params.owner, params.code, params.title_1, systemState)
+        //     .then((result) => {
+        //         setRequirement(result.data);
+        //     }).catch((err) => {
+        //         showAxiosResponseErrors(err)
+        //         setError(true);
+        //     }).finally(() => setFetching(false));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

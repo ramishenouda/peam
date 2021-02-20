@@ -1,17 +1,28 @@
 import { useState, useEffect } from 'react'
-import CourseNavbar from './course-navbar';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 import { CourseState } from '../../store/course/types';
 
+import CourseNavbar from './course-navbar';
 import { OverView } from './course-components/overview/overview-container';
 import { Students } from './course-components/students/students-container';
 import { Teams } from './course-components/teams/teams-container';
 import { Settings } from './course-components/settings/settings-container';
 
 import './course-style.css'
-import { useSelector } from 'react-redux';
+import { Requirement } from '../project-requirement/requirement';
 
 type Props = {
+}
+
+interface Params {
+    code: string;
+    owner: string;
+    type: string;
+    title_1: string;
+    title_2: string;
 }
 
 const CourseView = (props: Props): JSX.Element => {
@@ -19,6 +30,7 @@ const CourseView = (props: Props): JSX.Element => {
 
     const [tap, setTap] = useState(0);
     const [windowSize, setWindowSize] = useState(window.innerWidth);
+    const params: Params = useParams();
 
     useEffect(() => {
         window.addEventListener('resize', setSize);
@@ -46,28 +58,35 @@ const CourseView = (props: Props): JSX.Element => {
             <CourseNavbar 
                 active={tap}
                 tabHandler={setTap}
+                type={params.type}
             />
         </header>
         <main>
-            {tap === 0 &&
+            {
+                (tap === 0 && params.type === undefined) &&
                 <OverView />
             }
-            {tap === 1 &&
+            {
+                (tap === 1 && params.type === undefined) &&
                 <Students />
             }
             {
-                tap === 2 &&
+                (tap === 2 && params.type === undefined) &&
                 <Teams />
             }
             {
-                tap === 3 &&
+                (tap === 3 && params.type === undefined) &&
                 <div className="f1 mt-5 text-center">
                     Next Semester
                 </div>
             }
             {
-                tap === 4 &&
+                (tap === 4 && params.type === undefined) &&
                 <Settings />
+            }
+            {
+                tap === 5 &&
+                <Requirement />
             }
         </main>
         </>
