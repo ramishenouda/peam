@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+// import { useForm } from 'react-hook-form'
+// import { yupResolver } from '@hookform/resolvers/yup';
+// import * as yup from 'yup';
 
 
 import { Button, Container } from 'react-bootstrap';
-import { TeamForCreation as Team } from '../../../models/team';
+// import { TeamForCreation as Team } from '../../../models/team';
 
 
 type Props = {
@@ -23,31 +23,31 @@ interface Params {
     title_2: string;
 }
 
-const Schema = yup.object().shape({
-    name: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.')
-        .test('Doesn\'t contain special characters test', 'Title can only contain @ and # as special characters', (value) => {
-            return !value?.match(/[$-/:-?{-~!"^_`[\]]/);
-        }),
-    code: yup.string().required('Code is a required field').max(10, 'Ensure this field has no more than 10 characters.')
-        .test('Doesn\'t contain special characters test', 'Code can\'t contain any special characters', (value) => {
-        return !value?.match(/[_\W]/)
-    }),
-    description: yup.string(),
-});
+// const Schema = yup.object().shape({
+//     name: yup.string().required('Title is a required field').max(50, 'Ensure this field has no more than 50 characters.')
+//         .test('Doesn\'t contain special characters test', 'Title can only contain @ and # as special characters', (value) => {
+//             return !value?.match(/[$-/:-?{-~!"^_`[\]]/);
+//         }),
+//     code: yup.string().required('Code is a required field').max(10, 'Ensure this field has no more than 10 characters.')
+//         .test('Doesn\'t contain special characters test', 'Code can\'t contain any special characters', (value) => {
+//         return !value?.match(/[_\W]/)
+//     }),
+//     description: yup.string(),
+// });
 
 export const CreateTeam = (props: Props) => {
     const params: Params = useParams();
 
-    const { register , handleSubmit, errors, formState } = useForm<Team>({
-        mode: "all",
-        resolver: yupResolver(Schema)
-    });
+    // const { register , handleSubmit, errors, formState } = useForm<Team>({
+    //     mode: "all",
+    //     resolver: yupResolver(Schema)
+    // });
 
-    const { isValid } = formState;
+    // const { isValid } = formState;
 
-    const submit = () => {
-        // props.createCourse({title, code, description});
-    }
+    // const submit = () => {
+    //     // props.createCourse({title, code, description});
+    // }
 
     return (
         <Container className="mt-3">

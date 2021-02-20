@@ -33,3 +33,14 @@ export const CreateTeam = async (owner: string, courseCode: string, reqTitle: st
 
     return (await axios(options));
 }
+
+export const DeleteTeam = async (owner: string, courseCode: string, reqTitle: string, system: SystemState, team: string) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/teams/{team_name}/
+
+    options.url = baseURL + `courses/${owner}/${courseCode}/requirements/${reqTitle}/teams/${team}`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'DELETE';
+
+    return (await axios(options));
+}
+

@@ -20,7 +20,6 @@ export const GetRequirement = async (owner: string, courseCode: string, requirem
     options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'GET';
 
-    console.log('here')
     return (await axios(options));
 }
 

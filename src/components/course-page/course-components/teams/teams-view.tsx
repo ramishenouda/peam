@@ -19,24 +19,28 @@ type Props = {
 export const Teams = (props: Props) => {
     // const courseState: CourseStateate = useSelector((state: any) => state.course);
     const [showTeams, setShowTeams] = useState(props.index === 0);
-    const [teams, setTeams] = useState(Array<JSX.Element>());
+    const [teams, setTeams] = useState(Array<team>());
+
+    const removeTeam = (name: string) => {
+        const newTeams = teams.filter(x => x.name === name); 
+        setTeams(newTeams);
+    }
 
     useEffect(() => {
-        const getData = () => {
-            return props.teams.map((team) => {
-                return <TeamItem
-                    students={team.students}
-                    name={team.name}
-                    key={team.uid}
-                />
-            }
-            )
-        }
+        setTeams(props.teams);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-        if (showTeams) {
-            setTeams(getData());
-        }
-    }, [showTeams, props.teams])
+    const data = teams.map(team => {
+        return <TeamItem
+            students={team.students}
+            name={team.name}
+            key={team.uid}
+            role={props.role}
+            reqTitle={props.title}
+            removeTeam={removeTeam}
+        />
+    })
 
     return (
         <div className="mt-4">
@@ -57,7 +61,7 @@ export const Teams = (props: Props) => {
                 (showTeams) &&
                 <TeamsContainer className="mt-3">
                     {
-                        teams.length ? teams : 
+                        data.length ? data : 
                         <div className="text-center f3">
                             No teams yet.
                         </div>

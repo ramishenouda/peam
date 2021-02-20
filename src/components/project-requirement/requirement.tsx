@@ -8,7 +8,7 @@ import { CourseState } from '../../store/course/types';
 
 import { GetRequirement } from '../../services/requirement-service';
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
-import { confirmText, error as Error } from '../../services/notification-service';
+import { confirmText, error as Error, success } from '../../services/notification-service';
 import { CreateTeam } from '../../services/team-servce';
 
 import { TeamForCreation as Team } from '../../models/team';
@@ -49,12 +49,9 @@ export const Requirement = (props: Props) => {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        console.log(params);
-
         GetRequirement(params.owner, params.code, params.title_1, systemState)
             .then((result) => {
                 setRequirement(result.data);
-                console.log(result);
             }).catch((err) => {
                 showAxiosResponseErrors(err)
                 setError(true);
@@ -71,8 +68,7 @@ export const Requirement = (props: Props) => {
                 const teamName = result.value;
                 if (!teamName) {
                     Error('Team name can\'t be empty or undefined');
-                } else if (teamName.match(/[_\W]/)) {
-                    Error('Team name can\'t contain special characters');
+                    return;
                 }
 
                 const team: Team = {
@@ -82,7 +78,10 @@ export const Requirement = (props: Props) => {
 
                 CreateTeam(courseState.owner, courseState.code, requirement.title, systemState, team)
                     .then((result) => {
-                        console.log(result);
+                        success('Team created successfully');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 500);
                     }).catch((err) => {
                         showAxiosResponseErrors(err)
                     });

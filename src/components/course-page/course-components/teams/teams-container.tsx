@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CourseState } from '../../../../store/course/types';
 import { SystemState } from '../../../../store/system/types';
 
@@ -9,6 +9,7 @@ import { Requirement } from '../../../../models/requirement';
 import { GetCourseTeams } from '../../../../services/course-service';
 
 import { Teams as View } from './teams-view';
+import { updateCourse } from '../../../../store/course/actions';
 
 type Props = {
     fetch?: boolean;
@@ -22,6 +23,7 @@ export const Teams = (props: Props) => {
     // const [filterdStudents, setFilterdTeams] = useState(Array<team>());
     // const [searchValue, setSearchValue] = useState('');
 
+    const dispatch = useDispatch();
     const courseState: CourseState = useSelector((state: any) => state.course);
     const systemState: SystemState = useSelector((state: any) => state.system);
 
@@ -46,7 +48,6 @@ export const Teams = (props: Props) => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [courseState.owner, courseState.code])
-
 
     if (fetching) {
         return <div> Loading </div>
