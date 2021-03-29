@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import { Div } from '../../course-page/course-components/settings/settings-components/teachers/style';
 
-import { Description, Title } from '../settings-style';
+import { Title } from '../settings-style';
 
 type Props = {
     options: {}

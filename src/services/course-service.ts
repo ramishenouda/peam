@@ -180,3 +180,12 @@ export const DeleteCourseStudent = async (owner: string, courseCode: string, cou
 
     return (await axios(options));
 }
+
+export const DeleteCourse = async (owner: string, courseCode: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}//
+    options.url = baseURL + `courses/${owner}/${courseCode}/`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'DELETE';
+
+    return (await axios(options));
+}

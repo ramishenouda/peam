@@ -3,7 +3,6 @@ import { Button } from 'react-bootstrap';
 
 
 import { Requirement } from '../../models/requirement';
-import { Attachments } from '../course-page/course-components/overview/attachments/attachments';
 import { DDate } from '../course-page/course-components/settings/settings-components/requirements/requirement-style';
 import { Teams } from '../course-page/course-components/teams/teams-container';
 
@@ -94,12 +93,12 @@ export const RequirementView = (props: Props) => {
                         <Description >{ props.requirement.description }</Description>
                     </div>
                     <hr />
-                    <div className="mt-4">
+                    {/* <div className="mt-4">
                         <Title className='f2'>
                             Attachments
                         </Title>
                         <Attachments attachments={ props.requirement.attachments }/>
-                    </div>
+                    </div> */}
                 </div>
             </Container>
         </div>

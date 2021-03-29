@@ -41,6 +41,7 @@ const App = () => {
                         }
                     }).catch((err) => {
                         localStorage.removeItem('refresh_token');
+                        localStorage.clear();
                         window.location.reload();
                     }).finally(() => {
                         setFetchingToken(false);

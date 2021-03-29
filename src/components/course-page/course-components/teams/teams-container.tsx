@@ -52,7 +52,6 @@ export const Teams = (props: Props) => {
     } else if (error) {
         return <div> error </div>
     } else if(projectRequirements) {
-        console.log(projectRequirements)
         const Teams = projectRequirements.map((pr: Requirement, index: number) => 
             <View
                 title={pr.title}

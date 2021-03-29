@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { SettingsNavbar } from './settings-navbar';
 import { Profile, Security, Courses, Teams } from './components/';
 import { Container } from './settings-style';
-import { useParams } from 'react-router-dom';
 
 interface Props {
     tab: number;

@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import reportWebVitals from './reportWebVitals';
 
-import { Router } from 'react-router-dom'
-import { createBrowserHistory } from "history";
+import { BrowserRouter } from 'react-router-dom'
 
 import { Provider } from 'react-redux'
 import configureStore from './store/redux';
@@ -14,16 +13,15 @@ import './index.css';
 import App from './App';
 
 
-const hist = createBrowserHistory();
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router history={hist}>
+    <BrowserRouter basename="/">
       <Provider store={store}>
         <App />
       </Provider>
-    </Router>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

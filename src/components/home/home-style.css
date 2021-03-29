@@ -1,4 +1,9 @@
 #home {
+  position: fixed;
   background-color: #f9f9fa !important;
-  padding: 15px;
+  background-size: cover;
+  font-size: 25vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

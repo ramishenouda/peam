@@ -63,7 +63,7 @@ export const SearchUsers = async (inputValue: string) => {
 
 export const GetUserProfile = async(username: string, token: string) => {
     // http://localhost:8000/api/v1/users/{username}/
-    options.url = baseURL + `user/profile/?expand=courses&expand=teams&expand=courses.owner`
+    options.url = baseURL + `user/profile/?expand=*&expand=courses.owner&expand=as_teacher_set.owner&expand=as_student_set.owner`
     options.method = "GET";
     options.headers["Authorization"] = "Bearer " + token;
     options.headers["Content-Type"] = "application/json"

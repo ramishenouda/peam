@@ -42,6 +42,8 @@ export const Teams = (props: Props) => {
         />
     })
 
+    const showData = showTeams && data.length;
+
     return (
         <div className="mt-4">
             {
@@ -53,10 +55,10 @@ export const Teams = (props: Props) => {
             }
             <div className="my-1">&nbsp;</div>
             {
-                (showTeams && data.length) &&
+                showData ?
                 <TeamsContainer className="mt-3">
                     { data }
-                </TeamsContainer>
+                </TeamsContainer> : ''
             }
             {
                 (showTeams && !data.length) &&
