@@ -1,3 +1,4 @@
+import { Container } from 'react-bootstrap';
 import './home-style.css'
 
 interface Props {
@@ -7,9 +8,11 @@ interface Props {
 function Home(props: Props): JSX.Element {
     return (
         <>
-        <div id="home">
-            PEAM
-        </div>
+        <Container fluid id="home">
+            <div className="text-center no-select">
+                PEAM
+            </div>
+        </Container>
         </>
     )
 }

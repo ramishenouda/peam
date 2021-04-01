@@ -7,7 +7,11 @@ import { SystemState } from '../../../../store/system/types';
 import { StudentForCourseList as student } from '../../../../models/student';
 import { GetCourseStudents } from '../../../../services/course-service';
 
+import { confirm, success } from '../../../../services/notification-service';
+import { DeleteCourseStudent } from '../../../../services/course-service';
+
 import { Students as View } from './students-view'
+import { showAxiosResponseErrors } from '../../../../services/error-handler-service';
 
 
 export const Students = () => {
@@ -19,6 +23,25 @@ export const Students = () => {
 
     const courseState: CourseState = useSelector((state: any) => state.course);
     const systemState: SystemState = useSelector((state: any) => state.system);
+
+    const remove = (username: string, name: string) => {
+        confirm('', `Are you sure you want to remove </br> <strong> 
+            ${name ? name : username} </strong> 
+            </br> he will be removed from any team he is in.`
+        ).then(result => {
+            if (!result.isConfirmed) {
+                return;
+            }
+
+            DeleteCourseStudent(courseState.owner, courseState.code, username, systemState)
+                .then((result) => {
+                    success('Student was removed successfully');
+                    setStudents(prevState => prevState.filter(x => x.username !== username));
+                }).catch((err) => {
+                    showAxiosResponseErrors(err);
+                });
+        })
+    }
 
     useEffect(() => {
         let canUnload = false;
@@ -50,11 +73,11 @@ export const Students = () => {
         }
 
         const filterdStudents = students.filter(student => {
-            if (!student.fullName)
-                student.fullName = '';
+            if (!student.name)
+                student.name = '';
 
             return searchValue.trimStart().toLowerCase() === (
-                student.fullName.slice(0, searchValue.length).toLowerCase() || student.username.slice(0, searchValue.length).toLowerCase()
+                student.name.slice(0, searchValue.length).toLowerCase().trim() || student.username.slice(0, searchValue.length).toLowerCase().trim()
             )
         })
 
@@ -73,6 +96,7 @@ export const Students = () => {
                 filteredStudents={filterdStudents}
                 searchValue={searchValue}
                 role={courseState.role}
+                remove={remove}
             />
         )
     }

@@ -82,3 +82,17 @@ export const PasswordReset = async(user: UserForPasswordReset) => {
 
     return (await axios(options));        
 }
+
+export const PasswordChange = async(old_password: string, new_password1: string, new_password2: string, token: string) => {
+    // http://localhost:8000/api/v1/user/password/change/
+    options.url = baseURL + 'user/password/change/';
+    options.method = 'POST';
+    options.headers["Authorization"] = "Bearer " + token;
+    options.data = {
+        old_password: old_password,
+        new_password1: new_password1,
+        new_password2: new_password2
+    };
+
+    return (await axios(options));        
+}

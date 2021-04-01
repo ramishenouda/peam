@@ -77,7 +77,7 @@ export const Students = (props: Props) => {
                     for(let i = 0; i < fails.length; i++) {
                         message += fails[i].email + '</br>';
                     }
-                    error('The following emails coudln\'t be invited', message);
+                    error('The following emails couldn\'t be invited', message);
                 }
             }).catch((err) => {
                 showAxiosResponseErrors(err);

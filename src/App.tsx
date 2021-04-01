@@ -22,7 +22,6 @@ import { ResetPassword } from './components/password-reset/reset-password';
 import { NewCourse } from './components/course-new/new-course-container';
 import CoursePage from './components/course-page/course-container';
 import { RespondCourse } from './components/responses/course-invitation';
-import { RequirementContainer } from './components/project-requirement/requirement-container';
 import { Settings } from './components/settings/settings';
 
 const App = () => {
@@ -42,6 +41,7 @@ const App = () => {
                         }
                     }).catch((err) => {
                         localStorage.removeItem('refresh_token');
+                        localStorage.clear();
                         window.location.reload();
                     }).finally(() => {
                         setFetchingToken(false);
@@ -68,15 +68,14 @@ const App = () => {
                 <Route exact path="/" render={() => <HomePage />} />
                 <Route exact path="/join" render={() => <AnonymousRoute component={RegisterPage}/>} />
                 <Route exact path="/signup/email/verify/:key" render={() => <AnonymousRoute component={ActivateAccount} />} />
+                <Route exact path="/user/:query" render={() => <Settings />} />
                 <Route path="/login/:query?" render={() => <AnonymousRoute component={LoginPage}/>} />
                 <Route exact path="/logout" render={() => <ProtectedRoute redirectTo="/login" component={Logout} />} />
                 <Route exact path="/password_reset" render={() => <RequestPasswordReset /> } />
                 <Route exact path="/password/reset/confirm/:uid/:token" render={() => <ResetPassword /> } />
                 <Route exact path="/new" render={() => <ProtectedRoute redirectTo="/login" component={NewCourse} />} />
-                <Route exact path="/:username/settings" render={() => <Settings />} />
-                <Route exact path="/:owner/:code" render={() => <ProtectedRoute redirectTo="/login" component={CoursePage} />} />
-                <Route exact path="/:owner/:code/requirements/:title" render={() => <ProtectedRoute redirectTo="/login" component={RequirementContainer} />} />
                 <Route exact path="/courses/invitations/:token" render={() => <ProtectedRoute redirectTo="/login" component={RespondCourse} />} />
+                <Route exact path="/:owner/:code/:type_1?/:title_1?/:type_2?/:title_2?" render={() => <ProtectedRoute redirectTo="/login" component={CoursePage} />} />
                 <Route render={() => <Redirect to={{ pathname: '/' }} />} />
             </Switch>
         </React.Fragment>

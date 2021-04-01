@@ -13,7 +13,6 @@ const options: AxiosRequestConfig = {
     url: '',
     headers: {
         "Accept": 'application/json',
-        "Content-Type": "application/json",
     },
     data: { }
 };
@@ -56,28 +55,47 @@ export const getCurrentUser = (token: string, refreshToken: string): SystemState
 export const SearchUsers = async (inputValue: string) => {
     // http://localhost:8000/api/v1/users/?search=ramishenouda
     options.url = baseURL + `users/?search=${inputValue}`
+    options.headers["Content-Type"] = "application/json"
     options.method = "GET";
 
     return (await axios(options));
 }
 
-/*
-depreacted
-export const GetCurrentUser = (): SystemState => {
-    const token = localStorage.getItem('token');
-    let currentUser: SystemState = {loggedIn: false, session: '', username: '', name: ''};
+export const GetUserProfile = async(username: string, token: string) => {
+    // http://localhost:8000/api/v1/users/{username}/
+    options.url = baseURL + `user/profile/?expand=*&expand=courses.owner&expand=as_teacher_set.owner&expand=as_student_set.owner`
+    options.method = "GET";
+    options.headers["Authorization"] = "Bearer " + token;
+    options.headers["Content-Type"] = "application/json"
 
-    if (token) {
-        var decoded: SystemState;
-         try {
-            decoded = jwt_decode(token);
-            decoded.loggedIn = true;
-            currentUser = decoded;
-        } catch (error) {
-            localStorage.clear(); window.location.reload();
-        }
+    return (await axios(options));
+}
+
+export const UpdateUser = async(name: string, email: string, token: string) => {
+    // http://localhost:8000/api/v1/user/
+    options.url = baseURL + `user/`
+    options.method = "PATCH";
+    options.headers["Authorization"] = "Bearer " + token;
+    options.headers["Content-Type"] = "application/json"
+
+    options.data = {
+        email: email,
+        name: name
     }
 
-    return currentUser;
+    return (await axios(options));
 }
-*/
+
+// export const UpdateAvatar = async(avatar: any, token: string) => {
+//     // http://localhost:8000/api/v1/user/avatar/
+//     options.url = baseURL + `user/avatar/`
+//     options.method = "PATCH";
+//     options.headers["Authorization"] = "Bearer " + token;
+//     options.headers["Content-Type"] = "multipart/form-data; boundary=----WebKitFormBoundaryWP4KnN0qX6fToVf3";
+    
+//     options.data = {
+//         "avatar": "------WebKitFormBoundaryNujaYiLogb1FZ9Qz\r\nContent-Disposition: form-data; name=\"avatar\"; filename=\"59.png\"\r\nContent-Type: image/png\r\n\r\n\r\n------WebKitFormBoundaryNujaYiLogb1FZ9Qz--\r\n"
+//     }
+
+//     return (await axios(options));
+// }

@@ -3,46 +3,34 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 import defaultAvatar from '../../../../assets/student-avatar.png';
-import { confirm } from '../../../../services/notification-service';
+
 
 type Props = {
-    userName: string,
-    fullName: string,
+    username: string,
+    name: string,
     avatar: string
     role: string;
+    remove: (arg1: string, arg2: string) => void;
 };
 
 export const Student = (props: Props) => { 
-    const remove = () => {
-        confirm('', `Are you sure you want to remove </br> <strong> 
-            ${props.fullName ? props.fullName : props.userName} </strong> 
-            </br> he will be removed from any team he is in.`
-        ).then(result => {
-            if (!result.isConfirmed) {
-                return;
-            }
-
-            console.log('Deleting...');
-        })
-    }
-
     return (
         <div className="mt-2" id="student">
             <div>
-                <Link className="link" to={`/${props.userName}`}>
+                <Link className="link" to={`/${props.username}`}>
                     <img
                         className="profile-pic" 
                         src={`${props.avatar ? props.avatar : defaultAvatar}`} 
-                        alt={props.fullName? props.fullName : props.userName} 
+                        alt={props.name? props.name : props.username} 
                     />
                     <span className="title link">
-                        {props.fullName? props.fullName : props.userName}
+                        {props.name? props.name : props.username}
                     </span>
                 </Link>
             </div>
             <div className="remove-btn">
                 {
-                    props.role === 'teacher' && <Button variant="danger" onClick={remove}>Remove</Button>
+                    props.role === 'teacher' && <Button variant="danger" onClick={() => props.remove(props.username, props.name)}>Remove</Button>
                 }
             </div>
         </div>

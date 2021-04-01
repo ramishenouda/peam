@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux';
 
+import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { Button, Container } from 'react-bootstrap';
 import { CircleLoader } from 'react-spinners';
 
-import { UserForUpdate as User } from '../../../models/user';
+import { success } from '../../../services/notification-service';
+import { showAxiosResponseErrors } from '../../../services/error-handler-service';
+import { PasswordChange } from '../../../services/auth-service';
 
-import { Title, Description, Form } from '../settings-style';
+import { UserForSecurityUpdate as User } from '../../../models/user';
+import { SystemState } from '../../../store/system/types';
+
 import { RequestPasswordReset } from '../../password-reset/request-password-reset';
 
+import { Title, Description, Form } from '../settings-style';
+
 type Props = {
-    
+    options: {}
 };
 
 const SignupSchema = yup.object().shape({
@@ -23,14 +30,12 @@ const SignupSchema = yup.object().shape({
 });
 
 export const Security = (props: Props) => {
+    const systemState: SystemState = useSelector((state: any) => state.system);
+
     const initialUser: User = {
-        avatar: '',
-        email: '',
-        name: '',
         current_password: '',
         new_password1: '',
-        new_password2: '',
-        uid: ''
+        new_password2: ''
     }
 
     const [user, setUser] = useState(initialUser);
@@ -50,7 +55,15 @@ export const Security = (props: Props) => {
 
     const updateUser = () => {
         setUpdatingUser(true);
-        console.log(user);
+        PasswordChange(user.current_password, user.new_password1, user.new_password2, systemState.token)
+            .then((result) => {
+                success("Password changed successfully")
+                setTimeout(() => {
+                    window.location.reload();
+                }, 250);
+            }).catch((err) => {
+                showAxiosResponseErrors(err);
+            }).finally(() => setUpdatingUser(false));
     }
 
     return (

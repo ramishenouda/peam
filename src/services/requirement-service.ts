@@ -16,7 +16,7 @@ const options: AxiosRequestConfig = {
 
 export const GetRequirement = async (owner: string, courseCode: string, requirementTitle: string, system: SystemState) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/
-    options.url = baseURL + `courses/${owner}/${courseCode}/requirements/${requirementTitle}`
+    options.url = baseURL + `courses/${owner}/${courseCode}/requirements/${requirementTitle}/?expand=teams.students`
     options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'GET';
 

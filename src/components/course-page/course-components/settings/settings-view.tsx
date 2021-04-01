@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 
 import { CourseInfo } from './settings-components/course-info';
 import { Students } from './settings-components/students';
-import { Teachers } from './settings-components/teachers';
+import { Teachers } from './settings-components/teachers/teachers';
 import { Attachments } from './settings-components/attachments/attachments';
 import { Container } from './settings-style';
 import { SettingsNavbar } from './settings-navbar';
 import { Requirements } from './settings-components/requirements/requirements';
 import { PendingInvitations } from './settings-components/pending-invitations/pending-invitations';
+import { Dangerous } from './settings-components/dangerous';
 
 type Props = {
 
@@ -59,6 +60,10 @@ export const SettingsView = (props: Props) => {
             {
                 tab === 5 &&
                 <PendingInvitations />
+            }
+            {
+                tab === 6 &&
+                <Dangerous />
             }
         </Container>
     );

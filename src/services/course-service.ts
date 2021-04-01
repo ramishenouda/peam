@@ -7,7 +7,6 @@ import { Attachment } from '../models/attachment';
 import { UserToInviteToCourse } from '../models/user';
 
 const baseURL = process.env.REACT_APP_API_URI;
-const utils = '';
 
 const options: AxiosRequestConfig = {
     url: '',
@@ -124,14 +123,15 @@ export const RespondToCourseInvitation = async (invToken: string, status: string
     options.data = {
         "status": status
     }
-
+    
     return (await axios(options));
 }
 
-export const RetreieveCourseInvitation = async (invToken: string) => {
+export const RetreieveCourseInvitation = async (invToken: string, token: string) => {
     // http://localhost:8000/api/v1/courses/invitations/{token}/
     options.url = baseURL + `courses/invitations/${invToken}?expand=sender&expand=course`
     options.method = 'GET';
+    options.headers["Authorization"] = "Bearer " + token;
 
     return (await axios(options));
 }
@@ -145,12 +145,47 @@ export const GetCourseStudents = async (owner: string, courseCode: string, syste
     return (await axios(options));
 }
 
-export const GetCourseTeams = async (owner: string, courseName: string, system: SystemState) => {
-    let url;
-    if(process.env.NODE_ENV === 'development')
-        url = baseURL + `${owner}/${courseName}`;
-    else
-        url = baseURL + utils + `courses/${owner}/${courseName}/teams`;
+export const GetCourseTeams = async (owner: string, courseCode: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/
+    options.url = baseURL + `courses/${owner}/${courseCode}/requirements/?expand=teams.students`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'GET';
 
-    return (await axios.get(url, options));
+    return (await axios(options));
+}
+
+export const GetCourseTeachers = async (owner: string, courseCode: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/teachers/
+    options.url = baseURL + `courses/${owner}/${courseCode}/teachers/?expand=teacher`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'GET';
+
+    return (await axios(options));
+}
+
+export const DeleteCourseTeacher = async (owner: string, courseCode: string, courseTeacher: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/teachers/{course_teacher}/
+    options.url = baseURL + `courses/${owner}/${courseCode}/teachers/${courseTeacher}`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'DELETE';
+
+    return (await axios(options));
+}
+
+export const DeleteCourseStudent = async (owner: string, courseCode: string, courseStudent: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/students/{course_student}/
+    options.url = baseURL + `courses/${owner}/${courseCode}/students/${courseStudent}`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'DELETE';
+
+    return (await axios(options));
+}
+
+export const DeleteCourse = async (owner: string, courseCode: string, system: SystemState) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}//
+    options.url = baseURL + `courses/${owner}/${courseCode}/`
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'DELETE';
+
+    return (await axios(options));
 }

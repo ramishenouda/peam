@@ -29,7 +29,9 @@ export interface UserForUpdate {
     uid: string;
     name: string;
     email: string;
-    avatar: string;
+}
+
+export interface UserForSecurityUpdate {
     current_password: string;
     new_password1: string;
     new_password2: string;

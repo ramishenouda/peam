@@ -1,56 +1,106 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 
 import { Requirement } from '../../models/requirement';
+import { DDate } from '../course-page/course-components/settings/settings-components/requirements/requirement-style';
+import { Teams } from '../course-page/course-components/teams/teams-container';
 
-import { RequirementNavbar } from './requirement-navbar';
-
-import { Title, Description } from './requirement-style';
+import { Title, Description, Container } from './requirement-style';
 
 interface Params {
     owner: string;
     code: string;
-    title: string;
+    type: string;
+    title_1: string;
 }
 
 type Props = {
     requirement: Requirement;
     params: Params;
+    createTeam: () => void;
 };
 
 export const RequirementView = (props: Props) => {
-    const [tap, setTap] = useState(0);
-    const [windowSize, setWindowSize] = useState(window.innerWidth);
+    const mdScreen = window.innerWidth < 768;
 
-    useEffect(() => {
-        window.addEventListener('resize', setSize);
+    const endDate = new Date(props.requirement.to_dt);
+    const startDate = new Date(props.requirement.from_dt);
 
-        return function cleanup () {
-            window.removeEventListener('resize', setSize);
-        }
-    }, []);
+    let endDateStatus = '';
+    let showStartDate = true;
 
-    const setSize = () => {
-        setWindowSize(window.innerWidth)
-    }
+    const dayEarlierDate = new Date(endDate);
+    
+    dayEarlierDate.setHours(dayEarlierDate.getHours() - 24);
+    if (dayEarlierDate < new Date())
+        endDateStatus = 'ShowHours';
 
-    const isSmallScreen = windowSize < 769;
+    if (endDate < new Date())
+        endDateStatus = 'GameOver';
+
+    if (startDate < new Date())
+        showStartDate = false;
 
     return (
-        <div className="head bg-g-gray">
-            <div className="flex-auto">
-                <Title className="course-title text-center link f1"> { props.requirement.title } </Title>
-                { isSmallScreen &&
-                    <Description className="course-description f3">{ props.requirement.description }</Description>
-                }
-            </div>
+        <div className="mt-2">
             <div>
-                <RequirementNavbar
-                    active={tap}
-                    tabHandler={setTap} 
-                    />
+                <Title className='text-center f1'> { props.requirement.title } </Title>
             </div>
+            <Container>
+                <div className="mb-5">
+                    <div className="text-right">
+                        {
+                            // courseState.role === 'student' &&
+                            <Button onClick={props.createTeam} variant="outline-dark" className="f2">
+                                Create team
+                            </Button>
+                        }
+                    </div>
+                    <Teams requirement={props.requirement} />
+                </div>
+                {
+                    mdScreen &&
+                    <hr />
+                }
+                <div>
+                    <div className="mb-4">
+                        <Title className="f3">
+                            Deadline
+                        </Title>
+                        <DDate className="mb-2 f4">
+                            {
+                                showStartDate &&
+                                <span className={`requirement-deadline`}>
+                                    From: {startDate.toLocaleDateString()}
+                                </span>
+                            }
+                            <span className={`${showStartDate ? 'pl-2' : ''}`}>
+                                {
+                                    showStartDate ? 'To:' : 'Today:'
+                                }
+                                &nbsp;
+                                {!endDateStatus && endDate.toLocaleString()}
+                                {endDateStatus === 'ShowHours' && endDate.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}
+                                {endDateStatus === 'GameOver' && <span className="date-over"> { endDate.toLocaleString() }</span>}
+                            </span>
+                        </DDate>
+                    </div>
+                    <div className="mb-4">
+                        <Title className='f3'>
+                            About
+                        </Title>
+                        <Description >{ props.requirement.description }</Description>
+                    </div>
+                    <hr />
+                    {/* <div className="mt-4">
+                        <Title className='f2'>
+                            Attachments
+                        </Title>
+                        <Attachments attachments={ props.requirement.attachments }/>
+                    </div> */}
+                </div>
+            </Container>
         </div>
     );
 };

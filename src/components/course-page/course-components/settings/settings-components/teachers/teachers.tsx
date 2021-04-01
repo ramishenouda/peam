@@ -4,15 +4,16 @@ import { useSelector } from 'react-redux';
 import Creatable from 'react-select/creatable';
 import { Button } from 'react-bootstrap';
 
-import { error, success } from '../../../../../services/notification-service';
-import { InviteToCourse } from '../../../../../services/course-service';
-import { showAxiosResponseErrors } from '../../../../../services/error-handler-service';
+import { error, success } from '../../../../../../services/notification-service';
+import { InviteToCourse } from '../../../../../../services/course-service';
+import { showAxiosResponseErrors } from '../../../../../../services/error-handler-service';
 
-import { UserToInviteToCourse } from '../../../../../models/user';
-import { CourseState } from '../../../../../store/course/types';
-import { SystemState } from '../../../../../store/system/types';
+import { UserToInviteToCourse } from '../../../../../../models/user';
+import { CourseState } from '../../../../../../store/course/types';
+import { SystemState } from '../../../../../../store/system/types';
 
-import { Section } from '../settings-style';
+import { Section } from '../../settings-style';
+import { TeachersControler } from './teachers-control';
 
 type Props = {
     
@@ -77,7 +78,7 @@ export const Teachers = (props: Props) => {
                     for(let i = 0; i < fails.length; i++) {
                         message += fails[i].email + '</br>';
                     }
-                    error('The following emails coudln\'t be invited', message);
+                    error('The following emails couldn\'t be invited', message);
                 }
             }).catch((err) => {
                 showAxiosResponseErrors(err);
@@ -96,6 +97,7 @@ export const Teachers = (props: Props) => {
             <div>
                 <Button variant="dark" onClick={invite} disabled={ !emails.length } className="my-2 px-5 py-2">Send Invite</Button>
             </div>
+            <TeachersControler />
         </Section>
     );
 };

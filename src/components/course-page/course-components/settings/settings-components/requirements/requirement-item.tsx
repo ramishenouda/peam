@@ -169,11 +169,11 @@ export const RequirementItem = (props: Props) => {
                         }
                         <span className={`${showStartDate ? 'pl-2' : ''}`}>
                             {
-                                showStartDate ? 'To:' : 'Deadline:'
+                                showStartDate ? 'To:' : 'Today:'
                             }
                             &nbsp;
                             {!endDateStatus && endDate.toLocaleString()}
-                            {endDateStatus === 'ShowHours' && endDate.toLocaleTimeString()}
+                            {endDateStatus === 'ShowHours' && endDate.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}
                             {endDateStatus === 'GameOver' && <span className="date-over"> { endDate.toLocaleString() }</span>}
                         </span>
                     </DDate>

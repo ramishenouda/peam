@@ -11,38 +11,46 @@ import { CircleLoader } from 'react-spinners';
 import { UserForUpdate as User } from '../../../models/user';
 import { SystemState } from '../../../store/system/types';
 
+import defaultAvatar from '../../../assets/default-avatar.png'
+
 import { Title, Description, Form } from '../settings-style';
+import { FileToggle } from './style';
+import { UpdateUser } from '../../../services/user-service';
+import { showAxiosResponseErrors } from '../../../services/error-handler-service';
+import { success } from '../../../services/notification-service';
 
 type Props = {
-    
+    options: {}
 };
 
 const SignupSchema = yup.object().shape({
-    avatar: yup.string(),
     name: yup.string(),
     email: yup.string().email().required('Email is a required field'),
-    new_password1: yup.string().required('password is a required field').min(6, 'password can\'t be less than 6 characters'),
   });
 
 export const Profile = (props: Props) => {
+    const options: any = props.options;
+
     const systemState: SystemState = useSelector((state: any) => state.system);
-    
     const initialUser: User = {
-        avatar: '',
-        email: '',
-        name: systemState.name,
-        current_password: '',
-        new_password1: '',
-        new_password2: '',
-        uid: ''
+        uid: '',
+        email: options.email,
+        name: options.name,
     }
 
     const [user, setUser] = useState(initialUser);
     const [updatingUser, setUpdatingUser] = useState(false);
+    const [isdirty, setIsdirty] = useState(false);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const {name, value} = event.target;
-      setUser({...user, [name]: value});
+    useEffect(() => {
+        setUser({ uid: '', email: options.email, name: options.name })
+    }, [options.email, options.name])
+
+    const handleChange = (event: any) => {
+        if(!isdirty)
+            setIsdirty(true)
+        const {name, value} = event.target;
+        setUser({...user, [name]: value});
     };
 
     const { register, handleSubmit, errors, formState } = useForm<User>({
@@ -52,13 +60,33 @@ export const Profile = (props: Props) => {
 
     const { isValid } = formState;
 
-    useEffect(() => {
-        
-    }, [])
-
     const updateUser = () => {
         setUpdatingUser(true);
+        UpdateUser(user.name, user.email, systemState.token)
+            .then((result) => {
+                success("Your public profile was updated successfully")
+                setTimeout(() => {
+                    window.location.reload();
+                }, 250);
+            }).catch((err) => {
+                showAxiosResponseErrors(err)
+            }).finally(() => setUpdatingUser(false));
     }
+
+
+    /* const updateAvatar = (event: any) => {
+        const formData = new FormData();
+        formData.append('content', event.target.files[0])
+
+        UpdateAvatar(formData,systemState.token)
+            .then((result) => {
+                console.log(result)
+            }).catch((err) => {
+                showAxiosResponseErrors(err)
+                console.log(err);
+            });
+    } */
+
 
     return (
         <Container>
@@ -67,9 +95,17 @@ export const Profile = (props: Props) => {
                     Your profile
                 </Title>
                 <Description className="f3 no-select">
-                    Here you can update your settings, and set your Name.
+                    Here you can update your public profile, and set your name.
                 </Description>
             </div>
+            <form method="post" encType="multipart/form-data">
+                <Form.Group className="text-center" controlId="avatar">
+                    {/* <FileUpload multiple={false} accept="image/*" onChange={updateAvatar} name="avatar" id="avatar" label="Change your avatar" /> */}
+                    <label htmlFor="avatar">
+                        <FileToggle src={defaultAvatar} alt={initialUser.name} />
+                    </label>
+                </Form.Group>
+            </form>
             <Form className="login text-left" onSubmit={handleSubmit(updateUser)}>
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
@@ -79,7 +115,7 @@ export const Profile = (props: Props) => {
                         name="name"
                         ref={register}
                         type="text"
-                        defaultValue={user.name}
+                        defaultValue={initialUser.name}
                         placeholder="Name"
                     />
                     <p className="required-text"> { errors.name?.message } </p>
@@ -93,10 +129,11 @@ export const Profile = (props: Props) => {
                     ref={register}
                     type="email"
                     placeholder="Email"
+                    defaultValue={initialUser.email}
                 />
                     <p className="required-text"> { errors.email?.message } </p>
                 </Form.Group>
-                <Form.Group controlId="new_password1">
+                {/* <Form.Group controlId="new_password1">
                     <Form.Label>Your password <span className="required-text">*</span></Form.Label>
                     <Form.Control 
                         disabled={updatingUser}
@@ -107,11 +144,11 @@ export const Profile = (props: Props) => {
                         placeholder="Enter your password"
                     />
                     <p className="required-text"> {errors.new_password1?.message} </p>
-                </Form.Group>
+                </Form.Group> */}
                 { updatingUser? (
                     <CircleLoader size={35} color={"#1a1a1a"} loading={updatingUser} />
                 ) : (
-                    <Button variant="dark" type="submit" disabled={ !isValid }>
+                    <Button variant="dark" type="submit" disabled={ !isValid || !isdirty }>
                         Update my profile
                     </Button>
                 )}

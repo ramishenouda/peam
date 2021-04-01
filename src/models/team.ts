@@ -8,10 +8,13 @@ export interface Team {
     students: Array<StudentForCourseList>;
 }
 
+export interface TeamForCreation {
+    name: string;
+    requirement: string;
+}
+
 export interface TeamForCourseList {
     uid: string;
-    id?: string;
-    title: string;
-    description: string;
+    name: string;
     students: Array<StudentForCourseList>;
 }
