@@ -1,3 +1,5 @@
+// deprecated, check page-navbar.tsx
+
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 

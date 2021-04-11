@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import PeopleIcon from '@material-ui/icons/People';
+import GroupWorkIcon from '@material-ui/icons/GroupWork';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 import { CourseState } from '../../store/course/types';
 
-import CourseNavbar from './course-navbar';
 import { OverView } from './course-components/overview/overview-container';
 import { Students } from './course-components/students/students-container';
 import { Teams } from './course-components/teams/teams-container';
@@ -13,6 +17,8 @@ import { Settings } from './course-components/settings/settings-container';
 
 import './course-style.css'
 import { Requirement } from '../project-requirement/requirement';
+import { Team } from '../team/team';
+import { PageNavbar } from '../page-navbar/page-navbar';
 
 type Props = {
 }
@@ -29,7 +35,7 @@ interface Params {
 const CourseView = (props: Props): JSX.Element => {
     const courseState: CourseState = useSelector((state: any) => state.course);
 
-    const [tap, setTap] = useState(0);
+    const [tab, setTab] = useState(0);
     const [windowSize, setWindowSize] = useState(window.innerWidth);
     const params: Params = useParams();
 
@@ -46,6 +52,22 @@ const CourseView = (props: Props): JSX.Element => {
     }
 
     const isSmallScreen = windowSize < 769;
+    const tabsTitles = ['Overview', 'Students', 'Teams', 'Reports', 'Settings'];
+    const links = [
+        `/${courseState.owner}/${courseState.code}`,
+        `/${courseState.owner}/${courseState.code}`,
+        `/${courseState.owner}/${courseState.code}`,
+        `/${courseState.owner}/${courseState.code}`,
+        `/${courseState.owner}/${courseState.code}`
+    ];
+
+    const icons: Array<JSX.Element> = [
+        <ImportContactsIcon className="material-ui-icon"/>,
+        <PeopleIcon className="material-ui-icon"/>,
+        <GroupWorkIcon className="material-ui-icon"/>,
+        <AssessmentIcon className="material-ui-icon"/>,
+        <SettingsIcon className="material-ui-icon"/>
+    ];
 
     return (
         <>
@@ -56,38 +78,45 @@ const CourseView = (props: Props): JSX.Element => {
                     <h2 className="course-description f3">{ courseState.description }</h2>
                 }
             </div>
-            <CourseNavbar 
-                active={tap}
-                tabHandler={setTap}
+            <PageNavbar
+                titles={tabsTitles}
+                icons={icons}
+                setTab={setTab}
                 type={params.type_1}
+                active={tab}
+                links={links}
             />
         </header>
         <main>
             {
-                (tap === 0 && params.type_1 === undefined) &&
+                (tab === 0 && params.type_1 === undefined) &&
                 <OverView />
             }
             {
-                (tap === 1 && params.type_1 === undefined) &&
+                (tab === 1 && params.type_1 === undefined) &&
                 <Students />
             }
             {
-                (tap === 2 && params.type_1 === undefined) &&
+                (tab === 2 && params.type_1 === undefined) &&
                 <Teams fetch={true} />
             }
             {
-                (tap === 3 && params.type_1 === undefined) &&
+                (tab === 3 && params.type_1 === undefined) &&
                 <div className="f1 mt-5 text-center">
                     Next Semester
                 </div>
             }
             {
-                (tap === 4 && params.type_1 === undefined) &&
+                (tab === 4 && params.type_1 === undefined) &&
                 <Settings />
             }
             {
                 (params.type_1 === 'requirements' && !params.type_2) &&
                 <Requirement />
+            }
+            {
+                (params.type_1 === 'requirements' && params.type_2 === 'teams') &&
+                <Team />
             }
         </main>
         </>

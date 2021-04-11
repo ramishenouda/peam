@@ -1,16 +1,20 @@
+/*
+    Takes a list of users and show them
+*/
+
 import { Link } from "react-router-dom";
 
-import { Teacher } from "../../../../../models/teacher";
-import teacherAvatar from '../../../../../assets/teacher-avatar.png';
+import { Member } from "../../models/memeber";
+import teacherAvatar from '../../assets/teacher-avatar.png';
 
 type Props = {
-    teachers: Array<Teacher>
+    members: Array<Member>
 }
 
-export const Teachers = (props: Props) => {
-    let teachers;
-    if (props.teachers.length) {
-        teachers = props.teachers.map(item => {
+export const ListMembers = (props: Props) => {
+    let members;
+    if (props.members) {
+        members = props.members.map(item => {
             const pictureURL = item.avatar ? item.avatar : teacherAvatar
             return (
                 <p key={item.username}>
@@ -30,7 +34,7 @@ export const Teachers = (props: Props) => {
 
     return (
         <div>
-            { teachers ? teachers : (
+            { members ? members : (
                 <div>
                     Error while loading the teachers.<br/>Please reloard the page. 
                 </div>

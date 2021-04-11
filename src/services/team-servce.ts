@@ -15,24 +15,24 @@ const options: AxiosRequestConfig = {
     data: { }
 };
 
-export const GetCourseAttachments = async (owner: string, courseCode: string, system: SystemState) => {
-    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/teams/
-    options.url = baseURL + `courses/${owner}/${courseCode}/attachments/`
-    options.headers["Authorization"] = "Bearer " + system.token;
-    options.method = 'GET';
-
-    return (await axios(options));
-}
-
 export const CreateTeam = async (owner: string, courseCode: string, reqTitle: string, system: SystemState, team: TeamForCreation) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/teams/
-    options.url = baseURL + `courses/${owner}/${courseCode}/requirements/${reqTitle}/teams/`
+    options.url = baseURL + `courses/${owner}/${courseCode}/requirements/${reqTitle}/teams/`;
     options.headers["Authorization"] = "Bearer " + system.token;
     options.method = 'POST';
     options.data = team;
 
     return (await axios(options));
-}
+};
+
+export const GetTeam = async (owner: string, courseCode: string, reqTitle: string, system: SystemState, teamName: string) => {
+    // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/teams/{team_name}/
+    options.url = baseURL + `courses/${owner}/${courseCode}/requirements/${reqTitle}/teams/${teamName}?expand=students`;
+    options.headers["Authorization"] = "Bearer " + system.token;
+    options.method = 'GET';
+
+    return (await axios(options));
+};
 
 export const DeleteTeam = async (owner: string, courseCode: string, reqTitle: string, system: SystemState, team: string) => {
     // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/teams/{team_name}/
@@ -42,5 +42,4 @@ export const DeleteTeam = async (owner: string, courseCode: string, reqTitle: st
     options.method = 'DELETE';
 
     return (await axios(options));
-}
-
+};

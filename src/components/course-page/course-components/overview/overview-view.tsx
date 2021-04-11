@@ -5,7 +5,7 @@ import { CourseState } from '../../../../store/course/types';
 
 import { Requirements } from '../settings/settings-components/requirements/requirements';
 import { Attachments } from './attachments/attachments';
-import { Teachers } from './teachers/teachers';
+import { ListMembers } from '../../../list-members/list-members';
 
 import './overview-style.css';
 
@@ -58,7 +58,7 @@ export const OverView = (props: Props) => {
                             <hr style={{width: '140px', textAlign: 'center', margin: 'auto'}} />
                         </div>
                     }
-                    <Teachers teachers={ courseState.teachers }/>
+                    <ListMembers members={ courseState.teachers }/>
                 </div>
                 <div className="separator">
                     <hr/>
