@@ -20,6 +20,7 @@ import { GridView, Title } from '../../style';
 import { ProjectFiles } from './team-style';
 import { ListMembers } from '../list-members/list-members';
 import { PageNavbar } from '../page-navbar/page-navbar';
+import { TeamOverView } from './team-overview';
 
 type Props = {
     
@@ -100,20 +101,18 @@ export const Team = (props: Props) => {
                     </Title>
                 </Container>
             </div>
-            <GridView>
-                <ProjectFiles>
-                    <Title className="f2 text-center pt-5">
-                        NO FILES YET
-                    </Title>
-                </ProjectFiles>
-                <div>
-                    <Title className="f3">
-                        Students
-                    </Title>
-                    <hr/>
-                    <ListMembers members={team.students} />
-                </div>
-            </GridView>
+            {
+                tab === 1 &&
+                <TeamOverView students={team.students} />
+            }
+            {
+                tab === 2 &&
+                <div> Soon! </div>
+            }
+            {
+                tab === 3 &&
+                <div> SETTINGS! </div>
+            }
         </>
     );
 };

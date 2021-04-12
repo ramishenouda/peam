@@ -1,9 +1,10 @@
-import React from 'react';
+// Depreacted, check vertical Navbar.
 import { useSelector } from 'react-redux';
 import { CourseState } from '../../../../store/course/types';
 import { SystemState } from '../../../../store/system/types';
 
 import { NavItem, Navbar } from './settings-style';
+
 
 type Props = {
     setTab: (arg: number) => void,
