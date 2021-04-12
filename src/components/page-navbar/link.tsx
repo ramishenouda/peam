@@ -13,7 +13,7 @@ type Props = {
 export const Link = (props: Props) => {
     const data = 
         <span onClick={() => props.setTab(props.tab)} className={`course-nav-item ${(props.active === props.tab && !props.type) && 'active-tab'}`}>
-            <span> { props.icon } { props.title } </span>
+            <span className="material-ui-icon mx-2">{ props.icon }</span> { props.title }
         </span>
 
     if (props.link) {

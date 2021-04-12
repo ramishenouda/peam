@@ -6,7 +6,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
- .text {
+.text {
     font: 'inter', 'Robot'; 
     color: #3f3f3f;
     margin-left: 20px;
@@ -14,38 +14,38 @@
     text-align:center;
     font-size: 24px;
 }
- .bounceball {
-	 position: relative;
-	 display: inline-block;
-	 height: 37px;
-	 width: 15px;
+.bounceball {
+	position: relative;
+	display: inline-block;
+	height: 37px;
+	width: 15px;
 }
- .bounceball:before {
-	 position: absolute;
-	 content: '';
-	 display: block;
-	 top: 0;
-	 width: 15px;
-	 height: 15px;
-	 border-radius: 50%;
-	 background-color: #1a1a1a;
-	 transform-origin: 50%;
-	 animation: bounce 500ms alternate infinite ease;
+.bounceball:before {
+	position: absolute;
+	content: '';
+	display: block;
+	top: 0;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background-color: #1a1a1a;
+	transform-origin: 50%;
+	animation: bounce 500ms alternate infinite ease;
 }
  @keyframes bounce {
-	 0% {
-		 top: 30px;
-		 height: 5px;
-		 border-radius: 60px 60px 20px 20px;
-		 transform: scaleX(2);
+	0% {
+		top: 30px;
+		height: 5px;
+		border-radius: 60px 60px 20px 20px;
+		transform: scaleX(2);
 	}
-	 35% {
-		 height: 15px;
-		 border-radius: 50%;
-		 transform: scaleX(1);
+	35% {
+		height: 15px;
+		border-radius: 50%;
+		transform: scaleX(1);
 	}
-	 100% {
-		 top: 0;
+	100% {
+		top: 0;
 	}
 }
  

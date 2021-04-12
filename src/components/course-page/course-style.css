@@ -11,7 +11,6 @@
 .course-navbar {
     padding: 0 5vw 1.1vh 5vw;
     overflow-x: scroll;
-    padding-right: 100px !important;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
@@ -44,5 +43,5 @@
 }
 
 .material-ui-icon {
-    margin: 7px 10px 0px 0px;
+    width: fit-content;
 }

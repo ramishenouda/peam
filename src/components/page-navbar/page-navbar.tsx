@@ -7,9 +7,10 @@ type Props = {
     active: number;
     setTab: (tab: number) => void;
     type?: string;
-    links: Array<string>;
+    links?: Array<string>;
     titles: Array<string>;
     icons: Array<JSX.Element>;
+    styleColor?: 'gray'| 'none';
 }
 
 export const PageNavbar = (props: Props): JSX.Element => {
@@ -25,8 +26,8 @@ export const PageNavbar = (props: Props): JSX.Element => {
     let tabs = [];
     for(let i = 0; i < props.titles.length; i++) {
         tabs.push(
-            <span className={`ml-5 ${i + 1 === props.titles.length && 'mr-4'}`}>
-                <Link
+            <span className={`px-4`}>
+            <Link
                     icon={props.icons[i]}
                     title={props.titles[i]}
                     active={props.active}
@@ -34,14 +35,14 @@ export const PageNavbar = (props: Props): JSX.Element => {
                     tab={i}
                     key={props.titles[i]}
                     type={props.type}
-                    link={props.links[i] && props.links[i]}
+                    link={(props.links && props.links[i]) && props.links[i]}
                 />
             </span>
         );
     }
 
     return (
-        <Navbar className="course-navbar">
+        <Navbar className={`course-navbar ${props.styleColor === 'gray' && 'bg-g-gray'}`}>
             { tabs }
             <span className="">&nbsp;</span>
         </Navbar>

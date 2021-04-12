@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
@@ -62,30 +62,37 @@ const CourseView = (props: Props): JSX.Element => {
     ];
 
     const icons: Array<JSX.Element> = [
-        <ImportContactsIcon className="material-ui-icon"/>,
-        <PeopleIcon className="material-ui-icon"/>,
-        <GroupWorkIcon className="material-ui-icon"/>,
-        <AssessmentIcon className="material-ui-icon"/>,
-        <SettingsIcon className="material-ui-icon"/>
+        <ImportContactsIcon />,
+        <PeopleIcon />,
+        <GroupWorkIcon />,
+        <AssessmentIcon />,
+        <SettingsIcon />
     ];
 
     return (
         <>
         <header className="head bg-g-gray">
-            <div className="flex-auto mb-4">
-                <h1 className="course-title f2">{ courseState.title } | { courseState.code }</h1>
+            <div className="flex-auto pb-4">
+                <h1 className="course-title f2">
+                    <Link className="disable-link-style" to={`/${courseState.owner}/${courseState.code}`}>
+                        { courseState.title } | { courseState.code }
+                    </Link>
+                </h1>
                 { isSmallScreen &&
                     <h2 className="course-description f3">{ courseState.description }</h2>
                 }
             </div>
-            <PageNavbar
-                titles={tabsTitles}
-                icons={icons}
-                setTab={setTab}
-                type={params.type_1}
-                active={tab}
-                links={links}
-            />
+            {
+                !params.type_2 &&
+                <PageNavbar
+                    titles={tabsTitles}
+                    icons={icons}
+                    setTab={setTab}
+                    type={params.type_1}
+                    active={tab}
+                    links={links}
+                />
+            }
         </header>
         <main>
             {

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
-import { Button, Container } from 'react-bootstrap';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import SettingsIcon from '@material-ui/icons/Settings';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import BackIcon from '@material-ui/icons/ArrowBack';
 
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
 import { GetTeam } from '../../services/team-servce';
@@ -15,6 +19,7 @@ import { GridView, Title } from '../../style';
 
 import { ProjectFiles } from './team-style';
 import { ListMembers } from '../list-members/list-members';
+import { PageNavbar } from '../page-navbar/page-navbar';
 
 type Props = {
     
@@ -35,6 +40,27 @@ export const Team = (props: Props) => {
     const [fetching, setFetching] = useState(true);
     const [error, setError] = useState(false);
     const [team, setTeam] = useState({} as TeamType);
+    const [tab, setTab] = useState(1);
+
+    const navbarTitles = [
+        'Back',
+        'Overview',
+        'Report',
+        'Settings',
+    ]
+
+    const icons: Array<JSX.Element> = [
+        <BackIcon />,
+        <ImportContactsIcon />,
+        <AssessmentIcon />,
+        <SettingsIcon />
+    ];
+
+    const links: any = [
+        `/${params.owner}/${params.code}/requirements/${params.title_1}`
+    ]
+
+    const navbarStyle = "gray";
 
     useEffect(() => {
         GetTeam(params.owner, params.code, params.title_1, systemState, params.title_2)
@@ -47,15 +73,28 @@ export const Team = (props: Props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    if (fetching)
+        return <div className="f1 text-center p-5 m-5">
+            Loading....
+        </div>
+    
+    if (error)
+        return <div className="f1 text-center p-5 m-5">
+            Error while loading team data....
+        </div>
+
     return (
-        <div>
+        <>
+            <PageNavbar
+                active={tab}
+                icons={icons}
+                setTab={setTab}
+                titles={navbarTitles}
+                links={links}
+                styleColor={navbarStyle}
+            />
             <div>
                 <Container className="text-center">
-                    <Link to={`/${params.owner}/${params.code}/requirements/${params.title_1}`} className="link float-left">
-                        <Button variant="outline-dark">
-                            Go Back
-                        </Button>
-                    </Link>
                     <Title className="f1">
                         { team.name }
                     </Title>
@@ -75,6 +114,6 @@ export const Team = (props: Props) => {
                     <ListMembers members={team.students} />
                 </div>
             </GridView>
-        </div>
+        </>
     );
 };
