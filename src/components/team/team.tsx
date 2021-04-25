@@ -21,6 +21,7 @@ import { ProjectFiles } from './team-style';
 import { ListMembers } from '../list-members/list-members';
 import { PageNavbar } from '../page-navbar/page-navbar';
 import { TeamOverView } from './team-overview';
+import { TeamSettings } from './team-settings';
 
 type Props = {
     
@@ -111,7 +112,7 @@ export const Team = (props: Props) => {
             }
             {
                 tab === 3 &&
-                <div> SETTINGS! </div>
+                <TeamSettings setTeam={setTeam} team={team}/>
             }
         </>
     );

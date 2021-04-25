@@ -21,7 +21,7 @@ export const Requirements = (props: Props) => {
     if (courseState.requirements) {
         projectReqs = courseState.requirements.map((requirement, index) =>
             <div className={`${index !== 0 && 'mt-3'}`} key={requirement.uid}>
-                <RequirementItem 
+                <RequirementItem
                     requirement={requirement}
                     showOptions={props.showOptions}
                 />

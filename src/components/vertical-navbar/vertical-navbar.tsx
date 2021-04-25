@@ -13,18 +13,24 @@ export const VerticalNavbar = (props: Props) => {
 
     let tabs = [];
     for(let i = 0; i < props.titles.length; i++) {
+        const strings = props.titles[i].split('{');
+        const title = strings[0];
+        const color = !strings[2] ? undefined : strings[2].split('}')[0];
+     
         tabs.push(
-            <span className={`px-4`}>
+            <div>
                 <NavItem
                     active={props.active}
                     setTab={props.setTab}
                     tab={i}
-                    title={props.titles[i]}
+                    title={title}
+                    color={color}
                 />
-            </span>
+                {i !== props.titles.length - 1 && <hr />}
+            </div>
         );
     }
-    
+
     return (
         <Navbar className="text-center">
             { tabs }

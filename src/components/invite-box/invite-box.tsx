@@ -4,18 +4,27 @@ import { useSelector } from 'react-redux';
 import Creatable from 'react-select/creatable';
 import { Button } from 'react-bootstrap';
 
-import { error, success } from '../../../../../services/notification-service';
-import { InviteToCourse } from '../../../../../services/course-service';
-import { showAxiosResponseErrors } from '../../../../../services/error-handler-service';
+import { error, success } from '../../services/notification-service';
+import { showAxiosResponseErrors } from '../../services/error-handler-service';
 
-import { UserToInviteToCourse } from '../../../../../models/user';
-import { CourseState } from '../../../../../store/course/types';
-import { SystemState } from '../../../../../store/system/types';
+import { UserToInviteToCourse } from '../../models/user';
+import { CourseState } from '../../store/course/types';
+import { SystemState } from '../../store/system/types';
 
-import { Section } from '../settings-style';
+import { Section } from '../../style';
 
 type Props = {
-    
+    title: string;
+    buttonTitle?: string;
+    successMessage?: string;
+    errorTitle?: string;
+    errorText?: string;
+    inviteFunction: (...args: any[]) => Promise<any>;
+    inviteFunctionArgs: any[];
+    payloadArgs: any[];
+    thenFunction?: () => void;
+    catchFunction?: () => void;
+    finallyFunction?: () => void;
 };
 
 interface Email {
@@ -28,7 +37,7 @@ interface Fail {
     error: Array<string>;
 }
 
-export const Students = (props: Props) => {
+export const InviteBox = (props: Props) => {
     const courseState: CourseState = useSelector((state: any) => state.course);
     const systemState: SystemState = useSelector((state: any) => state.system);
 
@@ -60,6 +69,10 @@ export const Students = (props: Props) => {
         const date = new Date();
         date.setDate(date.getDate() + 7)
 
+        const successMessage = props.successMessage ? props.successMessage : 'Students invited successfully';
+        const errorTitle = props.errorTitle ? props.errorTitle : 'The following emails couldn\'t be invited';
+        const errorText = props.errorText ? props.errorText : '';
+    
         const users: UserToInviteToCourse = {
             course: courseState.id,
             emails: _eamils,
@@ -67,34 +80,45 @@ export const Students = (props: Props) => {
             type: 'student'
         }
 
-        InviteToCourse(courseState.owner, courseState.code, users, systemState)
+        props.inviteFunction(courseState.owner, courseState.code, users, systemState)
             .then((result) => {
+                if (props.thenFunction) {
+                    props.thenFunction();
+                    return;
+                }
+
                 const fails: Array<Fail> = result.data.fail;
                 if (fails.length < 1) {
-                    success('Students invited successfully')
+                    success(successMessage)
                 } else {
                     let message = '';
                     for(let i = 0; i < fails.length; i++) {
                         message += fails[i].email + '</br>';
                     }
-                    error('The following emails couldn\'t be invited', message);
+                    error(errorTitle, errorText ? errorText : message);
                 }
             }).catch((err) => {
-                showAxiosResponseErrors(err);
+                props.catchFunction && props.catchFunction();
+                !props.catchFunction && showAxiosResponseErrors(err);
+            }).finally(() => {
+                props.finallyFunction && props.finallyFunction();
             });
     }
 
     return (
         <Section id="peam-title-1 invite-students">
             <p className="f1">
-                Invite students
+                { props.title }
             </p>
             <hr />
             <div>
                 <Creatable isMulti isClearable onChange={handleInputChange}  value={emails} />
             </div>
             <div>
-                <Button variant="dark" onClick={invite} disabled={ !emails.length } className="my-2 px-5 py-2">Send Invite</Button>
+                <Button variant="dark" onClick={invite} disabled={ !emails.length } className="my-2 px-5 py-2">
+                    { !props.buttonTitle && 'Send Invite' }
+                    { props.buttonTitle && props.buttonTitle }
+                </Button>
             </div>
         </Section>
     );

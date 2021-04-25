@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 
-import { Container as container, Navbar as navbar } from 'react-bootstrap';
+import { Navbar as navbar } from 'react-bootstrap';
 
-export const Container = styled(container)`
-    display: grid;
-    grid-template-columns: 23% 77%;
-    grid-column-gap: 20px;
-    border-radius: 5px;
-    padding: 10px;
+// deprecated
+// export const Container = styled(container)`
+//     display: grid;
+//     grid-template-columns: 23% 77%;
+//     grid-column-gap: 20px;
+//     border-radius: 5px;
+//     padding: 10px;
 
-    ${({ mdscreen }) => mdscreen && `
-    display: block;
-  `}
-`
+//     ${({ mdscreen }) => mdscreen && `
+//     display: block;
+//   `}
+// `
 
 export const Section = styled.section`
     background: #f9f9f9;

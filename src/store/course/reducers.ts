@@ -10,7 +10,7 @@ const initialState: CourseState = {
   role: '',
   attachments: [],
   requirements: [],
-  teachers: []
+  teachers: [],
 }
 
 export function courseReducer(state = initialState, action: CourseActionTypes): CourseState {

@@ -53,4 +53,8 @@ export const NavItem = styled.div`
     :hover {
         background: #f1f1f1;
     }
+
+    ${({ color }) => color && `
+        color: ${color}
+    `}
 `
