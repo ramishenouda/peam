@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 import Creatable from 'react-select/creatable';
 import { Button } from 'react-bootstrap';
 
 import { error, success } from '../../services/notification-service';
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
-
-import { UserToInviteToCourse } from '../../models/user';
-import { CourseState } from '../../store/course/types';
-import { SystemState } from '../../store/system/types';
 
 import { Section } from '../../style';
 
@@ -20,8 +15,8 @@ type Props = {
     errorTitle?: string;
     errorText?: string;
     inviteFunction: (...args: any[]) => Promise<any>;
-    inviteFunctionArgs: any[];
-    payloadArgs: any[];
+    inviteFunctionArgs?: any[];
+    payloadArgs?: any;
     thenFunction?: () => void;
     catchFunction?: () => void;
     finallyFunction?: () => void;
@@ -38,9 +33,6 @@ interface Fail {
 }
 
 export const InviteBox = (props: Props) => {
-    const courseState: CourseState = useSelector((state: any) => state.course);
-    const systemState: SystemState = useSelector((state: any) => state.system);
-
     const [emails, setEmails] = useState(Array<Email>());
 
     const handleInputChange = (_value: any, action: any) => {
@@ -65,22 +57,18 @@ export const InviteBox = (props: Props) => {
     };
 
     const invite = () => {
-        const _eamils = emails.map(item => item.value);
-        const date = new Date();
-        date.setDate(date.getDate() + 7)
-
+        const _emails = emails.map(item => item.value);
+        
         const successMessage = props.successMessage ? props.successMessage : 'Students invited successfully';
         const errorTitle = props.errorTitle ? props.errorTitle : 'The following emails couldn\'t be invited';
         const errorText = props.errorText ? props.errorText : '';
     
-        const users: UserToInviteToCourse = {
-            course: courseState.id,
-            emails: _eamils,
-            expiry_date: date,
-            type: 'student'
-        }
+        const options = props.payloadArgs ? props.payloadArgs : {};
+        options.emails = _emails;
 
-        props.inviteFunction(courseState.owner, courseState.code, users, systemState)
+        const args = props.inviteFunctionArgs ? props.inviteFunctionArgs : [];
+
+        props.inviteFunction(...args, options)
             .then((result) => {
                 if (props.thenFunction) {
                     props.thenFunction();

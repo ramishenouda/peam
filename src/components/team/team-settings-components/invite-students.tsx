@@ -16,16 +16,24 @@ export const InviteStudents = (props: Props) => {
 
     }
 
-    // const payloadArgs = {
-    //     team: courseState.team.
-    // }
+    const date = new Date(new Date().setDate(new Date().getDate() + 7))
+
+    const payloadArgs = {
+        course: courseState.id,
+        expiry_date: date,
+        type: 'student'
+    }
+
+    const inviteFunctionArgs = [ courseState.owner, courseState.code, systemState ]
 
     return (
         <div>
-            {/* <InviteBox
+            <InviteBox
                 inviteFunction={invite}
                 title={'Invite students'}
-            /> */}
+                payloadArgs={payloadArgs}
+                inviteFunctionArgs={inviteFunctionArgs}
+            />
         </div>
     );
 };
