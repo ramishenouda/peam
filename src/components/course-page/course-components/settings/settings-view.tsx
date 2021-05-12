@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { VerticalNavbar } from '../../../vertical-navbar/vertical-navbar';
 
 import { CourseInfo } from './settings-components/course-info';
 import { Students } from './settings-components/students';
 import { Teachers } from './settings-components/teachers/teachers';
 import { Attachments } from './settings-components/attachments/attachments';
-import { Container } from './settings-style';
-import { SettingsNavbar } from './settings-navbar';
 import { Requirements } from './settings-components/requirements/requirements';
 import { PendingInvitations } from './settings-components/pending-invitations/pending-invitations';
 import { Dangerous } from './settings-components/dangerous';
+
+import { VerticalGridView } from '../../../../style';
 
 type Props = {
 
@@ -33,9 +34,21 @@ export const SettingsView = (props: Props) => {
       setWindowSize(window.innerWidth)
     }
 
+    const titles = [
+        'Course',
+        'Students',
+        'Teachers',
+        'Attachments',
+        'Project Requirements',
+        'Pending invitations',
+        'Dangerous{{red}}'
+    ]
+
+    const verticalNavbar = <VerticalNavbar active={tab} titles={titles} setTab={setTab} />
+
     return (
-        <Container mdscreen={mdscreen ? 1 : 0} className="py-4">
-            <SettingsNavbar active={tab} setTab={setTab} />
+        <VerticalGridView className="py-4">
+            { verticalNavbar }
             {mdscreen && <br/>}
             {
                 tab === 0 &&
@@ -65,6 +78,6 @@ export const SettingsView = (props: Props) => {
                 tab === 6 &&
                 <Dangerous />
             }
-        </Container>
+        </VerticalGridView>
     );
 };

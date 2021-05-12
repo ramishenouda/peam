@@ -10,8 +10,9 @@ type Props = {
 };
 
 export const Courses = (props: Props) => {
+    console.log(props.options);
     let data: any = props.options;
-    const view = data.courses.map((item: any) => {
+    const view = data.courses_owned.map((item: any) => {
         return (
             <Div className="p-3 mt-2">
                 <Link to={`/${item.owner.username}/${item.code}`} className="disable-link-style link f1">
@@ -30,7 +31,7 @@ export const Courses = (props: Props) => {
         )
     });
 
-    const coursesAsTeacher = data.as_teacher_set.map((item: any) => {
+    const coursesAsTeacher = data.courses_taught.map((item: any) => {
         return (
             <Div className="p-3 mt-2">
                 <Link to={`/${item.owner.username}/${item.code}`} className="disable-link-style link f1">
@@ -49,7 +50,7 @@ export const Courses = (props: Props) => {
         )
     });
 
-    const coursesAsStudent = data.as_student_set.map((item: any) => {
+    const coursesAsStudent = data.courses_taken.map((item: any) => {
         return (
             <Div className="p-3 mt-2">
                 <Link to={`/${item.owner.username}/${item.code}`} className="disable-link-style link f1">

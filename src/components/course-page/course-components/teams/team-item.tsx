@@ -61,7 +61,7 @@ export const TeamItem = (props: Props) => {
     return (
         <StyledDiv className="p-3 pb-5 mb-3">
             <div>
-                <Link to="/" className="link f3 mr-3">
+                <Link to={`/${courseState.owner}/${courseState.code}/requirements/${props.reqTitle}/teams/${props.name}`} className="link f3 mr-3">
                     <Title>
                         { props.name }
                     </Title>

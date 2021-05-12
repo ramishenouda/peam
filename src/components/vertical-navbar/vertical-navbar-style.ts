@@ -1,19 +1,18 @@
 import styled from 'styled-components';
 
-import { Navbar as navbar } from 'react-bootstrap';
+import { Container as container, Navbar as navbar } from 'react-bootstrap';
 
-// deprecated
-// export const Container = styled(container)`
-//     display: grid;
-//     grid-template-columns: 23% 77%;
-//     grid-column-gap: 20px;
-//     border-radius: 5px;
-//     padding: 10px;
+export const Container = styled(container)`
+    display: grid;
+    grid-template-columns: 23% 77%;
+    grid-column-gap: 20px;
+    border-radius: 5px;
+    padding: 10px;
 
-//     ${({ mdscreen }) => mdscreen && `
-//     display: block;
-//   `}
-// `
+    ${({ mdscreen }) => mdscreen && `
+    display: block;
+  `}
+`
 
 export const Section = styled.section`
     background: #f9f9f9;
@@ -54,4 +53,8 @@ export const NavItem = styled.div`
     :hover {
         background: #f1f1f1;
     }
+
+    ${({ color }) => color && `
+        color: ${color}
+    `}
 `

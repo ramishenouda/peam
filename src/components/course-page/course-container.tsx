@@ -37,32 +37,22 @@ function Course () {
             .then((result: AxiosResponse) => {
                 const teachers: Array<Teacher> = result.data.teachers;
                 const data: course = result.data;
+                const initial = {
+                    ownerId: data.owner.uid,
+                    id: data.uid,
+                    owner: data.owner.username,
+                    code: code,
+                    title: data.title,
+                    description: data.description,
+                    attachments: data.attachments,
+                    requirements: data.requirements,
+                    teachers: data.teachers,
+                }
+
                 if (teachers.find(x => x.username === systemState.username)) {
-                    dispatch(updateCourse({
-                        ownerId: data.owner.uid,
-                        id: data.uid, 
-                        owner: data.owner.username, 
-                        code: code, 
-                        title: data.title, 
-                        description: data.description, 
-                        attachments: data.attachments,
-                        requirements: data.requirements,
-                        teachers: data.teachers,
-                        role: 'teacher',
-                    }));
+                    dispatch(updateCourse({ ...initial, role: 'teacher' }));
                 } else {
-                    dispatch(updateCourse({
-                        ownerId: data.owner.uid,
-                        id: data.uid, 
-                        owner: data.owner.username, 
-                        code: code, 
-                        title: data.title, 
-                        description: data.description, 
-                        attachments: data.attachments,
-                        requirements: data.requirements,
-                        teachers: data.teachers,
-                        role: 'student',
-                    }));
+                    dispatch(updateCourse({ ...initial, role: 'student' }));
                 }
             }).catch((err: AxiosError) => {
                 showAxiosResponseErrors(err);

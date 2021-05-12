@@ -119,10 +119,6 @@
   font-weight: bold;
 }
 
-.offset-icon {
-  margin: 7px 10px 0px 0px;
-}
-
 .highlighted-text {
   text-decoration: underline #aa3b3b !important;
 }
@@ -161,4 +157,9 @@
 .date-over {
   color: red;
   text-decoration: line-through;
+}
+
+.peam {
+}
+.ahmed {
 }

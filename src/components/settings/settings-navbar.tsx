@@ -14,16 +14,16 @@ export const SettingsNavbar = (props: Props) => {
     return (
         <Navbar className="mt-3 mb-1">
             <NavItem onClick={() => props.setTab(0)} className={`${props.active === 0 && 'highlighted-text'}`}>
-                <ProfileIcon className="offset-icon"/> Profile
+                <ProfileIcon className="offset-icon mt-2 mx-2"/> Profile
             </NavItem>
             <NavItem onClick={() => props.setTab(1)} className={`${props.active === 1 && 'highlighted-text'}`}>
-                <SecurityIcon className="offset-icon"/> Security
+                <SecurityIcon className="offset-icon mt-2 mx-2"/> Security
             </NavItem>
             <NavItem onClick={() => props.setTab(2)} className={`${props.active === 2 && 'highlighted-text'}`}>
-                <CoursesIcon className="offset-icon"/> Courses
+                <CoursesIcon className="offset-icon mt-2 mx-2"/> Courses
             </NavItem>
             <NavItem onClick={() => props.setTab(3)} className={`${props.active === 3 && 'highlighted-text'}`}>
-                <GroupWorkIcon className="offset-icon"/> Teams
+                <GroupWorkIcon className="offset-icon mt-2 mx-2"/> Teams
             </NavItem>
             <NavItem className="">&nbsp;</NavItem>
         </Navbar>
