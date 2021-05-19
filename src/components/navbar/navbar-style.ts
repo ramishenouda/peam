@@ -1,92 +1,91 @@
 import styled, { css } from 'styled-components';
 
-import { 
-    Navbar as navbar, 
-    Nav as nav,
-    Form as form,
-    FormControl as formControl,
-    NavDropdown
+import {
+  Navbar as navbar,
+  Nav as nav,
+  Form as form,
+  FormControl as formControl,
+  NavDropdown,
 } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 
 export const Navbar = styled(navbar)`
-    width: 100%;
-	-webkit-box-shadow: 0 4px 6px -6px black;
-	   -moz-box-shadow: 0 4px 6px -6px black;
-	        box-shadow: 0 3px 5px -5px black;
-`
+  width: 100%;
+  -webkit-box-shadow: 0 4px 6px -6px black;
+  -moz-box-shadow: 0 4px 6px -6px black;
+  box-shadow: 0 3px 5px -5px black;
+`;
 
 export const NavbarBrand = styled(navbar.Brand)`
-    padding-left: 1.5vw !important;
-    padding-right: 1.5vw !important;
-    margin: 0;
-    background: #1a1a1a;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    color: white !important;
-`
+  padding-left: 1.5vw !important;
+  padding-right: 1.5vw !important;
+  margin: 0;
+  background: #1a1a1a;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: white !important;
+`;
 
-export const Form = styled(form)`
-`
+export const Form = styled(form)``;
 
 const NavItemStyle = css`
-    font-weight: 300;
-    font-family: Inter, 'Roboto', Inconsolata, sans-serif;
-    border-radius: 4px;
-    font-size: larger;
-    display: block;
-    padding: .5rem 1rem;
-    cursor: pointer;
-    transition: all 0.3s;
-`
+  font-weight: 300;
+  font-family: Inter, 'Roboto', Inconsolata, sans-serif;
+  border-radius: 4px;
+  font-size: larger;
+  display: block;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+`;
 
-export const SearchControl = styled(formControl) `
-    ${NavItemStyle}
-    box-shadow: none !important;
+export const SearchControl = styled(formControl)`
+  ${NavItemStyle}
+  box-shadow: none !important;
+  outline: none !important;
+  color: #424242 !important;
+  background-color: white !important;
+  cursor: text;
+
+  :focus,
+  :active {
+    margin-right: 6rem !important;
     outline: none !important;
-    color: #424242 !important;
-    background-color: white !important;
-    cursor: text;
-    :focus, :active {
-        margin-right: 6rem !important;
-        outline: none !important;
-        box-shadow: 0px 16px 12px -20px black !important;
-    }
-`
+    box-shadow: 0px 16px 12px -20px black !important;
+  }
+`;
 
 export const NavItem = styled(nav.Item)`
-    ${NavItemStyle}
-    :hover {
-        -webkit-box-shadow: 0 3px 5px -5px black;
-        -moz-box-shadow: 0 3px 5px -5px black;
-        box-shadow: 0px 16px 12px -20px black;
-    }
-`
+  ${NavItemStyle}
+  :hover {
+    -webkit-box-shadow: 0 3px 5px -5px black;
+    -moz-box-shadow: 0 3px 5px -5px black;
+    box-shadow: 0px 16px 12px -20px black;
+  }
+`;
 
 export const NewCourse = styled(Link)`
-    ${NavItemStyle}
-    position: absolute;
-    right: 70px;
-    top: -5px;
-    :hover {
-        -webkit-box-shadow: 0 3px 5px -5px black;
-        -moz-box-shadow: 0 3px 5px -5px black;
-        box-shadow: 0px 16px 12px -20px black;
-    }
-`
+  ${NavItemStyle}
+  position: absolute;
+  right: 70px;
+  top: -5px;
+  :hover {
+    -webkit-box-shadow: 0 3px 5px -5px black;
+    -moz-box-shadow: 0 3px 5px -5px black;
+    box-shadow: 0px 16px 12px -20px black;
+  }
+`;
 
 export const Dropdown = styled(NavDropdown)`
-    font-weight: 300;
-    font-family: Inter, 'Roboto', Inconsolata, sans-serif;
-    border-radius: 4px;
-    font-size: larger;
-    .dropdown-menu {
-        right: 0;
-        left: auto;
-    }
-`
+  font-weight: 300;
+  font-family: Inter, 'Roboto', Inconsolata, sans-serif;
+  border-radius: 4px;
+  font-size: larger;
+  .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+`;
 
-export const Nav = styled(nav)`
-`
-
+export const Nav = styled(nav)``;

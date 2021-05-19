@@ -29,42 +29,50 @@ export const AuthorizedNavbar = (props: Props) => {
 
     if (!mdScreen) {
         return (
-            <Navbar expand='md'>
-                <Link className="disable-link-style" to="/"><NavbarBrand>PEAM</NavbarBrand></Link>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ml-auto text-right">
-                        <Form>
-                            <SearchControl type="text" placeholder="Search Peam" className={`form-peam ${mdScreen && 'mt-2'}`} />
-                        </Form>
-                        <Link to="/new" className="disable-link-style">
-                            <NavItem className={`navbar-item ml-2`}>
-                                New course
-                            </NavItem>
-                        </Link>
-                        <Dropdown title={systemState.username}>
-                            <Dropdown.Item disabled={true}>
-                                <span>
-                                    Signed in as <br /> <strong>{systemState.username}</strong>
-                                </span>
-                                <hr/>
-                            </Dropdown.Item>
-                            <Link to={"/user/profile"} className="link dropdown-item mb-1">
-                                Your Profile
-                            </Link>
-                            {/* <Link to={"/user/courses"} className="link dropdown-item">
+          <Navbar expand="md" className="bg-g-gray">
+            <Link className="disable-link-style" to="/">
+              <NavbarBrand>PEAM</NavbarBrand>
+            </Link>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="ml-auto text-right">
+                <Form>
+                  <SearchControl
+                    type="text"
+                    placeholder="Search Peam"
+                    className={`form-peam ${mdScreen && 'mt-2'}`}
+                  />
+                </Form>
+                <Link to="/new" className="disable-link-style">
+                  <NavItem className={`navbar-item ml-2`}>New course</NavItem>
+                </Link>
+                <Dropdown title={systemState.username}>
+                  <Dropdown.Item disabled={true}>
+                    <span>
+                      Signed in as <br />{' '}
+                      <strong>{systemState.username}</strong>
+                    </span>
+                    <hr />
+                  </Dropdown.Item>
+                  <Link
+                    to={'/user/profile'}
+                    className="link dropdown-item mb-1"
+                  >
+                    Your Profile
+                  </Link>
+                  {/* <Link to={"/user/courses"} className="link dropdown-item">
                                 Your Courses
                             </Link>
                             <Link to={"/user/settings"} className="link dropdown-item">
                                 Settings
                             </Link> */}
-                            <Link to="/logout" className="link dropdown-item">
-                                Sign out
-                            </Link>
-                        </Dropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+                  <Link to="/logout" className="link dropdown-item">
+                    Sign out
+                  </Link>
+                </Dropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
         );
     } else {
         return (
