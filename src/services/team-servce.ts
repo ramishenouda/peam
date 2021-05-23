@@ -42,7 +42,7 @@ export const GetTeam = async (
   // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/teams/{team_name}/
   options.url =
     baseURL +
-    `courses/${owner}/${courseCode}/requirements/${reqTitle}/teams/${teamName}?expand=students`;
+    `courses/${owner}/${courseCode}/requirements/${reqTitle}/teams/${teamName}?expand=students&expand=project.project_zip`;
   options.headers['Authorization'] = 'Bearer ' + system.token;
   options.method = 'GET';
 

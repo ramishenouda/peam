@@ -30,7 +30,7 @@ export const NavbarBrand = styled(navbar.Brand)`
 export const Form = styled(form)``;
 
 const NavItemStyle = css`
-  font-weight: 300;
+  font-weight: 400;
   font-family: Inter, 'Roboto', Inconsolata, sans-serif;
   border-radius: 4px;
   font-size: larger;

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
@@ -39,9 +39,8 @@ const CourseView = (props: Props): JSX.Element => {
   const [title, setTitle] = useState(
     params.title_1 ? params.title_1 : courseState.title
   );
-  const [titleLink, SetTitleLink] = useState(
-    `/${courseState.owner}/${courseState.code}`
-  );
+
+  const titleLink: string = `/${courseState.owner}/${courseState.code}`;
 
   const tabsTitles = ['Overview', 'Students', 'Teams', 'Reports', 'Settings'];
   useEffect(() => {

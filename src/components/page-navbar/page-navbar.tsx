@@ -81,7 +81,6 @@ const headerNavbar = (
   description?: string
 ) => {
   const isSmallScreen = window.innerWidth < 769;
-  console.log(titleLink);
 
   return (
     <header className="head ">

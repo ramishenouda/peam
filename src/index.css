@@ -10,6 +10,22 @@
   box-sizing: border-box;
 }
 
+.drop-zone {
+  background: #ececec;
+  padding: 4rem;
+  border-radius: 20px;
+  text-align: center;
+  font-size: xx-large;
+  font-family: Roboto;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.drop-zone:hover {
+  background: #d8d8d8;
+  color: #3498db;
+}
+
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #3498db; /* Blue */
@@ -193,7 +209,10 @@
   text-decoration: line-through;
 }
 
-.peam {
+.bottom-border {
+  border-bottom: 1px solid white;
 }
-.ahmed {
+
+.top-border {
+  border-top: 1px solid white;
 }

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { Container } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -15,12 +14,11 @@ import { SystemState } from '../../store/system/types';
 
 import { Team as TeamType } from '../../models/team';
 
-import { Title } from '../../style';
-
 import { PageNavbar } from '../page-navbar/page-navbar';
 import { TeamOverView } from './team-overview';
 import { TeamSettings } from './team-settings';
 import { CourseState } from '../../store/course/types';
+import { updateTeam } from 'store/team/actions';
 
 type Props = {};
 
@@ -34,10 +32,10 @@ interface Params {
 
 export const Team = (props: Props) => {
   const params: Params = useParams();
+  const dispatch = useDispatch();
+
   const systemState: SystemState = useSelector((state: any) => state.system);
   const courseState: CourseState = useSelector((state: any) => state.course);
-
-  console.log(courseState);
 
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState(false);
@@ -70,6 +68,8 @@ export const Team = (props: Props) => {
     )
       .then((result) => {
         setTeam(result.data);
+        const initial: TeamType = result.data;
+        dispatch(updateTeam(initial));
       })
       .catch((err) => {
         showAxiosResponseErrors(err);
@@ -103,7 +103,9 @@ export const Team = (props: Props) => {
         titleLink={titleLink}
         subTitle={team.name}
       />
-      {tab === 1 && <TeamOverView students={team.students} />}
+      {tab === 1 && (
+        <TeamOverView project={team.project} students={team.students} />
+      )}
       {tab === 2 && <div> انشاء الله انشاء الله! </div>}
       {tab === 3 && <TeamSettings setTeam={setTeam} team={team} />}
     </>
