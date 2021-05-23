@@ -1,30 +1,34 @@
 import { Link as Ref } from 'react-router-dom';
 
 type Props = {
-    title: string;  //Title of the item
-    tab: number;    //tab number
-    active: number; //number of the current active tab
-    icon: JSX.Element;
-    type?: string;  //Used to hide the red line under tabs if needed
-    setTab: (tab: number) => void; //TabSetter function
-    link?: string;
+  title: string; //Title of the item
+  tab: number; //tab number
+  active: number; //number of the current active tab
+  icon: JSX.Element;
+  type?: string; //Used to hide the red line under tabs if needed
+  setTab: (tab: number) => void; //TabSetter function
+  link?: string;
 };
 
 export const Link = (props: Props) => {
-    const data = 
-        <span onClick={() => props.setTab(props.tab)} className={`course-nav-item ${(props.active === props.tab && !props.type) && 'active-tab'}`}>
-            <span className="material-ui-icon mx-2">{ props.icon }</span> { props.title }
-        </span>
+  const data = (
+    <span
+      onClick={() => props.setTab(props.tab)}
+      className={`course-nav-item ${
+        props.active === props.tab && !props.type && 'active-tab'
+      }`}
+    >
+      <span className="material-ui-icon mx-2">{props.icon}</span> {props.title}
+    </span>
+  );
 
-    if (props.link) {
-        return (
-            <Ref className="disable-link-style" to={props.link}>
-                { data }
-            </Ref>
-        );
-    }
-
+  if (props.link) {
     return (
-        data
+      <Ref className="disable-link-style" to={props.link}>
+        {data}
+      </Ref>
     );
+  }
+
+  return data;
 };
