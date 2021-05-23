@@ -37,7 +37,10 @@ export const File = ({
       className={`${last_index ? 'border-top' : 'border-bottom'}`}
     >
       {file_name[file_name.length - 1] === '/' && (
-        <FolderIcon className="mb-1" style={{ color: '#555' }} />
+        <FolderIcon
+          className="mb-1"
+          style={{ color: '#555', cursor: 'pointer' }}
+        />
       )}
       <Text className="disable-link-style ml-1">{file_name}</Text>
     </Item>
@@ -46,13 +49,13 @@ export const File = ({
 
 type Props2 = {
   file_name: string;
-  up: () => void;
+  up: (arg?: any) => void;
 };
 
 export const Up = ({ file_name, up }: Props2) => {
   return (
     <Item onClick={() => up()} className={'border-bottom'}>
-      <UpIcon className="mb-1" style={{ color: '#555' }} />
+      <UpIcon className="mb-1" style={{ color: '#555', cursor: 'pointer' }} />
       <Text className="disable-link-style ml-1">{file_name}</Text>
     </Item>
   );

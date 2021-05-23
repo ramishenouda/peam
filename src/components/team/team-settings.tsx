@@ -9,6 +9,7 @@ import {
   InviteStudents,
   ManageTeam,
 } from './team-settings-components/index';
+import { ManageProject } from './team-settings-components/manage-project';
 
 type Props = {
   team: Team;
@@ -18,7 +19,12 @@ type Props = {
 export const TeamSettings = (props: Props) => {
   const [tab, setTab] = useState(0);
 
-  const titles = ['Manage team', 'Invite students', 'Dangerous{{Red}}'];
+  const titles = [
+    'Manage team',
+    'Invite students',
+    'Manage Project',
+    'Dangerous{{Red}}',
+  ];
 
   const verticalNavbar = (
     <VerticalNavbar active={tab} setTab={setTab} titles={titles} />
@@ -29,7 +35,8 @@ export const TeamSettings = (props: Props) => {
       {verticalNavbar}
       {tab === 0 && <ManageTeam team={props.team} setTeam={props.setTeam} />}
       {tab === 1 && <InviteStudents />}
-      {tab === 2 && <Dangerous />}
+      {tab === 2 && <ManageProject _project={props.team.project} />}
+      {tab === 3 && <Dangerous />}
     </VerticalGridView>
   );
 };

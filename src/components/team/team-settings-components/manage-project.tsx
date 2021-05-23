@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Redirect, useParams } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,22 +8,20 @@ import * as yup from 'yup';
 
 import { Button, Form } from 'react-bootstrap';
 
-import { Team } from '../../../models/team';
-import { Member } from '../../../models/memeber';
+import { Project } from 'models';
 
 import { CourseState } from '../../../store/course/types';
 import { SystemState } from '../../../store/system/types';
 
-import { UpdateTeam } from '../../../services/team-servce';
 import { success } from '../../../services/notification-service';
 import { showAxiosResponseErrors } from '../../../services/error-handler-service';
+
 import { Section } from '../../../style';
-import { ListMembers } from '../../list-members/list-members';
-import { Redirect, useParams } from 'react-router-dom';
+import { updateProject } from 'services/project-service';
+import { TextareaAutosize } from 'components/course-new/new-course-style';
 
 type Props = {
-  team: Team;
-  setTeam: (tab: Team) => void;
+  _project: Project;
 };
 
 interface Params {
@@ -33,34 +32,36 @@ interface Params {
   title_2: string;
 }
 
-export const ManageTeam = (props: Props) => {
+export const ManageProject = ({ _project }: Props) => {
   const params: Params = useParams();
   const courseState: CourseState = useSelector((state: any) => state.course);
   const systemState: SystemState = useSelector((state: any) => state.system);
 
-  const initialTeam: Team = {
-    name: props.team.name,
-    students: props.team.students,
+  const initialProject: Project = {
+    title: _project.title,
+    project_zip: { files: [] },
+    uid: '',
   };
 
-  const [team, setTeam] = useState(initialTeam);
+  const [project, setProject] = useState(initialProject);
   const req = courseState.requirements.filter(
     (req) => req.title === params.title_1
   )[0];
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
-    setTeam({ ...team, [name]: value });
+    setProject({ ...project, [name]: value });
   };
 
   const Schema = yup.object().shape({
-    name: yup
+    title: yup
       .string()
-      .required('Name is a required field')
+      .required('Title is a required field')
       .max(50, 'Ensure this field has no more than 50 characters.'),
+    description: yup.string(),
   });
 
-  const { register, handleSubmit, errors, formState } = useForm<Team>({
+  const { register, handleSubmit, errors, formState } = useForm<Project>({
     mode: 'all',
     resolver: yupResolver(Schema),
   });
@@ -68,19 +69,20 @@ export const ManageTeam = (props: Props) => {
   const { isValid } = formState;
   const submit = () => {
     const payLoad = {
-      name: team.name,
-      requirement: req.uid,
+      title: project.title,
+      description: project.description,
     };
-    UpdateTeam(
+    updateProject(
       courseState.owner,
       courseState.code,
       params.title_1,
-      systemState,
       params.title_2,
+      _project.title,
+      systemState,
       payLoad
     )
       .then((result) => {
-        success('Team updated successfully');
+        success('Project updated successfully');
       })
       .catch((err) => {
         console.log(err);
@@ -88,16 +90,16 @@ export const ManageTeam = (props: Props) => {
       });
   };
 
-  const removeStudent = (member: Member) => {
-    // call the api to remove the student.
-  };
-
   if (!req) return <Redirect to="/" />;
+  if (!_project) {
+    return <span>no project yet.</span>;
+  }
+
   return (
     <div>
       <Section>
         <div>
-          <p className="peam-title-1 f1">Team</p>
+          <p className="peam-title-1 f1">Project</p>
         </div>
         <Form className="" onSubmit={handleSubmit(() => submit())}>
           <Form.Group controlId="title">
@@ -108,12 +110,23 @@ export const ManageTeam = (props: Props) => {
               className="f2"
               type="text"
               autoComplete="off"
-              defaultValue={team.name}
+              defaultValue={_project.title}
               onChange={handleChange}
-              name="name"
+              name="title"
               ref={register}
             />
-            <p className="required-text"> {errors.name?.message} </p>
+            <p className="required-text"> {errors.title?.message} </p>
+          </Form.Group>
+          <Form.Group controlId="description">
+            <Form.Label className="f3">Description</Form.Label>
+            <TextareaAutosize
+              minRows={3}
+              className="form-control f3"
+              // onChange={(e: any) => setDescription(e.target.value)}
+              name="description"
+              ref={register}
+            />
+            <p className="required-text"> {errors.description?.message} </p>
           </Form.Group>
           <Form.Group>
             <Button
@@ -126,18 +139,6 @@ export const ManageTeam = (props: Props) => {
             </Button>
           </Form.Group>
         </Form>
-      </Section>
-      <hr />
-      <Section>
-        <div>
-          <p className="peam-title-1 f1">Students</p>
-        </div>
-        <ListMembers
-          showButton={true}
-          ButtonText="Remove"
-          optionFuncton={removeStudent}
-          members={props.team.students}
-        />
       </Section>
     </div>
   );
