@@ -13,7 +13,7 @@ import { Member } from '../../../models/memeber';
 import { CourseState } from '../../../store/course/types';
 import { SystemState } from '../../../store/system/types';
 
-import { UpdateTeam } from '../../../services/team-servce';
+import { RemoveStudent, UpdateTeam } from '../../../services/team-servce';
 import { success } from '../../../services/notification-service';
 import { showAxiosResponseErrors } from '../../../services/error-handler-service';
 import { Section } from '../../../style';
@@ -89,7 +89,16 @@ export const ManageTeam = (props: Props) => {
   };
 
   const removeStudent = (member: Member) => {
-    // call the api to remove the student.
+    RemoveStudent(
+      courseState.owner,
+      courseState.code,
+      params.title_1,
+      systemState,
+      params.title_2,
+      member.username
+    )
+      .then((result) => {})
+      .catch((err) => {});
   };
 
   if (!req) return <Redirect to="/" />;

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AxiosError, AxiosResponse } from 'axios';
-
-import { getCourseInvitationsList } from '../../../../../../services/course-service';
-import { showAxiosResponseErrors } from '../../../../../../services/error-handler-service';
-
-import { CourseState } from '../../../../../../store/course/types';
-import { SystemState } from '../../../../../../store/system/types';
-import { PendingInvitationItem } from './pending-invitation-item';
+import { CourseState } from 'store/course/types';
+import { SystemState } from 'store/system/types';
+import { showAxiosResponseErrors } from 'services/error-handler-service';
+import { PendingInvitationItem } from 'components/float-card/float-card';
+import { useParams } from 'react-router-dom';
+import {
+  DeleteTeamInvitation,
+  getTeamInvitationsList,
+} from 'services/team-servce';
 
 type Props = {};
 
@@ -21,7 +23,17 @@ interface Invitation {
   token: string;
 }
 
+interface Params {
+  code: string;
+  owner: string;
+  type: string;
+  title_1: string;
+  title_2: string;
+}
+
 export const PendingInvitations = (props: Props) => {
+  const params: Params = useParams();
+
   const courseState: CourseState = useSelector((state: any) => state.course);
   const systemState: SystemState = useSelector((state: any) => state.system);
 
@@ -36,7 +48,13 @@ export const PendingInvitations = (props: Props) => {
   };
 
   useEffect(() => {
-    getCourseInvitationsList(courseState.owner, courseState.code, systemState)
+    getTeamInvitationsList(
+      courseState.owner,
+      courseState.code,
+      params.title_1,
+      params.title_2,
+      systemState
+    )
       .then((result: AxiosResponse) => {
         setInvitations(result.data.invitations);
       })
@@ -45,7 +63,7 @@ export const PendingInvitations = (props: Props) => {
         setError(true);
       })
       .finally(() => setFetching(false));
-  }, [courseState.owner, courseState.code, systemState]);
+  }, []);
 
   if (fetching) {
     return <div>Loading....</div>;
@@ -62,6 +80,7 @@ export const PendingInvitations = (props: Props) => {
       courseCode={courseState.code}
       courseOwner={courseState.owner}
       token={systemState.token}
+      removeInvite={DeleteTeamInvitation}
       removeInvitation={removeInvitation}
     />
   ));

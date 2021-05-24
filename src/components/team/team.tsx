@@ -41,17 +41,23 @@ export const Team = (props: Props) => {
   const [error, setError] = useState(false);
   const [team, setTeam] = useState({} as TeamType);
   const [tab, setTab] = useState(1);
+  const [inteam, setInTeam] = useState(false);
 
   const titleLink = `/${courseState.owner}/${courseState.code}`;
-  const navbarTitles = ['Back', 'Overview', 'Report', 'Settings'];
+  let navbarTitles;
+  if (inteam) navbarTitles = ['Back', 'Overview', 'Report', 'Settings'];
+  else navbarTitles = ['Back', 'Overview'];
 
-  const icons: Array<JSX.Element> = [
-    <BackIcon />,
-    <ImportContactsIcon />,
-    <AssessmentIcon />,
-    <SettingsIcon />,
-  ];
+  let icons: Array<JSX.Element>;
 
+  if (inteam)
+    icons = [
+      <BackIcon />,
+      <ImportContactsIcon />,
+      <AssessmentIcon />,
+      <SettingsIcon />,
+    ];
+  else icons = [<BackIcon />, <ImportContactsIcon />];
   const links: any = [
     `/${params.owner}/${params.code}/requirements/${params.title_1}`,
   ];
@@ -70,6 +76,12 @@ export const Team = (props: Props) => {
         setTeam(result.data);
         const initial: TeamType = result.data;
         dispatch(updateTeam(initial));
+        let f = false;
+        result.data.students.forEach((s: any) => {
+          if (s.username === systemState.username) f = true;
+        });
+
+        setInTeam(f);
       })
       .catch((err) => {
         showAxiosResponseErrors(err);
