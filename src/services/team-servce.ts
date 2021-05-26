@@ -171,7 +171,7 @@ export const UpdateTeam = async (
   reqTitle: string,
   system: SystemState,
   team: string,
-  data: { name: string; requirement: string }
+  data: { name: string }
 ) => {
   // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/teams/{team_name}/
 

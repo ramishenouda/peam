@@ -45,6 +45,7 @@ export const Team = (props: Props) => {
   const [inteam, setInTeam] = useState(false);
 
   const titleLink = `/${courseState.owner}/${courseState.code}`;
+  const isTeacher = courseState.role === 'teacher';
 
   const navItems: Array<NavItem> = [
     {
@@ -68,7 +69,7 @@ export const Team = (props: Props) => {
       tab: 2,
       title: 'Report',
       icon: <ReportIcon />,
-      hideCondition: courseState.role !== 'teacher',
+      hideCondition: !isTeacher,
     },
     {
       active: false,
@@ -76,7 +77,7 @@ export const Team = (props: Props) => {
       tab: 3,
       title: 'Settings',
       icon: <SettingsIcon />,
-      hideCondition: !inteam,
+      hideCondition: !inteam && !isTeacher,
     },
   ];
 

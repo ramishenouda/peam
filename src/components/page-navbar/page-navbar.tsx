@@ -15,10 +15,11 @@ export const PageNavbar = ({ pageNavbar }: Props): JSX.Element => {
   const tabs = pageNavbar.navItems
     .filter((item) => !item.hideCondition)
     .map((item) => (
-      <NavItem
-        navItem={{ ...item, active: item.tab === pageNavbar.active }}
-        key={item.title + Date()}
-      />
+      <span key={item.title + Date()} className="px-4">
+        <NavItem
+          navItem={{ ...item, active: item.tab === pageNavbar.active }}
+        />
+      </span>
     ));
 
   const Navbar = navbar(tabs);

@@ -69,8 +69,8 @@ export const ManageTeam = (props: Props) => {
   const submit = () => {
     const payLoad = {
       name: team.name,
-      requirement: req.uid,
     };
+
     UpdateTeam(
       courseState.owner,
       courseState.code,
@@ -81,6 +81,9 @@ export const ManageTeam = (props: Props) => {
     )
       .then((result) => {
         success('Team updated successfully');
+        setTimeout(() => {
+          window.location.replace(payLoad.name);
+        }, 250);
       })
       .catch((err) => {
         console.log(err);
