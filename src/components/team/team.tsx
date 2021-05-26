@@ -11,14 +11,15 @@ import { showAxiosResponseErrors } from '../../services/error-handler-service';
 import { GetTeam } from '../../services/team-servce';
 
 import { SystemState } from '../../store/system/types';
+import { CourseState } from '../../store/course/types';
+import { updateTeam } from 'store/team/actions';
 
 import { Team as TeamType } from '../../models/team';
 
 import { PageNavbar } from '../page-navbar/page-navbar';
 import { TeamOverView } from './team-overview';
 import { TeamSettings } from './team-settings';
-import { CourseState } from '../../store/course/types';
-import { updateTeam } from 'store/team/actions';
+import { Report } from 'components/report';
 
 type Props = {};
 
@@ -45,12 +46,13 @@ export const Team = (props: Props) => {
 
   const titleLink = `/${courseState.owner}/${courseState.code}`;
   let navbarTitles;
-  if (inteam) navbarTitles = ['Back', 'Overview', 'Report', 'Settings'];
+  if (inteam || courseState.role === 'teacher')
+    navbarTitles = ['Back', 'Overview', 'Report', 'Settings'];
   else navbarTitles = ['Back', 'Overview'];
 
   let icons: Array<JSX.Element>;
 
-  if (inteam)
+  if (inteam || courseState.role === 'teacher')
     icons = [
       <BackIcon />,
       <ImportContactsIcon />,
@@ -63,6 +65,22 @@ export const Team = (props: Props) => {
   ];
 
   const navbarStyle = 'gray';
+
+  const pageNavbar = (
+    <PageNavbar
+      active={tab}
+      icons={icons}
+      setTab={setTab}
+      titles={navbarTitles}
+      links={links}
+      styleColor={navbarStyle}
+      showHeader={true}
+      title={params.title_1}
+      titleLink={titleLink}
+      subTitle={team.name}
+      description={team.project ? team.project.description : ''}
+    />
+  );
 
   useEffect(() => {
     GetTeam(
@@ -103,22 +121,11 @@ export const Team = (props: Props) => {
 
   return (
     <>
-      <PageNavbar
-        active={tab}
-        icons={icons}
-        setTab={setTab}
-        titles={navbarTitles}
-        links={links}
-        styleColor={navbarStyle}
-        showHeader={true}
-        title={params.title_1}
-        titleLink={titleLink}
-        subTitle={team.name}
-      />
+      {pageNavbar}
       {tab === 1 && (
         <TeamOverView project={team.project} students={team.students} />
       )}
-      {tab === 2 && <div> انشاء الله انشاء الله! </div>}
+      {tab === 2 && <Report team={team} token={systemState.token} />}
       {tab === 3 && <TeamSettings setTeam={setTeam} team={team} />}
     </>
   );

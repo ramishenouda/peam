@@ -13,15 +13,29 @@ type Props = {
 };
 
 export const TeamOverView = (props: Props) => {
+  const isSmallScreen = window.innerWidth < 769;
+
   return (
     <GridView>
       {!props.project && <Project project={props.project} />}
       {props.project && <Tree project={props.project} />}
-      {/* make it more responsive */}
-      <div className="">
-        <Title className="f3">Students</Title>
-        <hr />
-        <ListMembers members={props.students} />
+      {/* todo: make it more responsive */}
+      <div>
+        {!isSmallScreen && props.project && (
+          <div>
+            <h1 className={`f3 overview-title ${isSmallScreen && 'mt-2'}`}>
+              About
+            </h1>
+            <p className="overview-description peam-title-1 mt-2">
+              {props.project.description}
+            </p>
+          </div>
+        )}
+        <div className="">
+          <Title className="f3">Students</Title>
+          <hr />
+          <ListMembers members={props.students} />
+        </div>
       </div>
     </GridView>
   );

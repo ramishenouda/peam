@@ -41,6 +41,7 @@ export const ManageProject = ({ _project }: Props) => {
     title: _project.title,
     project_zip: { files: [] },
     uid: '',
+    description: '',
   };
 
   const [project, setProject] = useState(initialProject);
@@ -83,6 +84,9 @@ export const ManageProject = ({ _project }: Props) => {
     )
       .then((result) => {
         success('Project updated successfully');
+        setTimeout(() => {
+          window.location.reload();
+        }, 250);
       })
       .catch((err) => {
         console.log(err);
@@ -122,7 +126,8 @@ export const ManageProject = ({ _project }: Props) => {
             <TextareaAutosize
               minRows={3}
               className="form-control f3"
-              // onChange={(e: any) => setDescription(e.target.value)}
+              onChange={handleChange}
+              defaultValue={_project.description}
               name="description"
               ref={register}
             />
