@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import OverviewIcon from '@material-ui/icons/ImportContacts';
 import SettingsIcon from '@material-ui/icons/Settings';
-import AssessmentIcon from '@material-ui/icons/Assessment';
+import ReportIcon from '@material-ui/icons/Assessment';
 import BackIcon from '@material-ui/icons/ArrowBack';
 
 import { showAxiosResponseErrors } from '../../services/error-handler-service';
@@ -15,7 +15,7 @@ import { CourseState } from '../../store/course/types';
 import { updateTeam } from 'store/team/actions';
 
 import { Team as TeamType } from '../../models/team';
-
+import { PageNavbar as PageNavbarType, NavItem } from 'models';
 import { PageNavbar } from '../page-navbar/page-navbar';
 import { TeamOverView } from './team-overview';
 import { TeamSettings } from './team-settings';
@@ -45,42 +45,50 @@ export const Team = (props: Props) => {
   const [inteam, setInTeam] = useState(false);
 
   const titleLink = `/${courseState.owner}/${courseState.code}`;
-  let navbarTitles;
-  if (inteam || courseState.role === 'teacher')
-    navbarTitles = ['Back', 'Overview', 'Report', 'Settings'];
-  else navbarTitles = ['Back', 'Overview'];
 
-  let icons: Array<JSX.Element>;
-
-  if (inteam || courseState.role === 'teacher')
-    icons = [
-      <BackIcon />,
-      <ImportContactsIcon />,
-      <AssessmentIcon />,
-      <SettingsIcon />,
-    ];
-  else icons = [<BackIcon />, <ImportContactsIcon />];
-  const links: any = [
-    `/${params.owner}/${params.code}/requirements/${params.title_1}`,
+  const navItems: Array<NavItem> = [
+    {
+      active: false,
+      setTab: setTab,
+      tab: 0,
+      title: 'Back',
+      icon: <BackIcon />,
+      link: `/${params.owner}/${params.code}/requirements/${params.title_1}`,
+    },
+    {
+      active: false,
+      setTab: setTab,
+      tab: 1,
+      title: 'Overview',
+      icon: <OverviewIcon />,
+    },
+    {
+      active: false,
+      setTab: setTab,
+      tab: 2,
+      title: 'Report',
+      icon: <ReportIcon />,
+      hideCondition: courseState.role !== 'teacher',
+    },
+    {
+      active: false,
+      setTab: setTab,
+      tab: 3,
+      title: 'Settings',
+      icon: <SettingsIcon />,
+      hideCondition: !inteam,
+    },
   ];
 
-  const navbarStyle = 'gray';
-
-  const pageNavbar = (
-    <PageNavbar
-      active={tab}
-      icons={icons}
-      setTab={setTab}
-      titles={navbarTitles}
-      links={links}
-      styleColor={navbarStyle}
-      showHeader={true}
-      title={params.title_1}
-      titleLink={titleLink}
-      subTitle={team.name}
-      description={team.project ? team.project.description : ''}
-    />
-  );
+  const Navbar: PageNavbarType = {
+    active: tab,
+    navItems: navItems,
+    showHeader: true,
+    title: params.title_1,
+    titleLink: titleLink,
+    subTitle: team.name,
+    description: team.project ? team.project.description : '',
+  };
 
   useEffect(() => {
     GetTeam(
@@ -121,7 +129,7 @@ export const Team = (props: Props) => {
 
   return (
     <>
-      {pageNavbar}
+      <PageNavbar pageNavbar={Navbar} />
       {tab === 1 && (
         <TeamOverView project={team.project} students={team.students} />
       )}

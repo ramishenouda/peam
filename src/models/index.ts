@@ -1,3 +1,2 @@
 export type { Project } from './project/project';
-
-export interface test {}
+export type { PageNavbar, NavItem } from './pageNavbar';
