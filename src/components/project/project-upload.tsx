@@ -23,6 +23,8 @@ import {
   TextareaAutosize,
 } from 'components/course-new/new-course-style';
 import { createProject } from 'services/project-service';
+import { showAxiosResponseErrors } from 'services/error-handler-service';
+import { success } from 'services/notification-service';
 
 interface Params {
   code: string;
@@ -38,46 +40,10 @@ type Props = {
 
 export const Project = (props: Props) => {
   const [creatingProject, setCreatingProject] = useState(false);
-
-  if (!props.project && !creatingProject)
-    return Project404(props, setCreatingProject);
-  return ProjectUpload();
-};
-
-// shows to the doctors that there is no projects.
-// shows to the student a button to toggle creating their project.
-const Project404 = (
-  props: Props,
-  toggleCreatingProject: (arg: boolean) => void
-) => {
-  const courseState: CourseState = useSelector((state: any) => state.course);
-
-  // todo: more responsive for mobile apps (seprate the students and the project files)
-  return (
-    <ProjectFiles>
-      {!props.project && courseState.role === 'teacher' && (
-        <Title className="f2 p-5 text-center">
-          The team hasn't uploaded any projects yet.
-        </Title>
-      )}
-      {!props.project && courseState.role === 'student' && (
-        <NavItem
-          onClick={() => toggleCreatingProject(true)}
-          className="f2 p-5 text-center"
-        >
-          You haven't uploaded any projects yet. <br /> Click to start
-          uploading.
-        </NavItem>
-      )}
-    </ProjectFiles>
-  );
-};
-
-const ProjectUpload = () => {
   const params: Params = useParams();
   const courseState: CourseState = useSelector((state: any) => state.course);
-  const teamState: TeamState = useSelector((state: any) => state.team);
   const systemState: SystemState = useSelector((state: any) => state.system);
+  const teamState: TeamState = useSelector((state: any) => state.team);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -98,6 +64,9 @@ const ProjectUpload = () => {
   });
   const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
     useDropzone({ multiple: false, maxFiles: 1, accept: '.zip' });
+
+  if (!props.project && !creatingProject)
+    return Project404(props, setCreatingProject, courseState);
 
   let files = acceptedFiles.map((file: File) => (
     <div
@@ -138,8 +107,15 @@ const ProjectUpload = () => {
     )
       .then((result) => {
         console.log(result);
+        success('Your project was created successfully');
+        setTimeout(() => {
+          window.location.reload();
+        }, 250);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err);
+        showAxiosResponseErrors(err);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -199,5 +175,33 @@ const ProjectUpload = () => {
         )}
       </Form.Group>
     </Form>
+  );
+};
+
+// shows to the doctors that there is no projects.
+// shows to the student a button to toggle creating their project.
+const Project404 = (
+  props: Props,
+  toggleCreatingProject: (arg: boolean) => void,
+  courseState: CourseState
+) => {
+  // todo: more responsive for mobile apps (seprate the students and the project files)
+  return (
+    <ProjectFiles>
+      {!props.project && courseState.role === 'teacher' && (
+        <Title className="f2 p-5 text-center">
+          The team hasn't uploaded any projects yet.
+        </Title>
+      )}
+      {!props.project && courseState.role === 'student' && (
+        <NavItem
+          onClick={() => toggleCreatingProject(true)}
+          className="f2 p-5 text-center"
+        >
+          You haven't uploaded any projects yet. <br /> Click to start
+          uploading.
+        </NavItem>
+      )}
+    </ProjectFiles>
   );
 };

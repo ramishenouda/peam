@@ -9,6 +9,8 @@ import {
   InviteStudents,
   ManageTeam,
 } from './team-settings-components/index';
+import { ManageProject } from './team-settings-components/manage-project';
+import { PendingInvitations } from './team-settings-components/pending-invitations';
 
 type Props = {
   team: Team;
@@ -18,7 +20,13 @@ type Props = {
 export const TeamSettings = (props: Props) => {
   const [tab, setTab] = useState(0);
 
-  const titles = ['Manage team', 'Invite students', 'Dangerous{{Red}}'];
+  const titles = [
+    'Manage team',
+    'Manage Project',
+    'Invite students',
+    'Pending invitations',
+    'Dangerous{{Red}}',
+  ];
 
   const verticalNavbar = (
     <VerticalNavbar active={tab} setTab={setTab} titles={titles} />
@@ -28,8 +36,12 @@ export const TeamSettings = (props: Props) => {
     <VerticalGridView>
       {verticalNavbar}
       {tab === 0 && <ManageTeam team={props.team} setTeam={props.setTeam} />}
-      {tab === 1 && <InviteStudents />}
-      {tab === 2 && <Dangerous />}
+      {tab === 1 && <ManageProject _project={props.team.project} />}
+      {tab === 2 && (
+        <InviteStudents team_uuid={props.team.uid ? props.team.uid : ''} />
+      )}
+      {tab === 3 && <PendingInvitations />}
+      {tab === 4 && <Dangerous />}
     </VerticalGridView>
   );
 };

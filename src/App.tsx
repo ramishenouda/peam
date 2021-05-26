@@ -22,6 +22,7 @@ import { ResetPassword } from './components/password-reset/reset-password';
 import { NewCourse } from './components/course-new/new-course-container';
 import CoursePage from './components/course-page/course-container';
 import { RespondCourse } from './components/responses/course-invitation';
+import { RespondTeam } from './components/responses/team-invitation';
 import { Settings } from './components/settings/settings';
 
 const App = () => {
@@ -112,6 +113,11 @@ const App = () => {
           render={() => (
             <ProtectedRoute redirectTo="/login" component={RespondCourse} />
           )}
+        />
+        <Route
+          exact
+          path="/courses/teams/invitations/:token"
+          render={() => <ProtectedRoute component={RespondTeam} />}
         />
         <Route
           exact

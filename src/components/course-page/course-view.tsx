@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import ImportContactsIcon from '@material-ui/icons/ImportContacts';
-import PeopleIcon from '@material-ui/icons/People';
-import GroupWorkIcon from '@material-ui/icons/GroupWork';
-import AssessmentIcon from '@material-ui/icons/Assessment';
+import OverviewIcon from '@material-ui/icons/ImportContacts';
+import StudentsIcon from '@material-ui/icons/People';
+import TeamsIcon from '@material-ui/icons/GroupWork';
+import ReportsIcon from '@material-ui/icons/Assessment';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import { CourseState } from '../../store/course/types';
@@ -19,6 +19,7 @@ import './course-style.css';
 import { Requirement } from '../project-requirement/requirement';
 import { Team } from '../team/team';
 import { PageNavbar } from '../page-navbar/page-navbar';
+import { NavItem, PageNavbar as PageNavbarType } from 'models';
 
 type Props = {};
 
@@ -42,48 +43,70 @@ const CourseView = (props: Props): JSX.Element => {
 
   const titleLink: string = `/${courseState.owner}/${courseState.code}`;
 
-  const tabsTitles = ['Overview', 'Students', 'Teams', 'Reports', 'Settings'];
   useEffect(() => {
     setTitle(params.title_1 ? params.title_1 : courseState.title);
   }, [params, tab, courseState.title]);
 
-  const links = [
-    `/${courseState.owner}/${courseState.code}`,
-    `/${courseState.owner}/${courseState.code}`,
-    `/${courseState.owner}/${courseState.code}`,
-    `/${courseState.owner}/${courseState.code}`,
-    `/${courseState.owner}/${courseState.code}`,
-  ];
-
   const isTeacher = courseState.role === 'teacher';
-  const conditions = [true, true, true, isTeacher, isTeacher];
 
-  const icons: Array<JSX.Element> = [
-    <ImportContactsIcon />,
-    <PeopleIcon />,
-    <GroupWorkIcon />,
-    <AssessmentIcon />,
-    <SettingsIcon />,
+  const navItems: Array<NavItem> = [
+    {
+      title: 'Overview',
+      icon: <OverviewIcon />,
+      setTab: setTab,
+      tab: 0,
+      active: false,
+      link: titleLink,
+    },
+    {
+      title: 'Students',
+      icon: <StudentsIcon />,
+      setTab: setTab,
+      tab: 1,
+      active: false,
+      link: titleLink,
+    },
+    {
+      title: 'Teams',
+      icon: <TeamsIcon />,
+      setTab: setTab,
+      tab: 2,
+      active: false,
+      link: titleLink,
+    },
+    {
+      title: 'Reports',
+      icon: <ReportsIcon />,
+      setTab: setTab,
+      tab: 3,
+      active: false,
+      link: titleLink,
+      disableCondition: !isTeacher,
+    },
+    {
+      title: 'Settings',
+      icon: <SettingsIcon />,
+      setTab: setTab,
+      tab: 4,
+      active: false,
+      link: titleLink,
+      disableCondition: !isTeacher,
+    },
   ];
+
+  const navbar: PageNavbarType = {
+    title: title,
+    titleLink: titleLink,
+    subTitle: courseState.code,
+    description: courseState.description,
+    showHeader: true,
+    active: tab,
+    navItems: navItems,
+  };
 
   return (
     <>
-      {!params.type_2 && (
-        <PageNavbar
-          titles={tabsTitles}
-          icons={icons}
-          setTab={setTab}
-          type={params.type_1}
-          conditions={conditions}
-          active={tab}
-          links={links}
-          showHeader={true}
-          title={title}
-          titleLink={titleLink}
-          subTitle={courseState.code}
-          description={courseState.description}
-        />
-      )}
+      {!params.type_2 && <PageNavbar pageNavbar={navbar} />}
       <main>
         {tab === 0 && params.type_1 === undefined && <OverView />}
         {tab === 1 && params.type_1 === undefined && <Students />}

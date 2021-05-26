@@ -31,7 +31,26 @@ export const createProject = async (
   options.method = 'POST';
   options.data = data;
 
+  return await axios(options);
+};
+
+export const updateProject = async (
+  owner: string,
+  courseCode: string,
+  reqTitle: string,
+  teamTitle: string,
+  projectTitle: string,
+  system: SystemState,
+  data: {}
+) => {
+  // http://localhost:8000/api/v1/courses/{course_owner}/{course_code}/requirements/{requirement_title}/teams/{team_name}/project/{project_title}/
+  options.url =
+    baseURL +
+    `courses/${owner}/${courseCode}/requirements/${reqTitle}/teams/${teamTitle}/project/${projectTitle}/`;
+  options.headers['Authorization'] = 'Bearer ' + system.token;
+  options.method = 'PATCH';
   options.data = data;
+
   return await axios(options);
 };
 

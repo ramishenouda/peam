@@ -1,39 +1,54 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { showAxiosResponseErrors } from 'services/error-handler-service';
+import { error } from 'services/notification-service';
+import { InviteToTeam } from 'services/team-servce';
 
-import { CourseState } from "../../../store/course/types";
-import { SystemState } from "../../../store/system/types";
+import { CourseState } from '../../../store/course/types';
+import { SystemState } from '../../../store/system/types';
 
-import { InviteBox } from "../../invite-box/invite-box";
+import { InviteBox } from '../../invite-box/invite-box';
 
-type Props = {
+interface Params {
+  code: string;
+  owner: string;
+  type: string;
+  title_1: string;
+  title_2: string;
+}
 
-};
+type Props = { team_uuid: string };
+
 export const InviteStudents = (props: Props) => {
-    const courseState: CourseState = useSelector((state: any) => state.course);
-    const systemState: SystemState = useSelector((state: any) => state.system);
+  const params: Params = useParams();
 
-    const invite = async () => {
+  const courseState: CourseState = useSelector((state: any) => state.course);
+  const systemState: SystemState = useSelector((state: any) => state.system);
 
-    }
+  const date = new Date(new Date().setDate(new Date().getDate() + 7));
 
-    const date = new Date(new Date().setDate(new Date().getDate() + 7))
+  const payloadArgs = {
+    expiry_date: date,
+    team: props.team_uuid,
+  };
 
-    const payloadArgs = {
-        course: courseState.id,
-        expiry_date: date,
-        type: 'student'
-    }
+  const inviteFunctionArgs = [
+    courseState.owner,
+    courseState.code,
+    params.title_1,
+    params.title_2,
+    systemState,
+  ];
 
-    const inviteFunctionArgs = [ courseState.owner, courseState.code, systemState ]
-
-    return (
-        <div>
-            <InviteBox
-                inviteFunction={invite}
-                title={'Invite students'}
-                payloadArgs={payloadArgs}
-                inviteFunctionArgs={inviteFunctionArgs}
-            />
-        </div>
-    );
+  return (
+    <div>
+      <InviteBox
+        inviteFunction={InviteToTeam}
+        title={'Invite students'}
+        payloadArgs={payloadArgs}
+        inviteFunctionArgs={inviteFunctionArgs}
+        errorText="Make sure all of the students are in the course."
+      />
+    </div>
+  );
 };

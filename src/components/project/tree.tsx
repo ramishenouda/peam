@@ -1,13 +1,18 @@
-import { Title } from 'components/settings/settings-style';
-import { Project } from 'models';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { openFile } from 'services/project-service';
+
 import { CourseState } from 'store/course/types';
 import { SystemState } from 'store/system/types';
+
+import { Project } from 'models';
+
+import { Title } from 'components/settings/settings-style';
+
 import { File, Up } from './file';
 import { ProjectFiles } from './styles';
+import { FileViewer } from './file-viewer';
 
 type Props = {
   project: Project;
@@ -28,6 +33,9 @@ export const Tree = ({ project }: Props) => {
   const courseState: CourseState = useSelector((state: any) => state.course);
 
   const initial: any = {};
+  const [viewingFile, setViewingFile] = useState(false); // for file-viewer
+  const [data, setData] = useState(''); // for file-viewer
+  const [fileName, setFileName] = useState(''); // for file-viewer
   const [currentDir, setCurrentDir] = useState('peam_____root');
   const [directories, setdirectories] = useState(initial);
   const directoriesLength = Object.keys(directories).length;
@@ -44,9 +52,14 @@ export const Tree = ({ project }: Props) => {
       file_path
     )
       .then((result: any) => {
-        const image = new Image();
-        image.src = 'data:image/jpg;base64,' + result.data.content;
-        document.body.appendChild(image);
+        setData(result.data.content);
+        const lastSlashIndex = file_path.lastIndexOf('/');
+        if (lastSlashIndex !== -1) {
+          setFileName(file_path.slice(lastSlashIndex + 1));
+        } else {
+          setFileName(file_path);
+        }
+        setViewingFile(true);
       })
       .catch((err) => {
         console.log(err);
@@ -66,6 +79,16 @@ export const Tree = ({ project }: Props) => {
     openProjectFile
   );
 
+  if (viewingFile)
+    return (
+      <div>
+        <FileViewer
+          data={data}
+          file_name={fileName}
+          toggleViewer={() => setViewingFile(false)}
+        />
+      </div>
+    );
   return (
     <div className="mb-4">
       <div className="text-left f2">

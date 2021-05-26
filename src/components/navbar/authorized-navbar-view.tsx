@@ -53,7 +53,9 @@ export const AuthorizedNavbar = (props: Props) => {
             <Link to="/new" className="disable-link-style">
               <NavItem className={`ml-2`}>New course</NavItem>
             </Link>
-            <Dropdown title={systemState.username}>
+            <Dropdown
+              title={systemState.name ? systemState.name : systemState.username}
+            >
               <Dropdown.Item disabled={true}>
                 <span>
                   Signed in as <br /> <strong>{systemState.username}</strong>
