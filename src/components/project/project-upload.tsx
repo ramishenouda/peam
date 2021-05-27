@@ -39,6 +39,8 @@ type Props = {
 };
 
 export const Project = (props: Props) => {
+  // fix: show only team members the upload zone.
+  // fix: disable the page buttons while loading.
   const [creatingProject, setCreatingProject] = useState(false);
   const params: Params = useParams();
   const courseState: CourseState = useSelector((state: any) => state.course);
@@ -62,6 +64,7 @@ export const Project = (props: Props) => {
     mode: 'all',
     resolver: yupResolver(Schema),
   });
+
   const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
     useDropzone({ multiple: false, maxFiles: 1, accept: '.zip' });
 
