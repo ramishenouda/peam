@@ -63,7 +63,7 @@ export const PendingInvitations = (props: Props) => {
         setError(true);
       })
       .finally(() => setFetching(false));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (fetching) {
     return <div>Loading....</div>;

@@ -23,7 +23,6 @@ import { UploadZone } from 'components/upload-zone';
 import { Section } from '../../../style';
 import { updateProject } from 'services/project-service';
 import { TextareaAutosize } from 'components/course-new/new-course-style';
-import { useTheme } from '@material-ui/core';
 
 type Props = {
   _project: Project;

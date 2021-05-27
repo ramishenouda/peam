@@ -81,7 +81,7 @@ const CourseView = (props: Props): JSX.Element => {
       tab: 3,
       active: false,
       link: titleLink,
-      disableCondition: !isTeacher,
+      hideCondition: !isTeacher,
     },
     {
       title: 'Settings',
@@ -90,7 +90,7 @@ const CourseView = (props: Props): JSX.Element => {
       tab: 4,
       active: false,
       link: titleLink,
-      disableCondition: !isTeacher,
+      hideCondition: !isTeacher,
     },
   ];
 

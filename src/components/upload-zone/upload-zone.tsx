@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-import { NavItem } from 'components/navbar/navbar-style';
 import { Button } from 'react-bootstrap';
 
 type Props = {
@@ -33,7 +32,7 @@ const UploadZone = ({
     const formData = new FormData();
     formData.append(formDataHeader, acceptedFiles[0]);
     setFormData(formData);
-  }, [hasFile]);
+  }, [hasFile]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (acceptedFiles.length && !hasFile) {
     setHasFile(true);
