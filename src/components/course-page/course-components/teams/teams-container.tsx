@@ -52,7 +52,7 @@ export const Teams = (props: Props) => {
   }, [courseState.owner, courseState.code]);
 
   if (fetching) {
-    return <div className="f1 p-5 text-center"> Loading.... </div>;
+    return <div className="f1 pb-5 px-5 text-center"> Loading.... </div>;
   } else if (error) {
     return <div> error </div>;
   } else if (projectRequirements) {

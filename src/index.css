@@ -135,9 +135,17 @@
   box-shadow: none !important;
 }
 
+.font-roboto {
+  font-family: 'Roboto' !important;
+}
+
 .disable-link-style {
   color: inherit;
   text-decoration: none;
+}
+
+.active-tab {
+  text-decoration: underline #aa3b3b !important;
 }
 
 .active {

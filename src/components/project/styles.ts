@@ -1,16 +1,9 @@
 import styled from 'styled-components';
 
-export const Item = styled.div`
-  padding: 0.5rem;
-  :hover {
-    background: #ddd;
-  }
-`;
-
 export const Text = styled.span`
   color: #1ff;
-  font-weight: 400;
-  font-family: Inter, 'Roboto', Inconsolata, sans-serif;
+  font-weight: 500;
+  font-family: 'Roboto', Inconsolata, sans-serif;
   border-radius: 4px;
   font-size: large;
   cursor: pointer;
@@ -33,4 +26,11 @@ export const ProjectFiles = styled.div`
   hyphens: auto;
   position: relative;
   box-shadow: 0px 0px 2px black;
+`;
+
+export const Item = styled.div`
+  padding: 0.5rem;
+  :hover {
+    background: #ddd;
+  }
 `;

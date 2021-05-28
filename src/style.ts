@@ -87,3 +87,24 @@ export const VerticalCenterdElement = styled.div`
   transform: translateY(-50%) !important;
   min-width: fit-content;
 `;
+
+export const NavItem = styled.div`
+  padding-bottom: 5px;
+  font-family: Inconsolata;
+  text-decoration: none #fff;
+  color: #1a1a1a !important;
+  font-size: x-large;
+  text-underline-offset: 19px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out !important;
+
+  margin: 0 1rem;
+
+  @media only screen and (max-width: 768px) {
+    margin: 0 20px !important;
+  }
+
+  :hover {
+    text-decoration: underline #1a1a1a;
+  }
+`;

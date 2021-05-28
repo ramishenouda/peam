@@ -10,11 +10,11 @@ import { Title } from 'style';
 type Props = {
   team: Team;
   token: string;
-  showHeader: boolean;
-  showHeaderText: boolean;
+  peamButton: boolean;
+  peamButtonText: string;
 };
 
-const Report = ({ team, token, showHeader, showHeaderText }: Props) => {
+const Report = ({ team, token, peamButton, peamButtonText }: Props) => {
   const runPeam = () => {
     peamPlagiarism(team.project.uid, token)
       .then((result) => {
@@ -25,26 +25,31 @@ const Report = ({ team, token, showHeader, showHeaderText }: Props) => {
       });
   };
 
+  if (peamButton) {
+    return <Button onClick={runPeam}>{peamButtonText}</Button>;
+  }
+
   return (
     <Container>
-      {showHeader && (
-        <header>
-          {showHeaderText && (
-            <p className="f3">Here you can check the plagiarism. </p>
-          )}
-          <Title>{team.name}</Title>
-        </header>
-      )}
+      <header>
+        <Title className="f1">Report page.</Title>
+        <p className="f3">
+          Here you can run peam plagiarism, to detect the plagiarism over all
+          the requirement projects.
+        </p>
+      </header>
       <div>
-        <Button onClick={runPeam}>Run peam plagiarism!</Button>
+        <Button variant="dark" onClick={runPeam}>
+          Run peam plagiarism!
+        </Button>
       </div>
     </Container>
   );
 };
 
 Report.defaultProps = {
-  showHeader: false,
-  showHeaderText: false,
+  peamButton: false,
+  peamButtonText: 'Run peam plagiarism!',
 };
 
 export default Report;

@@ -37,17 +37,19 @@ export const Settings = (props: Props) => {
         setFetching(false);
         if (params.query === 'profile') {
           setTab(0);
-        } else if (params.query === 'courses') {
-          setTab(2);
         } else if (params.query === 'settings') {
           setTab(1);
+        } else if (params.query === 'courses') {
+          setTab(2);
+        } else if (params.query === 'teams') {
+          setTab(3);
         }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (fetching) {
-    return <div className="mt-5 f1 text-center">Loading.....</div>;
+    return <div className="mt-5 f1 font-roboto text-center">Loading.....</div>;
   }
   return <SettingsView tab={tab} options={options} />;
 };

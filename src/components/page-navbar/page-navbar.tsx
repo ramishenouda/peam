@@ -15,7 +15,7 @@ export const PageNavbar = ({ pageNavbar }: Props): JSX.Element => {
   const tabs = pageNavbar.navItems
     .filter((item) => !item.hideCondition)
     .map((item) => (
-      <span key={item.title + Date()} className="px-4">
+      <span key={item.title + Date()}>
         <NavItem
           navItem={{ ...item, active: item.tab === pageNavbar.active }}
         />
@@ -80,9 +80,9 @@ const headerNavbar = (
 
 const navbar = (tabs: any, styleColor?: string) => {
   return (
-    <Navbar className={`course-navbar ${styleColor === 'gray' && ''}`}>
+    <Navbar className={`${styleColor === 'gray' && ''}`}>
       {tabs}
-      <span className="">&nbsp;</span>
+      <div className="">&nbsp;</div>
     </Navbar>
   );
 };

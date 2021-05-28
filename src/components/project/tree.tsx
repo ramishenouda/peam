@@ -13,6 +13,8 @@ import { Title } from 'components/settings/settings-style';
 import { File, Up } from './file';
 import { ProjectFiles } from './styles';
 import { FileViewer } from './file-viewer';
+import { showAxiosResponseErrors } from 'services/error-handler-service';
+import { CircleLoader } from 'react-spinners';
 
 type Props = {
   project: Project;
@@ -38,9 +40,12 @@ export const Tree = ({ project }: Props) => {
   const [fileName, setFileName] = useState(''); // for file-viewer
   const [currentDir, setCurrentDir] = useState('peam_____root');
   const [directories, setdirectories] = useState(initial);
+  const [openingFile, setOpeningFile] = useState(false);
+
   const directoriesLength = Object.keys(directories).length;
 
   const openProjectFile = (file_path: string) => {
+    setOpeningFile(true);
     file_path = file_path.slice('peam_____root/'.length);
     openFile(
       courseState.owner,
@@ -62,8 +67,9 @@ export const Tree = ({ project }: Props) => {
         setViewingFile(true);
       })
       .catch((err) => {
-        console.log(err);
-      });
+        showAxiosResponseErrors(err);
+      })
+      .finally(() => setOpeningFile(false));
   };
 
   useEffect(() => {
@@ -79,7 +85,18 @@ export const Tree = ({ project }: Props) => {
     openProjectFile
   );
 
-  if (viewingFile)
+  if (openingFile) {
+    return (
+      <div className="text-center f1 py-5">
+        <p>Opening file...</p>
+        <div className="d-flex justify-content-center">
+          <CircleLoader loading={openingFile} />
+        </div>
+      </div>
+    );
+  }
+
+  if (viewingFile) {
     return (
       <div>
         <FileViewer
@@ -89,6 +106,8 @@ export const Tree = ({ project }: Props) => {
         />
       </div>
     );
+  }
+
   return (
     <div className="mb-4">
       <div className="text-left f2">

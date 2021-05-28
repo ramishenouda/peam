@@ -40,14 +40,14 @@ export const RequirementView = (props: Props) => {
   return (
     <div className="mt-2">
       <Container>
-        <div className="mb-5">
+        <div>
           <div className="text-right">
             {
               // courseState.role === 'student' &&
               <Button
                 onClick={props.createTeam}
                 variant="outline-dark"
-                className="f2"
+                className="f3"
               >
                 Create team
               </Button>

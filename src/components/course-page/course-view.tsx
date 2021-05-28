@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import OverviewIcon from '@material-ui/icons/ImportContacts';
 import StudentsIcon from '@material-ui/icons/People';
 import TeamsIcon from '@material-ui/icons/GroupWork';
-import ReportsIcon from '@material-ui/icons/Assessment';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import { CourseState } from '../../store/course/types';
@@ -15,11 +14,13 @@ import { Students } from './course-components/students/students-container';
 import { Teams } from './course-components/teams/teams-container';
 import { Settings } from './course-components/settings/settings-container';
 
-import './course-style.css';
-import { Requirement } from '../project-requirement/requirement';
 import { Team } from '../team/team';
+import { Requirement } from '../project-requirement/requirement';
 import { PageNavbar } from '../page-navbar/page-navbar';
+
 import { NavItem, PageNavbar as PageNavbarType } from 'models';
+
+import './course-style.css';
 
 type Props = {};
 
@@ -75,19 +76,10 @@ const CourseView = (props: Props): JSX.Element => {
       link: titleLink,
     },
     {
-      title: 'Reports',
-      icon: <ReportsIcon />,
-      setTab: setTab,
-      tab: 3,
-      active: false,
-      link: titleLink,
-      hideCondition: !isTeacher,
-    },
-    {
       title: 'Settings',
       icon: <SettingsIcon />,
       setTab: setTab,
-      tab: 4,
+      tab: 3,
       active: false,
       link: titleLink,
       hideCondition: !isTeacher,
@@ -107,21 +99,18 @@ const CourseView = (props: Props): JSX.Element => {
   return (
     <>
       {!params.type_2 && <PageNavbar pageNavbar={navbar} />}
-      <main>
+      <div>
         {tab === 0 && params.type_1 === undefined && <OverView />}
         {tab === 1 && params.type_1 === undefined && <Students />}
         {tab === 2 && params.type_1 === undefined && <Teams fetch={true} />}
-        {tab === 3 && params.type_1 === undefined && (
-          <div className="f1 mt-5 text-center">Next Semester</div>
-        )}
-        {tab === 4 &&
+        {tab === 3 &&
           params.type_1 === undefined &&
           courseState.role === 'teacher' && <Settings />}
         {params.type_1 === 'requirements' && !params.type_2 && <Requirement />}
         {params.type_1 === 'requirements' && params.type_2 === 'teams' && (
           <Team />
         )}
-      </main>
+      </div>
     </>
   );
 };

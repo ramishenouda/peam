@@ -1,5 +1,8 @@
-import { NavItem as Item } from 'models';
 import { Link } from 'react-router-dom';
+
+import { NavItem as Item } from 'models';
+
+import { NavItem as StyledItem } from 'style';
 
 type Props = {
   navItem: Item;
@@ -7,13 +10,13 @@ type Props = {
 
 export const NavItem = ({ navItem }: Props) => {
   const data = (
-    <span
+    <StyledItem
       onClick={() => navItem.setTab(navItem.tab)}
       className={`course-nav-item ${navItem.active && 'active-tab'}`}
     >
-      <span className="material-ui-icon mx-2">{navItem.icon}</span>{' '}
+      <span className="offset-icon mt-2 mx-2">{navItem.icon}</span>
       {navItem.title}
-    </span>
+    </StyledItem>
   );
 
   if (navItem.link) {

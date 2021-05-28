@@ -11,10 +11,13 @@ import {
 import { Link } from 'react-router-dom';
 
 export const Navbar = styled(navbar)`
-  width: 100%;
-  -webkit-box-shadow: 0 4px 6px -6px black;
-  -moz-box-shadow: 0 4px 6px -6px black;
-  box-shadow: 0 3px 5px -5px black;
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  border-bottom: solid 1px #ddd;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const NavbarBrand = styled(navbar.Brand)`
