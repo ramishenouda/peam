@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
 
 import { peamPlagiarism } from 'services/plagiarism-service';
@@ -6,6 +6,7 @@ import { peamPlagiarism } from 'services/plagiarism-service';
 import { Team } from 'models/team';
 
 import { Title } from 'style';
+import { HashLoader as LoaderComponent } from 'react-spinners';
 
 type Props = {
   team: Team;
@@ -15,15 +16,23 @@ type Props = {
 };
 
 const Report = ({ team, token, peamButton, peamButtonText }: Props) => {
+  const [fetchingData, setFetchingData] = useState(false);
+
   const runPeam = () => {
+    setFetchingData(true);
     peamPlagiarism(team.project.uid, token)
       .then((result) => {
         console.log(result);
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setFetchingData(false));
   };
+
+  if (fetchingData) {
+    return Loader(fetchingData);
+  }
 
   if (peamButton) {
     return <Button onClick={runPeam}>{peamButtonText}</Button>;
@@ -34,8 +43,8 @@ const Report = ({ team, token, peamButton, peamButtonText }: Props) => {
       <header>
         <Title className="f1">Report page.</Title>
         <p className="f3">
-          Here you can run peam plagiarism, to detect the plagiarism over all
-          the requirement projects.
+          Here you can run peam plagiarism, to detect the plagiarism for a
+          project over all the requirement projects.
         </p>
       </header>
       <div>
@@ -44,6 +53,18 @@ const Report = ({ team, token, peamButton, peamButtonText }: Props) => {
         </Button>
       </div>
     </Container>
+  );
+};
+
+const Loader = (fetching: boolean) => {
+  return (
+    <div className="text-center f1 font-roboto mt-5">
+      <p>Please wait!</p>
+      <p>We are using dark magic to detect plagiarism</p>
+      <div className="d-flex justify-content-center">
+        <LoaderComponent loading={fetching} />
+      </div>
+    </div>
   );
 };
 

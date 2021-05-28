@@ -79,10 +79,5 @@ const headerNavbar = (
 };
 
 const navbar = (tabs: any, styleColor?: string) => {
-  return (
-    <Navbar className={`${styleColor === 'gray' && ''}`}>
-      {tabs}
-      <div className="">&nbsp;</div>
-    </Navbar>
-  );
+  return <Navbar className={`${styleColor === 'gray' && ''}`}>{tabs}</Navbar>;
 };

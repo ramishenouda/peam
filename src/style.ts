@@ -97,11 +97,14 @@ export const NavItem = styled.div`
   text-underline-offset: 19px;
   cursor: pointer;
   transition: all 0.3s ease-in-out !important;
+  min-width: max-content !important;
 
-  margin: 0 1rem;
+  margin: 0 20px;
 
   @media only screen and (max-width: 768px) {
-    margin: 0 20px !important;
+    margin-right: 20px;
+    margin-left: 0;
+    min-width: fit-content;
   }
 
   :hover {

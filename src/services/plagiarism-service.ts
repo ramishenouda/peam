@@ -17,7 +17,7 @@ export const peamPlagiarism = async (
   threshold?: string
 ) => {
   // http://localhost:8000/api/v1/plagiarism/
-  options.url = baseURL + 'plagiarism/';
+  options.url = baseURL + 'plagiarism/?expand=matches.project';
   options.method = 'POST';
   options.headers['Authorization'] = 'Bearer ' + token;
   options.data = {
