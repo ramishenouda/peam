@@ -10,7 +10,6 @@ import { DetectPlagiarismForTwoFiles } from 'services/plagiarism-service';
 import { VerticalNavbar } from 'components/vertical-navbar/vertical-navbar';
 import { GridViewRL } from 'style';
 import { PlagiarismFiles } from './plagiarism-files';
-import { showAxiosResponseErrors } from 'services/error-handler-service';
 
 type Props = {
   files: Array<string>; // Current project files.
@@ -75,9 +74,7 @@ export const PlagiarismView = ({
       projects[projectsTab].project,
       firstFile,
       secondFile,
-      systemState.token,
-      '{{',
-      '}}'
+      systemState.token
     );
   };
 

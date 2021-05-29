@@ -35,8 +35,9 @@ export const DetectPlagiarismForTwoFiles = async (
   firstFile: string,
   secondFile: string,
   token: string,
-  matchStart: string = '{',
-  matchEnd: string = '}'
+  htmlEncode: boolean = true,
+  matchStart: string = '<span class="plagiarism-text">',
+  matchEnd: string = '</span>'
 ) => {
   // http://localhost:8000/api/v1/plagiarism/compare/
   options.url = baseURL + 'plagiarism/compare/';
@@ -50,6 +51,7 @@ export const DetectPlagiarismForTwoFiles = async (
     second_file: secondFile,
     match_start_marker: matchStart,
     match_end_marker: matchEnd,
+    html_encoded: htmlEncode,
   };
 
   return await axios(options);
