@@ -106,6 +106,7 @@ export const ManageTeam = (props: Props) => {
       .catch((err) => {});
   };
 
+  // todo: change title to name
   if (!req) return <Redirect to="/" />;
   return (
     <div>

@@ -36,6 +36,7 @@ interface Params {
   title_2: string;
 }
 
+// todo redirect to the new url.
 export const ManageProject = ({ _project }: Props) => {
   const params: Params = useParams();
   const courseState: CourseState = useSelector((state: any) => state.course);

@@ -1,13 +1,14 @@
 import { Navbar } from './vertical-navbar-style';
 import { NavItem } from './nav-item';
-import { Title } from 'style';
 
 type Props = {
   active: number;
   setTab: (tab: number) => void;
   titles: Array<string>;
+  emptyTitlesText?: string;
 };
 
+// add options for text-align
 function sliceString(value: string, start: string, end: string) {
   const startIndex = value.indexOf(start);
   const endIndex = value.indexOf(end);
@@ -25,32 +26,38 @@ function sliceString(value: string, start: string, end: string) {
 
 export const VerticalNavbar = (props: Props) => {
   if (!props.titles || !props.titles.length)
-    return <div> tabs can't be undefined. </div>;
+    return (
+      <div className="text-danger text-center f3 font-roboto">
+        {props.emptyTitlesText
+          ? props.emptyTitlesText
+          : "VerticalNavbar: tabs can't be undefined."}
+      </div>
+    );
 
   let tabs = [];
+  let index = 0; // I'm not using the iterator of the for loop incase if we were adding a title.
+
   for (let i = 0; i < props.titles.length; i++) {
     const strings = props.titles[i].split('{');
     const title = strings[0];
     const color = sliceString(props.titles[i], '{{', '}}');
     const isTitle = sliceString(props.titles[i], '[[', ']]');
 
-    //    console.log(color, isTitle);
-
     tabs.push(
-      <div className="text-info bg-white my-1" key={props.titles[i] + i}>
+      <div className="text-info" key={props.titles[i] + i}>
         {!isTitle && (
-          <>
+          <div className="bg-white my-1">
             <NavItem
               active={props.active}
               setTab={props.setTab}
-              tab={i}
+              tab={index++}
               title={title}
               color={color ? color : ''}
             />
             {i + 1 !== props.titles.length && (
               <div className="border-bottom w-100"></div>
             )}
-          </>
+          </div>
         )}
         {isTitle && (
           <div className="text-left font-roboto font-bold">

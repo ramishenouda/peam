@@ -2,69 +2,50 @@ import { useEffect, useState } from 'react';
 
 import { File } from 'models';
 
-import { PlagiarismFile } from './plagiarism-file';
+import { GridViewEQ } from 'style';
+import { showAxiosResponseErrors } from 'services/error-handler-service';
+
+interface Files {
+  firstFile: File;
+  secondFile: File;
+}
 
 type Props = {
-  files: Array<File>;
-  file: string;
+  files: Files;
   getPlagForFiles: (firstFile: string, secondFile: string) => Promise<any>;
 };
 
-interface Files {
-  firstFile: string;
-  secondFile: string;
-}
-
-export const PlagiarismFiles = ({ file, files, getPlagForFiles }: Props) => {
-  const [plagiarismFiles, setPlagiarismFiles] = useState(new Array<Files>());
-  const [data, setData] = useState(new Array<JSX.Element>());
-
-  const convertFiles = (firstString: string, secondString: string): Files => {
-    const matchStart = "<span class='plagiarism-text'>";
-    const matchEnd = '</span>';
-    return {
-      firstFile: firstString
-        .replaceAll('{{', matchStart)
-        .replaceAll('}}', matchEnd),
-      secondFile: secondString
-        .replaceAll('{{', matchStart)
-        .replaceAll('}}', matchEnd),
-    };
-  };
-
-  const setView = () => {
-    const view = plagiarismFiles
-      .slice(data.length)
-      .map((file, index) => (
-        <PlagiarismFile
-          key={index + Date() + file.firstFile.length + file.secondFile.length}
-          firstFile={file.firstFile}
-          secondFile={file.secondFile}
-        />
-      ));
-
-    setData([...data, ...view]);
-  };
-
+export const PlagiarismFiles = ({ files, getPlagForFiles }: Props) => {
+  const [firstFile, setFirstFile] = useState('');
+  const [secondFile, setSecondFile] = useState('');
+  const [lastSecondFilePath, setLastSecondFilePath] = useState('');
   useEffect(() => {
-    setData([]);
-
-    getPlagForFiles(file, files[0].file)
-      .then((result: any) => {
-        const data: Files = convertFiles(
-          result.data.first_file,
-          result.data.second_file
-        );
-        setPlagiarismFiles([data]);
+    if (
+      !files.secondFile.filePath ||
+      files.secondFile.filePath === lastSecondFilePath
+    )
+      return;
+    console.log(files);
+    getPlagForFiles(files.firstFile.filePath, files.secondFile.filePath)
+      .then((result) => {
+        setFirstFile(result.data.first_file);
+        setSecondFile(result.data.second_file);
+        setLastSecondFilePath(files.secondFile.filePath);
       })
-      .catch((err) => {});
-  }, [file, files]);
+      .catch((err) => showAxiosResponseErrors(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [files]);
 
-  useEffect(() => {
-    if (!plagiarismFiles.length) return;
-
-    setView();
-  }, [plagiarismFiles]);
-
-  return <div>{data}</div>;
+  return (
+    <GridViewEQ>
+      <pre
+        className="draggableText"
+        dangerouslySetInnerHTML={{ __html: firstFile }}
+      />
+      <pre
+        className="draggableText"
+        dangerouslySetInnerHTML={{ __html: secondFile }}
+      />
+    </GridViewEQ>
+  );
 };

@@ -49,8 +49,8 @@ export const DetectPlagiarismForTwoFiles = async (
     second_project: secondProject,
     first_file: firstFile,
     second_file: secondFile,
-    match_start_marker: matchStart,
-    match_end_marker: matchEnd,
+    match_start_tokens: matchStart,
+    match_end_tokens: matchEnd,
     html_encoded: htmlEncode,
   };
 

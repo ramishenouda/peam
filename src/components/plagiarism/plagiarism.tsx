@@ -12,49 +12,16 @@ type Props = {
   projectUid: string;
 };
 
-function getFilesTitles(files: string[]) {
-  const directories = Array.from(
-    new Set(
-      files
-        .filter((file) => file.lastIndexOf('/') !== -1)
-        .map((file) => file.slice(0, file.lastIndexOf('/') + 1))
-    )
-  );
-
-  const _files = files.filter((file) => file.indexOf('/') === -1);
-
-  const filesInsideDirectories = directories.map((dir: string) => {
-    const dicFiles = files
-      .filter((file) => {
-        if (
-          file.length < dir.length ||
-          file.slice(dir.length + 1).indexOf('/') !== -1
-        )
-          return false;
-        const fileDir = file.slice(0, dir.length);
-        if (fileDir === dir) return true;
-        return false;
-      })
-      .map((file) => file.slice(dir.length));
-
-    return [dir + '[[title]]', ...dicFiles];
-  });
-
-  const titles = [..._files];
-  filesInsideDirectories.map((d) => d.map((f) => titles.push(f)));
-
-  return titles;
-}
-
 const Plagiarism = ({ plagiarismData, projectUid }: Props) => {
   const [gettingProjects, setGettingProjects] = useState(false); // for fetching
   const [noPlagiarismData, setNoPlagiarismData] = useState(false);
 
   const [files, setFiles] = useState(new Array<string>()); // Current opened project files for navbar.
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState({} as File); // current chose team file from the navbar
   const [projects, setProjects] = useState(new Array<Project>()); // Projects for navbar
 
   const getProjects = (index: number) => {
+    if (!plagiarismData[index]) return;
     setGettingProjects(true);
     getProjectsData(plagiarismData[index])
       .then((result) => {
@@ -62,7 +29,8 @@ const Plagiarism = ({ plagiarismData, projectUid }: Props) => {
       })
       .finally(() => {
         setGettingProjects(false);
-        setFile(plagiarismData[index].file);
+        const file = plagiarismData[index].file;
+        setFile({ file: file, filePath: file, ratio: file });
       });
   };
 
@@ -72,7 +40,7 @@ const Plagiarism = ({ plagiarismData, projectUid }: Props) => {
       return;
     }
     const files = plagiarismData.map((f) => f.file);
-    setFiles(getFilesTitles(files));
+    setFiles(files);
   }, [plagiarismData]);
 
   if (noPlagiarismData) {
@@ -123,6 +91,7 @@ const getProjectsData = async (
         return {
           file: f.file,
           ratio: f.ratio,
+          filePath: f.file,
         };
       });
 

@@ -64,8 +64,10 @@ const Report = ({ team, token, peamButton, peamButtonText }: Props) => {
     return <Button onClick={runPeam}>{peamButtonText}</Button>;
   }
 
+  // todo: remove this shit.
+
   return (
-    <Container>
+    <Container className="text-center pt-5">
       <header>
         <Title className="f1">Report page.</Title>
         <p className="f3">
@@ -75,7 +77,7 @@ const Report = ({ team, token, peamButton, peamButtonText }: Props) => {
       </header>
       <div>
         <Button variant="dark" onClick={runPeam}>
-          Run peam plagiarism!
+          Detect plagiarism!
         </Button>
       </div>
     </Container>
