@@ -68,6 +68,12 @@
 .f4 {
   font-size: 18px !important;
 }
+.f5 {
+  font-size: 16px !important;
+}
+.f6 {
+  font-size: 14px !important;
+}
 
 @media only screen and (max-width: 600px) {
   .f1 {
@@ -243,8 +249,9 @@
 
 .plagiarism-text {
   background-color: rgb(233, 83, 83);
+  padding: 1px 2px;
+  border-radius: 2px;
 }
 
 .draggableText {
-  cursor: grab;
 }

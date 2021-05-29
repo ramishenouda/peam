@@ -133,3 +133,29 @@ export const NavItem = styled.div`
     text-decoration: underline #1a1a1a;
   }
 `;
+
+export const CodeEditor = styled.pre`
+  list-style: none;
+  counter-reset: code-editor-counter;
+  .line-number {
+    background: white !important;
+    padding: 2px 0px;
+    color: #777;
+    font-family: Roboto;
+    font-size: 14px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
+`;
