@@ -2,7 +2,7 @@
 import { Tree } from 'components/project/tree';
 import { Project as ProjectType } from 'models';
 import { Student } from '../../models/student';
-import { GridView, Title } from '../../style';
+import { GridView, Title } from 'style';
 
 import { ListMembers } from '../list-members/list-members';
 import { Project } from '../project/project-upload';
@@ -20,6 +20,7 @@ export const TeamOverView = (props: Props) => {
       {!props.project && <Project project={props.project} />}
       {props.project && <Tree project={props.project} />}
       {/* todo: make it more responsive */}
+      {/* todo check if the description is not empty */}
       <div>
         {!isSmallScreen && props.project && (
           <div>

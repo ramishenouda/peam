@@ -7,8 +7,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { ProjectFiles } from 'components/team/team-style';
-import { NavItem } from 'components/navbar/navbar-style';
 import { Title } from 'components/project-requirement/requirement-style';
 
 import { CircleLoader } from 'react-spinners';
@@ -190,21 +188,22 @@ const Project404 = (
 ) => {
   // todo: more responsive for mobile apps (seprate the students and the project files)
   return (
-    <ProjectFiles>
+    <div>
       {!props.project && courseState.role === 'teacher' && (
         <Title className="f2 p-5 text-center">
           The team hasn't uploaded any projects yet.
         </Title>
       )}
       {!props.project && courseState.role === 'student' && (
-        <NavItem
+        <Button
           onClick={() => toggleCreatingProject(true)}
-          className="f2 p-5 text-center"
+          className="f2 p-5 text-center peam-pirmary-button w-100"
+          variant="outline-light"
         >
           You haven't uploaded any projects yet. <br /> Click to start
           uploading.
-        </NavItem>
+        </Button>
       )}
-    </ProjectFiles>
+    </div>
   );
 };

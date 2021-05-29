@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import {
-  Navbar,
+  AuthorizedNavbarStyle,
   NavbarBrand,
   Nav,
   NavItem,
@@ -36,12 +36,12 @@ export const AuthorizedNavbar = (props: Props) => {
 
   if (!mdScreen) {
     return (
-      <Navbar expand="md" className="bg-g-gray">
+      <AuthorizedNavbarStyle expand="md" className="bg-g-gray">
         <Link className="disable-link-style" to="/">
           <NavbarBrand>PEAM</NavbarBrand>
         </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <AuthorizedNavbarStyle.Toggle aria-controls="basic-navbar-nav" />
+        <AuthorizedNavbarStyle.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-right">
             <Form>
               <SearchControl
@@ -76,20 +76,20 @@ export const AuthorizedNavbar = (props: Props) => {
               </Link>
             </Dropdown>
           </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+        </AuthorizedNavbarStyle.Collapse>
+      </AuthorizedNavbarStyle>
     );
   } else {
     return (
-      <Navbar expand="md">
+      <AuthorizedNavbarStyle expand="md">
         <NewCourse to="/new" className="disable-link-style">
           <NavItem className={``}>New course</NavItem>
         </NewCourse>
         <Link className="disable-link-style" to="/">
           <NavbarBrand>PEAM</NavbarBrand>
         </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <AuthorizedNavbarStyle.Toggle aria-controls="basic-navbar-nav" />
+        <AuthorizedNavbarStyle.Collapse id="basic-navbar-nav">
           <Nav className="text-right f3">
             <Form>
               <SearchControl
@@ -127,8 +127,8 @@ export const AuthorizedNavbar = (props: Props) => {
               </Link>
             </NavItem>
           </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+        </AuthorizedNavbarStyle.Collapse>
+      </AuthorizedNavbarStyle>
     );
   }
 };

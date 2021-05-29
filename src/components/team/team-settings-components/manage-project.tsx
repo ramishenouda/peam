@@ -113,12 +113,6 @@ export const ManageProject = ({ _project }: Props) => {
       project.description === _project.description &&
       !formData.get('project_zip'));
 
-  console.log(
-    !isValid ||
-      (project.title === _project.title &&
-        project.description === _project.description &&
-        !formData.get('project_zip'))
-  );
   return (
     <div>
       <Section>

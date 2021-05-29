@@ -11,6 +11,19 @@ import {
 import { Link } from 'react-router-dom';
 
 export const Navbar = styled(navbar)`
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  width: 100%;
+  -webkit-box-shadow: 0 4px 6px -6px black;
+  -moz-box-shadow: 0 4px 6px -6px black;
+  box-shadow: 0 3px 5px -5px black;
+`;
+
+export const AuthorizedNavbarStyle = styled(navbar)`
   width: 100%;
   -webkit-box-shadow: 0 4px 6px -6px black;
   -moz-box-shadow: 0 4px 6px -6px black;

@@ -18,7 +18,7 @@ export const VerticalNavbar = (props: Props) => {
     const color = !strings[2] ? undefined : strings[2].split('}')[0];
 
     tabs.push(
-      <div key={props.titles[i] + i}>
+      <span key={props.titles[i] + i}>
         <NavItem
           active={props.active}
           setTab={props.setTab}
@@ -26,8 +26,10 @@ export const VerticalNavbar = (props: Props) => {
           title={title}
           color={color}
         />
-        {i !== props.titles.length - 1 && <hr />}
-      </div>
+        {i + 1 !== props.titles.length && (
+          <div className="border-bottom w-100"></div>
+        )}
+      </span>
     );
   }
 

@@ -21,6 +21,28 @@ export const GridView = styled.div`
   }
 `;
 
+export const GridViewRL = styled.div`
+  display: grid;
+  padding: 20px;
+  grid-template-columns: 20% 79%;
+  grid-column-gap: 1%;
+
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
+`;
+
+export const GridViewEQ = styled.div`
+  display: grid;
+  padding: 20px;
+  grid-template-columns: 49% 49%;
+  grid-column-gap: 1%;
+
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
+`;
+
 export const Section = styled.section`
   background: #f9f9f9;
   padding: 10px;

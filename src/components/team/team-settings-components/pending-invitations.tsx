@@ -70,7 +70,11 @@ export const PendingInvitations = (props: Props) => {
   }
 
   if (error) {
-    return <div>Error...try reloading...</div>;
+    return (
+      <div className="text-center mt-5 f1 font-roboto">
+        Error while loading team invitations
+      </div>
+    );
   }
 
   const invitations = invitations_data.map((item, index) => (

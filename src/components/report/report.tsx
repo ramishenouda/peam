@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { AxiosError, AxiosResponse } from 'axios';
+
 import { Button, Container } from 'react-bootstrap';
+import { HashLoader as LoaderComponent } from 'react-spinners';
 
 import { peamPlagiarism } from 'services/plagiarism-service';
+import { showAxiosResponseErrors } from 'services/error-handler-service';
 
 import { Team } from 'models/team';
+import { Plagiarism as plagiarism } from 'models';
+
+import { Plagiarism } from 'components/plagiarism';
 
 import { Title } from 'style';
-import { HashLoader as LoaderComponent } from 'react-spinners';
 
 type Props = {
   team: Team;
@@ -17,21 +23,41 @@ type Props = {
 
 const Report = ({ team, token, peamButton, peamButtonText }: Props) => {
   const [fetchingData, setFetchingData] = useState(false);
+  const [plagiarismData, setPlagiarismData] = useState(new Array<plagiarism>());
 
   const runPeam = () => {
     setFetchingData(true);
     peamPlagiarism(team.project.uid, token)
-      .then((result) => {
-        console.log(result);
+      .then((result: AxiosResponse) => {
+        setPlagiarismData(result.data);
       })
-      .catch((err) => {
+      .catch((err: AxiosError) => {
         console.log(err);
+        showAxiosResponseErrors(err);
       })
       .finally(() => setFetchingData(false));
   };
 
+  if (!team.project) {
+    return (
+      <div className="text-center mt-5 f1 font-roboto">
+        <p>The team didn't upload any projects yet.</p>
+        <p>The page will be availabe once the team uploads their project.</p>
+      </div>
+    );
+  }
+
   if (fetchingData) {
     return Loader(fetchingData);
+  }
+
+  if (plagiarismData.length) {
+    return (
+      <Plagiarism
+        projectUid={team.project.uid}
+        plagiarismData={plagiarismData}
+      />
+    );
   }
 
   if (peamButton) {

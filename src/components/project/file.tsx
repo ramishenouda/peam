@@ -1,7 +1,8 @@
-import { Item, Text } from './styles';
 import FolderIcon from '@material-ui/icons/Folder';
-
 import UpIcon from '@material-ui/icons/ArrowBack';
+
+import { Item, Text } from './styles';
+
 type Props = {
   file_name: string;
   last_index: boolean;

@@ -221,6 +221,30 @@
   border-bottom: 1px solid white;
 }
 
+.bottom-border-black {
+  border-bottom: 1px solid #000;
+}
+
 .top-border {
   border-top: 1px solid white;
+}
+
+.peam-pirmary-button {
+  color: #000;
+  border-color: #c0c0c0;
+}
+
+.peam-pirmary-button:hover {
+  transition: all 0.5s;
+  background-color: #f1f1f1 !important;
+  border-color: #f1f1f1;
+  color: #000;
+}
+
+.plagiarism-text {
+  background-color: rgb(233, 83, 83);
+}
+
+.draggableText {
+  cursor: grab;
 }
