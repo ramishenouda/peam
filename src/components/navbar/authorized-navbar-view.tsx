@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import { SystemState } from '../../store/system/types';
+
+import PeamLogo from 'assets/peam-logo.png';
+
 import {
   AuthorizedNavbarStyle,
   NavbarBrand,
@@ -12,7 +16,6 @@ import {
   Dropdown,
   NewCourse,
 } from './navbar-style';
-import { SystemState } from '../../store/system/types';
 
 type Props = {};
 
@@ -38,7 +41,9 @@ export const AuthorizedNavbar = (props: Props) => {
     return (
       <AuthorizedNavbarStyle expand="md" className="bg-g-gray">
         <Link className="disable-link-style" to="/">
-          <NavbarBrand>PEAM</NavbarBrand>
+          <NavbarBrand>
+            <img width="100px" height="100px" src={PeamLogo} alt="peam logo" />
+          </NavbarBrand>
         </Link>
         <AuthorizedNavbarStyle.Toggle aria-controls="basic-navbar-nav" />
         <AuthorizedNavbarStyle.Collapse id="basic-navbar-nav">
@@ -86,7 +91,9 @@ export const AuthorizedNavbar = (props: Props) => {
           <NavItem className={``}>New course</NavItem>
         </NewCourse>
         <Link className="disable-link-style" to="/">
-          <NavbarBrand>PEAM</NavbarBrand>
+          <NavbarBrand>
+            <img width="100px" height="100px" src={PeamLogo} alt="peam logo" />
+          </NavbarBrand>
         </Link>
         <AuthorizedNavbarStyle.Toggle aria-controls="basic-navbar-nav" />
         <AuthorizedNavbarStyle.Collapse id="basic-navbar-nav">

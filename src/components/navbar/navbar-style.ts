@@ -17,6 +17,7 @@ export const Navbar = styled(navbar)`
   ::-webkit-scrollbar {
     display: none;
   }
+
   width: 100%;
   -webkit-box-shadow: 0 4px 6px -6px black;
   -moz-box-shadow: 0 4px 6px -6px black;
@@ -34,10 +35,13 @@ export const NavbarBrand = styled(navbar.Brand)`
   padding-left: 1.5vw !important;
   padding-right: 1.5vw !important;
   margin: 0;
-  background: #1a1a1a;
   font-weight: 500;
+  position: absolute;
+  top: -25px;
+  left: 0;
+
   font-family: 'Inter', sans-serif;
-  color: white !important;
+  color: black !important;
 `;
 
 export const Form = styled(form)``;

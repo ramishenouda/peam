@@ -163,6 +163,37 @@ export const PlagiarismView = ({
     setShowNavbar(arg);
   };
 
+  let verticalNavbarHeader;
+  if (showNavbar) {
+    if (gettingProjects) {
+      verticalNavbarHeader = (
+        <div>
+          <div className="f3 font-roboto">
+            Loading projects...
+            <hr />
+          </div>
+        </div>
+      );
+    } else if (!choosingFile && !gettingProjects) {
+      verticalNavbarHeader = (
+        <div className="text-center">
+          <div className="f3 font-roboto">
+            <span style={{ cursor: 'pointer' }} className="mr-1" onClick={up}>
+              <UpIcon />
+            </span>
+            Choose a project <hr />
+          </div>
+        </div>
+      );
+    } else if (choosingFile) {
+      verticalNavbarHeader = (
+        <div className="text-center card-title pt-2 pb-2 border-bottom f3 font-roboto">
+          Choose a file
+        </div>
+      );
+    }
+  }
+
   const choosingFileNavbar = (
     <VerticalNavbar
       active={filesTab}
@@ -175,6 +206,7 @@ export const PlagiarismView = ({
       navOptions={'card'}
       navItemContainerOptions={'text-left'}
       navItemOptions={'py-2 my-1'}
+      header={verticalNavbarHeader}
     />
   );
 
@@ -190,6 +222,7 @@ export const PlagiarismView = ({
       navOptions={'card'}
       navItemContainerOptions={'text-left'}
       navItemOptions={'py-2 my-1'}
+      header={verticalNavbarHeader}
     />
   );
 
@@ -205,6 +238,7 @@ export const PlagiarismView = ({
       navOptions={'card'}
       navItemContainerOptions={'text-left'}
       navItemOptions={'py-2 my-1'}
+      header={verticalNavbarHeader}
     />
   );
 
@@ -227,37 +261,6 @@ export const PlagiarismView = ({
   return (
     <GridViewRL hidden={!showNavbar}>
       <div>
-        {showNavbar && (
-          <div className="">
-            {gettingProjects && (
-              <div>
-                <div className="f3 font-roboto">
-                  Loading projects...
-                  <hr />
-                </div>
-              </div>
-            )}
-            {!choosingFile && !gettingProjects && (
-              <div className="text-center">
-                <div className="f3 font-roboto">
-                  <span
-                    style={{ cursor: 'pointer' }}
-                    className="mr-1"
-                    onClick={up}
-                  >
-                    <UpIcon />
-                  </span>
-                  Choose a project <hr />
-                </div>
-              </div>
-            )}
-            {choosingFile && (
-              <div className="text-center f3 font-roboto">
-                Choose a file <hr />
-              </div>
-            )}
-          </div>
-        )}
         {choosingFile && choosingFileNavbar}
         {choosingProject && choosingProjectNavbar}
         {choosingProjectFile && choosingProjectFileNavbar}

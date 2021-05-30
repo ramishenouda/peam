@@ -16,7 +16,8 @@
   transition: all 0.3s;
 }
 
-.navbar .navbar-brand {
+/* depreacted check styled components in the navbar-styles.ts */
+/* .navbar .navbar-brand {
   padding-left: 1.5vw !important;
   padding-right: 1.5vw !important;
   margin: 0;
@@ -27,7 +28,7 @@
 }
 .navbar .navbar-brand:hover {
   color: white !important;
-}
+} */
 
 .navbar .navbar-item {
   padding-left: 2vw !important;

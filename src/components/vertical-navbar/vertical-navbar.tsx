@@ -17,6 +17,7 @@ type Props = {
   navOptions?: string;
   navItemContainerOptions?: string;
   navItemOptions?: string;
+  header?: JSX.Element;
 };
 
 // add options for text-align
@@ -51,6 +52,8 @@ export const VerticalNavbar = (props: Props) => {
       const title = strings[0];
       const color = sliceString(props.titles[i], '{{', '}}');
       const isTitle = sliceString(props.titles[i], '[[', ']]');
+      const isDisabled = sliceString(props.titles[i], '((', '))');
+      console.log(props.titles[i]);
       tabs.push(
         <div
           className={`text-info ${
@@ -67,6 +70,7 @@ export const VerticalNavbar = (props: Props) => {
                 title={title}
                 color={color ? color : ''}
                 options={props.navItemOptions}
+                disabled={isDisabled ? true : false}
               />
             </div>
           )}
@@ -111,6 +115,7 @@ export const VerticalNavbar = (props: Props) => {
       )}
       <NavContainer>
         <Navbar hidden={!isOpen} className={`text-center`}>
+          {props.header && props.header}
           {tabs}
         </Navbar>
       </NavContainer>
