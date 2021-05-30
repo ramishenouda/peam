@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react';
 
 import {
-  Plagiarism as plagiarsm,
+  PlagiarismData as plagiarism,
   PlagiarismProject as Project,
   File,
 } from 'models';
 import { PlagiarismView } from './plagiarism-view';
 
 type Props = {
-  plagiarismData: Array<plagiarsm>;
+  plagiarismData: Array<plagiarism>;
+  ratio: number;
   projectUid: string;
 };
 
-const Plagiarism = ({ plagiarismData, projectUid }: Props) => {
+const Plagiarism = ({ plagiarismData, ratio, projectUid }: Props) => {
   const [gettingProjects, setGettingProjects] = useState(false); // for fetching
   const [noPlagiarismData, setNoPlagiarismData] = useState(false);
+
+  const [numberOfMatches, setNumberOfMatches] = useState(0);
 
   const [files, setFiles] = useState(new Array<string>()); // Current opened project files for navbar.
   const [file, setFile] = useState({} as File); // current chose team file from the navbar
@@ -35,12 +38,13 @@ const Plagiarism = ({ plagiarismData, projectUid }: Props) => {
   };
 
   useEffect(() => {
-    if (!plagiarismData.length) {
+    if (!plagiarismData) {
       setNoPlagiarismData(true);
       return;
     }
     const files = plagiarismData.map((f) => f.file);
     setFiles(files);
+    setNumberOfMatches(getNumberOfMatches(plagiarismData));
   }, [plagiarismData]);
 
   if (noPlagiarismData) {
@@ -55,18 +59,21 @@ const Plagiarism = ({ plagiarismData, projectUid }: Props) => {
     <PlagiarismView
       getProjects={getProjects}
       files={files}
+      numberOfMatches={numberOfMatches}
       file={file}
       projects={projects}
       gettingProjects={gettingProjects}
       projectUid={projectUid}
+      ratio={ratio}
     />
   );
 };
 
 const getProjectsData = async (
-  plagiarismData: plagiarsm
+  plagiarismData: plagiarism
 ): Promise<Array<Project>> => {
   let prevTitle = '';
+
   const projects: Project[] = plagiarismData.matches
     .filter((m) => {
       if (m.project !== prevTitle) {
@@ -103,6 +110,11 @@ const getProjectsData = async (
     });
 
   return projects;
+};
+
+const getNumberOfMatches = (plagiarismData: Array<plagiarism>): number => {
+  return plagiarismData.filter((plagiarism) => plagiarism.matches.length)
+    .length;
 };
 
 Plagiarism.defaultProps = {

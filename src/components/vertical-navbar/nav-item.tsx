@@ -6,13 +6,16 @@ type Props = {
   active: number;
   setTab: (arg: number) => void;
   color?: string;
+  options?: string;
 };
 
 export const NavItem = (props: Props) => {
   return (
     <Navitem
       onClick={() => props.setTab(props.tab)}
-      className={`py-2 ${props.active === props.tab && 'active'}`}
+      className={`${props.options ? props.options : 'py-3 my-1'} ${
+        props.active === props.tab && 'active'
+      }`}
       color={props.color}
     >
       {props.title}

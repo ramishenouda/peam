@@ -23,14 +23,29 @@ export const Section = styled.section`
   border-radius: 5px;
 `;
 
+export const NavContainer = styled.div`
+  overflow: hidden;
+  position: relative;
+  transition: all 0.5s ease;
+`;
+
 export const Navbar = styled(navbar)`
   overflow-x: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  display: block;
+  display: block !important;
   border-radius: 5px;
   height: fit-content;
   background: #f9f9f9;
+  transition: all 0.5s ease;
+
+  ${({ hidden }) =>
+    hidden &&
+    `
+      position: absolute;
+      right: -50px;
+    `}
+
   padding: 10px;
   ::-webkit-scrollbar {
     display: none;
@@ -61,5 +76,22 @@ export const NavItem = styled.div`
     color &&
     `
         color: ${color}
+    `}
+`;
+
+export const ToggleButton = styled.div`
+  border: 1px solid #949494;
+  border-radius: 50px;
+  position: absolute;
+  background: #f1f1f1;
+  cursor: pointer;
+  z-index: 1000 !important;
+  left: -10px;
+  top: -20px;
+  ${({ hidden }) =>
+    hidden &&
+    `
+    display: block !important;
+    left: 0;
     `}
 `;

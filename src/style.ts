@@ -30,17 +30,30 @@ export const GridViewRL = styled.div`
   @media only screen and (max-width: 768px) {
     display: block;
   }
+
+  ${({ hidden }) =>
+    hidden &&
+    `
+      display: block !important;
+    `}
 `;
 
 export const GridViewEQ = styled.div`
   display: grid;
-  padding: 20px;
+  padding: 5px 5px 32px 5px;
   grid-template-columns: 49% 49%;
-  grid-column-gap: 1%;
+  grid-column-gap: 0;
+  justify-content: center;
 
   @media only screen and (max-width: 768px) {
     display: block;
   }
+
+  ${({ hidden }) =>
+    hidden &&
+    `
+      display: block !important;
+    `}
 `;
 
 export const Section = styled.section`
@@ -60,6 +73,12 @@ export const VerticalGridView = styled(container)`
   @media only screen and (max-width: 801px) {
     display: block;
   }
+
+  ${({ hidden }) =>
+    hidden &&
+    `
+      display: block !important;
+    `}
 `;
 
 export const Title = styled.h1`
@@ -71,6 +90,10 @@ export const Title = styled.h1`
 export const Description = styled.h6`
   font-family: 'Roboto', 'sans-serif';
   white-space: pre-wrap;
+`;
+
+export const ClearDiv = styled.div`
+  clear: both;
 `;
 
 export const Div = styled.div`
@@ -138,11 +161,9 @@ export const CodeEditor = styled.pre`
   list-style: none;
   counter-reset: code-editor-counter;
   .line-number {
-    background: white !important;
-    padding: 2px 0px;
     color: #777;
-    font-family: Roboto;
     font-size: 14px;
+    text-align: right;
   }
 
   ::-webkit-scrollbar {

@@ -8,7 +8,7 @@ import { PlagiarismProject as Project, File } from 'models';
 import { DetectPlagiarismForTwoFiles } from 'services/plagiarism-service';
 
 import { VerticalNavbar } from 'components/vertical-navbar/vertical-navbar';
-import { GridViewRL } from 'style';
+import { GridViewRL, Title } from 'style';
 import { PlagiarismFiles } from './plagiarism-files';
 
 type Props = {
@@ -18,6 +18,8 @@ type Props = {
   getProjects: (arg: number) => void;
   gettingProjects: boolean;
   projectUid: string; // Current opened team projectUid
+  numberOfMatches: number;
+  ratio: number;
 };
 
 function getFilesTitles(files: string[]): string[] {
@@ -60,6 +62,8 @@ export const PlagiarismView = ({
   projects,
   getProjects,
   gettingProjects,
+  numberOfMatches,
+  ratio,
   projectUid,
 }: Props) => {
   const [filesTab, setFilesTab] = useState(-1);
@@ -77,6 +81,9 @@ export const PlagiarismView = ({
     new Array<string>()
   ); // to convert chosed project files to title for the navbar.
   const [chosenProjectFile, setChosenProjectFile] = useState({} as File);
+
+  const [showNavbar, setShowNavbar] = useState(true);
+
   const systemState: SystemState = useSelector((state: any) => state.system);
 
   useEffect(() => {
@@ -152,12 +159,22 @@ export const PlagiarismView = ({
     );
   };
 
+  const toggleCallBack = (arg: boolean) => {
+    setShowNavbar(arg);
+  };
+
   const choosingFileNavbar = (
     <VerticalNavbar
       active={filesTab}
       setTab={setFilesTab}
       titles={teamProjectFiles}
       emptyTitlesText={'Looks like this project is empty.'}
+      showToggleButton={true}
+      toggleCallBack={toggleCallBack}
+      defaultOpen={true}
+      navOptions={'card'}
+      navItemContainerOptions={'text-left'}
+      navItemOptions={'py-2 my-1'}
     />
   );
 
@@ -167,6 +184,12 @@ export const PlagiarismView = ({
       setTab={setProjectsTab}
       titles={projectTitles}
       emptyTitlesText={'All good here.'}
+      showToggleButton={true}
+      toggleCallBack={toggleCallBack}
+      defaultOpen={true}
+      navOptions={'card'}
+      navItemContainerOptions={'text-left'}
+      navItemOptions={'py-2 my-1'}
     />
   );
 
@@ -176,39 +199,63 @@ export const PlagiarismView = ({
       setTab={setFilesProjectsTab}
       titles={projectFilesTitles}
       emptyTitlesText={'All good here.'}
+      showToggleButton={true}
+      toggleCallBack={toggleCallBack}
+      defaultOpen={true}
+      navOptions={'card'}
+      navItemContainerOptions={'text-left'}
+      navItemOptions={'py-2 my-1'}
     />
   );
+
+  let textStyle = '';
+  if (ratio < 0.31) {
+    textStyle = 'text-success';
+  } else if (ratio < 0.51) {
+    textStyle = 'text-warning';
+  } else {
+    textStyle = 'text-danger';
+  }
 
   const filesRenderCondition =
     projectFiles.length !== 0 && file && filesTab !== -1 && projectsTab !== -1;
 
-  const choosingAFileCondition = !filesRenderCondition && choosingFile;
+  const choosingAFileCondition =
+    (!filesRenderCondition && choosingFile) || !chosenProjectFile.filePath;
   const noMatchesForFileCondition = !projectTitles.length && !choosingFile;
 
   return (
-    <GridViewRL>
+    <GridViewRL hidden={!showNavbar}>
       <div>
-        {gettingProjects && (
-          <div>
-            <div className="f3 font-roboto">
-              Loading projects...
-              <hr />
-            </div>
-          </div>
-        )}
-        {!choosingFile && !gettingProjects && (
-          <div className="text-center">
-            <div className="f3 font-roboto">
-              <span style={{ cursor: 'pointer' }} className="mr-1" onClick={up}>
-                <UpIcon />
-              </span>
-              Choose a project <hr />
-            </div>
-          </div>
-        )}
-        {choosingFile && (
-          <div className="text-center f3 font-roboto">
-            Choose a file <hr />
+        {showNavbar && (
+          <div className="">
+            {gettingProjects && (
+              <div>
+                <div className="f3 font-roboto">
+                  Loading projects...
+                  <hr />
+                </div>
+              </div>
+            )}
+            {!choosingFile && !gettingProjects && (
+              <div className="text-center">
+                <div className="f3 font-roboto">
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    className="mr-1"
+                    onClick={up}
+                  >
+                    <UpIcon />
+                  </span>
+                  Choose a project <hr />
+                </div>
+              </div>
+            )}
+            {choosingFile && (
+              <div className="text-center f3 font-roboto">
+                Choose a file <hr />
+              </div>
+            )}
           </div>
         )}
         {choosingFile && choosingFileNavbar}
@@ -216,21 +263,38 @@ export const PlagiarismView = ({
         {choosingProjectFile && choosingProjectFileNavbar}
       </div>
       <div>
-        {filesRenderCondition && (
+        {filesRenderCondition && chosenProjectFile.filePath && (
           <PlagiarismFiles
             getPlagForFiles={getPlagForFiles}
             files={{ firstFile: file, secondFile: chosenProjectFile }}
           />
         )}
-        {choosingAFileCondition && (
-          <div className="f2 text-center pt-5 font-roboto">
-            Choose a file and a project from the navbar.
+        {choosingAFileCondition && !noMatchesForFileCondition && (
+          <div className="mt-2 pt-2">
+            <div className="text-center font-roboto f2 py-5 mt-5 rounded">
+              {/* <Title className="f1 text-primary">Plagiarism detected</Title>
+              <hr style={{ width: '150px', margin: '0 auto' }} />
+              <p>
+                <span className="f3 font-roboto mr-3 border-right pr-4">
+                  Found {numberOfMatches} files
+                </span>
+                <span className="ml-3 f3 font-roboto">
+                  Ratio {Math.floor(ratio * 100)}%
+                </span>
+              </p> */}
+
+              <Title className={`f1 ${textStyle}`}>
+                {Math.floor(ratio * 100)}% Plagiarism detected
+              </Title>
+              <p className="f3 font-roboto">
+                Found {numberOfMatches} files with plagiarism
+              </p>
+            </div>
           </div>
         )}
         {noMatchesForFileCondition && (
-          <div className=" rounded bg-light py-5 text-center mt-5 font-roboto f2">
+          <div className="rounded bg-light py-5 text-center mt-5 font-roboto f2">
             Looks like this file has no plagiarisms matches with other projects.
-            <p>All good here!</p>
           </div>
         )}
       </div>

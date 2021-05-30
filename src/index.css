@@ -134,6 +134,10 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#222222",endColorstr="#252525",GradientType=1);
 }
 
+.bg-code-editor {
+  background: #f9f9f9;
+}
+
 .form-peam:focus,
 .register .form-peam:active,
 .form-peam:active:focus {
@@ -248,7 +252,9 @@
 }
 
 .plagiarism-text {
-  background-color: rgb(233, 83, 83);
+  color: rgb(255, 0, 0);
+  font-family: 'Inconsolata' !important;
+  font-weight: bold;
   padding: 1px 2px;
   border-radius: 2px;
 }

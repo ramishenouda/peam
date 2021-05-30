@@ -23,7 +23,7 @@ type Props = {
 
 const Report = ({ team, token, peamButton, peamButtonText }: Props) => {
   const [fetchingData, setFetchingData] = useState(false);
-  const [plagiarismData, setPlagiarismData] = useState(new Array<plagiarism>());
+  const [plagiarismData, setPlagiarismData] = useState({} as plagiarism);
 
   const runPeam = () => {
     setFetchingData(true);
@@ -51,11 +51,12 @@ const Report = ({ team, token, peamButton, peamButtonText }: Props) => {
     return Loader(fetchingData);
   }
 
-  if (plagiarismData.length) {
+  if (plagiarismData.files) {
     return (
       <Plagiarism
         projectUid={team.project.uid}
-        plagiarismData={plagiarismData}
+        plagiarismData={plagiarismData.files}
+        ratio={plagiarismData.ratio}
       />
     );
   }

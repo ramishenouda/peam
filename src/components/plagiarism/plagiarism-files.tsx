@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { File } from 'models';
 
-import { CodeEditor, GridViewEQ } from 'style';
+import { CodeEditor, GridViewEQ, ClearDiv } from 'style';
 import { showAxiosResponseErrors } from 'services/error-handler-service';
 
 interface Files {
@@ -34,30 +34,32 @@ export const PlagiarismFiles = ({ files, getPlagForFiles }: Props) => {
     getPlagForFiles(files.firstFile.filePath, files.secondFile.filePath)
       .then((result) => {
         let first: string = result.data.first_file;
-        // '<li>' + result.data.first_file.replaceAll('\n', '</li> <li>');
         let second: string = result.data.second_file;
-        //'<li>' + result.data.second_file.replaceAll('\n', '</li> <li>');
+        let index = 0;
 
-        let firstResult = "<span class='line-number'> 1 </span>";
-        let secondResult = "<span class='line-number'> 1 </span>";
-        for (let i = 0, index = 2; i < first.length; i++) {
-          if (first[i] === '\n') {
-            firstResult += `\n<span class='line-number'> ${index++} </span>`;
-            continue;
-          }
-          firstResult += first[i];
-        }
+        let firstResult: any = first.split('\n');
+        setFirstFileLines(firstResult.length);
+        firstResult =
+          '<table> ' +
+          firstResult
+            .map((line: string) => {
+              return `<tr><td class="line-number text-right"> ${index++} </td> <td class="line-text">${line}</td></tr>`;
+            })
+            .join('') +
+          '</table>';
 
-        for (let i = 0, index = 2; i < second.length; i++) {
-          if (second[i] === '\n') {
-            secondResult += `\n<span class='line-number'> ${index++} </span>`;
-            continue;
-          }
-          secondResult += first[i];
-        }
+        index = 0;
+        let secondResult: any = second.split('\n');
+        setSecondFileLines(secondResult.length);
+        secondResult =
+          '<table>' +
+          secondResult
+            .map((line: string) => {
+              return `<tr><td class="line-number text-right"> ${index++} </td> <td class="line-text">${line}</td></tr>`;
+            })
+            .join('') +
+          '</table>';
 
-        setFirstFileLines(result.data.first_file.split('\n').length);
-        setSecondFileLines(result.data.second_file.split('\n').length);
         setFirstFile(firstResult);
         setSecondFile(secondResult);
         setFirstFileSize(
@@ -73,30 +75,40 @@ export const PlagiarismFiles = ({ files, getPlagForFiles }: Props) => {
   }, [files]);
 
   return (
-    <div>
-      <div className="text-right text-muted font-roboto f6 pr-4">
+    <div className="bg-code-editor card">
+      <div className="text-right text-dark font-roboto f5 pt-2 pr-4">
         Plagiarism ratio: {parseFloat(files.secondFile.ratio) * 100}%
       </div>
       <GridViewEQ className="f4">
-        <div>
-          <div className="text-muted f6 font-roboto">
-            <span className="border-muted border-right mr-1 pr-1">
-              {firstFileLines} lines
-            </span>
-            {firstFileSize} kb
-          </div>
+        <div className="card shadow-sm">
+          <ClearDiv className="text-white f6 font-roboto card-title bg-g-dark px-2 py-2">
+            <div className="border-muted float-left mr-1 pr-1">
+              {files.firstFile.file}
+            </div>
+            <div className="float-right">
+              <span className="border-muted border-right mr-1 pr-1">
+                {firstFileLines} lines
+              </span>
+              {firstFileSize} kb
+            </div>
+          </ClearDiv>
           <CodeEditor
             className="draggableText pt-1"
             dangerouslySetInnerHTML={{ __html: firstFile }}
           />
         </div>
-        <div>
-          <div className="text-muted f6 font-roboto">
-            <span className="border-muted  border-right mr-1 pr-1">
-              {secondFileLines} lines
-            </span>
-            {secondFileSize} kb
-          </div>
+        <div className="card shadow-sm">
+          <ClearDiv className="text-white f6 font-roboto card-title bg-g-dark px-2 py-2 ">
+            <div className="border-muted float-left mr-1 pr-1">
+              {files.secondFile.file}
+            </div>
+            <div className="float-right">
+              <span className="border-muted  border-right mr-1 pr-1">
+                {secondFileLines} lines
+              </span>
+              {secondFileSize} kb
+            </div>
+          </ClearDiv>
           <CodeEditor
             className="draggableText pt-1"
             dangerouslySetInnerHTML={{ __html: secondFile }}
