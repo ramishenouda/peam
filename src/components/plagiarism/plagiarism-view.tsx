@@ -103,7 +103,6 @@ export const PlagiarismView = ({
   }, [filesTab]);
 
   useEffect(() => {
-    console.log('setChoosingProject');
     if (projectsTab === -1 || !projects[projectsTab]) {
       setProjectFiles(new Array<File>());
       if (choosingProjectFile) {
@@ -124,7 +123,6 @@ export const PlagiarismView = ({
   }, [projectsTab, projects]);
 
   useEffect(() => {
-    console.log(filesProjectsTab);
     if (filesProjectsTab === -1) {
       setChosenProjectFile({} as File);
       return;

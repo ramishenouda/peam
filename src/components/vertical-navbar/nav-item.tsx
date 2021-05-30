@@ -5,6 +5,7 @@ type Props = {
   tab: number;
   active: number;
   setTab: (arg: number) => void;
+  hidden: boolean;
   color?: string;
   options?: string;
   disabled?: boolean;

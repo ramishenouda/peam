@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -22,25 +23,44 @@ type Props = {
   students: Array<StudentForCourseList>;
   role: string;
   reqTitle: string;
-  removeTeam: (tile: string, teamTitle: string) => void;
+  removeTeam: (name: string) => void;
 };
 
 export const TeamItem = (props: Props) => {
   const courseState: CourseState = useSelector((state: any) => state.course);
   const systemState: SystemState = useSelector((state: any) => state.system);
+  const [inTeam, setInTeam] = useState(false);
+
+  useEffect(() => {
+    if (props.role === 'teacher') return;
+
+    const inTeam = props.students.filter(
+      (student) => student.username === systemState.username
+    ).length;
+
+    setInTeam(inTeam > 0);
+    return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.students]);
 
   const remove = () => {
     confirmText(
       "You can't revert this",
       `You will delete everything the students have done.
-                </br>Type the team title to confirm: </br> <strong> ${props.name} </strong>`,
-      'Team title'
+                </br>Type the team name to confirm: </br> <strong> ${props.name} </strong>`,
+      'Team name'
     ).then((result) => {
       if (!result.isConfirmed) return;
 
       const resultValue = result.value ? result.value : '';
-      if (!resultValue) error("Title can't be empty or undefined");
-      if (resultValue !== props.name) error("Titles don't match.");
+      if (!resultValue) {
+        error("Name can't be empty or undefined");
+        return;
+      }
+      if (resultValue !== props.name) {
+        error("Names don't match.");
+        return;
+      }
 
       DeleteTeam(
         courseState.owner,
@@ -51,7 +71,7 @@ export const TeamItem = (props: Props) => {
       )
         .then((result) => {
           success('Team deleted successfully');
-          props.removeTeam(props.reqTitle, props.name);
+          props.removeTeam(props.name);
         })
         .catch((err) => {
           showAxiosResponseErrors(err);
@@ -80,7 +100,7 @@ export const TeamItem = (props: Props) => {
         </Link>
       </div>
       <div className="pb-3">{students}</div>
-      {props.role === 'teacher' && (
+      {(props.role === 'teacher' || inTeam) && (
         <div className="text-right">
           <StyledButton variant="danger" onClick={remove}>
             Remove

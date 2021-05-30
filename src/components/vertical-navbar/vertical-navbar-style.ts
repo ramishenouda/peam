@@ -86,12 +86,14 @@ export const ToggleButton = styled.div`
   background: #f1f1f1;
   cursor: pointer;
   z-index: 1000 !important;
-  left: -10px;
-  top: -20px;
+  right: -10px;
+  top: -10px;
   ${({ hidden }) =>
     hidden &&
     `
-    display: block !important;
+    display: inline !important;
+    border: none;
+    width: 27px;
     left: 0;
     `}
 `;

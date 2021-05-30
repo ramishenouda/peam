@@ -113,8 +113,7 @@ const getProjectsData = async (
 };
 
 const getNumberOfMatches = (plagiarismData: Array<plagiarism>): number => {
-  return plagiarismData.filter((plagiarism) => plagiarism.matches.length)
-    .length;
+  return plagiarismData.length;
 };
 
 Plagiarism.defaultProps = {

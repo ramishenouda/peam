@@ -32,7 +32,6 @@ const Report = ({ team, token, peamButton, peamButtonText }: Props) => {
         setPlagiarismData(result.data);
       })
       .catch((err: AxiosError) => {
-        console.log(err);
         showAxiosResponseErrors(err);
       })
       .finally(() => setFetchingData(false));

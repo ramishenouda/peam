@@ -30,7 +30,7 @@ export const PlagiarismFiles = ({ files, getPlagForFiles }: Props) => {
       files.secondFile.filePath === lastSecondFilePath
     )
       return;
-    console.log(files);
+
     getPlagForFiles(files.firstFile.filePath, files.secondFile.filePath)
       .then((result) => {
         let first: string = result.data.first_file;

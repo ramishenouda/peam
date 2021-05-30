@@ -30,7 +30,7 @@ const SignupSchema = yup.object().shape({
 
 export const Profile = (props: Props) => {
   const options: any = props.options;
-  console.log(options);
+
   const systemState: SystemState = useSelector((state: any) => state.system);
   const initialUser: User = {
     uid: '',

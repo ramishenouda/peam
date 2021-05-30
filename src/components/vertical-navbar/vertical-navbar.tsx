@@ -53,7 +53,7 @@ export const VerticalNavbar = (props: Props) => {
       const color = sliceString(props.titles[i], '{{', '}}');
       const isTitle = sliceString(props.titles[i], '[[', ']]');
       const isDisabled = sliceString(props.titles[i], '((', '))');
-      console.log(props.titles[i]);
+
       tabs.push(
         <div
           className={`text-info ${
@@ -71,6 +71,7 @@ export const VerticalNavbar = (props: Props) => {
                 color={color ? color : ''}
                 options={props.navItemOptions}
                 disabled={isDisabled ? true : false}
+                hidden={!isOpen}
               />
             </div>
           )}
@@ -100,7 +101,7 @@ export const VerticalNavbar = (props: Props) => {
   return (
     <div
       className={`position-relative mb-4 ${
-        props.navOptions && props.navOptions
+        props.navOptions && isOpen && props.navOptions
       }`}
     >
       {isOpen && props.showToggleButton && (

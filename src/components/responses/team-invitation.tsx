@@ -61,13 +61,10 @@ export const RespondTeam = (props: Props) => {
       return;
     }
 
+    // todo: show an error in the catch function
     RetreieveTeamInvitation(params.token, systemState.token)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((result) => {})
+      .catch((err) => {});
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

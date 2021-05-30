@@ -107,14 +107,12 @@ export const Project = (props: Props) => {
       formData
     )
       .then((result) => {
-        console.log(result);
         success('Your project was created successfully');
         setTimeout(() => {
           window.location.reload();
         }, 250);
       })
       .catch((err) => {
-        console.log(err);
         showAxiosResponseErrors(err);
       })
       .finally(() => setLoading(false));

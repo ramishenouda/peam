@@ -27,7 +27,7 @@ export const Teams = (props: Props) => {
 
   // fix: removing a team also removes all other teams from the view.
   const removeTeam = (name: string) => {
-    const newTeams = teams.filter((x) => x.name === name);
+    const newTeams = teams.filter((x) => x.name !== name);
     setTeams(newTeams);
   };
 

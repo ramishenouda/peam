@@ -15,9 +15,9 @@ import { Member } from '../../../models/memeber';
 import { CourseState } from '../../../store/course/types';
 import { SystemState } from '../../../store/system/types';
 
-import { RemoveStudent, UpdateTeam } from '../../../services/team-servce';
-import { success } from '../../../services/notification-service';
-import { showAxiosResponseErrors } from '../../../services/error-handler-service';
+import { RemoveStudent, UpdateTeam } from 'services/team-servce';
+import { success } from 'services/notification-service';
+import { showAxiosResponseErrors } from 'services/error-handler-service';
 
 import { ListMembers } from 'components/list-members/list-members';
 
@@ -40,6 +40,8 @@ export const ManageTeam = (props: Props) => {
   const params: Params = useParams();
   const courseState: CourseState = useSelector((state: any) => state.course);
   const systemState: SystemState = useSelector((state: any) => state.system);
+
+  const [students, setStudents] = useState(props.team.students);
 
   const [team, setTeam] = useState(props.team);
   const [updatingTeam, setUpdatingTeam] = useState(false);
@@ -87,7 +89,6 @@ export const ManageTeam = (props: Props) => {
         }, 250);
       })
       .catch((err) => {
-        console.log(err);
         showAxiosResponseErrors(err);
       })
       .finally(() => setUpdatingTeam(false));
@@ -102,11 +103,18 @@ export const ManageTeam = (props: Props) => {
       params.title_2,
       member.username
     )
-      .then((result) => {})
-      .catch((err) => {});
+      .then((result) => {
+        success('Student removed successfully');
+        setStudents(
+          students.filter((student) => student.username !== member.username)
+        );
+      })
+      .catch((err) => {
+        showAxiosResponseErrors(err);
+      });
   };
 
-  // todo: change title to name
+  // todo: show loading bar while requesting for deleting a student
   if (!req) return <Redirect to="/" />;
   return (
     <div>
@@ -155,7 +163,7 @@ export const ManageTeam = (props: Props) => {
           showButton={true}
           ButtonText="Remove"
           optionFuncton={removeStudent}
-          members={props.team.students}
+          members={students}
         />
       </Section>
     </div>

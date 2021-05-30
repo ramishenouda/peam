@@ -76,7 +76,6 @@ export const ManageProject = ({ _project }: Props) => {
     }
     if (_project.description !== project.description && project.description) {
       formData.append('description', project.description);
-      console.log(formData.get('description'));
     }
 
     const payLoad = formData;
@@ -97,7 +96,6 @@ export const ManageProject = ({ _project }: Props) => {
         }, 250);
       })
       .catch((err) => {
-        console.log(err);
         showAxiosResponseErrors(err);
       })
       .finally(() => setUpdatingProject(false));

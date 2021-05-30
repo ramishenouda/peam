@@ -46,7 +46,9 @@ export const Tree = ({ project }: Props) => {
 
   const openProjectFile = (file_path: string) => {
     setOpeningFile(true);
+
     file_path = file_path.slice('peam_____root/'.length);
+
     openFile(
       courseState.owner,
       courseState.code,
@@ -157,8 +159,12 @@ const getFiles = (
     }
   }
 
-  const lastSlash = currentDir.lastIndexOf('/', currentDir.length - 2);
-  const _currentDir = currentDir.slice(0, lastSlash);
+  // test:
+  const lastSlash = currentDir.lastIndexOf(
+    '/',
+    currentDir.lastIndexOf('/') - 1
+  );
+  const _currentDir = currentDir.slice(0, lastSlash + 1);
   if (lastSlash !== -1 && lastDir !== 'peam_____root/') {
     files.unshift(
       <Up
