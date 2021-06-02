@@ -1,53 +1,56 @@
 .navbar-view {
-    width: 100%;
-	-webkit-box-shadow: 0 4px 6px -6px black;
-	   -moz-box-shadow: 0 4px 6px -6px black;
-	        box-shadow: 0 3px 5px -5px black;
+  width: 100%;
+  -webkit-box-shadow: 0 4px 6px -6px black;
+  -moz-box-shadow: 0 4px 6px -6px black;
+  box-shadow: 0 3px 5px -5px black;
 }
 
-.navbar .navbar-item, .navbar .navbar-search {
-    font-family: 'Inter', 'Roboto', Inconsolata, sans-serif;
-    border-radius: 4px;
-    font-size: larger;
-    display: block;
-    padding: .5rem 1rem;
-    cursor: pointer;
-    transition: all 0.3s;
+.navbar .navbar-item,
+.navbar .navbar-search {
+  font-family: 'Inter', 'Roboto', Inconsolata, sans-serif;
+  border-radius: 4px;
+  font-size: larger;
+  display: block;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
-.navbar .navbar-brand {
-    padding-left: 1.5vw !important;
-    padding-right: 1.5vw !important;
-    margin: 0;
-    background: #1a1a1a;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    color: white;
+/* depreacted check styled components in the navbar-styles.ts */
+/* .navbar .navbar-brand {
+  padding-left: 1.5vw !important;
+  padding-right: 1.5vw !important;
+  margin: 0;
+  background: #1a1a1a;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: white;
 }
 .navbar .navbar-brand:hover {
-    color: white !important;
-}
+  color: white !important;
+} */
 
 .navbar .navbar-item {
-    padding-left: 2vw !important;
-    padding-right: 2vw !important;
+  padding-left: 2vw !important;
+  padding-right: 2vw !important;
 }
 .navbar .navbar-item:hover {
-    -webkit-box-shadow: 0 3px 5px -5px black;
-    -moz-box-shadow: 0 3px 5px -5px black;
-    box-shadow: 0px 16px 12px -20px black;
+  -webkit-box-shadow: 0 3px 5px -5px black;
+  -moz-box-shadow: 0 3px 5px -5px black;
+  box-shadow: 0px 16px 12px -20px black;
 }
 
 .navbar .navbar-search {
-    box-shadow: none !important;
-    outline: none !important;
-    color: #424242 !important;
-    background-color: white !important;
-    cursor: text;
+  box-shadow: none !important;
+  outline: none !important;
+  color: #424242 !important;
+  background-color: white !important;
+  cursor: text;
 }
 
-.navbar .navbar-search:focus, .navbar .navbar-search:active {
-    margin-right: 6rem !important;
-    outline: none !important;
-    box-shadow: 0px 16px 12px -20px black !important;
+.navbar .navbar-search:focus,
+.navbar .navbar-search:active {
+  margin-right: 6rem !important;
+  outline: none !important;
+  box-shadow: 0px 16px 12px -20px black !important;
 }

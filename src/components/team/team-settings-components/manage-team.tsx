@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Redirect, useParams } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { Button, Form } from 'react-bootstrap';
+import { CircleLoader as Loader } from 'react-spinners';
 
 import { Team } from '../../../models/team';
 import { Member } from '../../../models/memeber';
@@ -13,12 +15,13 @@ import { Member } from '../../../models/memeber';
 import { CourseState } from '../../../store/course/types';
 import { SystemState } from '../../../store/system/types';
 
-import { RemoveStudent, UpdateTeam } from '../../../services/team-servce';
-import { success } from '../../../services/notification-service';
-import { showAxiosResponseErrors } from '../../../services/error-handler-service';
-import { Section } from '../../../style';
-import { ListMembers } from '../../list-members/list-members';
-import { Redirect, useParams } from 'react-router-dom';
+import { RemoveStudent, UpdateTeam } from 'services/team-servce';
+import { success } from 'services/notification-service';
+import { showAxiosResponseErrors } from 'services/error-handler-service';
+
+import { ListMembers } from 'components/list-members/list-members';
+
+import { Section } from 'style';
 
 type Props = {
   team: Team;
@@ -38,12 +41,11 @@ export const ManageTeam = (props: Props) => {
   const courseState: CourseState = useSelector((state: any) => state.course);
   const systemState: SystemState = useSelector((state: any) => state.system);
 
-  const initialTeam: Team = {
-    name: props.team.name,
-    students: props.team.students,
-  };
+  const [students, setStudents] = useState(props.team.students);
 
-  const [team, setTeam] = useState(initialTeam);
+  const [team, setTeam] = useState(props.team);
+  const [updatingTeam, setUpdatingTeam] = useState(false);
+
   const req = courseState.requirements.filter(
     (req) => req.title === params.title_1
   )[0];
@@ -67,6 +69,7 @@ export const ManageTeam = (props: Props) => {
 
   const { isValid } = formState;
   const submit = () => {
+    setUpdatingTeam(true);
     const payLoad = {
       name: team.name,
     };
@@ -86,9 +89,9 @@ export const ManageTeam = (props: Props) => {
         }, 250);
       })
       .catch((err) => {
-        console.log(err);
         showAxiosResponseErrors(err);
-      });
+      })
+      .finally(() => setUpdatingTeam(false));
   };
 
   const removeStudent = (member: Member) => {
@@ -100,10 +103,18 @@ export const ManageTeam = (props: Props) => {
       params.title_2,
       member.username
     )
-      .then((result) => {})
-      .catch((err) => {});
+      .then((result) => {
+        success('Student removed successfully');
+        setStudents(
+          students.filter((student) => student.username !== member.username)
+        );
+      })
+      .catch((err) => {
+        showAxiosResponseErrors(err);
+      });
   };
 
+  // todo: show loading bar while requesting for deleting a student
   if (!req) return <Redirect to="/" />;
   return (
     <div>
@@ -128,14 +139,18 @@ export const ManageTeam = (props: Props) => {
             <p className="required-text"> {errors.name?.message} </p>
           </Form.Group>
           <Form.Group>
-            <Button
-              type="submit"
-              className="px-5 py-2"
-              variant="dark"
-              disabled={!isValid}
-            >
-              Save
-            </Button>
+            {!updatingTeam ? (
+              <Button
+                type="submit"
+                className="px-5 py-2"
+                variant="dark"
+                disabled={!isValid || props.team.name === team.name}
+              >
+                Save
+              </Button>
+            ) : (
+              <Loader size={35} color={'#1a1a1a'} loading={updatingTeam} />
+            )}
           </Form.Group>
         </Form>
       </Section>
@@ -148,7 +163,7 @@ export const ManageTeam = (props: Props) => {
           showButton={true}
           ButtonText="Remove"
           optionFuncton={removeStudent}
-          members={props.team.students}
+          members={students}
         />
       </Section>
     </div>

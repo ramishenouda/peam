@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { CircleLoader as Loader } from 'react-spinners';
+
 import { Button, Form } from 'react-bootstrap';
 
 import { Project } from 'models';
@@ -15,6 +17,8 @@ import { SystemState } from '../../../store/system/types';
 
 import { success } from '../../../services/notification-service';
 import { showAxiosResponseErrors } from '../../../services/error-handler-service';
+
+import { UploadZone } from 'components/upload-zone';
 
 import { Section } from '../../../style';
 import { updateProject } from 'services/project-service';
@@ -32,19 +36,16 @@ interface Params {
   title_2: string;
 }
 
+// todo redirect to the new url.
 export const ManageProject = ({ _project }: Props) => {
   const params: Params = useParams();
   const courseState: CourseState = useSelector((state: any) => state.course);
   const systemState: SystemState = useSelector((state: any) => state.system);
 
-  const initialProject: Project = {
-    title: _project.title,
-    project_zip: { files: [] },
-    uid: '',
-    description: '',
-  };
+  const [formData, setFormData] = useState(new FormData());
+  const [updatingProject, setUpdatingProject] = useState(false);
+  const [project, setProject] = useState(_project);
 
-  const [project, setProject] = useState(initialProject);
   const req = courseState.requirements.filter(
     (req) => req.title === params.title_1
   )[0];
@@ -69,10 +70,16 @@ export const ManageProject = ({ _project }: Props) => {
 
   const { isValid } = formState;
   const submit = () => {
-    const payLoad = {
-      title: project.title,
-      description: project.description,
-    };
+    setUpdatingProject(true);
+    if (_project.title !== project.title) {
+      formData.append('title', project.title);
+    }
+    if (_project.description !== project.description && project.description) {
+      formData.append('description', project.description);
+    }
+
+    const payLoad = formData;
+
     updateProject(
       courseState.owner,
       courseState.code,
@@ -89,15 +96,21 @@ export const ManageProject = ({ _project }: Props) => {
         }, 250);
       })
       .catch((err) => {
-        console.log(err);
         showAxiosResponseErrors(err);
-      });
+      })
+      .finally(() => setUpdatingProject(false));
   };
 
   if (!req) return <Redirect to="/" />;
   if (!_project) {
     return <span>no project yet.</span>;
   }
+
+  const formDisableCondition =
+    !isValid ||
+    (project.title === _project.title &&
+      project.description === _project.description &&
+      !formData.get('project_zip'));
 
   return (
     <div>
@@ -118,6 +131,7 @@ export const ManageProject = ({ _project }: Props) => {
               onChange={handleChange}
               name="title"
               ref={register}
+              readOnly={updatingProject}
             />
             <p className="required-text"> {errors.title?.message} </p>
           </Form.Group>
@@ -130,18 +144,29 @@ export const ManageProject = ({ _project }: Props) => {
               defaultValue={_project.description}
               name="description"
               ref={register}
+              readOnly={updatingProject}
             />
             <p className="required-text"> {errors.description?.message} </p>
           </Form.Group>
-          <Form.Group>
-            <Button
-              type="submit"
-              className="px-5 py-2"
-              variant="dark"
-              disabled={!isValid}
-            >
-              Save
-            </Button>
+          <UploadZone
+            formDataHeader="project_zip"
+            text={'Click to update project files'}
+            setFormData={setFormData}
+            uploading={updatingProject}
+          />
+          <Form.Group className="py-2">
+            {!updatingProject ? (
+              <Button
+                type="submit"
+                className="px-5 py-2"
+                variant="dark"
+                disabled={formDisableCondition}
+              >
+                Save
+              </Button>
+            ) : (
+              <Loader size={35} color={'#1a1a1a'} loading={updatingProject} />
+            )}
           </Form.Group>
         </Form>
       </Section>

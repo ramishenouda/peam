@@ -26,6 +26,7 @@ export const Dangerous = (props: Props) => {
   const courseState: CourseState = useSelector((state: any) => state.course);
   const systemState: SystemState = useSelector((state: any) => state.system);
 
+  const requirementLink = `${courseState.owner}/${courseState.code}/requirements/${params.title_1}`;
   const removeCourse = () => {
     confirmText(
       "You can't revert this",
@@ -54,7 +55,7 @@ export const Dangerous = (props: Props) => {
         .then(() => {
           success('Team deleted successfully');
           setTimeout(() => {
-            window.location.replace('http://localhost:3000/');
+            window.location.replace(`/${requirementLink}`);
           }, 500);
         })
         .catch((err) => {

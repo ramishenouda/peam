@@ -7,8 +7,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { ProjectFiles } from 'components/team/team-style';
-import { NavItem } from 'components/navbar/navbar-style';
 import { Title } from 'components/project-requirement/requirement-style';
 
 import { CircleLoader } from 'react-spinners';
@@ -39,6 +37,8 @@ type Props = {
 };
 
 export const Project = (props: Props) => {
+  // fix: show only team members the upload zone.
+  // fix: disable the page buttons while loading.
   const [creatingProject, setCreatingProject] = useState(false);
   const params: Params = useParams();
   const courseState: CourseState = useSelector((state: any) => state.course);
@@ -62,6 +62,7 @@ export const Project = (props: Props) => {
     mode: 'all',
     resolver: yupResolver(Schema),
   });
+
   const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
     useDropzone({ multiple: false, maxFiles: 1, accept: '.zip' });
 
@@ -106,14 +107,12 @@ export const Project = (props: Props) => {
       formData
     )
       .then((result) => {
-        console.log(result);
         success('Your project was created successfully');
         setTimeout(() => {
           window.location.reload();
         }, 250);
       })
       .catch((err) => {
-        console.log(err);
         showAxiosResponseErrors(err);
       })
       .finally(() => setLoading(false));
@@ -187,21 +186,22 @@ const Project404 = (
 ) => {
   // todo: more responsive for mobile apps (seprate the students and the project files)
   return (
-    <ProjectFiles>
+    <div>
       {!props.project && courseState.role === 'teacher' && (
         <Title className="f2 p-5 text-center">
           The team hasn't uploaded any projects yet.
         </Title>
       )}
       {!props.project && courseState.role === 'student' && (
-        <NavItem
+        <Button
           onClick={() => toggleCreatingProject(true)}
-          className="f2 p-5 text-center"
+          className="f2 p-5 text-center peam-pirmary-button w-100"
+          variant="outline-light"
         >
           You haven't uploaded any projects yet. <br /> Click to start
           uploading.
-        </NavItem>
+        </Button>
       )}
-    </ProjectFiles>
+    </div>
   );
 };

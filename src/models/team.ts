@@ -1,10 +1,11 @@
+import { Project } from './project/project';
 import { Student, StudentForCourseList } from './student';
 
 export interface Team {
   uid?: string;
   name: string;
   students: Array<Student>;
-  project?: any;
+  project: Project;
 }
 
 export interface TeamForCreation {

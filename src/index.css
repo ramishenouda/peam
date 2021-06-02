@@ -68,6 +68,12 @@
 .f4 {
   font-size: 18px !important;
 }
+.f5 {
+  font-size: 16px !important;
+}
+.f6 {
+  font-size: 14px !important;
+}
 
 @media only screen and (max-width: 600px) {
   .f1 {
@@ -128,6 +134,10 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#222222",endColorstr="#252525",GradientType=1);
 }
 
+.bg-code-editor {
+  background: #f9f9f9;
+}
+
 .form-peam:focus,
 .register .form-peam:active,
 .form-peam:active:focus {
@@ -135,9 +145,17 @@
   box-shadow: none !important;
 }
 
+.font-roboto {
+  font-family: 'Roboto' !important;
+}
+
 .disable-link-style {
   color: inherit;
   text-decoration: none;
+}
+
+.active-tab {
+  text-decoration: underline #aa3b3b !important;
 }
 
 .active {
@@ -213,6 +231,33 @@
   border-bottom: 1px solid white;
 }
 
+.bottom-border-black {
+  border-bottom: 1px solid #000;
+}
+
 .top-border {
   border-top: 1px solid white;
+}
+
+.peam-pirmary-button {
+  color: #000;
+  border-color: #c0c0c0;
+}
+
+.peam-pirmary-button:hover {
+  transition: all 0.5s;
+  background-color: #f1f1f1 !important;
+  border-color: #f1f1f1;
+  color: #000;
+}
+
+.plagiarism-text {
+  color: rgb(255, 0, 0);
+  font-family: 'Inconsolata' !important;
+  font-weight: bold;
+  padding: 1px 2px;
+  border-radius: 2px;
+}
+
+.draggableText {
 }

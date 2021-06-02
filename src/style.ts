@@ -21,6 +21,41 @@ export const GridView = styled.div`
   }
 `;
 
+export const GridViewRL = styled.div`
+  display: grid;
+  padding: 20px;
+  grid-template-columns: 20% 79%;
+  grid-column-gap: 1%;
+
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
+
+  ${({ hidden }) =>
+    hidden &&
+    `
+      display: block !important;
+    `}
+`;
+
+export const GridViewEQ = styled.div`
+  display: grid;
+  padding: 5px 5px 32px 5px;
+  grid-template-columns: 49% 49%;
+  grid-column-gap: 0;
+  justify-content: center;
+
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
+
+  ${({ hidden }) =>
+    hidden &&
+    `
+      display: block !important;
+    `}
+`;
+
 export const Section = styled.section`
   background: #f9f9f9;
   padding: 10px;
@@ -38,6 +73,12 @@ export const VerticalGridView = styled(container)`
   @media only screen and (max-width: 801px) {
     display: block;
   }
+
+  ${({ hidden }) =>
+    hidden &&
+    `
+      display: block !important;
+    `}
 `;
 
 export const Title = styled.h1`
@@ -49,6 +90,10 @@ export const Title = styled.h1`
 export const Description = styled.h6`
   font-family: 'Roboto', 'sans-serif';
   white-space: pre-wrap;
+`;
+
+export const ClearDiv = styled.div`
+  clear: both;
 `;
 
 export const Div = styled.div`
@@ -86,4 +131,52 @@ export const VerticalCenterdElement = styled.div`
   top: 50%;
   transform: translateY(-50%) !important;
   min-width: fit-content;
+`;
+
+export const NavItem = styled.div`
+  padding-bottom: 5px;
+  font-family: Inconsolata;
+  text-decoration: none #fff;
+  color: #1a1a1a !important;
+  font-size: x-large;
+  text-underline-offset: 19px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out !important;
+  min-width: max-content !important;
+
+  margin: 0 20px;
+
+  @media only screen and (max-width: 768px) {
+    margin-right: 20px;
+    margin-left: 0;
+    min-width: fit-content;
+  }
+
+  :hover {
+    text-decoration: underline #1a1a1a;
+  }
+`;
+
+export const CodeEditor = styled.pre`
+  list-style: none;
+  counter-reset: code-editor-counter;
+  .line-number {
+    color: #777;
+    font-size: 14px;
+    text-align: right;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
 `;

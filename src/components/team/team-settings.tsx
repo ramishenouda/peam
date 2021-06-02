@@ -17,7 +17,7 @@ type Props = {
   setTeam: (tab: Team) => void;
 };
 
-export const TeamSettings = (props: Props) => {
+export const TeamSettings = ({ team, setTeam }: Props) => {
   const [tab, setTab] = useState(0);
 
   const titles = [
@@ -35,11 +35,10 @@ export const TeamSettings = (props: Props) => {
   return (
     <VerticalGridView>
       {verticalNavbar}
-      {tab === 0 && <ManageTeam team={props.team} setTeam={props.setTeam} />}
-      {tab === 1 && <ManageProject _project={props.team.project} />}
-      {tab === 2 && (
-        <InviteStudents team_uuid={props.team.uid ? props.team.uid : ''} />
-      )}
+      {tab === 0 && <ManageTeam team={team} setTeam={setTeam} />}
+      {tab === 1 && team.project && <ManageProject _project={team.project} />}
+      {tab === 1 && !team.project && <div>No project to manage yet.</div>}
+      {tab === 2 && <InviteStudents team_uuid={team.uid ? team.uid : ''} />}
       {tab === 3 && <PendingInvitations />}
       {tab === 4 && <Dangerous />}
     </VerticalGridView>

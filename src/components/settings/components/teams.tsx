@@ -9,6 +9,7 @@ type Props = {
   options: {};
 };
 
+// todo use selector to get the team link.
 export const Teams = (props: Props) => {
   let data: any = props.options;
   const view = data.teams.map((item: any) => {

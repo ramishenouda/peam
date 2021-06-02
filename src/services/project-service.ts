@@ -48,6 +48,8 @@ export const updateProject = async (
     baseURL +
     `courses/${owner}/${courseCode}/requirements/${reqTitle}/teams/${teamTitle}/project/${projectTitle}/`;
   options.headers['Authorization'] = 'Bearer ' + system.token;
+  options.headers['Content-Type'] =
+    'multipart/form-data; boundary=----WebKitFormBoundary1b4Bs104C6QhlnFO';
   options.method = 'PATCH';
   options.data = data;
 
@@ -68,8 +70,6 @@ export const openFile = async (
     baseURL +
     `courses/${owner}/${courseCode}/requirements/${reqTitle}/teams/${teamTitle}/project/${project_title}/files/${file_path}`;
   options.headers['Authorization'] = 'Bearer ' + system.token;
-  options.headers['Content-Type'] =
-    'multipart/form-data; boundary=----WebKitFormBoundary1b4Bs104C6QhlnFO';
   options.method = 'GET';
 
   return await axios(options);

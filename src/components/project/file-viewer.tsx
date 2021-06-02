@@ -1,4 +1,9 @@
-import { audio, video, text, image, extensionToFullName } from 'helpers/types';
+import {
+  text,
+  image,
+  availableExtensions,
+  extensionToFullName,
+} from 'helpers/types';
 
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -32,14 +37,22 @@ export const FileViewer = ({ file_name, data, toggleViewer }: Props) => {
 
   const language = extensionToFullName(type);
 
-  if (text.includes(type)) {
-    file = data.length ? (
-      <SyntaxHighlighter language={language} style={docco}>
-        {data}
-      </SyntaxHighlighter>
-    ) : (
-      <span>File is empty.</span>
-    );
+  // fix: check if the data is not null
+  // test:
+  if (text.includes(type) && data) {
+    file =
+      data.length && type && availableExtensions.includes(type) ? (
+        <SyntaxHighlighter language={language} style={docco}>
+          {data}
+        </SyntaxHighlighter>
+      ) : (
+        <span>
+          {availableExtensions.includes(type) && <>File is empty.</>}
+          {!availableExtensions.includes(type) && (
+            <> Unsupported media type. </>
+          )}
+        </span>
+      );
   }
 
   return (

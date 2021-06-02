@@ -1,7 +1,8 @@
-import { Item, Text } from './styles';
 import FolderIcon from '@material-ui/icons/Folder';
-
 import UpIcon from '@material-ui/icons/ArrowBack';
+
+import { Item, Text } from './styles';
+
 type Props = {
   file_name: string;
   last_index: boolean;
@@ -54,9 +55,15 @@ type Props2 = {
 
 export const Up = ({ file_name, up }: Props2) => {
   return (
-    <Item onClick={() => up()} className={'border-bottom'}>
-      <UpIcon className="mb-1" style={{ color: '#555', cursor: 'pointer' }} />
-      <Text className="disable-link-style ml-1">{file_name}</Text>
-    </Item>
+    <div className={'border-bottom p-2'}>
+      <UpIcon
+        onClick={() => up()}
+        className="mb-1"
+        style={{ color: '#555', cursor: 'pointer' }}
+      />
+      <span className="disable-link-style ml-1 f3 font-roboto">
+        {file_name}
+      </span>
+    </div>
   );
 };

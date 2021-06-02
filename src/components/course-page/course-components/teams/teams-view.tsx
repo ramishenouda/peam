@@ -27,7 +27,7 @@ export const Teams = (props: Props) => {
 
   // fix: removing a team also removes all other teams from the view.
   const removeTeam = (name: string) => {
-    const newTeams = teams.filter((x) => x.name === name);
+    const newTeams = teams.filter((x) => x.name !== name);
     setTeams(newTeams);
   };
 
@@ -52,7 +52,7 @@ export const Teams = (props: Props) => {
   const showData = showTeams && data.length;
 
   return (
-    <div className="mt-4">
+    <div>
       {!props.hideSeparator && (
         <ProjectRequirementTitle
           onClick={() => setShowTeams(!showTeams)}
@@ -63,7 +63,7 @@ export const Teams = (props: Props) => {
         </ProjectRequirementTitle>
       )}
       <div className="my-1">&nbsp;</div>
-      {showData ? <TeamsContainer className="mt-3">{data}</TeamsContainer> : ''}
+      {showData ? <TeamsContainer className="mt-1">{data}</TeamsContainer> : ''}
       {showTeams && !data.length && (
         <div className="text-center f1">No teams yet.</div>
       )}

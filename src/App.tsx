@@ -30,6 +30,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // todo: handle case 500
     const getNewToken = () => {
       const _refreshToken = localStorage.getItem('refresh_token');
       if (_refreshToken) {
