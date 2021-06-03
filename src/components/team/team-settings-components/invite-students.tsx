@@ -1,7 +1,5 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { showAxiosResponseErrors } from 'services/error-handler-service';
-import { error } from 'services/notification-service';
 import { InviteToTeam } from 'services/team-servce';
 
 import { CourseState } from '../../../store/course/types';

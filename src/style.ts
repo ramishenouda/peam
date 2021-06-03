@@ -160,6 +160,8 @@ export const NavItem = styled.div`
 export const CodeEditor = styled.pre`
   list-style: none;
   counter-reset: code-editor-counter;
+  min-height: 60vh;
+
   .line-number {
     color: #777;
     font-size: 14px;

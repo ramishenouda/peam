@@ -47,12 +47,13 @@ export const DetectPlagiarismForTwoFiles = async (
   options.data = {
     first_project: firstProject,
     second_project: secondProject,
-    first_file: firstFile,
+    first_file: 'main.js',
     second_file: secondFile,
     match_start_tokens: matchStart,
     match_end_tokens: matchEnd,
     html_encoded: htmlEncode,
   };
 
+  console.log(options.data);
   return await axios(options);
 };

@@ -10,6 +10,7 @@ type Props = {
   active: number;
   setTab: (tab: number) => void;
   titles: Array<string>;
+  countTitles?: boolean;
   emptyTitlesText?: string;
   toggleCallBack?: (arg: boolean) => void;
   defaultOpen?: boolean;
@@ -53,7 +54,6 @@ export const VerticalNavbar = (props: Props) => {
       const color = sliceString(props.titles[i], '{{', '}}');
       const isTitle = sliceString(props.titles[i], '[[', ']]');
       const isDisabled = sliceString(props.titles[i], '((', '))');
-
       tabs.push(
         <div
           className={`text-info ${
@@ -82,6 +82,8 @@ export const VerticalNavbar = (props: Props) => {
           )}
         </div>
       );
+
+      if (isTitle && props.countTitles) index++;
     }
 
     setTabs(tabs);

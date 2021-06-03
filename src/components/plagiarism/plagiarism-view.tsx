@@ -15,7 +15,7 @@ type Props = {
   files: Array<string>; // Current project files.
   file: File; // Current projects for the opened file.
   projects: Array<Project>; // projects for the navbar.
-  getProjects: (arg: number) => void;
+  getProjects: (arg: number, file: string) => void;
   gettingProjects: boolean;
   projectUid: string; // Current opened team projectUid
   numberOfMatches: number;
@@ -56,6 +56,24 @@ function getFilesTitles(files: string[]): string[] {
   return titles;
 }
 
+const getFileName = (
+  teamProjectFiles: Array<string>,
+  index: number
+): string => {
+  if (index < 0 || index >= teamProjectFiles.length) return teamProjectFiles[0];
+
+  let result = teamProjectFiles[index];
+  const length = '[[title]]'.length;
+
+  for (let i = index; i > -1; i--) {
+    const title = teamProjectFiles[i];
+    if (title.indexOf('[[title]]') === -1) continue;
+    return title.slice(0, title.length - length) + teamProjectFiles[index];
+  }
+
+  return result;
+};
+
 export const PlagiarismView = ({
   files,
   file,
@@ -92,7 +110,7 @@ export const PlagiarismView = ({
 
   useEffect(() => {
     if (filesTab !== -1 && choosingFile) {
-      getProjects(filesTab);
+      getProjects(filesTab, getFileName(teamProjectFiles, filesTab));
       setChoosingFile(false);
       setChoosingProject(true);
     } else if (filesTab === -1 && !choosingFile) {
@@ -197,7 +215,7 @@ export const PlagiarismView = ({
       active={filesTab}
       setTab={setFilesTab}
       titles={teamProjectFiles}
-      emptyTitlesText={'Looks like this project is empty.'}
+      emptyTitlesText={'No plagiarism.'}
       showToggleButton={true}
       toggleCallBack={toggleCallBack}
       defaultOpen={true}
@@ -205,6 +223,7 @@ export const PlagiarismView = ({
       navItemContainerOptions={'text-left'}
       navItemOptions={'py-2 my-1'}
       header={verticalNavbarHeader}
+      countTitles={true}
     />
   );
 

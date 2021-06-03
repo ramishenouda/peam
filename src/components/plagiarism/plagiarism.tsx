@@ -23,16 +23,17 @@ const Plagiarism = ({ plagiarismData, ratio, projectUid }: Props) => {
   const [file, setFile] = useState({} as File); // current chose team file from the navbar
   const [projects, setProjects] = useState(new Array<Project>()); // Projects for navbar
 
-  const getProjects = (index: number) => {
-    if (!plagiarismData[index]) return;
+  const getProjects = (index: number, file: string) => {
+    const plagData = plagiarismData.filter((_file) => _file.file === file)[0];
+    if (!plagData) return;
     setGettingProjects(true);
-    getProjectsData(plagiarismData[index])
+    getProjectsData(plagData)
       .then((result) => {
         setProjects(result);
       })
       .finally(() => {
         setGettingProjects(false);
-        const file = plagiarismData[index].file;
+        const file = plagData.file;
         setFile({ file: file, filePath: file, ratio: file });
       });
   };
